@@ -3,7 +3,6 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { X, ChevronLeft, ChevronRight, Camera } from 'lucide-react'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Reveal } from '@/components/Reveal'
-import { cn } from '@/lib/utils'
 
 /**
  * Las fotos se descubren automáticamente en tiempo de build: basta con copiar
@@ -24,6 +23,8 @@ const modulos = import.meta.glob<string>('../assets/galeria/*.{jpg,jpeg,png,webp
  * La sección se autodescubre y no se renderiza si la carpeta está vacía.
  */
 const epigrafes: Record<string, string> = {
+  'acta-1926':
+    'El Acta N.º 1: a las cinco de la tarde del 12 de julio de 1926, en el Palace Hotel, quedó constituido el club y se repartieron los diez cargos de la primera comisión directiva.',
   'reta-saissac-1980':
     'Miguel Reta (negras) fue el primer campeón del club en la sede de calle Jujuy. Mayo de 1980, en juego ante Saissac; quien observa la partida es el señor Gil.',
   'sede-jujuy-1514': 'La sede de Jujuy 1514, el corazón del club desde 1980.',
@@ -57,31 +58,35 @@ export function Galeria() {
           align="center"
         />
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Las leyendas van siempre visibles debajo de cada foto: estaban solo
+            en el hover, y en celular el hover no existe. Estas fotos son
+            documentos históricos, la leyenda es la mitad del valor. */}
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {fotos.map((foto, i) => (
             <Reveal key={foto.nombre} delay={0.05 * (i % 6)}>
-              <button
-                type="button"
-                onClick={() => setAbierta(i)}
-                className={cn(
-                  'group relative block w-full overflow-hidden rounded-lg border border-ink/8 bg-ink/5',
-                  i % 5 === 0 ? 'aspect-4/5' : 'aspect-4/3',
-                )}
-              >
-                <img
-                  src={foto.url}
-                  alt={foto.epigrafe}
-                  loading="lazy"
-                  className="size-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                />
-                <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <span className="absolute inset-x-0 bottom-0 translate-y-3 p-5 text-left text-sm leading-snug text-ivory opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+              <figure className="flex h-full flex-col">
+                <button
+                  type="button"
+                  onClick={() => setAbierta(i)}
+                  aria-label={`Ampliar: ${foto.epigrafe}`}
+                  className="group relative block w-full overflow-hidden rounded-lg border border-ink/8 bg-ink/5"
+                >
+                  <span className="block aspect-4/3">
+                    <img
+                      src={foto.url}
+                      alt={foto.epigrafe}
+                      loading="lazy"
+                      className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </span>
+                  <span className="absolute top-3 right-3 grid size-9 place-items-center rounded-full border border-ivory/30 bg-ink/50 text-ivory opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100">
+                    <Camera className="size-4" />
+                  </span>
+                </button>
+                <figcaption className="mt-3 text-[0.88rem] leading-relaxed text-ink/65">
                   {foto.epigrafe}
-                </span>
-                <span className="absolute top-4 right-4 grid size-9 place-items-center rounded-full border border-ivory/30 text-ivory opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100">
-                  <Camera className="size-4" />
-                </span>
-              </button>
+                </figcaption>
+              </figure>
             </Reveal>
           ))}
         </div>

@@ -123,14 +123,15 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Cifras institucionales */}
-      <div className="absolute inset-x-0 bottom-0 border-t border-ivory/10 bg-ink/70 backdrop-blur-md">
+      {/* Cifras institucionales. En el flujo y empujadas al fondo con mt-auto:
+          como capa absoluta se le montaba encima al medallón en mobile. */}
+      <div className="relative mt-auto w-full border-t border-ivory/10 bg-ink/70">
         <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-ivory/10 px-5 lg:grid-cols-4 lg:divide-x lg:px-8">
           {cifras.map((c, i) => (
             <motion.div
               key={c.detalle}
               {...aparece(0.55 + i * 0.08)}
-              className="px-2 py-5 lg:px-8"
+              className="px-2 py-4 lg:px-8"
             >
               <dt className="font-condensed text-3xl text-gold-bright lg:text-4xl">
                 {c.valor}

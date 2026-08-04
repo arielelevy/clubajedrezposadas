@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { club, historia, hitos, comisionFundadora } from '@/data/site'
-import actaUrl from '@/assets/historia/acta-1926.webp'
+import actaUrl from '@/assets/galeria/acta-1926.webp'
 import { PageHeader } from '@/components/PageHeader'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Reveal } from '@/components/Reveal'
