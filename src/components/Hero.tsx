@@ -18,7 +18,7 @@ export function Hero() {
         }
 
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-ink text-ivory">
+    <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-ink text-ivory">
       <BoardTexture className="text-ivory" size={52} opacity={0.05} />
       <GraphiteCurves />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(192,145,44,0.16),transparent_58%)]" />
@@ -31,7 +31,7 @@ export function Hero() {
         100
       </span>
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 px-5 pt-40 pb-24 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:pt-44">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pt-40 pb-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:px-8 lg:pt-44 lg:pb-24">
         <div>
           <motion.p {...aparece(0.05)} className="kicker text-gold-bright">
             {club.ciudad}, {club.provincia} · desde 1926
@@ -93,7 +93,7 @@ export function Hero() {
                 animate: { opacity: 1, scale: 1 },
                 transition: { duration: 1.1, delay: 0.25, ease: [0.22, 1, 0.36, 1] as const },
               })}
-          className="relative mx-auto w-full max-w-md lg:max-w-none"
+          className="relative mx-auto w-full max-w-[16rem] sm:max-w-xs lg:max-w-none"
         >
           <div className="relative aspect-square">
             <motion.div
@@ -106,14 +106,18 @@ export function Hero() {
                   'conic-gradient(from 0deg, transparent 0 78%, rgba(226,189,94,0.5) 86%, transparent 94%)',
               }}
             />
-            <div className="absolute inset-6 rounded-full bg-ivory shadow-[0_40px_120px_-40px_rgba(226,189,94,0.55)]" />
-            <img
-              src="/logo-cap.svg"
-              alt="Escudo del Club de Ajedrez Posadas con el sello de los 100 años (1926-2026)"
-              className="absolute inset-9 size-auto object-contain"
-              width={520}
-              height={520}
-            />
+            <div className="absolute inset-5 rounded-full bg-ivory shadow-[0_40px_120px_-40px_rgba(226,189,94,0.55)]" />
+            {/* El logo va dentro de su propio marco para quedar centrado en el
+                disco marfil: con size-auto el SVG se salía del recuadro. */}
+            <div className="absolute inset-7">
+              <img
+                src="/logo-cap.svg"
+                alt="Escudo del Club de Ajedrez Posadas con el sello de los 100 años (1926-2026)"
+                className="size-full object-contain"
+                width={520}
+                height={520}
+              />
+            </div>
           </div>
         </motion.div>
       </div>

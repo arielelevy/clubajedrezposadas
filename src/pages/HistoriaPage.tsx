@@ -87,8 +87,8 @@ export function HistoriaPage() {
                     >
                       {/* Nodo */}
                       <span
-                        className={`absolute top-1 left-0 grid size-10 place-items-center rounded-full border border-gold/40 bg-ink text-gold-bright lg:left-auto ${
-                          i % 2 === 1 ? 'lg:-left-5' : 'lg:-right-5'
+                        className={`absolute top-1 left-0 grid size-10 place-items-center rounded-full border border-gold/40 bg-ink text-gold-bright ${
+                          i % 2 === 1 ? 'lg:right-auto lg:-left-5' : 'lg:left-auto lg:-right-5'
                         }`}
                       >
                         <ChessGlyph pieza={h.pieza as Pieza} className="text-xl" />
