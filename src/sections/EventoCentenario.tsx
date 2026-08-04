@@ -40,28 +40,29 @@ export function EventoCentenario() {
         <Reveal delay={0.12}>
           <article className="mt-2 grid overflow-hidden rounded-xl border border-gold/30 bg-ink text-ivory shadow-[var(--shadow-lift)] lg:grid-cols-[0.82fr_1.18fr]">
             {/* Ficha: fecha en tipografía condensada y datos del torneo */}
-            <div className="relative isolate overflow-hidden border-b border-ivory/10 p-7 lg:border-r lg:border-b-0 lg:p-9">
+            <div className="relative isolate overflow-hidden border-b border-ivory/10 p-6 lg:border-r lg:border-b-0 lg:p-7">
               <GraphiteCurves className="opacity-60" />
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(192,145,44,0.2),transparent_60%)]" />
 
               <div className="relative">
                 <p className="kicker text-gold-bright">{evento.sigla} · Diciembre 2026</p>
 
-                <time dateTime={evento.fechaISO} className="mt-5 block">
+                {/* Fecha y mes en una sola línea: apilados sumaban un renglón */}
+                <time dateTime={evento.fechaISO} className="mt-3 flex flex-wrap items-baseline gap-x-3">
                   <span className="flex items-baseline font-condensed leading-[0.8] text-ivory">
-                    <span className="text-[3.6rem] lg:text-[4.5rem]">{evento.diaDesde}</span>
-                    <span className="mx-2 text-[2.2rem] text-gold lg:text-[2.6rem]">—</span>
-                    <span className="text-[3.6rem] lg:text-[4.5rem]">{evento.diaHasta}</span>
+                    <span className="text-[3.2rem] lg:text-[3.8rem]">{evento.diaDesde}</span>
+                    <span className="mx-1.5 text-[2rem] text-gold lg:text-[2.2rem]">—</span>
+                    <span className="text-[3.2rem] lg:text-[3.8rem]">{evento.diaHasta}</span>
                   </span>
-                  <span className="mt-2 block font-condensed text-xl tracking-[0.3em] text-gold-bright uppercase lg:text-2xl">
+                  <span className="font-condensed text-lg tracking-[0.28em] text-gold-bright uppercase lg:text-xl">
                     {evento.mesCorto} {evento.anio}
                   </span>
                   <span className="sr-only">{evento.fechaTexto}</span>
                 </time>
 
-                <GoldDivider className="mt-6" />
+                <GoldDivider className="mt-4" />
 
-                <dl className="mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-2 lg:grid-cols-1">
+                <dl className="mt-4 grid gap-x-6 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-1">
                   {evento.ficha.map((f) => (
                     <div key={f.rotulo}>
                       <dt className="kicker text-[0.58rem] text-ivory/40">{f.rotulo}</dt>
@@ -70,7 +71,7 @@ export function EventoCentenario() {
                   ))}
                 </dl>
 
-                <Button asChild variant="gold" className="mt-7 w-full sm:w-auto">
+                <Button asChild variant="gold" className="mt-6 w-full sm:w-auto">
                   <a href={club.whatsappLink} target="_blank" rel="noreferrer">
                     <MessageCircle />
                     {evento.ctaTexto}
@@ -80,7 +81,7 @@ export function EventoCentenario() {
             </div>
 
             {/* Descripción y características */}
-            <div className="relative isolate overflow-hidden p-7 lg:p-9">
+            <div className="relative isolate overflow-hidden p-6 lg:p-7">
               <ChessGlyph
                 pieza="rey"
                 className="pointer-events-none absolute -right-6 -bottom-14 text-[15rem] leading-none text-ivory/[0.04] select-none"
@@ -92,8 +93,8 @@ export function EventoCentenario() {
                   {evento.descripcion2}
                 </p>
 
-                <p className="kicker mt-7 text-[0.6rem] text-gold-bright">Qué incluye la edición</p>
-                <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                <p className="kicker mt-6 text-[0.6rem] text-gold-bright">Qué incluye la edición</p>
+                <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
                   {evento.caracteristicas.map((c) => (
                     <li key={c} className="flex gap-3 text-[0.95rem] leading-snug text-ivory/80">
                       <span
@@ -105,7 +106,7 @@ export function EventoCentenario() {
                   ))}
                 </ul>
 
-                <div className="mt-7 flex flex-wrap items-center gap-4 border-t border-ivory/10 pt-6">
+                <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-ivory/10 pt-5">
                   <Button asChild variant="outlineLight">
                     <a href={club.instagramLink} target="_blank" rel="noreferrer">
                       Seguir la cuenta oficial

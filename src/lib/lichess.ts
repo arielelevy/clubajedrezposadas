@@ -14,6 +14,8 @@ export type Transmision = {
   info: string
   url: string
   enVivo: boolean
+  /** Vino de la lista de transmisiones terminadas, no de las que están en curso. */
+  terminada: boolean
 }
 
 type BroadcastTop = {
@@ -27,7 +29,7 @@ type BroadcastItem = {
   round: { id: string; name: string; ongoing?: boolean; url: string }
 }
 
-function aTransmision(item: BroadcastItem): Transmision {
+function aTransmision(item: BroadcastItem, terminada: boolean): Transmision {
   const info = [item.tour.info?.players, item.tour.info?.location, item.tour.info?.tc]
     .filter(Boolean)
     .join(' · ')
@@ -39,6 +41,7 @@ function aTransmision(item: BroadcastItem): Transmision {
     info,
     url: item.round.url,
     enVivo: Boolean(item.round.ongoing),
+    terminada,
   }
 }
 
@@ -62,7 +65,10 @@ export async function obtenerTransmisionesElite(cantidad = 6): Promise<Transmisi
     Array.isArray(data.past) ? data.past : (data.past?.currentPageResults ?? []),
   )
 
-  return [...activas.slice(0, cantidad), ...pasadas.slice(0, cantidad)].map(aTransmision)
+  return [
+    ...activas.slice(0, cantidad).map((i) => aTransmision(i, false)),
+    ...pasadas.slice(0, cantidad).map((i) => aTransmision(i, true)),
+  ]
 }
 
 /** PGN completo de una ronda de transmisión (todas las partidas de esa ronda). */

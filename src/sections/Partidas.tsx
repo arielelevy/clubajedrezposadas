@@ -10,13 +10,16 @@ import { cn } from '@/lib/utils'
 
 type Fuente = 'club' | 'elite'
 
+/** Una ronda de Lichess con sus partidas ya descargadas y parseadas. */
+type TransmisionCargada = { ronda: Transmision; partidas: Partida[] }
+
 export function Partidas() {
   const [fuente, setFuente] = useState<Fuente>('club')
   const [partidas, setPartidas] = useState<Partida[]>([])
   const [seleccionada, setSeleccionada] = useState(0)
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [transmisiones, setTransmisiones] = useState<Transmision[]>([])
+  const [transmisiones, setTransmisiones] = useState<TransmisionCargada[]>([])
   const [transmisionActiva, setTransmisionActiva] = useState<string | null>(null)
 
   /** Partidas del club: archivos PGN estáticos. */
@@ -43,57 +46,63 @@ export function Partidas() {
   }, [])
 
   /**
-   * Elite: transmisiones oficiales de Lichess (Candidatos, GCT, Tata Steel...).
+   * Elite: transmisiones oficiales de Lichess (Candidatos, GCT, opens, ligas).
    *
-   * Sin una ronda elegida a mano, recorre las disponibles hasta encontrar una
-   * con jugadas: muchas rondas en curso todavía no arrancaron y devuelven las
-   * partidas con las cabeceras puestas pero sin un solo movimiento, y ahí el
-   * visor mostraba un tablero vacío.
+   * Se sondean varias rondas en paralelo y se ofrecen solo las que tienen
+   * jugadas. Es la única forma: muchas rondas listadas como activas todavía no
+   * arrancaron y devuelven las partidas sin un solo movimiento, y la API no
+   * permite saberlo de antemano (el campo `ongoing` viene nulo y el HEAD del PGN
+   * responde 204 sin `Content-Length`).
+   *
+   * Las partidas parseadas se guardan junto a cada ronda, así cambiar de torneo
+   * es instantáneo y no se vuelve a pedir nada.
    */
-  const cargarElite = useCallback(
-    async (idRonda?: string) => {
-      setCargando(true)
-      setError(null)
-      try {
-        let rondas = transmisiones
-        if (rondas.length === 0) {
-          rondas = await obtenerTransmisionesElite(8)
-          setTransmisiones(rondas)
-        }
+  const cargarElite = useCallback(async () => {
+    setCargando(true)
+    setError(null)
+    try {
+      const rondas = await obtenerTransmisionesElite(4)
 
-        // Se prueban hasta ocho: alcanza para pasar de largo las que están por
-        // empezar y llegar a una con partidas, sin encadenar veinte pedidos.
-        const candidatas = idRonda ? [idRonda] : rondas.slice(0, 8).map((r) => r.id)
-        if (candidatas.length === 0) {
-          throw new Error('Lichess no devolvió transmisiones disponibles en este momento')
-        }
-
-        for (const candidata of candidatas) {
-          const pgn = await obtenerPgnDeRonda(candidata)
-          const conJugadas = parsearArchivoPgn(pgn, candidata).filter((p) => p.plies.length > 0)
-
-          if (conJugadas.length > 0) {
-            setTransmisionActiva(candidata)
-            setPartidas(conJugadas)
-            setSeleccionada(0)
-            return
+      // Se sondean unas pocas y se ofrecen las primeras cuatro con partidas.
+      const sondeos = await Promise.all(
+        rondas.slice(0, 7).map(async (ronda) => {
+          try {
+            const pgn = await obtenerPgnDeRonda(ronda.id)
+            const partidas = parsearArchivoPgn(pgn, ronda.id).filter((p) => p.plies.length > 0)
+            return partidas.length > 0 ? { ronda, partidas } : null
+          } catch {
+            return null
           }
-        }
+        }),
+      )
 
+      const disponibles = sondeos.filter((s): s is TransmisionCargada => s !== null).slice(0, 4)
+
+      if (disponibles.length === 0) {
         throw new Error(
-          idRonda
-            ? 'Esa ronda todavía no tiene jugadas publicadas'
-            : 'Ninguna de las transmisiones en curso tiene jugadas publicadas todavía',
+          'Ninguna de las transmisiones de Lichess tiene jugadas publicadas en este momento',
         )
-      } catch (e) {
-        setError(e instanceof Error ? e.message : 'Error desconocido al consultar Lichess')
-        setPartidas([])
-      } finally {
-        setCargando(false)
       }
-    },
-    [transmisiones],
-  )
+
+      setTransmisiones(disponibles)
+      setTransmisionActiva(disponibles[0].ronda.id)
+      setPartidas(disponibles[0].partidas)
+      setSeleccionada(0)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Error desconocido al consultar Lichess')
+      setPartidas([])
+      setTransmisiones([])
+    } finally {
+      setCargando(false)
+    }
+  }, [])
+
+  /** Cambio de torneo: ya está descargado y parseado. */
+  const elegirTransmision = useCallback((cargada: TransmisionCargada) => {
+    setTransmisionActiva(cargada.ronda.id)
+    setPartidas(cargada.partidas)
+    setSeleccionada(0)
+  }, [])
 
   useEffect(() => {
     if (fuente === 'club') cargarDelClub()
@@ -124,24 +133,26 @@ export function Partidas() {
           </BotonFuente>
         </Reveal>
 
-        {/* Transmisiones disponibles */}
+        {/* Torneos disponibles: solo los que tienen partidas con jugadas */}
         {fuente === 'elite' && transmisiones.length > 0 ? (
           <div className="mt-5 flex flex-wrap justify-center gap-2">
             {transmisiones.map((t) => (
               <button
-                key={t.id}
+                key={t.ronda.id}
                 type="button"
-                onClick={() => cargarElite(t.id)}
+                onClick={() => elegirTransmision(t)}
                 className={cn(
-                  'rounded-full border px-4 py-2 text-xs transition-colors',
-                  transmisionActiva === t.id
+                  'max-w-full truncate rounded-full border px-4 py-2 text-xs transition-colors',
+                  transmisionActiva === t.ronda.id
                     ? 'border-gold bg-gold/15 text-ink'
                     : 'border-ink/12 text-ink/60 hover:border-gold/50 hover:text-ink',
                 )}
-                title={t.info}
+                title={[t.ronda.torneo, t.ronda.ronda, t.ronda.info].filter(Boolean).join(' · ')}
               >
-                {t.enVivo ? <span className="mr-2 inline-block size-1.5 rounded-full bg-mate" /> : null}
-                {t.torneo} · {t.ronda}
+                {t.ronda.enVivo ? (
+                  <span className="mr-2 inline-block size-1.5 rounded-full bg-mate" />
+                ) : null}
+                {t.ronda.torneo} · {t.ronda.ronda}
               </button>
             ))}
           </div>
