@@ -28,7 +28,7 @@ export function Navbar() {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-500',
-        scrolled ? 'border-b border-ink/8 bg-bone/90 py-2 backdrop-blur-xl' : 'py-4',
+        scrolled ? 'border-b border-ink/8 bg-bone/95 py-2 backdrop-blur-sm' : 'py-4',
       )}
     >
       {/* Aviso del evento del centenario: solo con la barra transparente, se
@@ -37,7 +37,7 @@ export function Navbar() {
         <Link
           to="/#evento"
           className={cn(
-            'group block overflow-hidden border-b border-gold/20 bg-ink/85 backdrop-blur-md transition-all duration-500',
+            'group block overflow-hidden border-b border-gold/20 bg-ink/95 transition-all duration-500',
             scrolled ? 'pointer-events-none max-h-0 border-b-0 opacity-0' : 'max-h-24 opacity-100',
           )}
         >

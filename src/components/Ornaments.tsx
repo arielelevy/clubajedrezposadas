@@ -30,12 +30,20 @@ export function GraphiteCurves({ className }: { className?: string }) {
   )
 }
 
-/** Textura de tablero, muy tenue, con deriva lenta. */
+/**
+ * Textura de tablero, muy tenue.
+ *
+ * La deriva es opcional y viene apagada por defecto a propósito: animar el
+ * `transform` de una capa a pantalla completa con un gradiente repetido obliga
+ * al navegador a repintar áreas grandes en cada frame, y con la textura en seis
+ * secciones a la vez el scroll se sentía pesado. Queda animada solo en el Hero,
+ * donde es la firma visual y está sola en pantalla.
+ */
 export function BoardTexture({
   className,
   size = 46,
   opacity = 0.06,
-  animate = true,
+  animate = false,
 }: {
   className?: string
   size?: number
@@ -47,7 +55,7 @@ export function BoardTexture({
       aria-hidden="true"
       className={cn(
         'board-texture pointer-events-none absolute inset-0 text-current',
-        animate && 'animate-drift',
+        animate && 'animate-drift [contain:paint] [will-change:transform]',
         className,
       )}
       style={{ ['--board-size' as string]: `${size}px`, opacity }}

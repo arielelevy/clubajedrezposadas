@@ -1,5 +1,6 @@
 import { Download, MessageCircle, MapPin, ArrowRight, Lightbulb } from 'lucide-react'
 import { club, pasosSocio, faq, proyectos } from '@/data/site'
+import { padron, hayPadron } from '@/data/socios'
 import { PageHeader } from '@/components/PageHeader'
 import { Reveal } from '@/components/Reveal'
 import { Button } from '@/components/ui/button'
@@ -119,6 +120,47 @@ export function SociosPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Padrón de socios, sincronizado desde la planilla del club */}
+      {hayPadron ? (
+        <section id="padron" className="scroll-mt-24 bg-ivory py-20 lg:py-28">
+          <div className="mx-auto max-w-6xl px-5 lg:px-8">
+            <Reveal>
+              <p className="kicker text-gold-deep">Padrón</p>
+              <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
+                <h2 className="text-4xl text-ink lg:text-5xl">Quiénes sostienen el club</h2>
+                <p className="font-condensed text-4xl leading-none text-gold-deep">
+                  {padron.total}
+                  <span className="ml-2 font-sans text-sm font-light tracking-[0.18em] text-ink/50 uppercase">
+                    socios
+                  </span>
+                </p>
+              </div>
+              <GoldDivider className="mt-8" />
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <ul className="mt-10 columns-1 gap-x-10 sm:columns-2 lg:columns-3">
+                {padron.nombres.map((nombre) => (
+                  <li
+                    key={nombre}
+                    className="break-inside-avoid border-b border-ink/8 py-2.5 text-[0.95rem] text-ink/75"
+                  >
+                    {nombre}
+                  </li>
+                ))}
+              </ul>
+
+              {padron.actualizado ? (
+                <p className="mt-8 text-xs text-ink/45">
+                  Padrón actualizado el {padron.actualizado}. Si figurás mal o querés que no
+                  aparezca tu nombre, escribinos al {club.whatsapp}.
+                </p>
+              ) : null}
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
 
       {/* Convocatoria abierta a presentar proyectos */}
       <section

@@ -29,6 +29,13 @@
 
   --animate-drift: drift 26s ease-in-out infinite alternate;
   --animate-shimmer: shimmer 6s linear infinite;
+  --animate-girar: girar 90s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes drift {
@@ -146,6 +153,9 @@
     background-clip: text;
     color: transparent;
     animation: var(--animate-shimmer);
+    /* El shimmer repinta el texto en cada frame: aislarlo en su propia capa
+       evita que el navegador tenga que repintar la sección entera. */
+    will-change: background-position;
   }
 
   /* Etiqueta tipo "kicker" de tapa editorial */

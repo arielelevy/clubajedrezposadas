@@ -19,7 +19,7 @@ export function Hero() {
 
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-ink text-ivory">
-      <BoardTexture className="text-ivory" size={52} opacity={0.05} />
+      <BoardTexture className="text-ivory" size={52} opacity={0.05} animate />
       <GraphiteCurves />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(192,145,44,0.16),transparent_58%)]" />
 
@@ -96,11 +96,12 @@ export function Hero() {
           className="relative mx-auto w-full max-w-[16rem] sm:max-w-xs lg:max-w-none"
         >
           <div className="relative aspect-square">
-            <motion.div
+            {/* El arco dorado gira por CSS, no por Framer Motion: animarlo en JS
+                mantenía un requestAnimationFrame vivo en el main thread para
+                siempre, incluso con el Hero fuera de pantalla. */}
+            <div
               aria-hidden="true"
-              className="absolute inset-0 rounded-full border border-gold/25"
-              animate={reduce ? undefined : { rotate: 360 }}
-              transition={{ duration: 90, repeat: Infinity, ease: 'linear' }}
+              className="absolute inset-0 rounded-full border border-gold/25 [will-change:transform] motion-safe:animate-girar"
               style={{
                 background:
                   'conic-gradient(from 0deg, transparent 0 78%, rgba(226,189,94,0.5) 86%, transparent 94%)',
