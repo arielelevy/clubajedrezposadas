@@ -14,12 +14,25 @@
  * teléfonos, mails, DNI, direcciones ni fechas de nacimiento (ver
  * COLUMNAS_PROHIBIDAS): el repositorio es público y esos datos no se publican.
  *
+ * Hay dos formas de leer la planilla, y el script elige según lo que esté seteado:
+ *
+ *   A) SOCIOS_CSV_URL — una pestaña del Sheet publicada en la web como CSV.
+ *      No necesita credenciales ni Google Cloud. Conviene armar una pestaña
+ *      aparte que traiga SOLO la columna de nombres, y publicar esa: lo que se
+ *      publica en la web de Google queda legible para cualquiera con el link.
+ *
+ *   B) GOOGLE_SERVICE_ACCOUNT_JSON — la planilla queda privada y se lee con una
+ *      service account con permiso de Lector. La credencial vive en un secret
+ *      de Actions y nunca llega al navegador.
+ *
  * Uso:
+ *   SOCIOS_CSV_URL='https://docs.google.com/.../pub?output=csv' node scripts/sync-socios.mjs
  *   GOOGLE_SERVICE_ACCOUNT_JSON='{...}' node scripts/sync-socios.mjs
  *
  * Variables:
- *   GOOGLE_SERVICE_ACCOUNT_JSON  (requerida) clave JSON de la service account
- *   SHEET_ID                     (opcional)  id de la planilla
+ *   SOCIOS_CSV_URL               (opción A)  URL del CSV publicado
+ *   GOOGLE_SERVICE_ACCOUNT_JSON  (opción B)  clave JSON de la service account
+ *   SHEET_ID                     (opcional)  id de la planilla (opción B)
  *   SHEET_RANGE                  (opcional)  rango, por defecto la primera hoja
  *   PUBLICAR_NOMBRES             (opcional)  '0' para escribir solo el total
  */
