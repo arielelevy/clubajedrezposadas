@@ -62,10 +62,11 @@ export const eventoCentenario = {
   diaHasta: '08',
   mesCorto: 'Dic',
   anio: '2026',
-  lugar: 'Posadas, Misiones, Argentina',
+  lugar: 'Sociedad Italiana de Socorros Mutuos, Posadas',
   /** Ficha rápida del torneo, para la columna de datos del afiche. */
   ficha: [
-    { rotulo: 'Sede', valor: 'Posadas, Misiones' },
+    { rotulo: 'Sede', valor: 'Sociedad Italiana, Posadas' },
+    { rotulo: 'Cupo', valor: 'Hasta 140 jugadores' },
     { rotulo: 'Formato', valor: 'Torneo abierto, todas las categorías' },
     { rotulo: 'Ranking', valor: 'Homologado, con árbitros capacitados' },
     { rotulo: 'Premios', valor: 'En efectivo y trofeos' },

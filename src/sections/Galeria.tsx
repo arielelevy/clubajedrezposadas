@@ -27,8 +27,10 @@ const epigrafes: Record<string, string> = {
     'El Acta N.º 1: a las cinco de la tarde del 12 de julio de 1926, en el Palace Hotel, quedó constituido el club y se repartieron los diez cargos de la primera comisión directiva.',
   'reta-saissac-1980':
     'Miguel Reta (negras) fue el primer campeón del club en la sede de calle Jujuy. Mayo de 1980, en juego ante Saissac; quien observa la partida es el señor Gil.',
-  'sede-jujuy-1514': 'La sede de Jujuy 1514, el corazón del club desde 1980.',
-  'centenario-2026': 'Los festejos del centenario, julio de 2026.',
+  'torneo-itinerante':
+    'Del archivo del club: un torneo en marcha con relojes de madera y los jugadores de traje, en los años en que el club no tenía casa propia y los tableros iban del Palace Hotel a la Biblioteca Popular, el Hotel Savoy, la Casa Paraguaya y el Club Tokio.',
+  'centenario-2026':
+    'El festejo de los cien años en la sede de Jujuy 1514, julio de 2026: medio centenar de socios, amigos y dirigentes, homenaje a los jugadores históricos, las declaraciones de interés municipal y provincial, el descubrimiento de la placa conmemorativa y el brindis.',
 }
 
 type Foto = { url: string; nombre: string; epigrafe: string }

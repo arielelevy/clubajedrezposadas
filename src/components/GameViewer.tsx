@@ -69,13 +69,16 @@ export function GameViewer({ partida }: { partida: Partida }) {
           : 'En juego'
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,25rem)_minmax(0,1fr)]">
       <div>
-        <Board fen={fen} ultimaJugada={plyActual} invertido={invertido} />
+        {/* El tablero se acota: a ancho libre se comía la pantalla de alto. */}
+        <div className="mx-auto w-full max-w-[25rem]">
+          <Board fen={fen} ultimaJugada={plyActual} invertido={invertido} />
+        </div>
 
         {/* Controles */}
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5">
+        <div className="mx-auto mt-4 flex w-full max-w-[25rem] flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-1">
             <BotonControl etiqueta="Inicio" onClick={() => setIndice(-1)} disabled={indice === -1}>
               <ChevronFirst className="size-5" />
             </BotonControl>
@@ -123,9 +126,9 @@ export function GameViewer({ partida }: { partida: Partida }) {
 
       {/* Ficha + planilla */}
       <div className="flex flex-col rounded-lg border border-ink/8 bg-white/70">
-        <div className="border-b border-ink/8 p-5">
+        <div className="border-b border-ink/8 p-4">
           <p className="kicker text-[0.58rem] text-gold-deep">{partida.evento}</p>
-          <div className="mt-3 space-y-2 text-sm">
+          <div className="mt-2.5 space-y-1.5 text-sm">
             <Jugador nombre={partida.blancas} elo={partida.eloBlancas} color="w" />
             <Jugador nombre={partida.negras} elo={partida.eloNegras} color="b" />
           </div>
@@ -139,7 +142,7 @@ export function GameViewer({ partida }: { partida: Partida }) {
           ) : null}
         </div>
 
-        <ol className="max-h-96 flex-1 overflow-y-auto p-4 text-sm">
+        <ol className="max-h-[17rem] flex-1 overflow-y-auto p-3 text-sm">
           {pares.map((par) => (
             <li key={par.numero} className="grid grid-cols-[2.2rem_1fr_1fr] items-center gap-1 py-0.5">
               <span className="text-xs text-ink/40">{par.numero}.</span>
@@ -175,7 +178,7 @@ function BotonControl({
       aria-label={etiqueta}
       title={etiqueta}
       className={cn(
-        'grid size-10 place-items-center rounded-full border transition-all duration-300 disabled:opacity-35',
+        'grid size-9 place-items-center rounded-full border transition-all duration-300 disabled:opacity-35',
         destacado
           ? 'border-gold/50 bg-gold/15 text-gold-deep hover:bg-gold/25'
           : 'border-ink/12 text-ink/70 hover:border-gold/50 hover:text-gold-deep',
