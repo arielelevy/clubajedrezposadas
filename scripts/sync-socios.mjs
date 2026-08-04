@@ -235,11 +235,18 @@ function extraer(filas) {
   }
 }
 
-async function main() {
+async function obtenerFilas() {
+  const csv = process.env.SOCIOS_CSV_URL
+  if (csv) {
+    console.log('Leyendo la pestaña publicada como CSV.')
+    return leerCsvPublicado(csv)
+  }
+
   const crudo = process.env.GOOGLE_SERVICE_ACCOUNT_JSON
   if (!crudo) {
     throw new Error(
-      'Falta GOOGLE_SERVICE_ACCOUNT_JSON. Es la clave JSON de la service account con acceso de lectura a la planilla.',
+      'Falta la fuente de datos. Seteá SOCIOS_CSV_URL (pestaña publicada como CSV) ' +
+        'o GOOGLE_SERVICE_ACCOUNT_JSON (clave de la service account con acceso de lectura).',
     )
   }
 
@@ -248,8 +255,12 @@ async function main() {
     throw new Error('El JSON de la service account no tiene client_email o private_key.')
   }
 
-  const token = await obtenerToken(cuenta)
-  const { total, nombres, columnasUsadas } = extraer(await leerPlanilla(token))
+  console.log(`Leyendo la planilla con la service account ${cuenta.client_email}.`)
+  return leerPlanilla(await obtenerToken(cuenta))
+}
+
+async function main() {
+  const { total, nombres, columnasUsadas } = extraer(await obtenerFilas())
 
   const salida = {
     _nota:

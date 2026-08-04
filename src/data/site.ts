@@ -431,17 +431,20 @@ export const pasosSocio = [
     paso: '01',
     titulo: 'Escribinos',
     texto: `Mandá un WhatsApp al ${club.whatsapp} contándonos si es para vos, para un hijo o para toda la familia.`,
+    enlace: { texto: `Escribir al ${club.whatsapp}`, href: club.whatsappLink },
   },
   {
     paso: '02',
     titulo: 'Completá la solicitud',
     texto:
       'Llená el formulario de alta online, desde el celular y en dos minutos. Si preferís papel, también podés descargar el PDF y traerlo a la sede.',
+    enlace: { texto: 'Abrir el formulario de alta', href: club.formularioSocios },
   },
   {
     paso: '03',
     titulo: 'Vení a jugar',
     texto: 'Te esperamos en Jujuy 1514 en cualquiera de los horarios de taller para tu primera partida.',
+    enlace: { texto: 'Ver cómo llegar', href: club.mapsLink },
   },
 ] as const
 

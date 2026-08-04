@@ -53,6 +53,15 @@ export function SociosPage() {
                   <span className="font-condensed text-5xl leading-none text-gold">{p.paso}</span>
                   <h3 className="mt-5 font-display text-2xl text-ink">{p.titulo}</h3>
                   <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">{p.texto}</p>
+                  <a
+                    href={p.enlace.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group/enlace mt-auto inline-flex items-center gap-2 pt-6 text-sm font-medium text-gold-deep transition-colors hover:text-ink"
+                  >
+                    {p.enlace.texto}
+                    <ArrowRight className="size-4 transition-transform duration-300 group-hover/enlace:translate-x-1" />
+                  </a>
                 </li>
               </Reveal>
             ))}
