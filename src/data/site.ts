@@ -155,7 +155,7 @@ export const comisionFundadora = {
     { cargo: 'Vocal 3.º', nombre: 'León R. Naboulet', aConfirmar: false },
     { cargo: 'Vocal 4.º', nombre: 'H. L. de Tejada', aConfirmar: true },
     { cargo: 'Suplente 1.º', nombre: 'Carlos Pedernera', aConfirmar: false },
-    { cargo: 'Suplente 2.º', nombre: 'Duarte Isasa', aConfirmar: true },
+    { cargo: 'Suplente 2.º', nombre: 'Duarte Sosa', aConfirmar: false },
     { cargo: 'Suplente 3.º', nombre: 'Ladislao Zaragoza', aConfirmar: true },
   ],
 } as const
