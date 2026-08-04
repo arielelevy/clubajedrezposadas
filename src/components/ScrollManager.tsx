@@ -6,13 +6,19 @@ import { useLocation } from 'react-router-dom'
  *
  * El desplazamiento se calcula a mano en lugar de usar `scrollIntoView` porque
  * la barra de navegación es fija y además cambia de alto: arriba muestra el
- * aviso del centenario y al scrollear se compacta. `scroll-margin-top` toma un
- * valor fijo y la sección quedaba corrida. Acá se descuenta el alto real que va
- * a tener la barra una vez compactada.
+ * aviso del centenario y al scrollear se compacta.
+ *
+ * Además se salta el `padding-top` de la sección. Las secciones tienen un
+ * `py-24 lg:py-32` pensado para el scroll continuo; al aterrizar en el borde
+ * superior ese padding se sumaba al alto de la barra y quedaban unos 170px de
+ * aire antes del título. Se descuenta casi todo y se deja solo un respiro.
  */
 
-/** Alto de la barra compacta (py-2 + logo de 44px) más un respiro. */
-const ESPACIO_CABECERA = 76
+/** Alto de la barra compacta (py-2 + logo de 44px). */
+const ALTO_CABECERA = 68
+
+/** Aire que se deja entre la barra y el primer texto de la sección. */
+const RESPIRO = 20
 
 export function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -37,7 +43,13 @@ export function ScrollManager() {
         }
 
         const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        const destino = el.getBoundingClientRect().top + window.scrollY - ESPACIO_CABECERA
+        const paddingArriba = parseFloat(getComputedStyle(el).paddingTop) || 0
+
+        const destino =
+          el.getBoundingClientRect().top +
+          window.scrollY -
+          ALTO_CABECERA +
+          Math.max(0, paddingArriba - RESPIRO)
 
         window.scrollTo({
           top: Math.max(0, destino),

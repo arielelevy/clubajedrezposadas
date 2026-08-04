@@ -67,6 +67,75 @@ const COLUMNAS_PROHIBIDAS = [
   /edad/i,
 ]
 
+/** Parser de CSV mínimo: campos entre comillas, comillas escapadas y CRLF. */
+function parsearCsv(texto) {
+  const filas = []
+  let fila = []
+  let campo = ''
+  let entreComillas = false
+
+  for (let i = 0; i < texto.length; i++) {
+    const c = texto[i]
+
+    if (entreComillas) {
+      if (c === '"') {
+        if (texto[i + 1] === '"') {
+          campo += '"'
+          i++
+        } else {
+          entreComillas = false
+        }
+      } else {
+        campo += c
+      }
+      continue
+    }
+
+    if (c === '"') entreComillas = true
+    else if (c === ',') {
+      fila.push(campo)
+      campo = ''
+    } else if (c === '\n' || c === '\r') {
+      if (c === '\r' && texto[i + 1] === '\n') i++
+      fila.push(campo)
+      filas.push(fila)
+      fila = []
+      campo = ''
+    } else campo += c
+  }
+
+  if (campo !== '' || fila.length) {
+    fila.push(campo)
+    filas.push(fila)
+  }
+
+  return filas
+}
+
+async function leerCsvPublicado(url) {
+  const respuesta = await fetch(url, { redirect: 'follow' })
+
+  if (!respuesta.ok) {
+    throw new Error(
+      `No se pudo bajar el CSV publicado (${respuesta.status}). ` +
+        `Revisá que la pestaña esté publicada en la web y que el link termine en output=csv.`,
+    )
+  }
+
+  const texto = await respuesta.text()
+
+  if (texto.trimStart().startsWith('<')) {
+    throw new Error(
+      'La URL devolvió HTML en lugar de CSV. Tiene que ser el link de "Archivo → Compartir → ' +
+        'Publicar en la web", eligiendo la pestaña y el formato CSV.',
+    )
+  }
+
+  const filas = parsearCsv(texto).filter((f) => f.some((c) => String(c ?? '').trim() !== ''))
+  if (!filas.length) throw new Error('El CSV publicado vino vacío.')
+  return filas
+}
+
 function firmarJwt(cuenta) {
   const ahora = Math.floor(Date.now() / 1000)
   const encabezado = { alg: 'RS256', typ: 'JWT' }
