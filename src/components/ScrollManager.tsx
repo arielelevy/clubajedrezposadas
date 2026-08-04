@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 
 /**
@@ -22,10 +22,16 @@ const RESPIRO = 20
 
 export function ScrollManager() {
   const { pathname, hash } = useLocation()
+  const primerRender = useRef(true)
 
   useEffect(() => {
+    const esPrimero = primerRender.current
+    primerRender.current = false
+
     if (!hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+      // Al refrescar, el navegador restaura la posición: forzar el tope acá
+      // provocaba el salto de "se ve la página y después se mueve".
+      if (!esPrimero) window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
       return
     }
 

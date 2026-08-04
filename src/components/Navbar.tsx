@@ -23,7 +23,10 @@ const grupos = [
 ].filter((g) => g.items.length > 0)
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
+  // Se mide en el primer render: si arrancaba en false, al refrescar con la
+  // página ya scrolleada se veía un parpadeo de la barra transparente antes de
+  // pasar a la compacta.
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 24)
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
 

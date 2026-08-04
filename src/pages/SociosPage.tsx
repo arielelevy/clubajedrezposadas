@@ -1,6 +1,7 @@
-import { Download, MessageCircle, MapPin, ArrowRight, Lightbulb } from 'lucide-react'
+﻿import { Download, MessageCircle, MapPin, ArrowRight, Lightbulb } from 'lucide-react'
 import { club, pasosSocio, faq, proyectos } from '@/data/site'
-import { padron, hayPadron, porCategoria } from '@/data/socios'
+import { hayPadron } from '@/data/socios'
+import { PadronDialog } from '@/components/Padron'
 import { PageHeader } from '@/components/PageHeader'
 import { Reveal } from '@/components/Reveal'
 import { Button } from '@/components/ui/button'
@@ -31,6 +32,7 @@ export function SociosPage() {
             <ArrowRight />
           </a>
         </Button>
+        {hayPadron ? <PadronDialog /> : null}
         <Button asChild variant="outlineLight" size="lg">
           <a href={club.whatsappLink} target="_blank" rel="noreferrer">
             <MessageCircle />
@@ -49,18 +51,27 @@ export function SociosPage() {
           <ol className="mt-12 grid gap-5 md:grid-cols-3">
             {pasosSocio.map((p, i) => (
               <Reveal key={p.paso} delay={0.08 * i}>
-                <li className="flex h-full flex-col rounded-lg border border-ink/8 bg-white/70 p-7 transition-all duration-500 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]">
-                  <span className="font-condensed text-5xl leading-none text-gold">{p.paso}</span>
-                  <h3 className="mt-5 font-display text-2xl text-ink">{p.titulo}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">{p.texto}</p>
+                <li className="h-full">
+                  {/* La tarjeta entera es el enlace: el paso ya dice qué hace,
+                      no hace falta repetirlo como texto de link aparte. */}
                   <a
                     href={p.enlace.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group/enlace mt-auto inline-flex items-center gap-2 pt-6 text-sm font-medium text-gold-deep transition-colors hover:text-ink"
+                    aria-label={`${p.titulo} — ${p.enlace.texto}`}
+                    className="group flex h-full flex-col rounded-lg border border-ink/8 bg-white/70 p-7 transition-all duration-500 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]"
                   >
-                    {p.enlace.texto}
-                    <ArrowRight className="size-4 transition-transform duration-300 group-hover/enlace:translate-x-1" />
+                    <span className="flex items-start justify-between gap-4">
+                      <span className="font-condensed text-5xl leading-none text-gold">
+                        {p.paso}
+                      </span>
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="mt-2 size-5 shrink-0 text-gold/45 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gold"
+                      />
+                    </span>
+                    <h3 className="mt-5 font-display text-2xl text-ink">{p.titulo}</h3>
+                    <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">{p.texto}</p>
                   </a>
                 </li>
               </Reveal>
@@ -130,64 +141,6 @@ export function SociosPage() {
         </div>
       </section>
 
-      {/* Padrón de socios, sincronizado desde la planilla del club */}
-      {hayPadron ? (
-        <section id="padron" className="scroll-mt-24 bg-ivory py-20 lg:py-28">
-          <div className="mx-auto max-w-6xl px-5 lg:px-8">
-            <Reveal>
-              <p className="kicker text-gold-deep">Padrón</p>
-              <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
-                <h2 className="text-4xl text-ink lg:text-5xl">Quiénes sostienen el club</h2>
-                <p className="font-condensed text-4xl leading-none text-gold-deep">
-                  {padron.total}
-                  <span className="ml-2 font-sans text-sm font-light tracking-[0.18em] text-ink/50 uppercase">
-                    socios
-                  </span>
-                </p>
-              </div>
-              <GoldDivider className="mt-8" />
-
-              {porCategoria.length > 0 ? (
-                <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-                  {porCategoria.map(([tipo, cantidad]) => (
-                    <li key={tipo} className="flex items-baseline gap-2">
-                      <span className="font-condensed text-2xl leading-none text-ink">
-                        {cantidad}
-                      </span>
-                      <span className="kicker text-[0.6rem] text-ink/50">{tipo}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </Reveal>
-
-            <Reveal delay={0.08}>
-              <ul className="mt-12 columns-1 gap-x-10 sm:columns-2 lg:columns-3">
-                {padron.socios.map((socio) => (
-                  <li
-                    key={socio.nombre}
-                    className="flex break-inside-avoid items-baseline justify-between gap-3 border-b border-ink/8 py-2.5"
-                  >
-                    <span className="text-[0.95rem] text-ink/80">{socio.nombre}</span>
-                    {socio.tipo ? (
-                      <span className="shrink-0 text-[0.65rem] tracking-wide text-ink/35 uppercase">
-                        {socio.tipo}
-                      </span>
-                    ) : null}
-                  </li>
-                ))}
-              </ul>
-
-              {padron.actualizado ? (
-                <p className="mt-8 text-xs text-ink/45">
-                  Padrón actualizado el {padron.actualizado}. Si figurás mal o querés que no
-                  aparezca tu nombre, escribinos al {club.whatsapp}.
-                </p>
-              ) : null}
-            </Reveal>
-          </div>
-        </section>
-      ) : null}
 
       {/* Convocatoria abierta a presentar proyectos */}
       <section
