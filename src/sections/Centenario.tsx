@@ -37,7 +37,7 @@ export function Centenario() {
   return (
     <section
       id="centenario"
-      className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-24 text-ivory lg:py-32"
+      className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-16 text-ivory lg:py-24"
     >
       <BoardTexture className="text-ivory" size={64} opacity={0.04} />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_10%,rgba(192,145,44,0.14),transparent_58%)]" />

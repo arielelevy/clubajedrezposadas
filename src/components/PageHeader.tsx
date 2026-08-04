@@ -16,7 +16,7 @@ export function PageHeader({
   const reduce = useReducedMotion()
 
   return (
-    <section className="relative isolate overflow-hidden bg-ink pt-44 pb-20 text-ivory lg:pt-52 lg:pb-24">
+    <section className="relative isolate overflow-hidden bg-ink pt-28 pb-14 text-ivory lg:pt-32 lg:pb-16">
       <BoardTexture className="text-ivory" size={50} opacity={0.05} />
       <GraphiteCurves className="opacity-80" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(192,145,44,0.15),transparent_55%)]" />
@@ -28,12 +28,12 @@ export function PageHeader({
         className="relative mx-auto max-w-4xl px-5 text-center lg:px-8"
       >
         <p className="kicker text-gold-bright">{kicker}</p>
-        <h1 className="mt-6 text-4xl leading-[1.05] font-medium sm:text-5xl lg:text-6xl">{titulo}</h1>
-        <GoldDivider className="mx-auto mt-8 max-w-xs" />
+        <h1 className="mt-4 text-4xl leading-[1.05] font-medium sm:text-5xl lg:text-6xl">{titulo}</h1>
+        <GoldDivider className="mx-auto mt-6 max-w-xs" />
         {bajada ? (
-          <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-ivory/70">{bajada}</p>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ivory/70">{bajada}</p>
         ) : null}
-        {children ? <div className="mt-10 flex flex-wrap justify-center gap-4">{children}</div> : null}
+        {children ? <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div> : null}
       </motion.div>
     </section>
   )

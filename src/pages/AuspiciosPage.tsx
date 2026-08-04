@@ -41,7 +41,7 @@ export function AuspiciosPage() {
       </PageHeader>
 
       {/* Niveles de auspicio, con el aporte de la carpeta 2026 */}
-      <section className="bg-bone py-20 lg:py-28">
+      <section className="bg-bone py-14 lg:py-20">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <Reveal>
             <p className="kicker text-gold-deep">Niveles de auspicio</p>
@@ -54,7 +54,7 @@ export function AuspiciosPage() {
             </p>
           </Reveal>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {nivelesAuspicio.map((n, i) => (
               <Reveal key={n.nivel} delay={0.06 * i}>
                 <article
@@ -148,7 +148,7 @@ export function AuspiciosPage() {
       </section>
 
       {/* Dónde aparece la marca */}
-      <section className="relative isolate overflow-hidden bg-ink py-20 text-ivory lg:py-28">
+      <section className="relative isolate overflow-hidden bg-ink py-14 text-ivory lg:py-20">
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(192,145,44,0.15),transparent_55%)]" />
 
@@ -165,7 +165,7 @@ export function AuspiciosPage() {
             </p>
           </Reveal>
 
-          <dl className="mt-14 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="mt-10 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
             {propuestaValor.map((p, i) => (
               <Reveal key={p.titulo} delay={0.05 * i}>
                 <div className="border-t border-ivory/12 pt-5">
@@ -179,7 +179,7 @@ export function AuspiciosPage() {
       </section>
 
       {/* Quiénes ya acompañan + cierre */}
-      <section className="bg-ivory py-20 lg:py-28">
+      <section className="bg-ivory py-14 lg:py-20">
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <Reveal className="text-center">
             <p className="kicker text-gold-deep">Ya acompañan el centenario</p>
@@ -198,7 +198,7 @@ export function AuspiciosPage() {
           </ul>
 
           <Reveal delay={0.1}>
-            <div className="mt-16 rounded-lg border border-ink/8 bg-bone p-8 lg:p-10">
+            <div className="mt-12 rounded-lg border border-ink/8 bg-bone p-8 lg:p-10">
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div className="max-w-xl">
                   <h3 className="font-display text-2xl text-ink">

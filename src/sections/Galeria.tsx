@@ -45,7 +45,7 @@ export function Galeria() {
   if (fotos.length === 0) return null
 
   return (
-    <section id="galeria" className="scroll-mt-24 bg-bone py-24 lg:py-32">
+    <section id="galeria" className="scroll-mt-24 bg-bone py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Galería"
@@ -54,7 +54,7 @@ export function Galeria() {
           align="center"
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {fotos.map((foto, i) => (
             <Reveal key={foto.nombre} delay={0.05 * (i % 6)}>
               <button

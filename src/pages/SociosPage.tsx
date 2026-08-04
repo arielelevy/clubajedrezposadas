@@ -41,7 +41,7 @@ export function SociosPage() {
         </Button>
       </PageHeader>
 
-      <section className="bg-bone py-20 lg:py-28">
+      <section className="bg-bone py-14 lg:py-20">
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <Reveal>
             <p className="kicker text-gold-deep">Cómo asociarse</p>
@@ -59,19 +59,19 @@ export function SociosPage() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={`${p.titulo} — ${p.enlace.texto}`}
-                    className="group flex h-full flex-col rounded-lg border border-ink/8 bg-white/70 p-7 transition-all duration-500 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]"
+                    className="group flex h-full flex-col rounded-lg border border-ink/8 bg-white/70 p-6 transition-all duration-500 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]"
                   >
-                    <span className="flex items-start justify-between gap-4">
-                      <span className="font-condensed text-5xl leading-none text-gold">
+                    <span className="flex items-baseline justify-between gap-4">
+                      <span className="font-condensed text-4xl leading-none text-gold">
                         {p.paso}
                       </span>
                       <ArrowRight
                         aria-hidden="true"
-                        className="mt-2 size-5 shrink-0 text-gold/45 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gold"
+                        className="size-5 shrink-0 text-gold/45 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gold"
                       />
                     </span>
-                    <h3 className="mt-5 font-display text-2xl text-ink">{p.titulo}</h3>
-                    <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">{p.texto}</p>
+                    <h3 className="mt-4 font-display text-2xl text-ink">{p.titulo}</h3>
+                    <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">{p.texto}</p>
                   </a>
                 </li>
               </Reveal>
@@ -79,7 +79,7 @@ export function SociosPage() {
           </ol>
 
           <Reveal delay={0.1}>
-            <div className="mt-16 grid gap-6 rounded-lg border border-ink/8 bg-ivory p-8 lg:grid-cols-2 lg:p-10">
+            <div className="mt-12 grid gap-6 rounded-lg border border-ink/8 bg-ivory p-8 lg:grid-cols-2 lg:p-10">
               <div>
                 <h3 className="font-display text-2xl text-ink">Formulario de alta de socio</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">
@@ -127,7 +127,7 @@ export function SociosPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.15} className="mt-16 max-w-3xl">
+          <Reveal delay={0.15} className="mt-12 max-w-3xl">
             <p className="kicker text-gold-deep">Antes de venir</p>
             <Accordion type="single" collapsible className="mt-6">
               {faq.map((f) => (
@@ -145,7 +145,7 @@ export function SociosPage() {
       {/* Convocatoria abierta a presentar proyectos */}
       <section
         id="proyectos"
-        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-20 text-ivory lg:py-28"
+        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-14 text-ivory lg:py-20"
       >
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(192,145,44,0.16),transparent_58%)]" />

@@ -23,41 +23,46 @@ const grupos = [
 ].filter((g) => g.items.length > 0)
 
 export function Navbar() {
-  // Se mide en el primer render: si arrancaba en false, al refrescar con la
-  // página ya scrolleada se veía un parpadeo de la barra transparente antes de
-  // pasar a la compacta.
-  const [scrolled, setScrolled] = useState(() => window.scrollY > 24)
+  /**
+   * El aviso del centenario aparece cuando volvés al tope subiendo, y se
+   * retrae al bajar. No se muestra en la carga: la barra tiene que verse igual
+   * desde el primer momento, sin depender de dónde quedó el scroll.
+   */
+  const [avisoVisible, setAvisoVisible] = useState(false)
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
+    let anterior = window.scrollY
+
+    const onScroll = () => {
+      const y = window.scrollY
+      // Solo en el tope, y solo si se llegó ahí subiendo: así nunca tapa el
+      // contenido, porque arriba lo que hay es el aire del encabezado.
+      setAvisoVisible(y <= 24 && y < anterior)
+      anterior = y
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => setOpen(false), [pathname])
-
-  // Todas las rutas arrancan con un bloque oscuro (Hero o PageHeader),
-  // así que mientras la barra es transparente el contenido va en marfil.
-  const sobreOscuro = !scrolled
+  useEffect(() => {
+    setOpen(false)
+    setAvisoVisible(false)
+  }, [pathname])
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-500',
-        scrolled ? 'border-b border-ink/8 bg-bone/95 py-2 backdrop-blur-sm' : 'py-4',
-      )}
-    >
-      {/* Aviso del evento del centenario: solo con la barra transparente, se
-          retrae al scrollear para no robarle altura a la navegación. */}
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/8 bg-bone/95 py-2 backdrop-blur-sm">
+      {/* Aviso del evento del centenario */}
       {eventoCentenario.publicado ? (
         <Link
           to="/#evento"
           className={cn(
-            'group block overflow-hidden border-b border-gold/20 bg-ink/95 transition-all duration-500',
-            scrolled ? 'pointer-events-none max-h-0 border-b-0 opacity-0' : 'max-h-24 opacity-100',
+            'group -mx-0 -mt-2 mb-2 block overflow-hidden border-gold/20 bg-ink transition-all duration-500',
+            avisoVisible
+              ? 'max-h-24 border-b opacity-100'
+              : 'pointer-events-none max-h-0 opacity-0',
           )}
         >
           <span className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-5 py-2.5 lg:px-8">
@@ -75,33 +80,14 @@ export function Navbar() {
 
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
         <Link to="/" className="group flex items-center gap-3">
-          <span
-            className={cn(
-              'grid place-items-center rounded-full transition-all duration-500',
-              scrolled ? 'size-11 bg-ivory' : 'size-13 bg-ivory shadow-[var(--shadow-gold)]',
-            )}
-          >
-            <img
-              src="/logo-cap.svg"
-              alt=""
-              className={cn('transition-all duration-500', scrolled ? 'size-9' : 'size-11')}
-            />
+          <span className="grid size-11 place-items-center rounded-full bg-ivory">
+            <img src="/logo-cap.svg" alt="" className="size-9" />
           </span>
           <span className="leading-tight">
-            <span
-              className={cn(
-                'block font-display text-[1.2rem] font-semibold tracking-tight transition-colors sm:text-[1.35rem]',
-                sobreOscuro ? 'text-ivory' : 'text-ink',
-              )}
-            >
+            <span className="block font-display text-[1.2rem] font-semibold tracking-tight text-ink sm:text-[1.35rem]">
               Club de Ajedrez Posadas
             </span>
-            <span
-              className={cn(
-                'kicker block text-[0.68rem] transition-colors',
-                sobreOscuro ? 'text-gold-bright/90' : 'text-gold-deep',
-              )}
-            >
+            <span className="kicker block text-[0.68rem] text-gold-deep">
               1926 — 2026 · Centenario
             </span>
           </span>
@@ -112,15 +98,12 @@ export function Navbar() {
             <Link
               key={item.href}
               to={item.href}
-              className={cn(
-                'relative py-1 text-[0.95rem] transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:scale-x-100',
-                sobreOscuro ? 'text-ivory/85 hover:text-ivory' : 'text-ink/75 hover:text-ink',
-              )}
+              className="relative py-1 text-[0.95rem] text-ink/75 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100"
             >
               {item.label}
             </Link>
           ))}
-          <Button asChild size="sm" variant={sobreOscuro ? 'outlineLight' : 'gold'}>
+          <Button asChild size="sm" variant="gold">
             <a href={club.whatsappLink} target="_blank" rel="noreferrer">
               <MessageCircle />
               Escribinos
@@ -131,10 +114,7 @@ export function Navbar() {
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger asChild>
             <button
-              className={cn(
-                'grid size-11 place-items-center rounded-full border transition-colors lg:hidden',
-                sobreOscuro ? 'border-ivory/30 text-ivory' : 'border-ink/15 text-ink',
-              )}
+              className="grid size-11 place-items-center rounded-full border border-ink/15 text-ink transition-colors hover:border-gold hover:text-gold-deep lg:hidden"
               aria-label="Abrir menú"
             >
               <Menu className="size-5" />

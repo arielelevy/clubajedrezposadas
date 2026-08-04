@@ -13,7 +13,7 @@ import {
 
 export function Contacto() {
   return (
-    <section id="contacto" className="scroll-mt-24 bg-bone py-24 lg:py-32">
+    <section id="contacto" className="scroll-mt-24 bg-bone py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <div>

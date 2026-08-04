@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom'
  * aviso del centenario y al scrollear se compacta.
  *
  * Además se salta el `padding-top` de la sección. Las secciones tienen un
- * `py-24 lg:py-32` pensado para el scroll continuo; al aterrizar en el borde
+ * `py-16 lg:py-24` pensado para el scroll continuo; al aterrizar en el borde
  * superior ese padding se sumaba al alto de la barra y quedaban unos 170px de
  * aire antes del título. Se descuenta casi todo y se deja solo un respiro.
  */

@@ -7,7 +7,7 @@ import { GoldDivider } from '@/components/Ornaments'
 
 export function Talleres() {
   return (
-    <section id="talleres" className="relative scroll-mt-24 bg-ivory py-24 lg:py-32">
+    <section id="talleres" className="relative scroll-mt-24 bg-ivory py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Talleres y clases"
@@ -16,11 +16,11 @@ export function Talleres() {
           align="center"
         />
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {programas.map((p, i) => (
             <Reveal key={p.id} delay={0.08 * i}>
               <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-ink/8 bg-bone transition-all duration-500 hover:border-gold/50 hover:shadow-[var(--shadow-lift)]">
-                <div className="relative aspect-4/3 overflow-hidden bg-ink/5">
+                <div className="relative aspect-16/9 overflow-hidden bg-ink/5">
                   <img
                     src={p.imagen}
                     alt={p.imagenAlt}
@@ -29,10 +29,10 @@ export function Talleres() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/25 to-transparent" />
                 </div>
-                <div className="flex flex-1 flex-col p-7">
+                <div className="flex flex-1 flex-col p-6">
                   <h3 className="font-display text-2xl text-ink">{p.titulo}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">{p.resumen}</p>
-                  <ul className="mt-6 space-y-2.5 border-t border-ink/8 pt-6 text-sm text-ink/75">
+                  <p className="mt-2.5 text-[0.95rem] leading-relaxed text-ink/65">{p.resumen}</p>
+                  <ul className="mt-4 space-y-2 border-t border-ink/8 pt-4 text-sm text-ink/75">
                     {p.detalle.map((d) => (
                       <li key={d} className="flex gap-3">
                         <span className="mt-2 size-1.5 shrink-0 rotate-45 bg-gold" />
@@ -47,7 +47,7 @@ export function Talleres() {
         </div>
 
         {/* Horario semanal */}
-        <div className="mt-20 rounded-lg border border-ink/8 bg-bone p-7 lg:p-10">
+        <div className="mt-10 rounded-lg border border-ink/8 bg-bone p-6 lg:p-8">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
@@ -67,7 +67,7 @@ export function Talleres() {
           <div className="mt-8 divide-y divide-ink/8">
             {horarioSemanal.map((dia, i) => (
               <Reveal key={dia.dia} delay={0.04 * i}>
-                <div className="grid items-center gap-4 py-5 sm:grid-cols-[7rem_1fr]">
+                <div className="grid items-center gap-4 py-3.5 sm:grid-cols-[7rem_1fr]">
                   <p className="font-condensed text-3xl leading-none text-ink">{dia.abrev}</p>
                   <div className="grid gap-3 sm:grid-cols-2">
                     {dia.turnos.map((t) => (
