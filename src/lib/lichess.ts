@@ -42,18 +42,27 @@ function aTransmision(item: BroadcastItem): Transmision {
   }
 }
 
-/** Transmisiones oficiales destacadas (torneos de elite: Candidatos, GCT, Tata Steel, etc.). */
+/**
+ * Transmisiones oficiales destacadas (Candidatos, GCT, Tata Steel, opens...).
+ *
+ * Devuelve las en curso y también las terminadas, y no una sola lista recortada:
+ * entre rondas, las transmisiones activas responden con las partidas cargadas
+ * pero sin una sola jugada, y con un `slice` sobre la lista unida las terminadas
+ * —que sí tienen partidas completas— nunca entraban.
+ */
 export async function obtenerTransmisionesElite(cantidad = 6): Promise<Transmision[]> {
   const res = await fetch(`${BASE}/broadcast/top?nb=${cantidad}`)
   if (!res.ok) throw new Error(`Lichess respondió ${res.status} al pedir las transmisiones`)
 
   const data = (await res.json()) as BroadcastTop
-  const pasadas = Array.isArray(data.past) ? data.past : (data.past?.currentPageResults ?? [])
+  const conRonda = (items: BroadcastItem[]) => items.filter((i) => i?.round?.id)
 
-  return [...(data.active ?? []), ...pasadas]
-    .filter((i) => i?.round?.id)
-    .slice(0, cantidad)
-    .map(aTransmision)
+  const activas = conRonda(data.active ?? [])
+  const pasadas = conRonda(
+    Array.isArray(data.past) ? data.past : (data.past?.currentPageResults ?? []),
+  )
+
+  return [...activas.slice(0, cantidad), ...pasadas.slice(0, cantidad)].map(aTransmision)
 }
 
 /** PGN completo de una ronda de transmisión (todas las partidas de esa ronda). */

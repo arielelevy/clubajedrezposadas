@@ -93,7 +93,7 @@ export function Hero() {
                 animate: { opacity: 1, scale: 1 },
                 transition: { duration: 1.1, delay: 0.25, ease: [0.22, 1, 0.36, 1] as const },
               })}
-          className="relative mx-auto w-full max-w-[16rem] sm:max-w-xs lg:max-w-none"
+          className="relative mx-auto w-full max-w-[13rem] sm:max-w-xs lg:max-w-none"
         >
           <div className="relative aspect-square">
             {/* El arco dorado gira por CSS, no por Framer Motion: animarlo en JS
@@ -131,13 +131,16 @@ export function Hero() {
             <motion.div
               key={c.detalle}
               {...aparece(0.55 + i * 0.08)}
-              className="px-2 py-4 lg:px-8"
+              className="px-2 py-3 lg:px-8 lg:py-4"
             >
               <dt className="font-condensed text-3xl text-gold-bright lg:text-4xl">
                 {c.valor}
                 {c.unidad ? <span className="ml-1 text-base text-ivory/50">{c.unidad}</span> : null}
               </dt>
-              <dd className="mt-1 text-xs leading-snug text-ivory/55 lg:text-[0.8rem]">{c.detalle}</dd>
+              <dd className="mt-0.5 text-xs leading-snug text-ivory/55 lg:text-[0.8rem]">
+                <span className="sm:hidden">{c.corto}</span>
+                <span className="hidden sm:inline">{c.detalle}</span>
+              </dd>
             </motion.div>
           ))}
         </dl>

@@ -42,36 +42,58 @@ export function Partidas() {
     }
   }, [])
 
-  /** Elite: transmisiones oficiales de Lichess (Candidatos, GCT, Tata Steel...). */
-  const cargarElite = useCallback(async (idRonda?: string) => {
-    setCargando(true)
-    setError(null)
-    try {
-      let rondas = transmisiones
-      if (rondas.length === 0) {
-        rondas = await obtenerTransmisionesElite(6)
-        setTransmisiones(rondas)
+  /**
+   * Elite: transmisiones oficiales de Lichess (Candidatos, GCT, Tata Steel...).
+   *
+   * Sin una ronda elegida a mano, recorre las disponibles hasta encontrar una
+   * con jugadas: muchas rondas en curso todavía no arrancaron y devuelven las
+   * partidas con las cabeceras puestas pero sin un solo movimiento, y ahí el
+   * visor mostraba un tablero vacío.
+   */
+  const cargarElite = useCallback(
+    async (idRonda?: string) => {
+      setCargando(true)
+      setError(null)
+      try {
+        let rondas = transmisiones
+        if (rondas.length === 0) {
+          rondas = await obtenerTransmisionesElite(8)
+          setTransmisiones(rondas)
+        }
+
+        // Se prueban hasta ocho: alcanza para pasar de largo las que están por
+        // empezar y llegar a una con partidas, sin encadenar veinte pedidos.
+        const candidatas = idRonda ? [idRonda] : rondas.slice(0, 8).map((r) => r.id)
+        if (candidatas.length === 0) {
+          throw new Error('Lichess no devolvió transmisiones disponibles en este momento')
+        }
+
+        for (const candidata of candidatas) {
+          const pgn = await obtenerPgnDeRonda(candidata)
+          const conJugadas = parsearArchivoPgn(pgn, candidata).filter((p) => p.plies.length > 0)
+
+          if (conJugadas.length > 0) {
+            setTransmisionActiva(candidata)
+            setPartidas(conJugadas)
+            setSeleccionada(0)
+            return
+          }
+        }
+
+        throw new Error(
+          idRonda
+            ? 'Esa ronda todavía no tiene jugadas publicadas'
+            : 'Ninguna de las transmisiones en curso tiene jugadas publicadas todavía',
+        )
+      } catch (e) {
+        setError(e instanceof Error ? e.message : 'Error desconocido al consultar Lichess')
+        setPartidas([])
+      } finally {
+        setCargando(false)
       }
-      const objetivo = idRonda ?? rondas[0]?.id
-      if (!objetivo) throw new Error('Lichess no devolvió transmisiones disponibles en este momento')
-
-      const pgn = await obtenerPgnDeRonda(objetivo)
-      // Las rondas que todavía no arrancaron traen las partidas con las
-      // cabeceras puestas pero sin una sola jugada: el visor mostraría un
-      // tablero vacío, así que no cuentan como partidas para mostrar.
-      const todas = parsearArchivoPgn(pgn, objetivo).filter((p) => p.plies.length > 0)
-      if (todas.length === 0) throw new Error('La ronda todavía no tiene jugadas publicadas')
-
-      setTransmisionActiva(objetivo)
-      setPartidas(todas)
-      setSeleccionada(0)
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Error desconocido al consultar Lichess')
-      setPartidas([])
-    } finally {
-      setCargando(false)
-    }
-  }, [transmisiones])
+    },
+    [transmisiones],
+  )
 
   useEffect(() => {
     if (fuente === 'club') cargarDelClub()
@@ -87,7 +109,7 @@ export function Partidas() {
         <SectionHeading
           kicker="Tablero en vivo"
           titulo="Partidas para mirar jugada por jugada"
-          bajada="Las partidas clásicas que se estudian en los talleres y, en la otra pestaña, los torneos de elite que se están transmitiendo ahora mismo."
+          bajada="Las partidas clásicas que se estudian en los talleres y, en la otra pestaña, los torneos de elite que transmite Lichess: los que están en juego ahora y los que acaban de terminar."
           align="center"
         />
 
@@ -98,7 +120,7 @@ export function Partidas() {
           </BotonFuente>
           <BotonFuente activo={fuente === 'elite'} onClick={() => setFuente('elite')}>
             <Radio className="size-4" />
-            Elite en vivo
+            Torneos de elite
           </BotonFuente>
         </Reveal>
 

@@ -101,15 +101,30 @@ export const contextoAntiguedad = {
   ],
 } as const
 
+/**
+ * Cifras del Hero. `corto` es la versión para pantallas angostas: los detalles
+ * completos, en una columna de mobile, hacían crecer la barra tres renglones.
+ */
 export const cifras = [
-  { valor: '100', unidad: 'años', detalle: 'de vida institucional ininterrumpida' },
+  {
+    valor: '100',
+    unidad: 'años',
+    detalle: 'de vida institucional ininterrumpida',
+    corto: 'de vida ininterrumpida',
+  },
   {
     valor: '1926',
     unidad: '',
     detalle: 'primer club de ajedrez de Misiones y tercero más antiguo del país',
+    corto: '3.º más antiguo del país',
   },
-  { valor: '1980', unidad: '', detalle: 'sede propia en Jujuy 1514' },
-  { valor: '6', unidad: 'días', detalle: 'de talleres y clases por semana' },
+  { valor: '1980', unidad: '', detalle: 'sede propia en Jujuy 1514', corto: 'sede propia' },
+  {
+    valor: '6',
+    unidad: 'días',
+    detalle: 'de talleres y clases por semana',
+    corto: 'de talleres por semana',
+  },
 ] as const
 
 /** Reseña histórica oficial del centenario (texto institucional del club). */

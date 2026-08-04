@@ -101,19 +101,20 @@ export function Navbar() {
           <span className="leading-tight">
             <span
               className={cn(
-                'block font-display text-[1.2rem] font-semibold tracking-tight transition-colors duration-500 sm:text-[1.35rem]',
+                'block font-display text-[1.05rem] font-semibold tracking-tight whitespace-nowrap transition-colors duration-500 sm:text-[1.3rem]',
                 avisoVisible ? 'text-ivory' : 'text-ink',
               )}
             >
               Club de Ajedrez Posadas
             </span>
+            {/* El tracking ancho del kicker partía la línea en dos en mobile */}
             <span
               className={cn(
-                'kicker block text-[0.68rem] transition-colors duration-500',
+                'kicker block text-[0.6rem] tracking-[0.2em] whitespace-nowrap transition-colors duration-500 sm:text-[0.68rem] sm:tracking-[0.34em]',
                 avisoVisible ? 'text-gold-bright/90' : 'text-gold-deep',
               )}
             >
-              1926 — 2026 · Centenario
+              1926 — 2026<span className="hidden sm:inline"> · Centenario</span>
             </span>
           </span>
         </Link>
