@@ -31,7 +31,10 @@ export function Board({
 
   return (
     <div className={cn('w-full', className)}>
-      <div className="overflow-hidden rounded-md border border-ink/12 shadow-[var(--shadow-lift)]">
+      {/* @container: el tamaño de las piezas se mide contra el ancho del
+          tablero y no contra el viewport, así siguen al tablero cuando cambia
+          de tamaño en lugar de quedarse chicas. */}
+      <div className="@container overflow-hidden rounded-md border border-ink/12 shadow-[var(--shadow-lift)]">
         <div className="grid grid-cols-8">
           {filas.map((fila, i) =>
             (invertido ? [...fila].reverse() : fila).map((casilla, j) => {
@@ -58,7 +61,9 @@ export function Board({
                     <span
                       className={cn(
                         'relative select-none leading-none',
-                        'text-[clamp(1.4rem,5.2vw,2.9rem)]',
+                        // Cada casilla mide 12.5cqw; un poco más grande que eso
+                        // hace que la pieza llene la casilla sin tocar la vecina.
+                        'text-[14cqw]',
                         casilla.color === 'w'
                           ? 'text-[#fdfbf6] [text-shadow:0_0_1px_#0b0b0c,0_1px_0_#0b0b0c,1px_0_0_#0b0b0c,-1px_0_0_#0b0b0c,0_-1px_0_#0b0b0c]'
                           : 'text-[#141416] [text-shadow:0_0_1px_rgba(252,250,245,0.55)]',
