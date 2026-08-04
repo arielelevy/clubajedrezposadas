@@ -29,6 +29,8 @@ const epigrafes: Record<string, string> = {
     'Miguel Reta (negras) fue el primer campeón del club en la sede de calle Jujuy. Mayo de 1980, en juego ante Saissac; quien observa la partida es el señor Gil.',
   'torneo-itinerante':
     'Del archivo del club: un torneo en marcha con relojes de madera y los jugadores de traje, en los años en que el club no tenía casa propia y los tableros iban del Palace Hotel a la Biblioteca Popular, el Hotel Savoy, la Casa Paraguaya y el Club Tokio.',
+  'placa-centenario':
+    'La placa conmemorativa de los 100 años, descubierta el 12 de julio de 2026 en la sede: “Hogar de Ajedrecistas”, con el agradecimiento de la comisión directiva a los socios que hacen posible la existencia y la continuidad del club.',
   'centenario-2026':
     'El festejo de los cien años en la sede de Jujuy 1514, julio de 2026: medio centenar de socios, amigos y dirigentes, homenaje a los jugadores históricos, las declaraciones de interés municipal y provincial, el descubrimiento de la placa conmemorativa y el brindis.',
 }

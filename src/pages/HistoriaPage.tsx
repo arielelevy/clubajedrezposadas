@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { club, historia, hitos, comisionFundadora } from '@/data/site'
+import { club, historia, hitos, comisionFundadora, comisionCentenario } from '@/data/site'
 import actaUrl from '@/assets/galeria/acta-1926.webp'
+import placaUrl from '@/assets/galeria/placa-centenario.webp'
 import { PageHeader } from '@/components/PageHeader'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Reveal } from '@/components/Reveal'
@@ -93,6 +94,44 @@ export function HistoriaPage() {
               </dl>
 
               <p className="mt-5 text-xs text-ink/45">{comisionFundadora.nota}</p>
+            </Reveal>
+          </div>
+
+          {/* Cien años después, la otra comisión: el mismo gesto de dejar los
+              nombres asentados, del libro de actas a una placa de bronce. */}
+          <div className="mt-12 grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+            <Reveal>
+              <p className="kicker text-gold-deep">12 de julio de 2026</p>
+              <h2 className="mt-3 text-3xl text-ink lg:text-4xl">{comisionCentenario.titulo}</h2>
+              <p className="mt-5 text-[1.02rem] leading-relaxed text-ink/70">
+                {comisionCentenario.bajada}
+              </p>
+
+              <dl className="mt-8 divide-y divide-ink/8 border-t border-ink/8">
+                {comisionCentenario.cargos.map((c) => (
+                  <div
+                    key={`${c.cargo}-${c.nombre}`}
+                    className="grid gap-1 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"
+                  >
+                    <dt className="kicker text-[0.58rem] text-ink/40">{c.cargo}</dt>
+                    <dd className="text-[0.95rem] text-ink/85">{c.nombre}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <figure>
+                <img
+                  src={placaUrl}
+                  alt="Placa conmemorativa del centenario del Club de Ajedrez Posadas, titulada Hogar de Ajedrecistas, con los nombres de la comisión directiva"
+                  loading="lazy"
+                  className="w-full rounded-lg border border-ink/10 shadow-[var(--shadow-lift)]"
+                />
+                <figcaption className="mt-3 text-xs text-ink/45">
+                  “Hogar de Ajedrecistas”, en la sede de {club.direccion}.
+                </figcaption>
+              </figure>
             </Reveal>
           </div>
         </div>

@@ -176,6 +176,27 @@ export const comisionFundadora = {
 } as const
 
 /**
+ * Comisión directiva del centenario, transcripta de la placa "Hogar de
+ * Ajedrecistas" descubierta en la sede el 12 de julio de 2026.
+ */
+export const comisionCentenario = {
+  titulo: 'La comisión directiva del centenario',
+  bajada:
+    'Cien años después, los nombres que quedaron grabados en la placa “Hogar de Ajedrecistas”, descubierta en la sede el 12 de julio de 2026.',
+  cargos: [
+    { cargo: 'Presidente', nombre: 'Ignacio Daniel Pintos Merlo' },
+    { cargo: 'Secretario', nombre: 'Damián Moore Fernández' },
+    { cargo: 'Tesorero', nombre: 'Lautaro Javier Méndez Moniec' },
+    { cargo: 'Vocal titular', nombre: 'Javier Alberto Pelosa' },
+    { cargo: 'Vocal titular', nombre: 'Néstor C. Álvarez' },
+    { cargo: 'Vocal suplente', nombre: 'Cristian Lucas Owczarczyn' },
+    { cargo: 'Vocal suplente', nombre: 'Ariel Edgardo Levy' },
+    { cargo: 'Revisor de cuentas titular', nombre: 'Juan Héctor Osuna' },
+    { cargo: 'Revisor de cuentas suplente', nombre: 'Nancy Zabulanes' },
+  ],
+} as const
+
+/**
  * Hitos del siglo. `desde`/`hasta` ubican cada hito en el tablero de los cien
  * años del home (un casillero por año, 1926–2025); el hito de 2026 queda fuera
  * del tablero porque es el año que se está jugando.
