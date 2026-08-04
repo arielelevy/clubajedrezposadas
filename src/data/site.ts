@@ -40,9 +40,7 @@ export const navegacion = [
   { label: 'Centenario', href: '/#evento' },
   { label: 'Talleres', href: '/#talleres' },
   { label: 'Partidas', href: '/#partidas' },
-  // La galería está oculta hasta que lleguen fotos reales del club: la sección
-  // se autodescubre desde src/assets/galeria y no se renderiza si está vacía.
-  // Cuando haya fotos, volver a agregar: { label: 'Galería', href: '/#galeria' }
+  { label: 'Galería', href: '/#galeria' },
   { label: 'Auspicios', href: '/auspicios' },
   { label: 'Socios', href: '/socios' },
 ] as const
@@ -87,6 +85,21 @@ export const eventoCentenario = {
   avisoSuperior: 'IRT "100 Años" · 5 al 8 de diciembre de 2026 · Posadas',
 } as const
 
+/**
+ * Contexto de antigüedad: el club es anterior a la propia federación argentina
+ * y casi contemporáneo de la FIDE. Dicho así, en tres fechas, se entiende solo.
+ */
+export const contextoAntiguedad = {
+  titulo: 'Más viejo que su propia federación',
+  texto:
+    'El Club de Ajedrez Posadas se fundó veintidós años antes que la Federación Argentina de Ajedrez, y apenas dos años después de que naciera la Federación Internacional.',
+  fechas: [
+    { anio: '1924', que: 'Nace la FIDE', propio: false },
+    { anio: '1926', que: 'Se funda el club', propio: true },
+    { anio: '1948', que: 'Se constituye la FADA', propio: false },
+  ],
+} as const
+
 export const cifras = [
   { valor: '100', unidad: 'años', detalle: 'de vida institucional ininterrumpida' },
   {
@@ -116,6 +129,32 @@ export const historia = {
   cierre: [
     'Que este centenario sea un homenaje a quienes hicieron posible esta historia y, al mismo tiempo, el punto de partida para seguir escribiendo las próximas páginas del Club de Ajedrez Posadas.',
     'Porque las instituciones centenarias no pertenecen solamente a quienes las integran: pertenecen a toda la comunidad. Y el Club de Ajedrez Posadas, después de cien años, es parte del patrimonio deportivo, cultural e histórico de nuestra ciudad y de nuestra provincia.',
+  ],
+} as const
+
+/**
+ * Primera comisión directiva, transcripta del Acta N° 1 del 12 de julio de 1926.
+ *
+ * Se respeta la grafía del acta, que en varios nombres difiere de la reseña
+ * institucional (Ysasa / Isasa, Gourry / Gaury, J. Lozano / Lorenzo Casanova).
+ * El acta además nombra cuatro cargos que la reseña no menciona.
+ */
+export const comisionFundadora = {
+  titulo: 'La primera comisión directiva',
+  bajada:
+    'Los diez cargos que quedaron asentados en el Acta N° 1, firmada en el Palace Hotel a las cinco de la tarde del 12 de julio de 1926.',
+  nota: 'Los nombres siguen la grafía del acta original.',
+  cargos: [
+    { cargo: 'Presidente', nombre: 'Diego Ysasa' },
+    { cargo: 'Secretario', nombre: 'J. Lozano Casanova' },
+    { cargo: 'Tesorero', nombre: 'Eduardo Gourry' },
+    { cargo: 'Vocal 1.º', nombre: 'Enrique Sanchís' },
+    { cargo: 'Vocal 2.º', nombre: 'Juan Morales' },
+    { cargo: 'Vocal 3.º', nombre: 'León R. Naboulet' },
+    { cargo: 'Vocal 4.º', nombre: 'H. L. de Tejada' },
+    { cargo: 'Suplente 1.º', nombre: 'Carlos Pedernera' },
+    { cargo: 'Suplente 2.º', nombre: 'Duarte Ysasa' },
+    { cargo: 'Suplente 3.º', nombre: 'Ladislao Zaragoza' },
   ],
 } as const
 
@@ -156,14 +195,24 @@ export const hitos = [
     pieza: 'torre',
   },
   {
-    anio: '2000s',
+    anio: '2000',
     desde: 2000,
-    hasta: 2009,
+    hasta: 2003,
     fecha: 'Nuevo milenio',
-    titulo: 'Renovación y crecimiento',
+    titulo: 'Los primeros torneos internacionales',
     texto:
-      'Reafiliación a la Federación Argentina de Ajedrez, torneos con validez para el ranking nacional e internacional, capacitación docente y escuelas de iniciación.',
+      'Reafiliado a la Federación Argentina de Ajedrez, el club empieza a organizar torneos IRT, con validez para el ranking internacional. Hasta 2010 fue el único club activo de la provincia que los organizaba.',
     pieza: 'alfil',
+  },
+  {
+    anio: '2004-2020',
+    desde: 2004,
+    hasta: 2020,
+    fecha: 'Dos décadas',
+    titulo: 'De dos jugadores con ELO a cuarenta',
+    texto:
+      'En 2004 el club tenía solo dos jugadores con ranking internacional. En 2012 ya eran veinticinco, y para 2020 alrededor de cuarenta: la medida más concreta del trabajo sostenido en los talleres.',
+    pieza: 'dama',
   },
   {
     anio: '2026',

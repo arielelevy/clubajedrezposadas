@@ -56,8 +56,11 @@ export function Partidas() {
       if (!objetivo) throw new Error('Lichess no devolvió transmisiones disponibles en este momento')
 
       const pgn = await obtenerPgnDeRonda(objetivo)
-      const todas = parsearArchivoPgn(pgn, objetivo)
-      if (todas.length === 0) throw new Error('La ronda todavía no tiene partidas publicadas')
+      // Las rondas que todavía no arrancaron traen las partidas con las
+      // cabeceras puestas pero sin una sola jugada: el visor mostraría un
+      // tablero vacío, así que no cuentan como partidas para mostrar.
+      const todas = parsearArchivoPgn(pgn, objetivo).filter((p) => p.plies.length > 0)
+      if (todas.length === 0) throw new Error('La ronda todavía no tiene jugadas publicadas')
 
       setTransmisionActiva(objetivo)
       setPartidas(todas)

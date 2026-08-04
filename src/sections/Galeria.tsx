@@ -20,12 +20,15 @@ const modulos = import.meta.glob<string>('../assets/galeria/*.{jpg,jpeg,png,webp
  * Epígrafes por nombre de archivo (sin extensión). Los que no estén acá caen
  * al nombre del archivo con los guiones convertidos en espacios.
  *
- * La carpeta está vacía a propósito: estaba sembrada con los afiches del club y
- * no con fotos, así que la sección no se muestra. Cuando lleguen las fotos
- * reales, copiarlas a src/assets/galeria/, cargar los epígrafes acá y volver a
- * poner "Galería" en `navegacion` (src/data/site.ts).
+ * Para agregar fotos: copiarlas a src/assets/galeria/ y sumar su epígrafe acá.
+ * La sección se autodescubre y no se renderiza si la carpeta está vacía.
  */
-const epigrafes: Record<string, string> = {}
+const epigrafes: Record<string, string> = {
+  'reta-saissac-1980':
+    'Miguel Reta (negras) fue el primer campeón del club en la sede de calle Jujuy. Mayo de 1980, en juego ante Saissac; quien observa la partida es el señor Gil.',
+  'sede-jujuy-1514': 'La sede de Jujuy 1514, el corazón del club desde 1980.',
+  'centenario-2026': 'Los festejos del centenario, julio de 2026.',
+}
 
 type Foto = { url: string; nombre: string; epigrafe: string }
 

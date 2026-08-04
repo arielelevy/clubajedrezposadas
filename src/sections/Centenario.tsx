@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { hitos } from '@/data/site'
+import { hitos, contextoAntiguedad } from '@/data/site'
 import { Reveal } from '@/components/Reveal'
 import { Button } from '@/components/ui/button'
 import { ChessGlyph, type Pieza } from '@/components/ChessGlyph'
@@ -191,7 +191,41 @@ export function Centenario() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.16}>
+          {/* Antigüedad en perspectiva: tres fechas y se entiende sola */}
+          <Reveal delay={0.14}>
+            <div className="mt-8 border-t border-ivory/12 pt-7">
+              <p className="kicker text-[0.58rem] text-ivory/40">{contextoAntiguedad.titulo}</p>
+              <ol className="mt-5 flex flex-wrap items-start gap-x-10 gap-y-5">
+                {contextoAntiguedad.fechas.map((f) => (
+                  <li key={f.anio}>
+                    <p
+                      className={
+                        f.propio
+                          ? 'font-condensed text-3xl leading-none text-gold-bright'
+                          : 'font-condensed text-3xl leading-none text-ivory/45'
+                      }
+                    >
+                      {f.anio}
+                    </p>
+                    <p
+                      className={
+                        f.propio
+                          ? 'mt-1.5 text-[0.82rem] text-ivory/80'
+                          : 'mt-1.5 text-[0.82rem] text-ivory/45'
+                      }
+                    >
+                      {f.que}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-5 max-w-xl text-[0.9rem] leading-relaxed text-ivory/55">
+                {contextoAntiguedad.texto}
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.18}>
             <Button asChild variant="gold" size="lg" className="mt-9">
               <Link to="/historia">
                 Leer los cien años

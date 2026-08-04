@@ -39,25 +39,25 @@ export function Hero() {
 
           <motion.h1
             {...aparece(0.15)}
-            className="mt-6 text-[3.1rem] leading-[0.96] font-medium sm:text-7xl lg:text-[5.6rem]"
+            className="mt-4 text-[2.9rem] leading-[0.95] font-medium sm:text-6xl lg:text-[5rem]"
           >
             Cien años
-            <span className="mt-1 block text-gold-gradient">de ajedrez</span>
+            <span className="block text-gold-gradient">de ajedrez</span>
             <span className="mt-2 block font-sans text-base font-light tracking-[0.2em] text-ivory/60 uppercase sm:text-lg">
               en el corazón de Misiones
             </span>
           </motion.h1>
 
           <motion.div {...aparece(0.28)}>
-            <GoldDivider className="mt-9 max-w-md" />
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-ivory/75">
+            <GoldDivider className="mt-6 max-w-md" />
+            <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-ivory/75">
               El primer club dedicado exclusivamente al ajedrez en la provincia. Fundado el{' '}
               {club.fundacion} en el Palace Hotel, con sede propia desde 1980 y las puertas abiertas
               seis días por semana para chicos, jóvenes y adultos.
             </p>
           </motion.div>
 
-          <motion.div {...aparece(0.4)} className="mt-8 flex flex-wrap items-center gap-4">
+          <motion.div {...aparece(0.4)} className="mt-6 flex flex-wrap items-center gap-4">
             <Button asChild size="lg" variant="gold">
               <a href={club.whatsappLink} target="_blank" rel="noreferrer">
                 <MessageCircle />
@@ -77,7 +77,7 @@ export function Hero() {
             href={club.mapsLink}
             target="_blank"
             rel="noreferrer"
-            className="mt-8 inline-flex items-center gap-2 text-sm text-ivory/55 transition-colors hover:text-gold-bright"
+            className="mt-6 inline-flex items-center gap-2 text-sm text-ivory/55 transition-colors hover:text-gold-bright"
           >
             <MapPin className="size-4" />
             {club.direccion} · {club.ciudad}, {club.provincia}

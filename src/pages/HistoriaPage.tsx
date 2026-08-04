@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { club, historia, hitos } from '@/data/site'
+import { club, historia, hitos, comisionFundadora } from '@/data/site'
+import actaUrl from '@/assets/historia/acta-1926.webp'
 import { PageHeader } from '@/components/PageHeader'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Reveal } from '@/components/Reveal'
@@ -50,7 +51,47 @@ export function HistoriaPage() {
         </div>
       </section>
 
-      {/* Línea del tiempo: los cinco hitos del siglo */}
+      {/* El acta de fundación y la primera comisión directiva */}
+      <section id="acta" className="scroll-mt-24 bg-ivory py-12 lg:py-16">
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+            <Reveal>
+              <figure>
+                <img
+                  src={actaUrl}
+                  alt="Acta N° 1 del Club de Ajedrez Posadas, manuscrita el 12 de julio de 1926 en el Palace Hotel, con la distribución de cargos de la primera comisión directiva"
+                  loading="lazy"
+                  className="w-full rounded-lg border border-ink/10 shadow-[var(--shadow-lift)]"
+                />
+                <figcaption className="mt-3 text-xs text-ink/45">
+                  Acta N.º 1, libro de actas del club.
+                </figcaption>
+              </figure>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <p className="kicker text-gold-deep">12 de julio de 1926</p>
+              <h2 className="mt-3 text-3xl text-ink lg:text-4xl">{comisionFundadora.titulo}</h2>
+              <p className="mt-5 text-[1.02rem] leading-relaxed text-ink/70">
+                {comisionFundadora.bajada}
+              </p>
+
+              <dl className="mt-8 divide-y divide-ink/8 border-t border-ink/8">
+                {comisionFundadora.cargos.map((c) => (
+                  <div key={c.cargo} className="grid grid-cols-[8rem_1fr] gap-4 py-2.5">
+                    <dt className="kicker text-[0.58rem] text-ink/40">{c.cargo}</dt>
+                    <dd className="text-[0.95rem] text-ink/85">{c.nombre}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <p className="mt-5 text-xs text-ink/45">{comisionFundadora.nota}</p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Línea del tiempo: los hitos del siglo */}
       <section
         id="hitos"
         className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-12 text-ivory lg:py-18"
