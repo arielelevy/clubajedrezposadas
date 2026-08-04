@@ -22,15 +22,19 @@ export function EventoCentenario() {
       <BoardTexture className="text-ink" size={72} opacity={0.035} animate={false} />
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
-        <Reveal className="max-w-3xl">
-          <p className="kicker text-gold-deep">El evento del centenario</p>
-          <h2 className="mt-4 text-3xl leading-[1.06] text-ink sm:text-4xl lg:text-5xl">
-            {evento.nombre}
-          </h2>
-          <p className="mt-3 font-sans text-sm font-light tracking-[0.22em] text-ink/50 uppercase">
-            {evento.subtitulo}
-          </p>
-          <p className="mt-4 text-[1.05rem] leading-relaxed text-ink/65">{evento.bajada}</p>
+        {/* Título a la izquierda y bajada a la derecha: apilados se comían un
+            renglón entero de alto sin necesidad. */}
+        <Reveal className="grid items-end gap-x-12 gap-y-4 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+            <p className="kicker text-gold-deep">El evento del centenario</p>
+            <h2 className="mt-4 text-3xl leading-[1.06] text-ink sm:text-4xl lg:text-5xl">
+              {evento.nombre}
+            </h2>
+            <p className="mt-3 font-sans text-sm font-light tracking-[0.22em] text-ink/50 uppercase">
+              {evento.subtitulo}
+            </p>
+          </div>
+          <p className="text-[1.02rem] leading-relaxed text-ink/65 lg:pb-1">{evento.bajada}</p>
         </Reveal>
 
         <Reveal delay={0.12}>

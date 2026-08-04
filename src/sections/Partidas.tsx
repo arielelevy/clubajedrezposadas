@@ -92,7 +92,7 @@ export function Partidas() {
         />
 
         {/* Selector de fuente */}
-        <Reveal className="mt-9 flex flex-wrap justify-center gap-2">
+        <Reveal className="mt-6 flex flex-wrap justify-center gap-2">
           <BotonFuente activo={fuente === 'club'} onClick={() => setFuente('club')}>
             Clásicas
           </BotonFuente>
@@ -104,7 +104,7 @@ export function Partidas() {
 
         {/* Transmisiones disponibles */}
         {fuente === 'elite' && transmisiones.length > 0 ? (
-          <div className="mt-8 flex flex-wrap justify-center gap-2">
+          <div className="mt-5 flex flex-wrap justify-center gap-2">
             {transmisiones.map((t) => (
               <button
                 key={t.id}
@@ -125,9 +125,9 @@ export function Partidas() {
           </div>
         ) : null}
 
-        <div className="mt-9">
+        <div className="mt-6">
           {cargando ? (
-            <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-24 text-ink/50">
+            <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-16 text-ink/50">
               <LoaderCircle className="size-7 animate-spin text-gold" />
               <p className="mt-4 text-sm">
                 {fuente === 'elite' ? 'Consultando Lichess…' : 'Leyendo las partidas…'}
@@ -148,9 +148,9 @@ export function Partidas() {
               </button>
             </div>
           ) : partida ? (
-            <div className="grid gap-8 lg:grid-cols-[16rem_minmax(0,1fr)]">
+            <div className="grid gap-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
               {/* Listado de partidas */}
-              <ol className="max-h-[34rem] space-y-1.5 overflow-y-auto pr-1">
+              <ol className="max-h-[28rem] space-y-1.5 overflow-y-auto pr-1">
                 {partidas.map((p, i) => (
                   <li key={p.id}>
                     <button

@@ -16,25 +16,25 @@ export function Footer() {
     <footer className="relative isolate overflow-hidden bg-ink text-ivory">
       <BoardTexture className="text-ivory" size={38} opacity={0.04} animate={false} />
 
-      <div className="relative mx-auto max-w-7xl px-5 py-16 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
+      <div className="relative mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-12">
+        <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr_1fr] lg:gap-12">
           <div>
             <div className="flex items-center gap-4">
-              <span className="grid size-16 place-items-center rounded-full bg-ivory">
-                <img src="/logo-cap.svg" alt="" className="size-14" />
+              <span className="grid size-14 shrink-0 place-items-center rounded-full bg-ivory">
+                <img src="/logo-cap.svg" alt="" className="size-12" />
               </span>
               <div>
-                <p className="font-display text-2xl">{club.nombre}</p>
-                <p className="kicker mt-1 text-[0.65rem] text-gold-bright">1926 — 2026 · {club.lema}</p>
+                <p className="font-display text-xl">{club.nombre}</p>
+                <p className="kicker mt-1 text-[0.6rem] text-gold-bright">1926 — 2026 · {club.lema}</p>
               </div>
             </div>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-ivory/60">
+            <p className="mt-4 max-w-sm text-[0.85rem] leading-relaxed text-ivory/60">
               Institución deportiva y cultural centenaria de {club.ciudad}, {club.provincia}. Personería
               jurídica {club.personeriaJuridica}.
             </p>
 
             {/* Redes del club */}
-            <ul className="mt-7 flex items-center gap-3">
+            <ul className="mt-5 flex items-center gap-2.5">
               {redes.map((r) => (
                 <li key={r.nombre}>
                   <a
@@ -54,7 +54,7 @@ export function Footer() {
 
           <nav>
             <p className="kicker text-ivory/40">Secciones</p>
-            <ul className="mt-5 space-y-3 text-sm">
+            <ul className="mt-4 space-y-2 text-sm">
               {navegacion.map((item) => (
                 <li key={item.href}>
                   <Link to={item.href} className="text-ivory/70 transition-colors hover:text-gold-bright">
@@ -67,7 +67,7 @@ export function Footer() {
 
           <div>
             <p className="kicker text-ivory/40">Contacto</p>
-            <ul className="mt-5 space-y-4 text-sm">
+            <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <a
                   href={club.whatsappLink}
@@ -109,9 +109,9 @@ export function Footer() {
           </div>
         </div>
 
-        <GoldDivider className="mt-14" />
+        <GoldDivider className="mt-9" />
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-3 text-xs text-ivory/40 sm:flex-row">
+        <div className="mt-5 flex flex-col items-center justify-between gap-2 text-xs text-ivory/40 sm:flex-row">
           <p>
             © {club.anioFundacion}–{new Date().getFullYear()} {club.nombre}. Todos los derechos reservados.
           </p>

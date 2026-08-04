@@ -55,13 +55,21 @@ export function Navbar() {
   }, [pathname, hash])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/8 bg-bone/95 py-2 backdrop-blur-sm">
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 transition-colors duration-500',
+        // Con el aviso desplegado la barra se apoya sobre el bloque oscuro de la
+        // página, así que vuelve al look transparente sobre oscuro. Ya no depende
+        // de la ruta, que era lo que dejaba el menú negro sobre negro.
+        avisoVisible ? 'bg-transparent' : 'border-b border-ink/8 bg-bone/95 backdrop-blur-sm',
+      )}
+    >
       {/* Aviso del evento del centenario */}
       {eventoCentenario.publicado ? (
         <Link
           to="/#evento"
           className={cn(
-            'group -mx-0 -mt-2 mb-2 block overflow-hidden border-gold/20 bg-ink transition-all duration-500',
+            'group block overflow-hidden border-gold/20 bg-ink transition-all duration-500',
             avisoVisible
               ? 'max-h-24 border-b opacity-100'
               : 'pointer-events-none max-h-0 opacity-0',
@@ -80,16 +88,31 @@ export function Navbar() {
         </Link>
       ) : null}
 
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
+      <div
+        className={cn(
+          'mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 transition-all duration-500 lg:px-8',
+          avisoVisible ? 'py-3' : 'py-2',
+        )}
+      >
         <Link to="/" className="group flex items-center gap-3">
           <span className="grid size-11 place-items-center rounded-full bg-ivory">
             <img src="/logo-cap.svg" alt="" className="size-9" />
           </span>
           <span className="leading-tight">
-            <span className="block font-display text-[1.2rem] font-semibold tracking-tight text-ink sm:text-[1.35rem]">
+            <span
+              className={cn(
+                'block font-display text-[1.2rem] font-semibold tracking-tight transition-colors duration-500 sm:text-[1.35rem]',
+                avisoVisible ? 'text-ivory' : 'text-ink',
+              )}
+            >
               Club de Ajedrez Posadas
             </span>
-            <span className="kicker block text-[0.68rem] text-gold-deep">
+            <span
+              className={cn(
+                'kicker block text-[0.68rem] transition-colors duration-500',
+                avisoVisible ? 'text-gold-bright/90' : 'text-gold-deep',
+              )}
+            >
               1926 — 2026 · Centenario
             </span>
           </span>
@@ -100,12 +123,15 @@ export function Navbar() {
             <Link
               key={item.href}
               to={item.href}
-              className="relative py-1 text-[0.95rem] text-ink/75 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:text-ink hover:after:scale-x-100"
+              className={cn(
+                'relative py-1 text-[0.95rem] transition-colors duration-500 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:scale-x-100',
+                avisoVisible ? 'text-ivory/85 hover:text-ivory' : 'text-ink/75 hover:text-ink',
+              )}
             >
               {item.label}
             </Link>
           ))}
-          <Button asChild size="sm" variant="gold">
+          <Button asChild size="sm" variant={avisoVisible ? 'outlineLight' : 'gold'}>
             <a href={club.whatsappLink} target="_blank" rel="noreferrer">
               <MessageCircle />
               Escribinos
@@ -116,7 +142,12 @@ export function Navbar() {
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger asChild>
             <button
-              className="grid size-11 place-items-center rounded-full border border-ink/15 text-ink transition-colors hover:border-gold hover:text-gold-deep lg:hidden"
+              className={cn(
+                'grid size-11 place-items-center rounded-full border transition-colors duration-500 lg:hidden',
+                avisoVisible
+                  ? 'border-ivory/30 text-ivory'
+                  : 'border-ink/15 text-ink hover:border-gold hover:text-gold-deep',
+              )}
               aria-label="Abrir menú"
             >
               <Menu className="size-5" />
