@@ -36,7 +36,9 @@ export function GameViewer({ partida }: { partida: Partida }) {
       setReproduciendo(false)
       return
     }
-    const t = setTimeout(avanzar, 900)
+    // Cinco segundos por jugada: la reproducción es para seguir la partida,
+    // no para verla pasar.
+    const t = setTimeout(avanzar, 5000)
     return () => clearTimeout(t)
   }, [reproduciendo, indice, total, avanzar])
 

@@ -22,6 +22,9 @@ const grupos = [
   },
 ].filter((g) => g.items.length > 0)
 
+/** Píxeles de scroll hacia arriba, ya en el tope, para desplegar el aviso. */
+const RESISTENCIA = 90
+
 export function Navbar() {
   /**
    * El aviso del centenario aparece cuando volvés al tope subiendo, y se
@@ -34,12 +37,22 @@ export function Navbar() {
 
   useEffect(() => {
     let anterior = window.scrollY
+    let acumulado = 0
 
     const onScroll = () => {
       const y = window.scrollY
-      // Solo en el tope, y solo si se llegó ahí subiendo: así nunca tapa el
-      // contenido, porque arriba lo que hay es el aire del encabezado.
-      setAvisoVisible(y <= 24 && y < anterior)
+      const subiendo = y < anterior
+
+      if (subiendo && y <= 24) {
+        // Pequeña resistencia: hay que insistir hacia arriba para que aparezca,
+        // así no salta con cualquier roce del dedo o rebote del scroll.
+        acumulado += anterior - y
+        if (acumulado >= RESISTENCIA) setAvisoVisible(true)
+      } else if (!subiendo) {
+        acumulado = 0
+        setAvisoVisible(false)
+      }
+
       anterior = y
     }
 

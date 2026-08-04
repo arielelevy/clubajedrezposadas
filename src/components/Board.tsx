@@ -60,10 +60,12 @@ export function Board({
                   {casilla.pieza ? (
                     <span
                       className={cn(
-                        'relative select-none leading-none',
-                        // Cada casilla mide 12.5cqw; un poco más grande que eso
-                        // hace que la pieza llene la casilla sin tocar la vecina.
-                        'text-[14cqw]',
+                        // La caja del glifo es más alta que su font-size (el tipo
+                        // trae ascendente y descendente propios), así que con
+                        // 14cqw la pieza medía 170% del alto de la casilla y se
+                        // metía en la de al lado. A 9.5cqw entra justa.
+                        'relative flex select-none items-center justify-center leading-[0.75]',
+                        'text-[9.5cqw]',
                         casilla.color === 'w'
                           ? 'text-[#fdfbf6] [text-shadow:0_0_1px_#0b0b0c,0_1px_0_#0b0b0c,1px_0_0_#0b0b0c,-1px_0_0_#0b0b0c,0_-1px_0_#0b0b0c]'
                           : 'text-[#141416] [text-shadow:0_0_1px_rgba(252,250,245,0.55)]',

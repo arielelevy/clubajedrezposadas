@@ -88,15 +88,15 @@ export function EventoCentenario() {
               />
 
               <div className="relative">
-                <p className="text-[0.98rem] leading-relaxed text-ivory/75">{evento.descripcion}</p>
-                <p className="mt-4 text-[0.98rem] leading-relaxed text-ivory/75">
+                <p className="text-[0.94rem] leading-[1.6] text-ivory/75">{evento.descripcion}</p>
+                <p className="mt-3 text-[0.94rem] leading-[1.6] text-ivory/75">
                   {evento.descripcion2}
                 </p>
 
                 <p className="kicker mt-6 text-[0.6rem] text-gold-bright">Qué incluye la edición</p>
                 <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
                   {evento.caracteristicas.map((c) => (
-                    <li key={c} className="flex gap-3 text-[0.95rem] leading-snug text-ivory/80">
+                    <li key={c} className="flex gap-3 text-[0.9rem] leading-snug text-ivory/80">
                       <span
                         aria-hidden="true"
                         className="mt-1.5 size-1.5 shrink-0 rotate-45 bg-gold-bright"
