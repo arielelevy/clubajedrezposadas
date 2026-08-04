@@ -61,11 +61,19 @@ export function Partidas() {
     setCargando(true)
     setError(null)
     try {
-      const rondas = await obtenerTransmisionesElite(4)
+      const rondas = await obtenerTransmisionesElite(5)
 
-      // Se sondean unas pocas y se ofrecen las primeras cuatro con partidas.
+      // Se sondean tres en curso y cinco terminadas. Las en curso valen la pena
+      // porque son lo interesante cuando hay ronda jugándose, pero buena parte
+      // del día están por empezar y vienen vacías, así que el peso del sondeo va
+      // a las terminadas, que sí tienen partidas completas.
+      const candidatas = [
+        ...rondas.filter((r) => !r.terminada).slice(0, 3),
+        ...rondas.filter((r) => r.terminada).slice(0, 5),
+      ]
+
       const sondeos = await Promise.all(
-        rondas.slice(0, 7).map(async (ronda) => {
+        candidatas.map(async (ronda) => {
           try {
             const pgn = await obtenerPgnDeRonda(ronda.id)
             const partidas = parsearArchivoPgn(pgn, ronda.id).filter((p) => p.plies.length > 0)
