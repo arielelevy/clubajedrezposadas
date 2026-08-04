@@ -33,3 +33,6 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# Notas internas de handoff (no van al repo publico)
+ESTADO.md

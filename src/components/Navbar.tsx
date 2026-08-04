@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Menu, X, MessageCircle } from 'lucide-react'
-import { club, navegacion } from '@/data/site'
+import { Menu, X, MessageCircle, ArrowRight } from 'lucide-react'
+import { club, navegacion, eventoCentenario } from '@/data/site'
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
 
@@ -20,7 +20,9 @@ export function Navbar() {
 
   useEffect(() => setOpen(false), [pathname])
 
-  const sobreOscuro = pathname === '/' && !scrolled
+  // Todas las rutas arrancan con un bloque oscuro (Hero o PageHeader),
+  // así que mientras la barra es transparente el contenido va en marfil.
+  const sobreOscuro = !scrolled
 
   return (
     <header
@@ -29,6 +31,29 @@ export function Navbar() {
         scrolled ? 'border-b border-ink/8 bg-bone/90 py-2 backdrop-blur-xl' : 'py-4',
       )}
     >
+      {/* Aviso del evento del centenario: solo con la barra transparente, se
+          retrae al scrollear para no robarle altura a la navegación. */}
+      {eventoCentenario.publicado ? (
+        <Link
+          to="/#evento"
+          className={cn(
+            'group block overflow-hidden border-b border-gold/20 bg-ink/85 backdrop-blur-md transition-all duration-500',
+            scrolled ? 'pointer-events-none max-h-0 border-b-0 opacity-0' : 'max-h-24 opacity-100',
+          )}
+        >
+          <span className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-5 py-2.5 lg:px-8">
+            <span aria-hidden="true" className="size-1.5 shrink-0 rotate-45 bg-gold-bright" />
+            <span className="font-condensed text-[0.68rem] leading-tight tracking-[0.2em] text-gold-bright uppercase sm:text-[0.8rem] sm:tracking-[0.28em]">
+              {eventoCentenario.avisoSuperior}
+            </span>
+            <ArrowRight
+              aria-hidden="true"
+              className="size-3.5 shrink-0 text-gold-bright/60 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </span>
+        </Link>
+      ) : null}
+
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 lg:px-8">
         <Link to="/" className="group flex items-center gap-3">
           <span
@@ -46,7 +71,7 @@ export function Navbar() {
           <span className="leading-tight">
             <span
               className={cn(
-                'block font-display text-[1.05rem] font-semibold tracking-tight transition-colors sm:text-lg',
+                'block font-display text-[1.2rem] font-semibold tracking-tight transition-colors sm:text-[1.35rem]',
                 sobreOscuro ? 'text-ivory' : 'text-ink',
               )}
             >
@@ -54,7 +79,7 @@ export function Navbar() {
             </span>
             <span
               className={cn(
-                'kicker block text-[0.62rem] transition-colors',
+                'kicker block text-[0.68rem] transition-colors',
                 sobreOscuro ? 'text-gold-bright/90' : 'text-gold-deep',
               )}
             >
@@ -69,7 +94,7 @@ export function Navbar() {
               key={item.href}
               to={item.href}
               className={cn(
-                'relative py-1 text-sm transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:scale-x-100',
+                'relative py-1 text-[0.95rem] transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:scale-x-100',
                 sobreOscuro ? 'text-ivory/85 hover:text-ivory' : 'text-ink/75 hover:text-ink',
               )}
             >

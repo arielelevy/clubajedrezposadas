@@ -13,6 +13,7 @@ export const club = {
   anioCentenario: 2026,
   personeriaJuridica: 'N° A-135',
   direccion: 'Jujuy 1514',
+  codigoPostal: '3300',
   ciudad: 'Posadas',
   provincia: 'Misiones',
   pais: 'Argentina',
@@ -20,23 +21,75 @@ export const club = {
   whatsappLink: 'https://wa.me/5493764328118',
   instagram: 'clubdeajedrezposadas',
   instagramLink: 'https://www.instagram.com/clubdeajedrezposadas',
-  mapsLink: 'https://www.google.com/maps/search/?api=1&query=Jujuy+1514+Posadas+Misiones',
+  facebook: 'clubdeajedrezposadas',
+  facebookLink: 'https://www.facebook.com/CLUBDEAJEDREZPOSADAS/',
+  mapsLink:
+    'https://www.google.com/maps/search/?api=1&query=Jujuy+1514%2C+3300+Posadas%2C+Misiones%2C+Argentina',
   mapsEmbed:
-    'https://www.google.com/maps?q=Jujuy%201514%2C%20Posadas%2C%20Misiones%2C%20Argentina&output=embed',
+    'https://www.google.com/maps?q=Jujuy%201514%2C%203300%20Posadas%2C%20Misiones%2C%20Argentina&output=embed',
+  /** Formularios oficiales de Google (links públicos de respuesta). */
+  formularioSocios: 'https://forms.gle/bajZCJdf8p4m6HQG9',
+  formularioProyectos: 'https://forms.gle/H8agD4kkmauwwKze7',
 } as const
 
 export const navegacion = [
   { label: 'El club', href: '/#el-club' },
   { label: 'Historia', href: '/historia' },
+  { label: 'Centenario', href: '/#evento' },
   { label: 'Talleres', href: '/#talleres' },
-  { label: 'Centenario', href: '/#centenario' },
+  { label: 'Partidas', href: '/#partidas' },
+  { label: 'Galería', href: '/#galeria' },
   { label: 'Auspicios', href: '/auspicios' },
   { label: 'Socios', href: '/socios' },
 ] as const
 
+/**
+ * Evento central del centenario (datos de la carpeta institucional 2026).
+ * Con `publicado: false` la sección y el aviso superior dejan de mostrarse.
+ */
+export const eventoCentenario = {
+  publicado: true,
+  sigla: 'IRT',
+  nombre: 'IRT "100 Años"',
+  subtitulo: 'International Rating Tournament',
+  bajada: 'El torneo principal del festejo de los 100 años del Club de Ajedrez Posadas',
+  fechaTexto: '5, 6, 7 y 8 de diciembre de 2026',
+  fechaISO: '2026-12-05',
+  /** Fecha partida para el bloque tipográfico del afiche. */
+  diaDesde: '05',
+  diaHasta: '08',
+  mesCorto: 'Dic',
+  anio: '2026',
+  lugar: 'Posadas, Misiones, Argentina',
+  /** Ficha rápida del torneo, para la columna de datos del afiche. */
+  ficha: [
+    { rotulo: 'Sede', valor: 'Posadas, Misiones' },
+    { rotulo: 'Formato', valor: 'Torneo abierto, todas las categorías' },
+    { rotulo: 'Ranking', valor: 'Homologado, con árbitros capacitados' },
+    { rotulo: 'Premios', valor: 'En efectivo y trofeos' },
+  ],
+  descripcion:
+    'Una edición especial que busca consolidarse como uno de los eventos ajedrecísticos más importantes de la región, con proyección nacional e internacional. Al ser un torneo abierto participan jugadores de todas las edades y categorías, junto a profesionales titulados nacionales e internacionales.',
+  descripcion2:
+    'En el marco de su centenario, el club proyecta este evento como un punto de encuentro intergeneracional que combina competencia, formación y desarrollo, posicionando a Posadas como sede de eventos ajedrecísticos de relevancia.',
+  caracteristicas: [
+    'Jugadores locales, regionales, nacionales e internacionales',
+    'Presencia de jugadores profesionales titulados',
+    'Árbitros capacitados y homologación para ranking oficial',
+    'Premiación en efectivo y trofeos',
+    'Cobertura en redes sociales y medios digitales',
+  ],
+  ctaTexto: 'Consultar por la inscripción',
+  avisoSuperior: 'IRT "100 Años" · 5 al 8 de diciembre de 2026 · Posadas',
+} as const
+
 export const cifras = [
   { valor: '100', unidad: 'años', detalle: 'de vida institucional ininterrumpida' },
-  { valor: '1926', unidad: '', detalle: 'primer club de ajedrez de Misiones' },
+  {
+    valor: '1926',
+    unidad: '',
+    detalle: 'primer club de ajedrez de Misiones y tercero más antiguo del país',
+  },
   { valor: '1980', unidad: '', detalle: 'sede propia en Jujuy 1514' },
   { valor: '6', unidad: 'días', detalle: 'de talleres y clases por semana' },
 ] as const
@@ -62,9 +115,16 @@ export const historia = {
   ],
 } as const
 
+/**
+ * Hitos del siglo. `desde`/`hasta` ubican cada hito en el tablero de los cien
+ * años del home (un casillero por año, 1926–2025); el hito de 2026 queda fuera
+ * del tablero porque es el año que se está jugando.
+ */
 export const hitos = [
   {
     anio: '1926',
+    desde: 1926,
+    hasta: 1926,
     fecha: '12 de julio',
     titulo: 'Fundación en el Palace Hotel',
     texto:
@@ -73,6 +133,8 @@ export const hitos = [
   },
   {
     anio: '1926-1979',
+    desde: 1927,
+    hasta: 1979,
     fecha: 'Cinco décadas',
     titulo: 'El club itinerante',
     texto:
@@ -81,6 +143,8 @@ export const hitos = [
   },
   {
     anio: '1980',
+    desde: 1980,
+    hasta: 1980,
     fecha: '14 de mayo',
     titulo: 'Sede propia en Jujuy 1514',
     texto:
@@ -89,6 +153,8 @@ export const hitos = [
   },
   {
     anio: '2000s',
+    desde: 2000,
+    hasta: 2009,
     fecha: 'Nuevo milenio',
     titulo: 'Renovación y crecimiento',
     texto:
@@ -97,6 +163,8 @@ export const hitos = [
   },
   {
     anio: '2026',
+    desde: 2026,
+    hasta: 2026,
     fecha: '12 de julio',
     titulo: 'Centenario',
     texto:
@@ -209,68 +277,154 @@ export const pilaresCentenario = [
 ] as const
 
 /**
- * Niveles de auspicio de la carpeta institucional 2026.
- * Los montos y el detalle completo de beneficios están en el PDF oficial
- * (public/docs/carpeta-auspicios-2026.pdf), no se replican acá.
+ * Niveles de auspicio de la carpeta institucional 2026 ("Elegí tu jugada").
+ * Montos y beneficios según el PDF oficial: public/docs/carpeta-auspicios-2026.pdf
  */
 export const nivelesAuspicio = [
   {
     nivel: 'Rey Platino',
     rol: 'Sponsor presentador',
-    disponibilidad: '1 espacio disponible',
+    aporte: 'Más de $1.500.000',
+    disponibilidad: '1 disponible',
     pieza: 'rey',
     destacado: true,
+    exclusivo: 'Beneficio exclusivo: nombre del torneo',
     beneficios: [
-      'Marca presentadora del centenario en toda la comunicación',
-      'Máxima jerarquía en gráficas, sede y torneos',
-      'Presencia en actos protocolares del centenario',
+      'Logo predominante en toda la identidad gráfica',
+      'Logo en trofeos, medallas y cartelería',
+      'Logo en fondo de entrevistas',
+      'Apertura oficial junto a autoridades (si lo desea)',
+      'Mención obligatoria en toda comunicación oficial',
+      'Prioridad absoluta en acciones comerciales y stand premium',
     ],
   },
   {
     nivel: 'Rey Oro',
     rol: 'Sponsor principal',
-    disponibilidad: '2 espacios disponibles',
+    aporte: 'Más de $1.500.000',
+    disponibilidad: '2 disponibles',
     pieza: 'rey',
     destacado: true,
+    exclusivo: '',
     beneficios: [
-      'Logo principal en torneos y material institucional',
-      'Presencia en redes y prensa del club',
-      'Espacio propio en la sede de Jujuy 1514',
+      'Logo de igual tamaño al sponsor presentador (excepto en el nombre del torneo)',
+      'Logo en banners y frente principal',
+      'Presencia en la entrega de premios',
+      'Espacio para exhibición y material promocional',
+      'Inclusión en todas las publicaciones oficiales',
+      'Stand premium (si lo desea)',
     ],
   },
   {
     nivel: 'Caballo',
     rol: 'Auspiciante',
+    aporte: '$751.000 a $1.500.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'caballo',
     destacado: false,
-    beneficios: ['Logo en gráficas de torneos', 'Menciones en redes sociales', 'Presencia en la sede'],
+    exclusivo: '',
+    beneficios: [
+      'Logo destacado en toda la gráfica oficial',
+      'Banner exclusivo en zona principal',
+      'Stand o espacio institucional en el torneo',
+      'Merchandising o regalos para jugadores',
+      'Logo en reconocimientos y materiales de los 100 años',
+      'Prioridad para futuras acciones institucionales del club',
+    ],
   },
   {
     nivel: 'Alfil',
     rol: 'Auspiciante',
+    aporte: '$400.001 a $750.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'alfil',
     destacado: false,
-    beneficios: ['Logo en gráficas seleccionadas', 'Menciones en redes sociales'],
+    exclusivo: '',
+    beneficios: [
+      'Logo en planillas oficiales de anotación',
+      'Logo en credenciales de jugadores, árbitros y organización',
+      'Banner corporativo en el salón de juego',
+      'Logo en el backdrop de fotografías institucionales',
+      'Entrega de premios junto a autoridades (si lo desea)',
+    ],
   },
   {
     nivel: 'Torre',
     rol: 'Colaborador',
+    aporte: '$200.001 a $400.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'torre',
     destacado: false,
-    beneficios: ['Mención como colaborador del centenario', 'Presencia en la sede'],
+    exclusivo: '',
+    beneficios: [
+      'Logo en afiches digitales y publicaciones oficiales',
+      'Material promocional de la empresa en el espacio del torneo',
+      'Logo en los diplomas de reconocimiento a históricos',
+      'Mención durante la ceremonia de apertura y cierre',
+    ],
   },
   {
     nivel: 'Dama',
     rol: 'Colaborador',
+    aporte: 'Aportes hasta $200.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'dama',
     destacado: false,
-    beneficios: ['Mención como colaborador del centenario'],
+    exclusivo: '',
+    beneficios: [
+      'Logo en la web de inscripciones y reglamento',
+      'Mención en redes sociales como sponsor',
+      'Logo en el banner institucional de sponsors',
+      'Certificado de auspiciante oficial',
+      'Derecho a usar la imagen del evento en sus comunicaciones',
+    ],
   },
 ] as const
+
+/** Cada nivel incluye los beneficios de los niveles anteriores. */
+export const notaAuspicios =
+  'Cada nivel incluye los beneficios de los niveles anteriores. El aporte puede ser económico o en productos, y los festejos del centenario se extienden hasta julio de 2027, con hasta 12 meses de exposición de marca.'
+
+/** Marcas e instituciones que ya acompañan el centenario. */
+export const auspiciantesActuales = [
+  'Juan Carlos Silva',
+  'Sociedad Italiana de Socorros Mutuos',
+  'Club Itapúa',
+] as const
+
+/** Propuesta de valor para auspiciantes (carpeta 2026). */
+export const propuestaValor = [
+  { titulo: 'Material gráfico', texto: 'Planillas de anotación, folletos, itinerarios, bonos de premiación y certificados.' },
+  { titulo: 'Redes sociales', texto: 'Instagram (feed, stories y ads), Facebook y Threads.' },
+  { titulo: 'Tableros y salas de juego', texto: 'Banderas, banners y publicidad general provista por los aportantes.' },
+  { titulo: 'Indumentaria oficial', texto: 'Remeras institucionales del club.' },
+  { titulo: 'Prensa en actos oficiales', texto: 'Menciones en actos y premiaciones durante todo el año.' },
+  { titulo: 'Actividad de RSE', texto: 'Inclusión social y programas de becas.' },
+  { titulo: 'Publicidad en el club', texto: 'Paredes disponibles para publicidad directa en la sede, con presencia constante.' },
+  { titulo: 'Entradas y experiencias', texto: 'Partidas con titulados, accesos gratuitos al torneo y brindis de celebración.' },
+] as const
+
+/** Programa de Ajedrez Infantil del centenario. */
+export const programaInfantil = {
+  titulo: 'Programa de Ajedrez Infantil',
+  bajada:
+    'No es un evento aislado: es una propuesta sostenida durante todo el año, con lo formativo, lo recreativo y lo competitivo integrados.',
+  objetivos: [
+    'Estimular el pensamiento lógico y estratégico',
+    'Desarrollar la concentración y la toma de decisiones',
+    'Fomentar el respeto, la paciencia y el juego limpio',
+    'Promover la inclusión y la participación social',
+    'Representar al club en competencias regionales y provinciales',
+  ],
+  actividades: [
+    'Torneos infantiles internos',
+    'Torneos abiertos a la comunidad',
+    'Encuentros recreativos y formativos',
+    'Jornadas de ajedrez en plazas y espacios públicos',
+    'Participación en torneos oficiales',
+    'Acciones de difusión y promoción del ajedrez',
+  ],
+} as const
 
 export const pasosSocio = [
   {
@@ -281,7 +435,8 @@ export const pasosSocio = [
   {
     paso: '02',
     titulo: 'Completá la solicitud',
-    texto: 'Descargá el formulario de alta de socio, completalo y traelo a la sede o envialo por WhatsApp.',
+    texto:
+      'Llená el formulario de alta online, desde el celular y en dos minutos. Si preferís papel, también podés descargar el PDF y traerlo a la sede.',
   },
   {
     paso: '03',
@@ -313,6 +468,31 @@ export const faq = [
   {
     pregunta: '¿Cómo me asocio?',
     respuesta:
-      'Escribinos por WhatsApp, descargá la solicitud de alta de socio desde la sección Socios y acercate a la sede de Jujuy 1514.',
+      'Completá el formulario de alta online desde la sección Socios y acercate a la sede de Jujuy 1514. Si preferís hacerlo en papel, la solicitud también está en PDF, y por WhatsApp te resolvemos cualquier duda.',
+  },
+  {
+    pregunta: '¿Puedo proponer una actividad o un proyecto en el club?',
+    respuesta:
+      'Sí. El club recibe propuestas de socios, docentes, instituciones y vecinos: talleres, torneos, jornadas en escuelas y plazas, acciones culturales. Hay un formulario para presentarlas y la comisión directiva las evalúa.',
   },
 ] as const
+
+/**
+ * Convocatoria abierta a presentar proyectos en el club.
+ * El formulario es el de Google: club.formularioProyectos.
+ */
+export const proyectos = {
+  kicker: 'Convocatoria abierta',
+  titulo: 'Presentá tu proyecto en el club',
+  bajada:
+    'La sede de Jujuy 1514 no es solo un salón de juego: es un espacio disponible para la comunidad. Si tenés una idea que suma al ajedrez posadeño, queremos escucharla.',
+  ejemplos: [
+    'Talleres, cursos y capacitaciones',
+    'Torneos y encuentros recreativos',
+    'Jornadas de ajedrez en escuelas, plazas y barrios',
+    'Actividades culturales y de inclusión social',
+    'Proyectos de archivo, difusión y comunicación',
+  ],
+  nota: 'Las propuestas las evalúa la comisión directiva. No hace falta ser socio para presentar una.',
+  cta: 'Presentar un proyecto',
+} as const

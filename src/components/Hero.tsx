@@ -31,7 +31,7 @@ export function Hero() {
         100
       </span>
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 px-5 pt-32 pb-24 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:pt-36">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 px-5 pt-40 pb-24 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:pt-44">
         <div>
           <motion.p {...aparece(0.05)} className="kicker text-gold-bright">
             {club.ciudad}, {club.provincia} · desde 1926

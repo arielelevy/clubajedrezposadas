@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom'
-import { Instagram, MessageCircle, MapPin } from 'lucide-react'
+import { MessageCircle, MapPin } from 'lucide-react'
+import { InstagramIcon, FacebookIcon, WhatsAppIcon } from './Icons'
 import { club, navegacion } from '@/data/site'
 import { BoardTexture, GoldDivider } from './Ornaments'
+
+const redes = [
+  { nombre: `Instagram @${club.instagram}`, href: club.instagramLink, Icono: InstagramIcon },
+  { nombre: `Facebook /${club.facebook}`, href: club.facebookLink, Icono: FacebookIcon },
+  { nombre: `WhatsApp ${club.whatsapp}`, href: club.whatsappLink, Icono: WhatsAppIcon },
+] as const
 
 export function Footer() {
   return (
@@ -24,6 +31,24 @@ export function Footer() {
               Institución deportiva y cultural centenaria de {club.ciudad}, {club.provincia}. Personería
               jurídica {club.personeriaJuridica}.
             </p>
+
+            {/* Redes del club */}
+            <ul className="mt-7 flex items-center gap-3">
+              {redes.map((r) => (
+                <li key={r.nombre}>
+                  <a
+                    href={r.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={r.nombre}
+                    title={r.nombre}
+                    className="grid size-11 place-items-center rounded-full border border-ivory/15 text-ivory/70 transition-all duration-300 hover:border-gold/60 hover:bg-gold/10 hover:text-gold-bright"
+                  >
+                    <r.Icono className="size-5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <nav>
@@ -60,7 +85,7 @@ export function Footer() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-3 text-ivory/70 transition-colors hover:text-gold-bright"
                 >
-                  <Instagram className="size-4 text-gold" />
+                  <InstagramIcon className="size-4 text-gold" />
                   @{club.instagram}
                 </a>
               </li>
@@ -75,7 +100,7 @@ export function Footer() {
                   <span>
                     {club.direccion}
                     <br />
-                    {club.ciudad}, {club.provincia}
+                    {club.codigoPostal} {club.ciudad}, {club.provincia}
                   </span>
                 </a>
               </li>
