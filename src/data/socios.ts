@@ -22,7 +22,18 @@ export type Padron = {
   socios: Socio[]
 }
 
-export const padron = datos as Padron
+/**
+ * Se normaliza en lugar de castear de una: si el JSON queda a medias (una
+ * sincronización cortada, un HMR con la versión anterior en caché), un `.map`
+ * sobre undefined tiraba la página entera de socios.
+ */
+const bruto = datos as Partial<Padron>
+
+export const padron: Padron = {
+  actualizado: bruto.actualizado ?? null,
+  total: typeof bruto.total === 'number' ? bruto.total : 0,
+  socios: Array.isArray(bruto.socios) ? bruto.socios : [],
+}
 
 /** Hay listado para mostrar. Si la sincronización nunca corrió, no se renderiza. */
 export const hayPadron = padron.socios.length > 0

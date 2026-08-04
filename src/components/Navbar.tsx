@@ -1,10 +1,26 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Menu, X, MessageCircle, ArrowRight } from 'lucide-react'
+import { Menu, X, MessageCircle, ArrowRight, ChevronRight, MapPin } from 'lucide-react'
 import { club, navegacion, eventoCentenario } from '@/data/site'
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
+
+/**
+ * El menú mezclaba secciones del home (`/#algo`) con páginas propias. En el
+ * panel de mobile se separan, que es una distinción real: unas te mueven dentro
+ * de la página y las otras te llevan a otra.
+ */
+const grupos = [
+  {
+    titulo: 'En el inicio',
+    items: navegacion.filter((i) => i.href.startsWith('/#')),
+  },
+  {
+    titulo: 'Páginas',
+    items: navegacion.filter((i) => !i.href.startsWith('/#')),
+  },
+].filter((g) => g.items.length > 0)
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -123,29 +139,64 @@ export function Navbar() {
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/70 backdrop-blur-sm" />
-            <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[86%] max-w-sm flex-col bg-ink px-7 py-6 text-ivory shadow-2xl">
-              <div className="flex items-center justify-between">
-                <Dialog.Title className="kicker text-gold-bright">Menú</Dialog.Title>
-                <Dialog.Close className="grid size-10 place-items-center rounded-full border border-ivory/20">
+            <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-[21rem] flex-col bg-ink text-ivory shadow-2xl">
+              {/* Identidad, en lugar de un "Menú" a secas */}
+              <div className="flex items-start justify-between gap-4 border-b border-ivory/10 px-6 py-5">
+                <Dialog.Title asChild>
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ivory">
+                      <img src="/logo-cap.svg" alt="" className="size-8" />
+                    </span>
+                    <span className="leading-tight">
+                      <span className="block font-display text-[1.05rem] font-semibold">
+                        {club.nombre}
+                      </span>
+                      <span className="kicker block text-[0.58rem] text-gold-bright/90">
+                        1926 — 2026
+                      </span>
+                    </span>
+                  </div>
+                </Dialog.Title>
+                <Dialog.Close className="grid size-10 shrink-0 place-items-center rounded-full border border-ivory/20 transition-colors hover:border-gold/60 hover:text-gold-bright">
                   <X className="size-5" />
                   <span className="sr-only">Cerrar</span>
                 </Dialog.Close>
               </div>
-              <nav className="mt-10 flex flex-col gap-1">
-                {navegacion.map((item) => (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className="border-b border-ivory/10 py-4 font-display text-2xl text-ivory/90 transition-colors hover:text-gold-bright"
-                  >
-                    {item.label}
-                  </Link>
+
+              {/* Navegación: scrollea sola, así el contacto nunca se va de pantalla */}
+              <nav className="flex-1 overflow-y-auto overscroll-contain px-6 py-6">
+                {grupos.map((grupo, i) => (
+                  <div key={grupo.titulo} className={i > 0 ? 'mt-8' : undefined}>
+                    <p className="kicker text-[0.58rem] text-ivory/35">{grupo.titulo}</p>
+                    <ul className="mt-3">
+                      {grupo.items.map((item) => (
+                        <li key={item.href}>
+                          <Link
+                            to={item.href}
+                            className="flex items-center justify-between gap-3 border-b border-ivory/8 py-3.5 text-[1.05rem] font-medium text-ivory/85 transition-colors hover:text-gold-bright"
+                          >
+                            {item.label}
+                            <ChevronRight className="size-4 shrink-0 text-ivory/25" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
               </nav>
-              <div className="mt-auto space-y-3 text-sm text-ivory/70">
-                <p>
-                  {club.direccion} · {club.ciudad}
-                </p>
+
+              <div className="shrink-0 space-y-4 border-t border-ivory/10 px-6 py-5">
+                <a
+                  href={club.mapsLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-start gap-2.5 text-sm text-ivory/60 transition-colors hover:text-gold-bright"
+                >
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-gold" />
+                  <span>
+                    {club.direccion} · {club.ciudad}
+                  </span>
+                </a>
                 <Button asChild variant="gold" className="w-full">
                   <a href={club.whatsappLink} target="_blank" rel="noreferrer">
                     <MessageCircle />
