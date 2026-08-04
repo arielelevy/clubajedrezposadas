@@ -34,7 +34,7 @@ export function SectionHeading({
       {bajada ? (
         <p
           className={cn(
-            'mt-6 max-w-2xl text-lg leading-relaxed',
+            'mt-4 max-w-2xl text-lg leading-relaxed',
             align === 'center' && 'mx-auto',
             oscuro ? 'text-ivory/70' : 'text-ink/65',
           )}

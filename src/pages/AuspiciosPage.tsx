@@ -41,20 +41,20 @@ export function AuspiciosPage() {
       </PageHeader>
 
       {/* Niveles de auspicio, con el aporte de la carpeta 2026 */}
-      <section className="bg-bone py-14 lg:py-20">
+      <section className="bg-bone py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <Reveal>
             <p className="kicker text-gold-deep">Niveles de auspicio</p>
             <h2 className="mt-4 max-w-2xl text-4xl text-ink lg:text-5xl">
               Seis formas de acompañar el proyecto
             </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/65">
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/65">
               Cada nivel toma el nombre de una pieza y define el aporte y las contraprestaciones. El
               detalle completo, junto con los plazos, está en la carpeta institucional 2026.
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {nivelesAuspicio.map((n, i) => (
               <Reveal key={n.nivel} delay={0.06 * i}>
                 <article
@@ -140,7 +140,7 @@ export function AuspiciosPage() {
           </div>
 
           <Reveal delay={0.08}>
-            <p className="mx-auto mt-12 max-w-3xl border-l-2 border-gold/50 pl-6 text-[0.95rem] leading-relaxed text-ink/60">
+            <p className="mx-auto mt-9 max-w-3xl border-l-2 border-gold/50 pl-6 text-[0.95rem] leading-relaxed text-ink/60">
               {notaAuspicios}
             </p>
           </Reveal>
@@ -148,7 +148,7 @@ export function AuspiciosPage() {
       </section>
 
       {/* Dónde aparece la marca */}
-      <section className="relative isolate overflow-hidden bg-ink py-14 text-ivory lg:py-20">
+      <section className="relative isolate overflow-hidden bg-ink py-12 text-ivory lg:py-16">
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(192,145,44,0.15),transparent_55%)]" />
 
@@ -165,7 +165,7 @@ export function AuspiciosPage() {
             </p>
           </Reveal>
 
-          <dl className="mt-10 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
+          <dl className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
             {propuestaValor.map((p, i) => (
               <Reveal key={p.titulo} delay={0.05 * i}>
                 <div className="border-t border-ivory/12 pt-5">
@@ -179,14 +179,14 @@ export function AuspiciosPage() {
       </section>
 
       {/* Quiénes ya acompañan + cierre */}
-      <section className="bg-ivory py-14 lg:py-20">
+      <section className="bg-ivory py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <Reveal className="text-center">
             <p className="kicker text-gold-deep">Ya acompañan el centenario</p>
             <h2 className="mt-4 text-3xl text-ink lg:text-4xl">Gracias por estar</h2>
           </Reveal>
 
-          <ul className="mt-12 grid gap-4 sm:grid-cols-3">
+          <ul className="mt-9 grid gap-4 sm:grid-cols-3">
             {auspiciantesActuales.map((a, i) => (
               <Reveal key={a} delay={0.07 * i}>
                 <li className="flex h-full items-center justify-center gap-4 rounded-lg border border-ink/8 bg-white/70 px-6 py-8 text-center">
@@ -198,7 +198,7 @@ export function AuspiciosPage() {
           </ul>
 
           <Reveal delay={0.1}>
-            <div className="mt-12 rounded-lg border border-ink/8 bg-bone p-8 lg:p-10">
+            <div className="mt-9 rounded-lg border border-ink/8 bg-bone p-8 lg:p-10">
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div className="max-w-xl">
                   <h3 className="font-display text-2xl text-ink">

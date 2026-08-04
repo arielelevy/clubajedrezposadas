@@ -57,7 +57,7 @@ export function Hero() {
             </p>
           </motion.div>
 
-          <motion.div {...aparece(0.4)} className="mt-10 flex flex-wrap items-center gap-4">
+          <motion.div {...aparece(0.4)} className="mt-8 flex flex-wrap items-center gap-4">
             <Button asChild size="lg" variant="gold">
               <a href={club.whatsappLink} target="_blank" rel="noreferrer">
                 <MessageCircle />

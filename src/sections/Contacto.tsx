@@ -13,7 +13,7 @@ import {
 
 export function Contacto() {
   return (
-    <section id="contacto" className="scroll-mt-24 bg-bone py-16 lg:py-24">
+    <section id="contacto" className="scroll-mt-24 bg-bone py-12 lg:py-18">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <div>
@@ -23,7 +23,7 @@ export function Contacto() {
               bajada="Vení a conocer la sede de Jujuy 1514 en cualquiera de los horarios de taller, o escribinos antes si preferís coordinar."
             />
 
-            <Reveal delay={0.1} className="mt-10 space-y-4">
+            <Reveal delay={0.1} className="mt-8 space-y-4">
               <a
                 href={club.mapsLink}
                 target="_blank"
@@ -99,7 +99,7 @@ export function Contacto() {
               </div>
             </Reveal>
 
-            <Reveal delay={0.1} className="mt-12">
+            <Reveal delay={0.1} className="mt-9">
               <p className="kicker text-gold-deep">Preguntas frecuentes</p>
               <Accordion type="single" collapsible className="mt-6">
                 {faq.map((f) => (

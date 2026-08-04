@@ -11,7 +11,7 @@ const piezas = ['torre', 'caballo', 'alfil'] as const
 
 export function ElClub() {
   return (
-    <section id="el-club" className="relative scroll-mt-24 overflow-hidden bg-bone py-16 lg:py-24">
+    <section id="el-club" className="relative scroll-mt-24 overflow-hidden bg-bone py-12 lg:py-18">
       <BoardTexture className="text-ink" size={64} opacity={0.03} animate={false} />
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">

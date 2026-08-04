@@ -31,7 +31,7 @@ export function PageHeader({
         <h1 className="mt-4 text-4xl leading-[1.05] font-medium sm:text-5xl lg:text-6xl">{titulo}</h1>
         <GoldDivider className="mx-auto mt-6 max-w-xs" />
         {bajada ? (
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ivory/70">{bajada}</p>
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-ivory/70">{bajada}</p>
         ) : null}
         {children ? <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div> : null}
       </motion.div>

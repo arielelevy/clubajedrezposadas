@@ -30,7 +30,7 @@ export function Navbar() {
    */
   const [avisoVisible, setAvisoVisible] = useState(false)
   const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
 
   useEffect(() => {
     let anterior = window.scrollY
@@ -47,10 +47,12 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Se incluye el hash: elegir una sección del inicio no cambia el pathname,
+  // así que el panel de mobile quedaba abierto tapando la sección elegida.
   useEffect(() => {
     setOpen(false)
     setAvisoVisible(false)
-  }, [pathname])
+  }, [pathname, hash])
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/8 bg-bone/95 py-2 backdrop-blur-sm">
@@ -156,6 +158,9 @@ export function Navbar() {
                         <li key={item.href}>
                           <Link
                             to={item.href}
+                            // Cierra también cuando se elige la sección en la
+                            // que ya estás, donde la ubicación no cambia.
+                            onClick={() => setOpen(false)}
                             className="flex items-center justify-between gap-3 border-b border-ivory/8 py-3.5 text-[1.05rem] font-medium text-ivory/85 transition-colors hover:text-gold-bright"
                           >
                             {item.label}

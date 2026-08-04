@@ -37,7 +37,7 @@ export function Centenario() {
   return (
     <section
       id="centenario"
-      className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-16 text-ivory lg:py-24"
+      className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-12 text-ivory lg:py-18"
     >
       <BoardTexture className="text-ivory" size={64} opacity={0.04} />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_10%,rgba(192,145,44,0.14),transparent_58%)]" />
@@ -173,7 +173,7 @@ export function Centenario() {
 
           {/* Hito seleccionado */}
           <Reveal delay={0.1}>
-            <div className="mt-10 rounded-lg border border-gold/25 bg-graphite/60 p-8 backdrop-blur-sm lg:p-9">
+            <div className="mt-8 rounded-lg border border-gold/25 bg-graphite/60 p-8 backdrop-blur-sm lg:p-9">
               <div className="flex items-center gap-4">
                 <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 text-gold-bright">
                   <ChessGlyph pieza={hito.pieza as Pieza} className="text-xl" />

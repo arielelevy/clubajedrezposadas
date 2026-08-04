@@ -41,14 +41,16 @@ export function SociosPage() {
         </Button>
       </PageHeader>
 
-      <section className="bg-bone py-14 lg:py-20">
+      <section className="bg-bone py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
-          <Reveal>
-            <p className="kicker text-gold-deep">Cómo asociarse</p>
-            <h2 className="mt-4 text-4xl text-ink lg:text-5xl">Tres pasos</h2>
+          {/* Título y bajada en una línea: "Tres pasos" solo no justificaba
+              ocupar el alto de un titular de sección. */}
+          <Reveal className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+            <h2 className="text-3xl text-ink lg:text-4xl">Cómo asociarse</h2>
+            <p className="kicker text-gold-deep">en tres pasos</p>
           </Reveal>
 
-          <ol className="mt-12 grid gap-5 md:grid-cols-3">
+          <ol className="mt-9 grid gap-5 md:grid-cols-3">
             {pasosSocio.map((p, i) => (
               <Reveal key={p.paso} delay={0.08 * i}>
                 <li className="h-full">
@@ -79,7 +81,7 @@ export function SociosPage() {
           </ol>
 
           <Reveal delay={0.1}>
-            <div className="mt-12 grid gap-6 rounded-lg border border-ink/8 bg-ivory p-8 lg:grid-cols-2 lg:p-10">
+            <div className="mt-9 grid gap-6 rounded-lg border border-ink/8 bg-ivory p-8 lg:grid-cols-2 lg:p-10">
               <div>
                 <h3 className="font-display text-2xl text-ink">Formulario de alta de socio</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">
@@ -127,7 +129,7 @@ export function SociosPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.15} className="mt-12 max-w-3xl">
+          <Reveal delay={0.15} className="mt-9 max-w-3xl">
             <p className="kicker text-gold-deep">Antes de venir</p>
             <Accordion type="single" collapsible className="mt-6">
               {faq.map((f) => (
@@ -145,7 +147,7 @@ export function SociosPage() {
       {/* Convocatoria abierta a presentar proyectos */}
       <section
         id="proyectos"
-        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-14 text-ivory lg:py-20"
+        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-12 text-ivory lg:py-16"
       >
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(192,145,44,0.16),transparent_58%)]" />

@@ -79,19 +79,19 @@ export function Partidas() {
   const partida = partidas[seleccionada]
 
   return (
-    <section id="partidas" className="scroll-mt-24 bg-ivory py-16 lg:py-24">
+    <section id="partidas" className="scroll-mt-24 bg-ivory py-12 lg:py-18">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Tablero en vivo"
           titulo="Partidas para mirar jugada por jugada"
-          bajada="Las clásicas que se estudian en los talleres del club y, en la otra pestaña, las partidas de los torneos de elite que se están transmitiendo ahora mismo."
+          bajada="Las partidas clásicas que se estudian en los talleres y, en la otra pestaña, los torneos de elite que se están transmitiendo ahora mismo."
           align="center"
         />
 
         {/* Selector de fuente */}
-        <Reveal className="mt-12 flex flex-wrap justify-center gap-2">
+        <Reveal className="mt-9 flex flex-wrap justify-center gap-2">
           <BotonFuente activo={fuente === 'club'} onClick={() => setFuente('club')}>
-            Clásicas del club
+            Clásicas
           </BotonFuente>
           <BotonFuente activo={fuente === 'elite'} onClick={() => setFuente('elite')}>
             <Radio className="size-4" />
@@ -122,7 +122,7 @@ export function Partidas() {
           </div>
         ) : null}
 
-        <div className="mt-12">
+        <div className="mt-9">
           {cargando ? (
             <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-24 text-ink/50">
               <LoaderCircle className="size-7 animate-spin text-gold" />
@@ -178,9 +178,9 @@ export function Partidas() {
           )}
         </div>
 
-        <p className="mt-10 text-center text-xs text-ink/45">
-          Las partidas de elite se leen en vivo desde la API pública de Lichess. Las del club se publican como
-          archivos PGN, sin necesidad de servidor.
+        <p className="mt-8 text-center text-xs text-ink/45">
+          Las partidas de elite se leen en vivo desde la API pública de Lichess. Las clásicas se
+          publican como archivos PGN, sin necesidad de servidor.
         </p>
       </div>
     </section>

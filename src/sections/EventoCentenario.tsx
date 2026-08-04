@@ -17,7 +17,7 @@ export function EventoCentenario() {
   return (
     <section
       id="evento"
-      className="relative isolate scroll-mt-24 overflow-hidden bg-ivory py-16 lg:py-24"
+      className="relative isolate scroll-mt-24 overflow-hidden bg-ivory py-12 lg:py-18"
     >
       <BoardTexture className="text-ink" size={72} opacity={0.035} animate={false} />
 

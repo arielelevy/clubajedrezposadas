@@ -22,7 +22,7 @@ export function HistoriaPage() {
         bajada={historia.bajada}
       />
 
-      <section className="bg-bone py-14 lg:py-20">
+      <section className="bg-bone py-12 lg:py-16">
         <div className="mx-auto max-w-3xl px-5 lg:px-0">
           {historia.parrafos.map((p, i) => (
             <Reveal key={i} delay={0.03 * i}>
@@ -39,7 +39,7 @@ export function HistoriaPage() {
           ))}
 
           <Reveal>
-            <GoldDivider className="my-14" />
+            <GoldDivider className="my-10" />
           </Reveal>
 
           {historia.cierre.map((p, i) => (
@@ -53,7 +53,7 @@ export function HistoriaPage() {
       {/* Línea del tiempo: los cinco hitos del siglo */}
       <section
         id="hitos"
-        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-16 text-ivory lg:py-24"
+        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-12 text-ivory lg:py-18"
       >
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <GraphiteCurves className="opacity-70" />
@@ -69,7 +69,7 @@ export function HistoriaPage() {
             />
           </div>
 
-          <ol className="relative mt-12 space-y-2">
+          <ol className="relative mt-9 space-y-2">
             {/* Riel vertical */}
             <span
               aria-hidden="true"
@@ -107,7 +107,7 @@ export function HistoriaPage() {
             ))}
           </ol>
 
-          <Reveal className="mt-12 flex flex-wrap gap-4">
+          <Reveal className="mt-9 flex flex-wrap gap-4">
             <Button asChild variant="gold" size="lg">
               <Link to="/socios">
                 Sumate al club

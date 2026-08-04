@@ -7,7 +7,7 @@ import { GoldDivider } from '@/components/Ornaments'
 
 export function Talleres() {
   return (
-    <section id="talleres" className="relative scroll-mt-24 bg-ivory py-16 lg:py-24">
+    <section id="talleres" className="relative scroll-mt-24 bg-ivory py-12 lg:py-18">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Talleres y clases"
@@ -16,7 +16,7 @@ export function Talleres() {
           align="center"
         />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-9 grid gap-6 lg:grid-cols-3">
           {programas.map((p, i) => (
             <Reveal key={p.id} delay={0.08 * i}>
               <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-ink/8 bg-bone transition-all duration-500 hover:border-gold/50 hover:shadow-[var(--shadow-lift)]">
@@ -47,7 +47,7 @@ export function Talleres() {
         </div>
 
         {/* Horario semanal */}
-        <div className="mt-10 rounded-lg border border-ink/8 bg-bone p-6 lg:p-8">
+        <div className="mt-8 rounded-lg border border-ink/8 bg-bone p-6 lg:p-8">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
