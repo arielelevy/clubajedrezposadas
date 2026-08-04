@@ -46,13 +46,31 @@ const RAIZ = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const SALIDA = resolve(RAIZ, 'src/data/socios.json')
 
 const SHEET_ID = process.env.SHEET_ID ?? '1gnpEBfmAU9HqWhi26S5hyq4zFfsEQ7Njnnds3fFWTG4'
-const SHEET_RANGE = process.env.SHEET_RANGE ?? 'A1:Z20000'
+const SHEET_GID = process.env.SHEET_GID ?? '0'
+const SHEET_RANGE = process.env.SHEET_RANGE ?? 'A1:BZ20000'
 const PUBLICAR_NOMBRES = process.env.PUBLICAR_NOMBRES !== '0'
 
-/** Columnas que se consideran nombre. El resto de la planilla se ignora. */
-const COLUMNAS_NOMBRE = [/^nombre/i, /^apellido/i, /nombre y apellido/i, /^socio/i]
+/**
+ * La planilla del club es legible con el link, así que por defecto se lee por
+ * el endpoint CSV y no hace falta credencial. Si algún día se cierra, basta con
+ * cargar GOOGLE_SERVICE_ACCOUNT_JSON y este default deja de usarse.
+ */
+const CSV_POR_DEFECTO = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${SHEET_GID}`
 
-/** Encabezados que nunca se leen, ni siquiera para contar. */
+/** Columna con el nombre del socio. */
+const COLUMNAS_NOMBRE = [/nombre y apellido/i, /^nombre/i, /^apellido/i]
+
+/** Columna con la categoría (ACTIVO, CADETE, PROTECTOR…). */
+const COLUMNA_TIPO = /tipo de socio/i
+
+/** Columna que marca si el socio integra el padrón ("SI" / "NO"). */
+const COLUMNA_PADRON = /^grupo$/i
+
+/**
+ * Encabezados que nunca se leen. La planilla trae además el historial de pagos
+ * mes por mes: no es una columna prohibida, pero tampoco se publica, porque solo
+ * se leen las columnas elegidas más arriba.
+ */
 const COLUMNAS_PROHIBIDAS = [
   /tel[eé]fono/i,
   /celular/i,
@@ -65,6 +83,10 @@ const COLUMNAS_PROHIBIDAS = [
   /domicilio/i,
   /nacimiento/i,
   /edad/i,
+  /cuota/i,
+  /pag[oa]/i,
+  /deuda/i,
+  /importe/i,
 ]
 
 /** Parser de CSV mínimo: campos entre comillas, comillas escapadas y CRLF. */
@@ -199,84 +221,110 @@ async function leerPlanilla(token) {
   return values
 }
 
+/**
+ * Normaliza "acuña jonas AGUSTIN" a "Acuña Jonas Agustin", respetando los
+ * títulos entre paréntesis como (MN) o (AR-ACM). La planilla usa la coma de
+ * forma despareja ("Barney,juan", "Kuchera Marcos A,"), así que se ordena.
+ */
+function capitalizar(texto) {
+  return texto
+    .replace(/\s*,\s*/g, ', ')
+    .replace(/[,\s]+$/, '')
+    .trim()
+    .toLocaleLowerCase('es')
+    .split(' ')
+    .map((palabra) =>
+      palabra.startsWith('(') || palabra.length <= 1
+        ? palabra.toLocaleUpperCase('es')
+        : palabra[0].toLocaleUpperCase('es') + palabra.slice(1),
+    )
+    .join(' ')
+}
+
 function extraer(filas) {
   const encabezados = filas[0].map((h) => String(h ?? '').trim())
-  const datos = filas.slice(1).filter((f) => f.some((c) => String(c ?? '').trim() !== ''))
 
-  const indicesNombre = encabezados
-    .map((h, i) => ({ h, i }))
-    .filter(
-      ({ h }) =>
-        COLUMNAS_NOMBRE.some((r) => r.test(h)) && !COLUMNAS_PROHIBIDAS.some((r) => r.test(h)),
-    )
-    .map(({ i }) => i)
+  const buscar = (patron) =>
+    encabezados.findIndex((h) => patron.test(h) && !COLUMNAS_PROHIBIDAS.some((p) => p.test(h)))
 
-  if (indicesNombre.length === 0) {
+  const iNombre = COLUMNAS_NOMBRE.map(buscar).find((i) => i >= 0) ?? -1
+  if (iNombre < 0) {
     throw new Error(
-      `No encontré ninguna columna de nombre. Encabezados de la planilla: ${encabezados.join(' | ')}. ` +
+      `No encontré la columna de nombre. Encabezados de la planilla: ${encabezados.join(' | ')}. ` +
         `Ajustá COLUMNAS_NOMBRE en este script.`,
     )
   }
 
-  const nombres = datos
-    .map((fila) =>
-      indicesNombre
-        .map((i) => String(fila[i] ?? '').trim())
-        .filter(Boolean)
-        .join(' ')
-        .replace(/\s+/g, ' '),
-    )
-    .filter(Boolean)
+  const iTipo = buscar(COLUMNA_TIPO)
+  const iPadron = buscar(COLUMNA_PADRON)
 
-  return {
-    total: nombres.length,
-    columnasUsadas: indicesNombre.map((i) => encabezados[i]),
-    nombres: [...new Set(nombres)].sort((a, b) => a.localeCompare(b, 'es')),
+  const vistos = new Set()
+  const socios = []
+
+  for (const fila of filas.slice(1)) {
+    const nombre = String(fila[iNombre] ?? '')
+      .trim()
+      .replace(/\s+/g, ' ')
+    if (!nombre) continue
+
+    // La planilla marca con "SI"/"NO" quién integra el padrón.
+    if (iPadron >= 0 && String(fila[iPadron] ?? '').trim().toUpperCase() !== 'SI') continue
+
+    const clave = nombre.toLocaleLowerCase('es')
+    if (vistos.has(clave)) continue
+    vistos.add(clave)
+
+    socios.push({
+      nombre: capitalizar(nombre),
+      tipo: iTipo >= 0 ? capitalizar(String(fila[iTipo] ?? '').trim()) : '',
+    })
   }
+
+  socios.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+
+  const columnasUsadas = [encabezados[iNombre], iTipo >= 0 ? encabezados[iTipo] : null].filter(
+    Boolean,
+  )
+
+  return { total: socios.length, socios, columnasUsadas }
 }
 
 async function obtenerFilas() {
-  const csv = process.env.SOCIOS_CSV_URL
-  if (csv) {
-    console.log('Leyendo la pestaña publicada como CSV.')
-    return leerCsvPublicado(csv)
-  }
-
   const crudo = process.env.GOOGLE_SERVICE_ACCOUNT_JSON
-  if (!crudo) {
-    throw new Error(
-      'Falta la fuente de datos. Seteá SOCIOS_CSV_URL (pestaña publicada como CSV) ' +
-        'o GOOGLE_SERVICE_ACCOUNT_JSON (clave de la service account con acceso de lectura).',
-    )
+
+  if (crudo) {
+    const cuenta = JSON.parse(crudo)
+    if (!cuenta.client_email || !cuenta.private_key) {
+      throw new Error('El JSON de la service account no tiene client_email o private_key.')
+    }
+    console.log(`Leyendo la planilla con la service account ${cuenta.client_email}.`)
+    return leerPlanilla(await obtenerToken(cuenta))
   }
 
-  const cuenta = JSON.parse(crudo)
-  if (!cuenta.client_email || !cuenta.private_key) {
-    throw new Error('El JSON de la service account no tiene client_email o private_key.')
-  }
-
-  console.log(`Leyendo la planilla con la service account ${cuenta.client_email}.`)
-  return leerPlanilla(await obtenerToken(cuenta))
+  const csv = process.env.SOCIOS_CSV_URL ?? CSV_POR_DEFECTO
+  console.log('Leyendo la planilla por el endpoint CSV (sin credencial).')
+  return leerCsvPublicado(csv)
 }
 
 async function main() {
-  const { total, nombres, columnasUsadas } = extraer(await obtenerFilas())
+  const { total, socios, columnasUsadas } = extraer(await obtenerFilas())
 
   const salida = {
     _nota:
-      'Generado por scripts/sync-socios.mjs desde la planilla de altas del club. No editar a mano.',
+      'Generado por scripts/sync-socios.mjs desde la planilla de socios del club. No editar a mano.',
     actualizado: new Date().toISOString().slice(0, 10),
     total,
-    nombres: PUBLICAR_NOMBRES ? nombres : [],
+    socios: PUBLICAR_NOMBRES ? socios : [],
   }
 
   await mkdir(dirname(SALIDA), { recursive: true })
   await writeFile(SALIDA, `${JSON.stringify(salida, null, 2)}\n`, 'utf8')
 
-  console.log(`Socios: ${total} (columnas leídas: ${columnasUsadas.join(', ')})`)
+  console.log(`Socios en el padrón: ${total}`)
+  console.log(`Columnas leídas: ${columnasUsadas.join(', ')} (y ninguna más)`)
   console.log(
     PUBLICAR_NOMBRES
-      ? `Nombres publicados: ${nombres.length} únicos.`
+      ? `Publicados ${socios.length} nombres con su categoría.`
       : 'Nombres omitidos (PUBLICAR_NOMBRES=0): solo se escribió el total.',
   )
 }

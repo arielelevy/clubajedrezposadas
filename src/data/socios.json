@@ -1,6 +1,459 @@
 {
-  "_nota": "Generado por scripts/sync-socios.mjs desde la planilla de altas del club. No editar a mano.",
-  "actualizado": null,
-  "total": 0,
-  "nombres": []
+  "_nota": "Generado por scripts/sync-socios.mjs desde la planilla de socios del club. No editar a mano.",
+  "actualizado": "2026-08-04",
+  "total": 113,
+  "socios": [
+    {
+      "nombre": "Acuña Jonas Agustin",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Álvarez Miguel (MN)",
+      "tipo": "Protector"
+    },
+    {
+      "nombre": "Álvarez Néstor Carlos",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Amfiurer Carla Mariana",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Antunez Oscar",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Astelli Gonzalez Juan Cruz",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Atencio Julio",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Barney, Juan",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Bazan, Evencio",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Benitez Diego Natanael",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Benítez Tomás (AN)",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Beron Werro Esteban",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Bianchi Sergio Agustín",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Blanco Mauricio",
+      "tipo": "Protector"
+    },
+    {
+      "nombre": "Boutet Scolari Murad",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Cáceres Ivana Ayelén",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Cafferata Carlos",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Camogli, Juan Manuel",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Carlino Esteban",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Cazzaniga Hernán",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Chemes Juliana",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Chu Lau Carlos (AR)",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Cordero, Roberto Luis",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Coronel Santiago Nicolas",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Crotti Lucas (AR)",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "De Sousa Benjamin",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Duarte Junior Oscar",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Echeverría, León Ignacio",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Emategui, Federico",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Ezquivel Santiago Farias",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Fernandez Gabriel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Figueredo, Dante Gael",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Figueredo, Mauro Hernan",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Galenga Benicio Cadete",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Galfrascoli Francesco Carlos",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Gamon Octavio Franco",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Garcia Leandro",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Gembarowski Luca",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Gimenez Arturo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Godoy Bautista",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Gonzalez Javier Juan Pablo",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Guantay Silvia",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Guerrero, Axel Elian",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Guerrero, Guillermo Martín",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Hassel, Guillermo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Heili Velásques, José Eduardo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Herrera Faddy",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Horrisberger, Martina Hebe",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Kober, Damián Alberto",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Kuchera Marcos A",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Kuhle Ernesto",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Kuhle, Tobías",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Ledesma Hugo (MN)",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Leslie Maximiliano Santa Cruz",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Levy, Ariel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Lezcano, Thiago",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Lomanto Pedro",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Marchak, Miguel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Marin Zilveti Camila",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Marin Zilveti Fausto",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Martinez Ezequiel Agusto",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Maxit Alfredo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Mayol Gonzales, Genaro",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Medina Franco A. (AR)",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Melgarejo Juan Manuel",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Melgarejo Pedro",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Mencia Bruno",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Méndez Moniec, Lautaro Javier",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Mercado Eduardo Miguel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Miranda Jorge Rafael",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Moore Fernandez Damián (IN)",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Mujica Rodrigo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Nascimiento Machado, Máximiliano",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Orrego Benjamin",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Osuna Juan Héctor",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Oviedo Horacio",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Owczarczyn, Cristian Lucas (AR-ACM)",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Padula, Pablo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Paz, Roque Pablo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Pelosa Javier Alberto",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Pernía, Andrés",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Portillo, Luciana Marian (CMNF)",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Quagliozzi, Santino",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Rebatta Pedro Augusto",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Recio Sarabi Munay",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Recio, Fernando",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Reta Miguel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Rios Oscar",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Rodriguez Ortiz Dasha Kimberly",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Salazar Maximo Leon",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Salgado Gabriel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Sanchez Hurt Alfonsina",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Segui Mateo Ruben",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Silva Bruno Francisco",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Silvero Santiago Valentin",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Silvero, Marcelo Nicolás",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Soarez Montenegro Enzo",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Stockar Benjamin",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Szychowski, Nilo",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Techeira Emmanuel",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Tello Santiago",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Thea Osvaldo",
+      "tipo": "Protector"
+    },
+    {
+      "nombre": "Theisen, Lisandro",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Tucci Christian",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Urizar Tau, Thiago Roberto",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Velásquez Heili José Eduardo",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Vergara, Emmanuel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Villalba, Fernando Sebastian",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Vogel Erni",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Voines Vigo",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Voynes, Rippel Viggo",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Yossen, Angel",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Zaboulanes, Nancy",
+      "tipo": "Activo"
+    }
+  ]
 }

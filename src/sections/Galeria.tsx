@@ -16,13 +16,16 @@ const modulos = import.meta.glob<string>('../assets/galeria/*.{jpg,jpeg,png,webp
   import: 'default',
 })
 
-const epigrafes: Record<string, string> = {
-  'banner-menos-pantalla': 'Campaña "Menos pantalla, más vida" — clases y talleres del club',
-  'talleres-horarios': 'Horario semanal de talleres en la sede de Jujuy 1514',
-  'talleres-infantil': 'Talleres de ajedrez infantil, de lunes a sábado',
-  'clases-adultos': 'Clases para adultos: principiantes e intermedios',
-  membrete: 'Membrete institucional: fundado el 12 de julio de 1926',
-}
+/**
+ * Epígrafes por nombre de archivo (sin extensión). Los que no estén acá caen
+ * al nombre del archivo con los guiones convertidos en espacios.
+ *
+ * La carpeta está vacía a propósito: estaba sembrada con los afiches del club y
+ * no con fotos, así que la sección no se muestra. Cuando lleguen las fotos
+ * reales, copiarlas a src/assets/galeria/, cargar los epígrafes acá y volver a
+ * poner "Galería" en `navegacion` (src/data/site.ts).
+ */
+const epigrafes: Record<string, string> = {}
 
 type Foto = { url: string; nombre: string; epigrafe: string }
 

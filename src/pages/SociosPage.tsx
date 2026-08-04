@@ -1,6 +1,6 @@
 import { Download, MessageCircle, MapPin, ArrowRight, Lightbulb } from 'lucide-react'
 import { club, pasosSocio, faq, proyectos } from '@/data/site'
-import { padron, hayPadron } from '@/data/socios'
+import { padron, hayPadron, porCategoria } from '@/data/socios'
 import { PageHeader } from '@/components/PageHeader'
 import { Reveal } from '@/components/Reveal'
 import { Button } from '@/components/ui/button'
@@ -146,16 +146,34 @@ export function SociosPage() {
                 </p>
               </div>
               <GoldDivider className="mt-8" />
+
+              {porCategoria.length > 0 ? (
+                <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+                  {porCategoria.map(([tipo, cantidad]) => (
+                    <li key={tipo} className="flex items-baseline gap-2">
+                      <span className="font-condensed text-2xl leading-none text-ink">
+                        {cantidad}
+                      </span>
+                      <span className="kicker text-[0.6rem] text-ink/50">{tipo}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </Reveal>
 
             <Reveal delay={0.08}>
-              <ul className="mt-10 columns-1 gap-x-10 sm:columns-2 lg:columns-3">
-                {padron.nombres.map((nombre) => (
+              <ul className="mt-12 columns-1 gap-x-10 sm:columns-2 lg:columns-3">
+                {padron.socios.map((socio) => (
                   <li
-                    key={nombre}
-                    className="break-inside-avoid border-b border-ink/8 py-2.5 text-[0.95rem] text-ink/75"
+                    key={socio.nombre}
+                    className="flex break-inside-avoid items-baseline justify-between gap-3 border-b border-ink/8 py-2.5"
                   >
-                    {nombre}
+                    <span className="text-[0.95rem] text-ink/80">{socio.nombre}</span>
+                    {socio.tipo ? (
+                      <span className="shrink-0 text-[0.65rem] tracking-wide text-ink/35 uppercase">
+                        {socio.tipo}
+                      </span>
+                    ) : null}
                   </li>
                 ))}
               </ul>

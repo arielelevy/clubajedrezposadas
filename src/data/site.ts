@@ -23,6 +23,8 @@ export const club = {
   instagramLink: 'https://www.instagram.com/clubdeajedrezposadas',
   facebook: 'clubdeajedrezposadas',
   facebookLink: 'https://www.facebook.com/CLUBDEAJEDREZPOSADAS/',
+  x: 'ajedrez_posadas',
+  xLink: 'https://x.com/ajedrez_posadas',
   mapsLink:
     'https://www.google.com/maps/search/?api=1&query=Jujuy+1514%2C+3300+Posadas%2C+Misiones%2C+Argentina',
   mapsEmbed:
@@ -38,7 +40,9 @@ export const navegacion = [
   { label: 'Centenario', href: '/#evento' },
   { label: 'Talleres', href: '/#talleres' },
   { label: 'Partidas', href: '/#partidas' },
-  { label: 'Galería', href: '/#galeria' },
+  // La galería está oculta hasta que lleguen fotos reales del club: la sección
+  // se autodescubre desde src/assets/galeria y no se renderiza si está vacía.
+  // Cuando haya fotos, volver a agregar: { label: 'Galería', href: '/#galeria' }
   { label: 'Auspicios', href: '/auspicios' },
   { label: 'Socios', href: '/socios' },
 ] as const

@@ -40,6 +40,14 @@ export function FacebookIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function XIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M17.53 3h3.02l-6.6 7.54L21.75 21h-5.6l-4.38-5.73L6.74 21H3.72l6.86-7.84L2.5 3h5.74l4.1 5.42L17.53 3Zm-1.06 16.16h1.67L7.6 4.75H5.81l10.66 14.41Z" />
+    </svg>
+  )
+}
+
 export function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

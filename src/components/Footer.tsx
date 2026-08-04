@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { MessageCircle, MapPin } from 'lucide-react'
-import { InstagramIcon, FacebookIcon, WhatsAppIcon } from './Icons'
+import { InstagramIcon, FacebookIcon, XIcon, WhatsAppIcon } from './Icons'
 import { club, navegacion } from '@/data/site'
 import { BoardTexture, GoldDivider } from './Ornaments'
 
 const redes = [
   { nombre: `Instagram @${club.instagram}`, href: club.instagramLink, Icono: InstagramIcon },
   { nombre: `Facebook /${club.facebook}`, href: club.facebookLink, Icono: FacebookIcon },
+  { nombre: `X @${club.x}`, href: club.xLink, Icono: XIcon },
   { nombre: `WhatsApp ${club.whatsapp}`, href: club.whatsappLink, Icono: WhatsAppIcon },
 ] as const
 
