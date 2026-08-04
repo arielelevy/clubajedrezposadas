@@ -80,7 +80,14 @@ export function HistoriaPage() {
                 {comisionFundadora.cargos.map((c) => (
                   <div key={c.cargo} className="grid grid-cols-[8rem_1fr] gap-4 py-2.5">
                     <dt className="kicker text-[0.58rem] text-ink/40">{c.cargo}</dt>
-                    <dd className="text-[0.95rem] text-ink/85">{c.nombre}</dd>
+                    <dd className="text-[0.95rem] text-ink/85">
+                      {c.nombre}
+                      {c.aConfirmar ? (
+                        <span className="ml-1 text-gold-deep" title="Pendiente de confirmación">
+                          *
+                        </span>
+                      ) : null}
+                    </dd>
                   </div>
                 ))}
               </dl>

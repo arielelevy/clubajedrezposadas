@@ -134,28 +134,29 @@ export const historia = {
 } as const
 
 /**
- * Primera comisión directiva, transcripta del Acta N° 1 del 12 de julio de 1926.
+ * Primera comisión directiva, según el Acta N° 1 del 12 de julio de 1926.
  *
- * Se respeta la grafía del acta, que en varios nombres difiere de la reseña
- * institucional (Ysasa / Isasa, Gourry / Gaury, J. Lozano / Lorenzo Casanova).
- * El acta además nombra cuatro cargos que la reseña no menciona.
+ * Para los nombres que también aparecen en la reseña institucional se usa la
+ * grafía de la reseña, que es la del club. Los cuatro cargos que solo figuran en
+ * el acta van marcados con `aConfirmar`: se leyeron de la cursiva original y
+ * están a la espera de que el club los verifique contra el libro de actas.
  */
 export const comisionFundadora = {
   titulo: 'La primera comisión directiva',
   bajada:
-    'Los diez cargos que quedaron asentados en el Acta N° 1, firmada en el Palace Hotel a las cinco de la tarde del 12 de julio de 1926.',
-  nota: 'Los nombres siguen la grafía del acta original.',
+    'Los diez cargos que quedaron asentados en el Acta N.º 1, firmada en el Palace Hotel a las cinco de la tarde del 12 de julio de 1926.',
+  nota: 'Los cargos marcados con asterisco figuran solo en el acta y su grafía está pendiente de confirmación.',
   cargos: [
-    { cargo: 'Presidente', nombre: 'Diego Ysasa' },
-    { cargo: 'Secretario', nombre: 'J. Lozano Casanova' },
-    { cargo: 'Tesorero', nombre: 'Eduardo Gourry' },
-    { cargo: 'Vocal 1.º', nombre: 'Enrique Sanchís' },
-    { cargo: 'Vocal 2.º', nombre: 'Juan Morales' },
-    { cargo: 'Vocal 3.º', nombre: 'León R. Naboulet' },
-    { cargo: 'Vocal 4.º', nombre: 'H. L. de Tejada' },
-    { cargo: 'Suplente 1.º', nombre: 'Carlos Pedernera' },
-    { cargo: 'Suplente 2.º', nombre: 'Duarte Ysasa' },
-    { cargo: 'Suplente 3.º', nombre: 'Ladislao Zaragoza' },
+    { cargo: 'Presidente', nombre: 'Diego Isasa', aConfirmar: false },
+    { cargo: 'Secretario', nombre: 'Lorenzo Casanova', aConfirmar: false },
+    { cargo: 'Tesorero', nombre: 'Eduardo Gaury', aConfirmar: false },
+    { cargo: 'Vocal 1.º', nombre: 'Enrique Sanchís', aConfirmar: true },
+    { cargo: 'Vocal 2.º', nombre: 'Juan Morales', aConfirmar: false },
+    { cargo: 'Vocal 3.º', nombre: 'León R. Naboulet', aConfirmar: false },
+    { cargo: 'Vocal 4.º', nombre: 'H. L. de Tejada', aConfirmar: true },
+    { cargo: 'Suplente 1.º', nombre: 'Carlos Pedernera', aConfirmar: false },
+    { cargo: 'Suplente 2.º', nombre: 'Duarte Isasa', aConfirmar: true },
+    { cargo: 'Suplente 3.º', nombre: 'Ladislao Zaragoza', aConfirmar: true },
   ],
 } as const
 
