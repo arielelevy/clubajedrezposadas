@@ -125,8 +125,8 @@ export function Partidas() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Tablero en vivo"
-          titulo="Partidas para mirar jugada por jugada"
-          bajada="Las partidas clásicas que se estudian en los talleres y, en la otra pestaña, los torneos de elite que transmite Lichess: los que están en juego ahora y los que acaban de terminar."
+          titulo="Partidas, jugada por jugada"
+          bajada="Las clásicas que se estudian en los talleres, y los torneos de elite que transmite Lichess."
           align="center"
         />
 

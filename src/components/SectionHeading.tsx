@@ -21,11 +21,11 @@ export function SectionHeading({
   return (
     <Reveal className={cn(align === 'center' && 'text-center', className)}>
       {kicker ? (
-        <p className={cn('kicker mb-4', oscuro ? 'text-gold-bright' : 'text-gold-deep')}>{kicker}</p>
+        <p className={cn('kicker mb-3', oscuro ? 'text-gold-bright' : 'text-gold-deep')}>{kicker}</p>
       ) : null}
       <h2
         className={cn(
-          'text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]',
+          'text-[2.1rem] leading-[1.08] sm:text-4xl lg:text-5xl',
           oscuro ? 'text-ivory' : 'text-ink',
         )}
       >
@@ -34,7 +34,7 @@ export function SectionHeading({
       {bajada ? (
         <p
           className={cn(
-            'mt-4 max-w-2xl text-lg leading-relaxed',
+            'mt-3 max-w-2xl text-[1.02rem] leading-relaxed',
             align === 'center' && 'mx-auto',
             oscuro ? 'text-ivory/70' : 'text-ink/65',
           )}
