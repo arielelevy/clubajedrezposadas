@@ -105,7 +105,11 @@ export function Centenario() {
                 // y tapaba la lectura del hito recién elegido.
                 if (e.pointerType !== 'mouse') return
                 const casillero = (e.target as HTMLElement).closest('[data-anio]')
-                setAnioMirado(casillero ? Number(casillero.getAttribute('data-anio')) : null)
+                // En los 3 px entre casilleros el target es la grilla: si eso
+                // borrara la lectura, el texto de abajo parpadearía al pasar el
+                // mouse. Se mantiene el último año hasta salir del tablero.
+                if (!casillero) return
+                setAnioMirado(Number(casillero.getAttribute('data-anio')))
               }}
             >
               {anios.map((anio, i) => {
@@ -126,8 +130,10 @@ export function Centenario() {
                         title={`${ancla.anio} · ${ancla.titulo}`}
                         className={cn(
                           // El `after` agranda el área táctil sin agrandar el
-                          // casillero: en mobile cada casilla mide ~28px.
-                          'relative grid size-full place-items-center rounded-[3px] bg-gradient-to-br from-gold-bright to-gold-deep text-ink transition-all duration-300 after:absolute after:-inset-1.5 after:content-[""] hover:brightness-115',
+                          // casillero: en mobile cada casilla mide ~28px. Solo
+                          // en punteros gruesos, porque con mouse ese halo le
+                          // robaba el hover a los casilleros vecinos.
+                          'relative grid size-full place-items-center rounded-[3px] bg-gradient-to-br from-gold-bright to-gold-deep text-ink transition-all duration-300 pointer-coarse:after:absolute pointer-coarse:after:-inset-1.5 pointer-coarse:after:content-[""] hover:brightness-115',
                           hito.anio === ancla.anio
                             ? 'ring-2 ring-gold-bright ring-offset-2 ring-offset-ink'
                             : 'opacity-80 hover:opacity-100',
@@ -168,13 +174,13 @@ export function Centenario() {
               aria-live="polite"
               className="min-w-0 font-condensed text-xl tracking-wide text-ivory/60"
             >
-              {anioMirado ? (
-                <span className="text-gold-bright">{anioMirado}</span>
-              ) : tocado ? (
+              {anioMirado || tocado ? (
+                // El año va siempre en el mismo lugar: si alternara con el
+                // rótulo del hito, la línea se movería sola con el mouse.
                 <span className="flex flex-wrap items-baseline gap-x-2.5">
-                  <span className="text-gold-bright">{hito.anio}</span>
+                  <span className="text-gold-bright">{anioMirado ?? hito.anio}</span>
                   <span className="font-sans text-[0.68rem] font-light tracking-[0.16em] text-ivory/45 uppercase">
-                    {hito.fecha}
+                    {anioMirado ? '' : hito.fecha}
                   </span>
                 </span>
               ) : (
