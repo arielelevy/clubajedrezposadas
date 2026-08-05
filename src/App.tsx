@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import { Meta } from './components/Meta'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { ScrollManager } from './components/ScrollManager'
@@ -12,6 +13,7 @@ export function App() {
   return (
     <>
       <ScrollManager />
+      <Meta />
       <Navbar />
       <main>
         <Routes>

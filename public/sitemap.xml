@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Las cuatro rutas reales del sitio (App.tsx). Las secciones del inicio
+  (/#el-club, /#talleres…) no van: son anclas de la misma página y Google
+  no indexa fragmentos por separado.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://clubdeajedrezposadas.com/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://clubdeajedrezposadas.com/historia</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clubdeajedrezposadas.com/socios</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clubdeajedrezposadas.com/auspicios</loc>
+    <lastmod>2026-08-04</lastmod>
+    <priority>0.6</priority>
+  </url>
+</urlset>

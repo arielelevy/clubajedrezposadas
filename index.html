@@ -12,7 +12,7 @@
       content="Club de Ajedrez Posadas: cien años de ajedrez en Misiones. Talleres para niños, jóvenes y adultos, torneos con validez FIDE y una sede propia en Jujuy 1514, Posadas."
     />
     <meta name="theme-color" content="#0b0b0c" />
-    <link rel="canonical" href="https://clubdeajedrezposadas.com.ar/" />
+    <link rel="canonical" href="https://clubdeajedrezposadas.com/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Club de Ajedrez Posadas" />
@@ -21,7 +21,9 @@
       property="og:description"
       content="Cien años de ajedrez en Misiones. Talleres, torneos y una sede propia desde 1980."
     />
-    <meta property="og:image" content="/og-image.jpg" />
+    <!-- Absoluta: las redes y Google no resuelven rutas relativas del og:image -->
+    <meta property="og:image" content="https://clubdeajedrezposadas.com/og-image.jpg" />
+    <meta property="og:url" content="https://clubdeajedrezposadas.com/" />
     <meta property="og:locale" content="es_AR" />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -39,8 +41,8 @@
         "name": "Club de Ajedrez Posadas",
         "foundingDate": "1926-07-12",
         "sport": "Ajedrez",
-        "url": "https://clubdeajedrezposadas.com.ar/",
-        "logo": "/logo-cap-512.png",
+        "url": "https://clubdeajedrezposadas.com/",
+        "logo": "https://clubdeajedrezposadas.com/logo-cap-512.png",
         "telephone": "+5493764328118",
         "address": {
           "@type": "PostalAddress",
@@ -49,7 +51,11 @@
           "addressRegion": "Misiones",
           "addressCountry": "AR"
         },
-        "sameAs": ["https://www.instagram.com/clubdeajedrezposadas"]
+        "sameAs": [
+          "https://www.instagram.com/clubdeajedrezposadas",
+          "https://www.facebook.com/clubdeajedrezposadas",
+          "https://x.com/ajedrez_posadas"
+        ]
       }
     </script>
   </head>

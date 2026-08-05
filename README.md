@@ -4,7 +4,8 @@ Sitio del **Club de Ajedrez Posadas** (Misiones, Argentina), fundado el 12 de ju
 en camino a su centenario: primer club dedicado exclusivamente al ajedrez de la provincia y
 tercera institución ajedrecística más antigua del país.
 
-🌐 **En producción:** https://blue-sky-07b9cde0f.7.azurestaticapps.net
+🌐 **En producción:** https://clubdeajedrezposadas.com
+(host de Azure Static Web Apps: https://blue-sky-07b9cde0f.7.azurestaticapps.net)
 
 ## Qué incluye
 

@@ -22,7 +22,7 @@ export const club = {
   instagram: 'clubdeajedrezposadas',
   instagramLink: 'https://www.instagram.com/clubdeajedrezposadas',
   facebook: 'clubdeajedrezposadas',
-  facebookLink: 'https://www.facebook.com/CLUBDEAJEDREZPOSADAS/',
+  facebookLink: 'https://www.facebook.com/clubdeajedrezposadas',
   x: 'ajedrez_posadas',
   xLink: 'https://x.com/ajedrez_posadas',
   mapsLink:
