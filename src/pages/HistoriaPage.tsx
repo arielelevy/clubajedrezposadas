@@ -7,6 +7,7 @@ import {
   comisionFundadora,
   comisionCentenario,
   decadaTorneos,
+  torneosRecientes,
 } from '@/data/site'
 import actaUrl from '@/assets/galeria/acta-1926.webp'
 import placaUrl from '@/assets/galeria/placa-centenario.webp'
@@ -192,6 +193,40 @@ export function HistoriaPage() {
               ))}
             </dl>
             <p className="mt-5 text-xs text-ink/45">{decadaTorneos.nota}</p>
+          </Reveal>
+
+          {/* De 2020 en adelante el blog ya no publicaba: la fuente pasa a ser la
+              planilla oficial de cada torneo. */}
+          <Reveal className="mt-12">
+            <p className="kicker text-gold-deep">{torneosRecientes.titulo}</p>
+            <p className="mt-4 max-w-2xl text-[1.02rem] leading-relaxed text-ink/70">
+              {torneosRecientes.bajada}
+            </p>
+
+            <ul className="mt-7 divide-y divide-ink/8 border-t border-ink/8">
+              {torneosRecientes.torneos.map((t) => (
+                <li
+                  key={`${t.anio}-${t.nombre}`}
+                  className="grid gap-2 py-4 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-6"
+                >
+                  <p className="font-condensed text-2xl leading-none text-gold-deep">{t.anio}</p>
+                  <div>
+                    <p className="font-display text-lg leading-snug text-ink">{t.nombre}</p>
+                    <p className="kicker mt-1 text-[0.55rem] text-ink/35">{t.detalle}</p>
+                    <p className="mt-2 text-[0.9rem] leading-relaxed text-ink/60">{t.cierre}</p>
+                  </div>
+                  <p className="text-[0.95rem] text-ink sm:text-right">
+                    <span className="font-medium">{t.campeon}</span>
+                    {t.puntos ? (
+                      <span className="mt-0.5 block text-xs text-gold-deep">
+                        {t.puntos} puntos
+                      </span>
+                    ) : null}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-xs text-ink/45">{torneosRecientes.nota}</p>
           </Reveal>
         </div>
       </section>

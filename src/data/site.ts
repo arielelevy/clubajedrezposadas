@@ -362,6 +362,63 @@ export const decadaTorneos = {
   nota: 'Reconstruido de las crónicas que el club publicó entre 2010 y 2019.',
 } as const
 
+/**
+ * De 2020 al centenario. Acá la fuente ya no es el blog -que dejó de publicarse
+ * en 2019- sino las planillas de Chess-Results, que asientan la clasificación
+ * final de cada torneo con validez FIDE.
+ */
+export const torneosRecientes = {
+  titulo: 'Del 2020 al centenario',
+  bajada:
+    'El Mayor sigue siendo el torneo que consagra al campeón del club, y sigue habiendo nombres que cruzan las décadas: Joaquín Jiménez, campeón en 2010 y en 2014, terminó segundo en 2024, ahora como maestro candidato.',
+  torneos: [
+    {
+      anio: '2022',
+      nombre: 'IRT Sub 2400 “Torneo Mayor Abierto”',
+      detalle: '39 jugadores · 6 rondas',
+      campeon: 'Patricio Zaldívar',
+      puntos: '5½',
+      cierre:
+        'Segundo quedó el paraguayo Ettiene Ezequiel Amarilla y tercero Esteban Carlino, del CAP.',
+    },
+    {
+      anio: '2024',
+      nombre: 'IRT Clasificación al Mayor',
+      detalle: '10 jugadores · 7 rondas',
+      campeon: 'Juan Ignacio Selva Andrade',
+      puntos: '5½',
+      cierre: 'Miguel Álvarez llegó a los mismos puntos y quedó segundo por desempate.',
+    },
+    {
+      anio: '2024',
+      nombre: 'Torneo Mayor del club',
+      detalle: '8 jugadores · 7 rondas',
+      campeon: 'Horacio Oviedo',
+      puntos: '6',
+      cierre: 'Segundo el MC Joaquín Jiménez y tercero Ángel Damián Yossen.',
+    },
+    {
+      anio: '2024',
+      nombre: 'Torneo por Equipos 98.º Aniversario',
+      detalle: '8 equipos · 5 rondas',
+      campeon: 'Tierra Roja',
+      puntos: null,
+      cierre:
+        'El Club de Ajedrez Posadas “A” terminó en el podio, junto al Club de Ajedrez Oberá “A”.',
+    },
+    {
+      anio: '2025',
+      nombre: 'IRT Abierto 99.º Aniversario',
+      detalle: '39 jugadores · 6 rondas',
+      campeon: 'Patricio Zaldívar',
+      puntos: '5',
+      cierre:
+        'Igualó en puntos con Stefan Botz y se quedó con el título por desempate; tercero fue Horacio Oviedo.',
+    },
+  ],
+  nota: 'Clasificaciones finales publicadas en Chess-Results.',
+} as const
+
 /** Horario semanal completo (gráfica oficial "Horario semanal · Talleres de ajedrez"). */
 export const horarioSemanal = [
   {
