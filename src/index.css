@@ -31,6 +31,33 @@
   --animate-shimmer: shimmer 6s linear infinite;
   --animate-girar: girar 90s linear infinite;
   --animate-jugada: jugada 0.42s ease-out;
+  /* Entradas de la portada y de los encabezados. Antes las hacía Framer Motion:
+     en CSS son las mismas curvas sin traer una librería de animación ni montar
+     un motor de valores por elemento. */
+  --animate-entrar: entrar 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-acercar: acercar 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes acercar {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Cambio de hito en el tablero de los cien años: la ficha entra de nuevo para
@@ -178,5 +205,28 @@
   /* Etiqueta tipo "kicker" de tapa editorial */
   .kicker {
     @apply font-condensed text-sm tracking-[0.42em] uppercase;
+  }
+
+  /* Aparición en scroll: el estado inicial y la transición viven acá, y el
+     componente Reveal solo agrega .a-la-vista cuando el bloque entra. Así no hay
+     motor de animación en JS por cada uno de los cuarenta bloques de la página. */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-y, 24px), 0);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  }
+
+  .reveal.a-la-vista {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

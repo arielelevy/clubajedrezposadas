@@ -1,21 +1,14 @@
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
 import { MessageCircle, ArrowRight, MapPin } from 'lucide-react'
 import { club, cifras } from '@/data/site'
 import { Button } from './ui/button'
 import { BoardTexture, GraphiteCurves, GoldDivider } from './Ornaments'
 
 export function Hero() {
-  const reduce = useReducedMotion()
-
-  const aparece = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 26 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] as const },
-        }
+  /** Entrada escalonada por CSS: la clase trae la curva y el delay va por estilo. */
+  const aparece = (delay: number) => ({
+    style: { animationDelay: `${delay}s` },
+  })
 
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-ink text-ivory">
@@ -33,31 +26,31 @@ export function Hero() {
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pt-28 pb-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:px-8 lg:pt-32 lg:pb-20">
         <div>
-          <motion.p {...aparece(0.05)} className="kicker text-gold-bright">
+          <p {...aparece(0.05)} className="kicker text-gold-bright motion-safe:animate-entrar">
             {club.ciudad}, {club.provincia} · desde 1926
-          </motion.p>
+          </p>
 
-          <motion.h1
+          <h1
             {...aparece(0.15)}
-            className="mt-4 text-[2.9rem] leading-[0.95] font-medium sm:text-6xl lg:text-[5rem]"
+            className="mt-4 text-[2.9rem] leading-[0.95] font-medium motion-safe:animate-entrar sm:text-6xl lg:text-[5rem]"
           >
             Cien años
             <span className="block text-gold-gradient">de ajedrez</span>
             <span className="mt-2 block font-sans text-base font-light tracking-[0.2em] text-ivory/60 uppercase sm:text-lg">
               en el corazón de Misiones
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.div {...aparece(0.28)}>
+          <div {...aparece(0.28)} className="motion-safe:animate-entrar">
             <GoldDivider className="mt-6 max-w-md" />
             <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-ivory/75">
               El primer club dedicado exclusivamente al ajedrez en la provincia. Fundado el{' '}
               {club.fundacion} en el Palace Hotel, con sede propia desde 1980 y las puertas abiertas
               seis días por semana para chicos, jóvenes y adultos.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div {...aparece(0.4)} className="mt-6 flex flex-wrap items-center gap-4">
+          <div {...aparece(0.4)} className="mt-6 flex flex-wrap items-center gap-4 motion-safe:animate-entrar">
             <Button asChild size="lg" variant="gold">
               <a href={club.whatsappLink} target="_blank" rel="noreferrer">
                 <MessageCircle />
@@ -70,30 +63,24 @@ export function Hero() {
                 <ArrowRight />
               </Link>
             </Button>
-          </motion.div>
+          </div>
 
-          <motion.a
+          <a
             {...aparece(0.5)}
             href={club.mapsLink}
             target="_blank"
             rel="noreferrer"
-            className="mt-6 inline-flex items-center gap-2 text-sm text-ivory/55 transition-colors hover:text-gold-bright"
+            className="mt-6 inline-flex items-center gap-2 text-sm text-ivory/55 transition-colors hover:text-gold-bright motion-safe:animate-entrar"
           >
             <MapPin className="size-4" />
             {club.direccion} · {club.ciudad}, {club.provincia}
-          </motion.a>
+          </a>
         </div>
 
         {/* Medallón del centenario */}
-        <motion.div
-          {...(reduce
-            ? {}
-            : {
-                initial: { opacity: 0, scale: 0.9 },
-                animate: { opacity: 1, scale: 1 },
-                transition: { duration: 1.1, delay: 0.25, ease: [0.22, 1, 0.36, 1] as const },
-              })}
-          className="relative mx-auto w-full max-w-[13rem] sm:max-w-xs lg:max-w-none"
+        <div
+          style={{ animationDelay: '0.25s' }}
+          className="relative mx-auto w-full max-w-[13rem] motion-safe:animate-acercar sm:max-w-xs lg:max-w-none"
         >
           <div className="relative aspect-square">
             {/* El arco dorado gira por CSS, no por Framer Motion: animarlo en JS
@@ -112,15 +99,15 @@ export function Hero() {
                 disco marfil: con size-auto el SVG se salía del recuadro. */}
             <div className="absolute inset-7">
               <img
-                src="/logo-cap.svg"
+                src="/logo-cap-640.webp"
                 alt="Escudo del Club de Ajedrez Posadas con el sello de los 100 años (1926-2026)"
                 className="size-full object-contain"
-                width={520}
-                height={520}
+                width={640}
+                height={640}
               />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Cifras institucionales. En el flujo y empujadas al fondo con mt-auto:
@@ -128,10 +115,10 @@ export function Hero() {
       <div className="relative mt-auto w-full border-t border-ivory/10 bg-ink/70">
         <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-ivory/10 px-5 lg:grid-cols-4 lg:divide-x lg:px-8">
           {cifras.map((c, i) => (
-            <motion.div
+            <div
               key={c.detalle}
               {...aparece(0.55 + i * 0.08)}
-              className="px-2 py-3 lg:px-8 lg:py-4"
+              className="px-2 py-3 motion-safe:animate-entrar lg:px-8 lg:py-4"
             >
               <dt className="font-condensed text-3xl text-gold-bright lg:text-4xl">
                 {c.valor}
@@ -141,7 +128,7 @@ export function Hero() {
                 <span className="sm:hidden">{c.corto}</span>
                 <span className="hidden sm:inline">{c.detalle}</span>
               </dd>
-            </motion.div>
+            </div>
           ))}
         </dl>
       </div>

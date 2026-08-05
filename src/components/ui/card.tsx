@@ -5,7 +5,10 @@ export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
   return (
     <div
       className={cn(
-        'relative rounded-lg border border-ink/8 bg-white/70 p-7 backdrop-blur-sm transition-all duration-500 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]',
+        // Sin backdrop-blur: la tarjeta se apoya sobre fondos planos, así que el
+        // desenfoque no se veía y en cambio obligaba al navegador a recomponer
+        // cada tarjeta en cada frame del scroll.
+        'relative rounded-lg border border-ink/8 bg-white/70 p-7 transition-all duration-500 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]',
         className,
       )}
       {...props}

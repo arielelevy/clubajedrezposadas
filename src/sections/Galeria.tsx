@@ -83,7 +83,9 @@ export function Galeria() {
                       className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </span>
-                  <span className="absolute top-3 right-3 grid size-9 place-items-center rounded-full border border-ivory/30 bg-ink/50 text-ivory opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100">
+                  {/* Sin backdrop-blur: aun invisible obligaba al navegador a
+                      mantener una capa aparte por cada foto de la galería. */}
+                  <span className="absolute top-3 right-3 grid size-9 place-items-center rounded-full border border-ivory/30 bg-ink/60 text-ivory opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                     <Camera className="size-4" />
                   </span>
                 </button>

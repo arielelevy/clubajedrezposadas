@@ -98,15 +98,18 @@ export function GameViewer({ partida }: { partida: Partida }) {
           : 'En juego'
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,25rem)_minmax(0,1fr)]">
+    /* --tablero: el tablero es cuadrado, así que su ancho es también su alto. Se
+       lo acota contra el viewport y no solo en rem para que en pantallas bajas
+       (notebooks, celular acostado) el tablero y sus controles entren juntos sin
+       tener que scrollear. */
+    <div className="grid gap-5 [--tablero:min(25rem,56svh)] lg:grid-cols-[minmax(0,var(--tablero))_minmax(0,1fr)]">
       <div>
-        {/* El tablero se acota: a ancho libre se comía la pantalla de alto. */}
-        <div className="mx-auto w-full max-w-[25rem]">
+        <div className="mx-auto w-full max-w-[var(--tablero)]">
           <Board fen={fen} ultimaJugada={plyActual} invertido={invertido} />
         </div>
 
         {/* Controles */}
-        <div className="mx-auto mt-4 flex w-full max-w-[25rem] flex-wrap items-center justify-between gap-3">
+        <div className="mx-auto mt-3 flex w-full max-w-[var(--tablero)] flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-1">
             <BotonControl etiqueta="Inicio" onClick={() => setIndice(-1)} disabled={indice === -1}>
               <ChevronFirst className="size-5" />

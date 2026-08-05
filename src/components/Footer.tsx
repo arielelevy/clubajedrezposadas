@@ -21,7 +21,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-4">
               <span className="grid size-14 shrink-0 place-items-center rounded-full bg-ivory">
-                <img src="/logo-cap.svg" alt="" className="size-12" />
+                <img src="/logo-cap-96.webp" alt="" width={48} height={48} className="size-12" />
               </span>
               <div>
                 <p className="font-display text-xl">{club.nombre}</p>

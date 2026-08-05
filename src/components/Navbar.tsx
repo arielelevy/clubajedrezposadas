@@ -163,7 +163,7 @@ export function Navbar() {
       >
         <Link to="/" className="group flex items-center gap-3">
           <span className="grid size-11 place-items-center rounded-full bg-ivory">
-            <img src="/logo-cap.svg" alt="" className="size-9" />
+            <img src="/logo-cap-96.webp" alt="" width={36} height={36} className="size-9" />
           </span>
           <span className="leading-tight">
             <span
@@ -229,7 +229,7 @@ export function Navbar() {
                 <Dialog.Title asChild>
                   <div className="flex items-center gap-3">
                     <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ivory">
-                      <img src="/logo-cap.svg" alt="" className="size-8" />
+                      <img src="/logo-cap-96.webp" alt="" width={32} height={32} className="size-8" />
                     </span>
                     <span className="leading-tight">
                       <span className="block font-display text-[1.05rem] font-semibold">

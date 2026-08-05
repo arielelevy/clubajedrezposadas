@@ -1,12 +1,20 @@
-import { useCallback, useEffect, useState } from 'react'
+import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react'
 import { Radio, LoaderCircle, TriangleAlert, RefreshCw } from 'lucide-react'
 import { archivosDelClub } from '@/data/partidas'
-import { parsearArchivoPgn, type Partida } from '@/lib/pgn'
-import { obtenerPgnDeRonda, obtenerTransmisionesElite, type Transmision } from '@/lib/lichess'
+import type { Partida } from '@/lib/pgn'
+import type { Transmision } from '@/lib/lichess'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Reveal } from '@/components/Reveal'
-import { GameViewer } from '@/components/GameViewer'
 import { cn } from '@/lib/utils'
+
+/**
+ * El visor y el motor de ajedrez son la mitad del peso de la portada y viven
+ * abajo del pliegue, así que se piden aparte. La sección sí queda en el HTML: el
+ * menú ancla a #partidas y ese destino tiene que existir desde el arranque.
+ */
+const GameViewer = lazy(() =>
+  import('@/components/GameViewer').then((m) => ({ default: m.GameViewer })),
+)
 
 type Fuente = 'club' | 'elite'
 
@@ -27,13 +35,16 @@ export function Partidas() {
     setCargando(true)
     setError(null)
     try {
-      const textos = await Promise.all(
-        archivosDelClub.map(async (a) => {
-          const res = await fetch(a.archivo)
-          if (!res.ok) throw new Error(`No se pudo leer ${a.archivo} (${res.status})`)
-          return { texto: await res.text(), archivo: a.archivo }
-        }),
-      )
+      const [{ parsearArchivoPgn }, textos] = await Promise.all([
+        import('@/lib/pgn'),
+        Promise.all(
+          archivosDelClub.map(async (a) => {
+            const res = await fetch(a.archivo)
+            if (!res.ok) throw new Error(`No se pudo leer ${a.archivo} (${res.status})`)
+            return { texto: await res.text(), archivo: a.archivo }
+          }),
+        ),
+      ])
       const todas = textos.flatMap((t) => parsearArchivoPgn(t.texto, t.archivo))
       setPartidas(todas)
       setSeleccionada(0)
@@ -61,6 +72,9 @@ export function Partidas() {
     setCargando(true)
     setError(null)
     try {
+      const [{ parsearArchivoPgn }, { obtenerPgnDeRonda, obtenerTransmisionesElite }] =
+        await Promise.all([import('@/lib/pgn'), import('@/lib/lichess')])
+
       const rondas = await obtenerTransmisionesElite(5)
 
       // Se sondean tres en curso y cinco terminadas. Las en curso valen la pena
@@ -112,16 +126,45 @@ export function Partidas() {
     setSeleccionada(0)
   }, [])
 
+  /**
+   * Nada se descarga ni se parsea hasta que la sección está por entrar en
+   * pantalla: son cuatro PGN y el motor de ajedrez, y hacerlo en la carga le
+   * robaba main thread a lo que el visitante sí está viendo arriba.
+   */
+  const seccion = useRef<HTMLElement>(null)
+  const [cerca, setCerca] = useState(false)
+
   useEffect(() => {
+    const el = seccion.current
+    if (!el) return
+    if (!('IntersectionObserver' in window)) {
+      setCerca(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      (entradas) => {
+        if (!entradas.some((e) => e.isIntersecting)) return
+        setCerca(true)
+        observer.disconnect()
+      },
+      { rootMargin: '400px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!cerca) return
     if (fuente === 'club') cargarDelClub()
     else cargarElite()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fuente])
+  }, [fuente, cerca])
 
   const partida = partidas[seleccionada]
 
   return (
-    <section id="partidas" className="scroll-mt-24 bg-ivory py-12 lg:py-18">
+    <section ref={seccion} id="partidas" className="scroll-mt-20 bg-ivory py-10 lg:py-14">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Tablero en vivo"
@@ -131,7 +174,7 @@ export function Partidas() {
         />
 
         {/* Selector de fuente */}
-        <Reveal className="mt-6 flex flex-wrap justify-center gap-2">
+        <Reveal className="mt-5 flex flex-wrap justify-center gap-2">
           <BotonFuente activo={fuente === 'club'} onClick={() => setFuente('club')}>
             Clásicas
           </BotonFuente>
@@ -143,7 +186,7 @@ export function Partidas() {
 
         {/* Torneos disponibles: solo los que tienen partidas con jugadas */}
         {fuente === 'elite' && transmisiones.length > 0 ? (
-          <div className="mt-5 flex flex-wrap justify-center gap-2">
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
             {transmisiones.map((t) => (
               <button
                 key={t.ronda.id}
@@ -166,9 +209,9 @@ export function Partidas() {
           </div>
         ) : null}
 
-        <div className="mt-6">
+        <div className="mt-5">
           {cargando ? (
-            <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-16 text-ink/50">
+            <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-12 text-ink/50">
               <LoaderCircle className="size-7 animate-spin text-gold" />
               <p className="mt-4 text-sm">
                 {fuente === 'elite' ? 'Consultando Lichess…' : 'Leyendo las partidas…'}
@@ -189,9 +232,11 @@ export function Partidas() {
               </button>
             </div>
           ) : partida ? (
-            <div className="grid gap-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
-              {/* Listado de partidas */}
-              <ol className="max-h-[28rem] space-y-1.5 overflow-y-auto pr-1">
+            <div className="grid gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]">
+              {/* Listado de partidas. En una sola columna va debajo del visor y
+                  más bajo: arriba se comía la pantalla y el tablero terminaba
+                  abajo del pliegue. */}
+              <ol className="order-2 max-h-[10rem] space-y-1.5 overflow-y-auto pr-1 lg:order-none lg:max-h-[28rem]">
                 {partidas.map((p, i) => (
                   <li key={p.id}>
                     <button
@@ -215,14 +260,24 @@ export function Partidas() {
                 ))}
               </ol>
 
-              <GameViewer partida={partida} />
+              <div className="order-1 lg:order-none">
+                <Suspense
+                  fallback={
+                    <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-12">
+                      <LoaderCircle className="size-7 animate-spin text-gold" />
+                    </div>
+                  }
+                >
+                  <GameViewer partida={partida} />
+                </Suspense>
+              </div>
             </div>
           ) : (
             <p className="text-center text-sm text-ink/50">No hay partidas para mostrar.</p>
           )}
         </div>
 
-        <p className="mt-8 text-center text-xs text-ink/45">
+        <p className="mt-6 text-center text-xs text-ink/45">
           Las partidas de elite se leen en vivo desde la API pública de Lichess. Las clásicas se
           publican como archivos PGN, sin necesidad de servidor.
         </p>

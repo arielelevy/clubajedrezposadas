@@ -33,6 +33,17 @@ for (const size of [512, 1024]) {
     .toFile(path.join(root, 'public', `logo-cap-${size}.png`))
 }
 
+/* El SVG del logo pesa 525 kB porque adentro trae un PNG embebido, y la barra y
+   el pie lo mostraban a 36 y 48 px: media portada de descarga para un sello del
+   tamaño de una uña. Estos webp son lo que usa la pagina; el SVG queda para
+   imprenta y para quien lo pida directo. */
+for (const size of [96, 640]) {
+  await sharp(logoBuf, { density: 300 })
+    .resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .webp({ quality: 88 })
+    .toFile(path.join(root, 'public', `logo-cap-${size}.webp`))
+}
+
 /* --- Favicon: el sello completo no se lee a 16 px (el aro con texto, el laurel
    y el "100 AÑOS" quedan en dos pixeles). Se recorta el mate con las manos tal
    cual esta en el logo -sin retocar colores ni agregar fondo- y ese pedazo
@@ -82,18 +93,21 @@ for (const size of [16, 32, 48]) {
 await sharp(master).resize(256, 256).png({ compressionLevel: 9 }).toFile(path.join(root, 'public', 'favicon.png'))
 await (await icono(180, { fondo: { r: 0xfc, g: 0xfa, b: 0xf5 }, ocupa: 0.9 })).toFile(path.join(root, 'public', 'apple-touch-icon.png'))
 
-// --- Piezas graficas -> webp para la galeria ---
+/* --- Piezas graficas -> webp.
+   Los tres primeros se ven en las tarjetas de talleres, en un recuadro 16/9 de
+   unos 450 px: a 1400 px de ancho se bajaban 430 kB para mostrar bastante menos
+   de la mitad. 900 px alcanza para pantallas retina. -------------------------- */
 const posters = {
-  'TALLERES.png': 'talleres-horarios.webp',
-  'Niños.png': 'talleres-infantil.webp',
-  'Adultos.png': 'clases-adultos.webp',
-  'Banner IMPRECO.png': 'banner-menos-pantalla.webp',
-  'CAP MEMBRETE.png': 'membrete.webp',
+  'TALLERES.png': ['talleres-horarios.webp', 900],
+  'Niños.png': ['talleres-infantil.webp', 900],
+  'Adultos.png': ['clases-adultos.webp', 900],
+  'Banner IMPRECO.png': ['banner-menos-pantalla.webp', 1400],
+  'CAP MEMBRETE.png': ['membrete.webp', 1400],
 }
-for (const [from, to] of Object.entries(posters)) {
+for (const [from, [to, ancho]] of Object.entries(posters)) {
   await sharp(need(from))
-    .resize({ width: 1400, withoutEnlargement: true })
-    .webp({ quality: 82 })
+    .resize({ width: ancho, withoutEnlargement: true })
+    .webp({ quality: 80 })
     .toFile(path.join(outImg, to))
 }
 

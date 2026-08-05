@@ -9,8 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         gold: 'bg-gradient-to-r from-gold-deep via-gold to-gold-bright text-ink shadow-[0_10px_30px_-12px_rgba(192,145,44,0.7)] hover:brightness-110 hover:shadow-[0_14px_40px_-12px_rgba(192,145,44,0.85)]',
-        outlineLight:
-          'border border-ivory/35 text-ivory hover:border-gold-bright hover:text-gold-bright backdrop-blur-sm',
+        outlineLight: 'border border-ivory/35 text-ivory hover:border-gold-bright hover:text-gold-bright',
         outlineDark: 'border border-ink/20 text-ink hover:border-gold hover:text-gold-deep',
         ink: 'bg-ink text-ivory hover:bg-graphite',
         ghost: 'text-ink hover:text-gold-deep',
