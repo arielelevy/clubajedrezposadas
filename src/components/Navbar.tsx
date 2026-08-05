@@ -22,8 +22,17 @@ const grupos = [
   },
 ].filter((g) => g.items.length > 0)
 
-/** Píxeles de scroll hacia arriba, ya en el tope, para desplegar el aviso. */
-const RESISTENCIA = 90
+/**
+ * Resistencia para desplegar el aviso, ya en el tope. No se puede medir con el
+ * scroll: en `y = 0` la página no se mueve más y dejan de llegar eventos, así
+ * que los píxeles se cuentan sobre la rueda y el arrastre del dedo, que siguen
+ * llegando cuando uno insiste hacia arriba contra el tope.
+ */
+const RESISTENCIA_RUEDA = 380 // cuatro golpes de rueda, más o menos
+const RESISTENCIA_TACTIL = 150 // un tirón sostenido del dedo
+
+/** Hasta acá se considera que la página está en el tope. */
+const TOPE = 24
 
 export function Navbar() {
   /**
@@ -38,26 +47,71 @@ export function Navbar() {
   useEffect(() => {
     let anterior = window.scrollY
     let acumulado = 0
+    let dedo: number | null = null
 
+    const enTope = () => window.scrollY <= TOPE
+
+    // Bajar retrae el aviso y borra lo acumulado: la insistencia arranca de cero.
+    // Se pide `y > TOPE` porque el rebote de iOS vuelve de un scroll negativo a 0
+    // sin que nadie haya bajado nada, y eso cerraba el aviso recién abierto.
     const onScroll = () => {
       const y = window.scrollY
-      const subiendo = y < anterior
-
-      if (subiendo && y <= 24) {
-        // Pequeña resistencia: hay que insistir hacia arriba para que aparezca,
-        // así no salta con cualquier roce del dedo o rebote del scroll.
-        acumulado += anterior - y
-        if (acumulado >= RESISTENCIA) setAvisoVisible(true)
-      } else if (!subiendo) {
+      if (y > anterior && y > TOPE) {
         acumulado = 0
         setAvisoVisible(false)
       }
-
       anterior = y
     }
 
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY >= 0) {
+        acumulado = 0
+        return
+      }
+      if (!enTope()) return
+      // deltaMode 1 son líneas, no píxeles (Firefox).
+      acumulado += e.deltaMode === 1 ? -e.deltaY * 16 : -e.deltaY
+      if (acumulado >= RESISTENCIA_RUEDA) setAvisoVisible(true)
+    }
+
+    const onTouchStart = (e: TouchEvent) => {
+      dedo = e.touches[0]?.clientY ?? null
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      const actual = e.touches[0]?.clientY
+      if (actual == null || dedo == null) return
+
+      // El dedo bajando arrastra la página hacia arriba.
+      const arrastre = actual - dedo
+      dedo = actual
+
+      if (arrastre < 0) {
+        acumulado = 0
+        return
+      }
+      if (!enTope() || arrastre === 0) return
+
+      acumulado += arrastre
+      if (acumulado >= RESISTENCIA_TACTIL) setAvisoVisible(true)
+    }
+
+    const onTouchEnd = () => {
+      dedo = null
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('wheel', onWheel, { passive: true })
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: true })
+    window.addEventListener('touchend', onTouchEnd, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('touchend', onTouchEnd)
+    }
   }, [])
 
   // Se incluye el hash: elegir una sección del inicio no cambia el pathname,

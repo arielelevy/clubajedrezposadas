@@ -87,17 +87,18 @@ export const eventoCentenario = {
 } as const
 
 /**
- * Contexto de antigüedad: el club es anterior a la propia federación argentina
- * y casi contemporáneo de la FIDE. Dicho así, en tres fechas, se entiende solo.
+ * Contexto de antigüedad: el club es casi contemporáneo de las dos federaciones
+ * que ordenan el ajedrez, la argentina (28/09/1922) y la internacional
+ * (20/07/1924). Dicho así, en tres fechas seguidas, se entiende solo.
  */
 export const contextoAntiguedad = {
-  titulo: 'Más viejo que su propia federación',
+  titulo: 'Casi tan antiguo como sus federaciones',
   texto:
-    'El Club de Ajedrez Posadas se fundó veintidós años antes que la Federación Argentina de Ajedrez, y apenas dos años después de que naciera la Federación Internacional.',
+    'Cuando el club abrió sus puertas en Posadas, el ajedrez organizado era casi tan nuevo como él: la Federación Argentina de Ajedrez tenía cuatro años y la Federación Internacional, apenas dos.',
   fechas: [
+    { anio: '1922', que: 'Se constituye la FADA', propio: false },
     { anio: '1924', que: 'Nace la FIDE', propio: false },
     { anio: '1926', que: 'Se funda el club', propio: true },
-    { anio: '1948', que: 'Se constituye la FADA', propio: false },
   ],
 } as const
 

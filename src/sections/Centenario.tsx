@@ -28,11 +28,45 @@ const ultimoAnio = PRIMER_ANIO + CASILLEROS - 1
 const enTablero = hitos.filter((h) => h.desde <= ultimoAnio)
 const cierre = hitos[hitos.length - 1]
 
+type Hito = (typeof hitos)[number]
+
+/**
+ * Ficha del hito elegido. Se usa con `key={hito.anio}` para que React la vuelva
+ * a montar y la animación `jugada` corra en cada cambio: si nada se mueve, el
+ * toque en el casillero parece no haber hecho nada.
+ */
+function FichaHito({ hito }: { hito: Hito }) {
+  return (
+    <div className="animate-jugada rounded-lg border border-gold/25 bg-graphite/60 p-8 backdrop-blur-sm lg:p-9">
+      <div className="flex items-center gap-4">
+        <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 text-gold-bright">
+          <ChessGlyph pieza={hito.pieza as Pieza} className="text-xl" />
+        </span>
+        <div>
+          <p className="font-condensed text-3xl leading-none text-gold-bright">{hito.anio}</p>
+          <p className="kicker mt-1.5 text-[0.6rem] text-ivory/40">{hito.fecha}</p>
+        </div>
+      </div>
+
+      <h3 className="mt-7 text-2xl leading-snug text-ivory">{hito.titulo}</h3>
+      <p className="mt-4 text-[0.98rem] leading-relaxed text-ivory/70">{hito.texto}</p>
+    </div>
+  )
+}
+
 export function Centenario() {
   const [seleccionado, setSeleccionado] = useState<string>(cierre.anio)
   const [anioMirado, setAnioMirado] = useState<number | null>(null)
+  const [tocado, setTocado] = useState(false)
 
   const hito = hitos.find((h) => h.anio === seleccionado) ?? cierre
+
+  /** Un toque en un casillero de oro: la lectura pasa a mostrar el hito elegido. */
+  const elegir = (anio: string) => {
+    setSeleccionado(anio)
+    setTocado(true)
+    setAnioMirado(null)
+  }
 
   return (
     <section
@@ -65,8 +99,11 @@ export function Centenario() {
 
             <ol
               className="grid flex-1 grid-cols-[repeat(10,minmax(0,1fr))] gap-[3px]"
-              onMouseLeave={() => setAnioMirado(null)}
-              onMouseOver={(e) => {
+              onPointerLeave={() => setAnioMirado(null)}
+              onPointerOver={(e) => {
+                // Solo mouse: en touch el "hover" queda pegado después del toque
+                // y tapaba la lectura del hito recién elegido.
+                if (e.pointerType !== 'mouse') return
                 const casillero = (e.target as HTMLElement).closest('[data-anio]')
                 setAnioMirado(casillero ? Number(casillero.getAttribute('data-anio')) : null)
               }}
@@ -84,11 +121,13 @@ export function Centenario() {
                       <button
                         type="button"
                         data-anio={anio}
-                        onClick={() => setSeleccionado(ancla.anio)}
+                        onClick={() => elegir(ancla.anio)}
                         aria-pressed={hito.anio === ancla.anio}
                         title={`${ancla.anio} · ${ancla.titulo}`}
                         className={cn(
-                          'grid size-full place-items-center rounded-[3px] bg-gradient-to-br from-gold-bright to-gold-deep text-ink transition-all duration-300 hover:brightness-115',
+                          // El `after` agranda el área táctil sin agrandar el
+                          // casillero: en mobile cada casilla mide ~28px.
+                          'relative grid size-full place-items-center rounded-[3px] bg-gradient-to-br from-gold-bright to-gold-deep text-ink transition-all duration-300 after:absolute after:-inset-1.5 after:content-[""] hover:brightness-115',
                           hito.anio === ancla.anio
                             ? 'ring-2 ring-gold-bright ring-offset-2 ring-offset-ink'
                             : 'opacity-80 hover:opacity-100',
@@ -125,9 +164,19 @@ export function Centenario() {
 
           {/* Lectura del casillero + la jugada en curso */}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-ivory/10 pt-6">
-            <p aria-live="polite" className="font-condensed text-xl tracking-wide text-ivory/60">
+            <p
+              aria-live="polite"
+              className="min-w-0 font-condensed text-xl tracking-wide text-ivory/60"
+            >
               {anioMirado ? (
                 <span className="text-gold-bright">{anioMirado}</span>
+              ) : tocado ? (
+                <span className="flex flex-wrap items-baseline gap-x-2.5">
+                  <span className="text-gold-bright">{hito.anio}</span>
+                  <span className="font-sans text-[0.68rem] font-light tracking-[0.16em] text-ivory/45 uppercase">
+                    {hito.fecha}
+                  </span>
+                </span>
               ) : (
                 <span className="text-[0.7rem] tracking-[0.2em] uppercase">
                   Tocá un casillero de oro
@@ -137,7 +186,7 @@ export function Centenario() {
 
             <button
               type="button"
-              onClick={() => setSeleccionado(cierre.anio)}
+              onClick={() => elegir(cierre.anio)}
               aria-pressed={hito.anio === cierre.anio}
               className={cn(
                 'group flex items-center gap-3 rounded-md border px-4 py-2.5 transition-all duration-300',
@@ -155,6 +204,12 @@ export function Centenario() {
               </span>
             </button>
           </div>
+
+          {/* En mobile la ficha del hito va acá, pegada al tablero: arriba
+              quedaba fuera de pantalla y el toque no se veía. */}
+          <div className="mt-6 lg:hidden">
+            <FichaHito key={hito.anio} hito={hito} />
+          </div>
         </Reveal>
 
         {/* El relato */}
@@ -171,24 +226,9 @@ export function Centenario() {
             </p>
           </Reveal>
 
-          {/* Hito seleccionado */}
-          <Reveal delay={0.1}>
-            <div className="mt-8 rounded-lg border border-gold/25 bg-graphite/60 p-8 backdrop-blur-sm lg:p-9">
-              <div className="flex items-center gap-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 text-gold-bright">
-                  <ChessGlyph pieza={hito.pieza as Pieza} className="text-xl" />
-                </span>
-                <div>
-                  <p className="font-condensed text-3xl leading-none text-gold-bright">
-                    {hito.anio}
-                  </p>
-                  <p className="kicker mt-1.5 text-[0.6rem] text-ivory/40">{hito.fecha}</p>
-                </div>
-              </div>
-
-              <h3 className="mt-7 text-2xl leading-snug text-ivory">{hito.titulo}</h3>
-              <p className="mt-4 text-[0.98rem] leading-relaxed text-ivory/70">{hito.texto}</p>
-            </div>
+          {/* Hito seleccionado (en mobile se muestra debajo del tablero) */}
+          <Reveal delay={0.1} className="mt-8 hidden lg:block">
+            <FichaHito key={hito.anio} hito={hito} />
           </Reveal>
 
           {/* Antigüedad en perspectiva: tres fechas y se entiende sola */}

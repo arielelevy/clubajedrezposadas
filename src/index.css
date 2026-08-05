@@ -30,6 +30,20 @@
   --animate-drift: drift 26s ease-in-out infinite alternate;
   --animate-shimmer: shimmer 6s linear infinite;
   --animate-girar: girar 90s linear infinite;
+  --animate-jugada: jugada 0.42s ease-out;
+}
+
+/* Cambio de hito en el tablero de los cien años: la ficha entra de nuevo para
+   que se vea que el toque hizo algo, sobre todo en mobile. */
+@keyframes jugada {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes girar {
@@ -78,6 +92,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* El aviso del centenario se despliega insistiendo hacia arriba contra el
+       tope; sin esto, en Android ese mismo tirón recarga la página. */
+    overscroll-behavior-y: contain;
   }
 
   body {
