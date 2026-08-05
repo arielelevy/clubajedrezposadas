@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ChevronFirst,
   ChevronLast,
@@ -8,17 +8,30 @@ import {
   Pause,
   RefreshCw,
   Download,
+  Volume2,
+  VolumeX,
 } from 'lucide-react'
 import { agruparJugadas, type Partida } from '@/lib/pgn'
+import { sonarJugada } from '@/lib/sonido'
 import { cn } from '@/lib/utils'
 import { Board } from './Board'
 
 const FEN_INICIAL = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+const CLAVE_SONIDO = 'cap:sonido-visor'
 
 export function GameViewer({ partida }: { partida: Partida }) {
   const [indice, setIndice] = useState(-1) // -1 = posición inicial
   const [reproduciendo, setReproduciendo] = useState(false)
   const [invertido, setInvertido] = useState(false)
+
+  // Arranca en silencio: audio que suena sin que lo pidas es una molestia.
+  const [conSonido, setConSonido] = useState(
+    () => localStorage.getItem(CLAVE_SONIDO) === '1',
+  )
+
+  useEffect(() => {
+    localStorage.setItem(CLAVE_SONIDO, conSonido ? '1' : '0')
+  }, [conSonido])
 
   useEffect(() => {
     setIndice(-1)
@@ -52,6 +65,20 @@ export function GameViewer({ partida }: { partida: Partida }) {
   }, [avanzar, retroceder])
 
   const plyActual = indice >= 0 ? partida.plies[indice] : undefined
+
+  // Suena solo cuando el índice avanza, no al retroceder ni al cambiar de
+  // partida: el sonido acompaña la jugada, no el hecho de estar en una posición.
+  const indiceAnterior = useRef(indice)
+  useEffect(() => {
+    const previo = indiceAnterior.current
+    indiceAnterior.current = indice
+
+    if (!conSonido) return
+    if (indice <= previo) return
+
+    const san = partida.plies[indice]?.san
+    if (san) sonarJugada(san)
+  }, [indice, conSonido, partida.plies])
   const fen = plyActual?.fen ?? partida.fenInicial ?? FEN_INICIAL
   const pares = useMemo(() => agruparJugadas(partida.plies), [partida.plies])
 
@@ -107,6 +134,13 @@ export function GameViewer({ partida }: { partida: Partida }) {
             </BotonControl>
             <BotonControl etiqueta="Girar tablero" onClick={() => setInvertido((v) => !v)}>
               <RefreshCw className="size-4" />
+            </BotonControl>
+            <BotonControl
+              etiqueta={conSonido ? 'Silenciar' : 'Activar sonido'}
+              onClick={() => setConSonido((s) => !s)}
+              destacado={conSonido}
+            >
+              {conSonido ? <Volume2 className="size-4" /> : <VolumeX className="size-4" />}
             </BotonControl>
           </div>
 

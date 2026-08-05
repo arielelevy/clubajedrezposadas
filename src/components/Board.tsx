@@ -35,7 +35,10 @@ export function Board({
           tablero y no contra el viewport, así siguen al tablero cuando cambia
           de tamaño en lugar de quedarse chicas. */}
       <div className="@container overflow-hidden rounded-md border border-ink/12 shadow-[var(--shadow-lift)]">
-        <div className="grid grid-cols-8">
+        {/* El tablero es cuadrado y sus ocho filas miden exactamente un octavo:
+            así ninguna casilla puede estirarse por lo que tenga adentro, que era
+            lo que deformaba el tablero cuando la pieza entraba en la fila. */}
+        <div className="grid aspect-square grid-cols-8 grid-rows-8">
           {filas.map((fila, i) =>
             (invertido ? [...fila].reverse() : fila).map((casilla, j) => {
               const clara = (i + j) % 2 === 0
@@ -46,7 +49,7 @@ export function Board({
                 <div
                   key={casilla.nombre}
                   className={cn(
-                    'relative grid aspect-square place-items-center',
+                    'relative grid min-h-0 min-w-0 place-items-center overflow-hidden',
                     clara ? 'bg-ivory' : 'bg-[#7d6541]',
                   )}
                 >
@@ -60,12 +63,13 @@ export function Board({
                   {casilla.pieza ? (
                     <span
                       className={cn(
-                        // La caja del glifo es más alta que su font-size (el tipo
-                        // trae ascendente y descendente propios), así que con
-                        // 14cqw la pieza medía 170% del alto de la casilla y se
-                        // metía en la de al lado. A 9.5cqw entra justa.
-                        'relative flex select-none items-center justify-center leading-[0.75]',
-                        'text-[9.5cqw]',
+                        // Medido sobre el render: a 12cqw la tinta ocupaba el 82%
+                        // de la casilla y tocaba el borde de abajo, y con la base
+                        // ancha de las piezas eso se lee como que están hundidas.
+                        // A 10.5cqw queda margen arriba y abajo, y el empujón
+                        // corrige el centrado óptico (la tinta de estos glifos
+                        // vive toda arriba de la línea base).
+                        'relative -translate-y-[0.07em] select-none leading-none text-[10.5cqw]',
                         casilla.color === 'w'
                           ? 'text-[#fdfbf6] [text-shadow:0_0_1px_#0b0b0c,0_1px_0_#0b0b0c,1px_0_0_#0b0b0c,-1px_0_0_#0b0b0c,0_-1px_0_#0b0b0c]'
                           : 'text-[#141416] [text-shadow:0_0_1px_rgba(252,250,245,0.55)]',
