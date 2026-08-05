@@ -33,11 +33,54 @@ for (const size of [512, 1024]) {
     .toFile(path.join(root, 'public', `logo-cap-${size}.png`))
 }
 
-// Favicon: recorta el margen y deja la pieza centrada
-await sharp(logoBuf, { density: 300 })
-  .resize(256, 256, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
-  .png({ compressionLevel: 9 })
-  .toFile(path.join(root, 'public', 'favicon.png'))
+/* --- Favicon: el sello completo no se lee a 16 px (el aro con texto, el laurel
+   y el "100 AÑOS" quedan en dos pixeles). Se recorta el mate con las manos tal
+   cual esta en el logo -sin retocar colores ni agregar fondo- y ese pedazo
+   ocupa todo el icono. El recorte esta medido para caer dentro del aro, asi no
+   entran restos del circulo ni de las letras. ---------------------------- */
+const LIENZO = 2000
+
+const marca = await sharp(logoBuf, { density: 400 })
+  .resize(LIENZO, LIENZO, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+  .png()
+  .toBuffer()
+
+// Fracciones del lienzo: el mate completo con las manos, la tapa, el arranque
+// de la bombilla y el tramo de hoja que los abraza.
+const RECORTE = { left: 0.3205, top: 0.24, width: 0.36, height: 0.36 }
+const recorte = {
+  left: Math.round(RECORTE.left * LIENZO),
+  top: Math.round(RECORTE.top * LIENZO),
+  width: Math.round(RECORTE.width * LIENZO),
+  height: Math.round(RECORTE.height * LIENZO),
+}
+const arteBase = await sharp(marca).extract(recorte).png().toBuffer()
+
+/** Icono cuadrado con el recorte centrado. `fondo` solo para iOS, que no admite alfa. */
+async function icono(size, { fondo = null, ocupa = 0.98 } = {}) {
+  const escala = (size * ocupa) / Math.max(recorte.width, recorte.height)
+  const w = Math.max(1, Math.round(recorte.width * escala))
+  const h = Math.max(1, Math.round(recorte.height * escala))
+  const arte = await sharp(arteBase).resize(w, h, { fit: 'fill' }).png().toBuffer()
+  const lienzo = fondo
+    ? sharp({ create: { width: size, height: size, channels: 3, background: fondo } })
+    : sharp({ create: { width: size, height: size, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+  return lienzo
+    .composite([{ input: arte, top: Math.round((size - h) / 2), left: Math.round((size - w) / 2) }])
+    .png({ compressionLevel: 9 })
+}
+
+// El master se genera grande y se baja por resize: a 16 y 32 px el downscale
+// desde 512 conserva mucho mejor el borde del mate que rasterizar directo.
+const master = await (await icono(512)).toBuffer()
+for (const size of [16, 32, 48]) {
+  await sharp(master)
+    .resize(size, size)
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(root, 'public', `favicon-${size}.png`))
+}
+await sharp(master).resize(256, 256).png({ compressionLevel: 9 }).toFile(path.join(root, 'public', 'favicon.png'))
+await (await icono(180, { fondo: { r: 0xfc, g: 0xfa, b: 0xf5 }, ocupa: 0.9 })).toFile(path.join(root, 'public', 'apple-touch-icon.png'))
 
 // --- Piezas graficas -> webp para la galeria ---
 const posters = {
