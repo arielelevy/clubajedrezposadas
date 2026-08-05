@@ -23,8 +23,16 @@ export const club = {
   instagramLink: 'https://www.instagram.com/clubdeajedrezposadas',
   facebook: 'clubdeajedrezposadas',
   facebookLink: 'https://www.facebook.com/clubdeajedrezposadas',
-  x: 'ajedrez_posadas',
-  xLink: 'https://x.com/ajedrez_posadas',
+  x: 'ajedrezposadas',
+  xLink: 'https://x.com/ajedrezposadas',
+  youtube: 'ClubdeAjedrezPosadas',
+  youtubeLink: 'https://www.youtube.com/@ClubdeAjedrezPosadas',
+  /* Equipos online del club. A agosto de 2026: 76 socios en Lichess y 60 en
+     chess.com, ambos con la comisión como administradora. */
+  lichess: 'club-de-ajedrez-posadas',
+  lichessLink: 'https://lichess.org/team/club-de-ajedrez-posadas',
+  chesscom: 'club-de-ajedrez-posadas',
+  chesscomLink: 'https://www.chess.com/clubs/about/club-de-ajedrez-posadas',
   mapsLink:
     'https://www.google.com/maps/search/?api=1&query=Jujuy+1514%2C+3300+Posadas%2C+Misiones%2C+Argentina',
   mapsEmbed:

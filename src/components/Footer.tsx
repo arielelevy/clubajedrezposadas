@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom'
 import { MessageCircle, MapPin } from 'lucide-react'
-import { InstagramIcon, FacebookIcon, XIcon, WhatsAppIcon } from './Icons'
+import {
+  InstagramIcon,
+  FacebookIcon,
+  XIcon,
+  YouTubeIcon,
+  CaballoIcon,
+  PeonIcon,
+  WhatsAppIcon,
+} from './Icons'
 import { club, navegacion } from '@/data/site'
 import { BoardTexture, GoldDivider } from './Ornaments'
 
@@ -8,6 +16,9 @@ const redes = [
   { nombre: `Instagram @${club.instagram}`, href: club.instagramLink, Icono: InstagramIcon },
   { nombre: `Facebook /${club.facebook}`, href: club.facebookLink, Icono: FacebookIcon },
   { nombre: `X @${club.x}`, href: club.xLink, Icono: XIcon },
+  { nombre: `YouTube @${club.youtube}`, href: club.youtubeLink, Icono: YouTubeIcon },
+  { nombre: 'Equipo del club en Lichess', href: club.lichessLink, Icono: CaballoIcon },
+  { nombre: 'Club del CAP en chess.com', href: club.chesscomLink, Icono: PeonIcon },
   { nombre: `WhatsApp ${club.whatsapp}`, href: club.whatsappLink, Icono: WhatsAppIcon },
 ] as const
 
@@ -33,8 +44,8 @@ export function Footer() {
               jurídica {club.personeriaJuridica}.
             </p>
 
-            {/* Redes del club */}
-            <ul className="mt-5 flex items-center gap-2.5">
+            {/* Redes del club. Con siete ya no entran en una línea de celular. */}
+            <ul className="mt-5 flex flex-wrap items-center gap-2.5">
               {redes.map((r) => (
                 <li key={r.nombre}>
                   <a

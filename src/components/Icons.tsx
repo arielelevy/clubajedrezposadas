@@ -48,6 +48,66 @@ export function XIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+export function YouTubeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <rect x="2" y="5" width="20" height="14" rx="4.5" />
+      <path d="M10.4 9.1 15.3 12l-4.9 2.9V9.1Z" />
+    </svg>
+  )
+}
+
+/**
+ * Lichess y chess.com no tienen glifo de marca reproducible con honestidad, así
+ * que se los representa con las piezas que el sitio ya usa como iconografía: el
+ * caballo para Lichess y el peón para chess.com. El nombre va en el aria-label.
+ */
+export function CaballoIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M13.6 3.4c2.2 1.1 3.6 3.2 3.8 5.7.2 2.4-.5 4-.5 5.8 0 1.1.3 2.1.9 3H7.4c.2-2.4 1.4-4.4 3.4-6 1-.8 1.6-1.5 1.9-2.3-1 .5-2 .7-3 .6l-2.6-.2 1.7-2.4c.5-.7.8-1.6.9-2.5l.2-2 1.7 1.5 2-1.2Z" />
+      <path d="M6.2 20.6h11.9" />
+    </svg>
+  )
+}
+
+export function PeonIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="7.2" r="3.1" />
+      <path d="M9.3 10.6c-.4 1 .1 2 1 2.5-1 1.5-1.7 3.3-1.9 5.4h7.2c-.2-2.1-.9-3.9-1.9-5.4.9-.5 1.4-1.5 1-2.5" />
+      <path d="M6.4 20.6h11.2" />
+    </svg>
+  )
+}
+
 export function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
