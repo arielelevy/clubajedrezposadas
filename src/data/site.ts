@@ -273,6 +273,95 @@ export const hitos = [
   },
 ] as const
 
+/**
+ * La década 2010-2019, reconstruida desde el blog que el club sostuvo esos años
+ * (veinte entradas entre enero de 2010 y septiembre de 2019). Cada ficha sale de
+ * la crónica publicada en su momento.
+ *
+ * Quedan afuera a propósito los aranceles, los teléfonos y las sedes de
+ * entonces: eran datos de uso, no de historia, y hoy no rigen.
+ */
+export const decadaTorneos = {
+  titulo: 'La década que el club dejó escrita',
+  bajada:
+    'Entre 2010 y 2019 el club publicó cada torneo que organizó. Leídas juntas, esas crónicas cuentan cómo el CAP se volvió parada obligada del ajedrez del Litoral: aniversarios con validez FIDE, jugadores de nueve países y finales que se decidieron en la última ronda.',
+  destacados: [
+    {
+      anio: '2010',
+      fecha: '28 al 31 de enero',
+      nombre: 'IRT Internacional “En las Misiones”',
+      texto:
+        'Setenta y un jugadores de Brasil, Paraguay, Rusia y diez provincias argentinas, en una organización compartida con la Biblioteca Pública de las Misiones.',
+      campeon: 'Alessandro Manzone',
+      cierre:
+        'El chaqueño se coronó tras empatar la última ronda con el maestro FIDE paraguayo Eduardo Peralta.',
+      pieza: 'torre',
+    },
+    {
+      anio: '2010',
+      fecha: '3 al 6 de junio',
+      nombre: 'IRT 84.º Aniversario',
+      texto:
+        'Tres maestros internacionales y jugadores de España, Canadá, Brasil, Paraguay y Rusia, con el auspicio del Consejo Provincial de Deportes y Recreación.',
+      campeon: 'MF Luismar Brito',
+      cierre:
+        'El brasileño igualó en la última ronda con el maestro internacional Facundo Quiroga y se quedó con el torneo.',
+      pieza: 'alfil',
+    },
+    {
+      anio: '2010',
+      fecha: 'Octubre',
+      nombre: 'Torneo Mayor del CAP',
+      texto:
+        'Once jugadores en la propia sede, válido para el ELO FIDE y para el ranking argentino. El Mayor es el torneo que consagra al campeón del club.',
+      campeon: 'Joaquín Jiménez',
+      cierre: 'Repitió el título; lo escoltaron Esteban Carlino y Humberto Paiva.',
+      pieza: 'peon',
+    },
+    {
+      anio: '2011',
+      fecha: 'Enero',
+      nombre: 'IRT CAP Verano',
+      texto:
+        'Cincuenta y seis jugadores de nueve países, uno de los torneos más numerosos que organizó el club: entre los inscriptos hubo un gran maestro, cinco maestros internacionales, cinco maestros FIDE, una maestra internacional femenina y tres maestras FIDE.',
+      campeon: 'GM Neuris Delgado',
+      cierre:
+        'El cubano radicado entonces en Asunción cerró con 5½ puntos y compartió el primer puesto con el venezolano Remo Bassan. La coordinación general fue de Néstor Santa Cruz y Delia Cibils.',
+      pieza: 'rey',
+    },
+    {
+      anio: '2014',
+      fecha: 'Julio',
+      nombre: 'IRT 88.º Aniversario',
+      texto: 'El aniversario volvió a jugarse como torneo abierto con validez internacional.',
+      campeon: 'Joaquín Jiménez',
+      cierre:
+        'Tercero quedó Ezequiel García Gorostegui, y Maximiliano Hernán Heras se llevó el premio al mejor sub 2000.',
+      pieza: 'caballo',
+    },
+    {
+      anio: '2015',
+      fecha: 'Septiembre',
+      nombre: 'IRT 89.º Aniversario',
+      texto: 'Antesala de los noventa años, otra vez con maestros de la región en la sede.',
+      campeon: 'MF Antonio Almirón',
+      cierre: 'El maestro FIDE se impuso y posó con sus escoltas para la crónica del club.',
+      pieza: 'dama',
+    },
+  ],
+  /** El resto de la serie: los torneos que el blog anunció año por año. */
+  serie: [
+    { anio: '2013', torneos: ['IRT Verano', 'IRT “Copa Ciudad de Posadas”'] },
+    { anio: '2014', torneos: ['IRT Clausura'] },
+    { anio: '2015', torneos: ['IRT Posadas', 'IRT Clausura'] },
+    { anio: '2016', torneos: ['IRT Sub 2200 “90.º Aniversario”'] },
+    { anio: '2017', torneos: ['Torneo Regional por Equipos “91.º Aniversario”', 'IRT Mayor'] },
+    { anio: '2018', torneos: ['Torneos “Realidad Misionera”', 'Abierto IRT Misiones'] },
+    { anio: '2019', torneos: ['IRT Día de la Independencia', 'IRT Mayor'] },
+  ],
+  nota: 'Reconstruido de las crónicas que el club publicó entre 2010 y 2019.',
+} as const
+
 /** Horario semanal completo (gráfica oficial "Horario semanal · Talleres de ajedrez"). */
 export const horarioSemanal = [
   {

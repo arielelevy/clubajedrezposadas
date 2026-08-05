@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { club, historia, hitos, comisionFundadora, comisionCentenario } from '@/data/site'
+import {
+  club,
+  historia,
+  hitos,
+  comisionFundadora,
+  comisionCentenario,
+  decadaTorneos,
+} from '@/data/site'
 import actaUrl from '@/assets/galeria/acta-1926.webp'
 import placaUrl from '@/assets/galeria/placa-centenario.webp'
 import { PageHeader } from '@/components/PageHeader'
@@ -134,6 +141,58 @@ export function HistoriaPage() {
               </figure>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* La década 2010-2019 según las crónicas que el club publicó en su momento */}
+      <section id="decada" className="scroll-mt-24 bg-bone py-12 lg:py-16">
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          <div className="max-w-3xl">
+            <SectionHeading
+              kicker="2010 — 2019"
+              titulo={decadaTorneos.titulo}
+              bajada={decadaTorneos.bajada}
+            />
+          </div>
+
+          <div className="mt-9 grid gap-5 lg:grid-cols-2">
+            {decadaTorneos.destacados.map((t, i) => (
+              <Reveal key={`${t.anio}-${t.nombre}`} delay={0.05 * (i % 2)}>
+                <article className="flex h-full flex-col rounded-lg border border-ink/8 bg-white/70 p-6 transition-colors duration-500 hover:border-gold/45 lg:p-7">
+                  <div className="flex items-baseline gap-3">
+                    <p className="font-condensed text-3xl leading-none text-gold-deep">{t.anio}</p>
+                    <p className="kicker text-[0.58rem] text-ink/40">{t.fecha}</p>
+                  </div>
+                  <h3 className="mt-3 font-display text-2xl leading-snug text-ink">{t.nombre}</h3>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">{t.texto}</p>
+
+                  {/* El campeón cierra la ficha: es el dato que la crónica destacaba */}
+                  <div className="mt-auto flex items-start gap-3 border-t border-ink/8 pt-5">
+                    <ChessGlyph pieza={t.pieza as Pieza} className="mt-0.5 text-xl text-gold" />
+                    <div>
+                      <p className="text-[0.95rem] font-medium text-ink">Campeón: {t.campeon}</p>
+                      <p className="mt-1 text-[0.88rem] leading-relaxed text-ink/60">{t.cierre}</p>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* El resto de la serie, año por año */}
+          <Reveal className="mt-11">
+            <GoldDivider className="max-w-xs" />
+            <p className="kicker mt-6 text-gold-deep">Y además</p>
+            <dl className="mt-4 divide-y divide-ink/8 border-t border-ink/8">
+              {decadaTorneos.serie.map((a) => (
+                <div key={a.anio} className="grid gap-1 py-3 sm:grid-cols-[5rem_1fr] sm:gap-6">
+                  <dt className="font-condensed text-xl leading-none text-gold-deep">{a.anio}</dt>
+                  <dd className="text-[0.95rem] text-ink/70">{a.torneos.join(' · ')}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-5 text-xs text-ink/45">{decadaTorneos.nota}</p>
+          </Reveal>
         </div>
       </section>
 
