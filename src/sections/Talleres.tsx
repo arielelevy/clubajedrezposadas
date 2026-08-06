@@ -72,7 +72,7 @@ export function Talleres() {
                   <div className="grid gap-3 sm:grid-cols-2">
                     {dia.turnos.map((t) => (
                       <div
-                        key={t.horario + t.instructor}
+                        key={dia.abrev + t.horario}
                         className="rounded-md border border-ink/8 bg-ivory/60 px-4 py-3"
                       >
                         <p className="flex items-center gap-2 text-[0.95rem] font-medium text-ink">
@@ -80,7 +80,7 @@ export function Talleres() {
                           {t.horario} hs
                         </p>
                         <p className="mt-1 text-xs text-ink/60">
-                          {t.grupo} · {t.instructor}
+                          {t.instructor ? `${t.grupo} · ${t.instructor}` : t.grupo}
                         </p>
                       </div>
                     ))}
@@ -91,8 +91,10 @@ export function Talleres() {
           </div>
 
           <p className="mt-6 text-xs text-ink/50">
-            Los talleres funcionan en la sede de {club.direccion}, {club.ciudad}. Miércoles y viernes de
-            noche se suman próximamente al esquema de clases para adultos.
+            Los talleres funcionan en la sede de {club.direccion}, {club.ciudad}. Los viernes de 20:00 a
+            22:00 y los sábados de 16:00 a 20:00 la sede queda abierta para jugar, sin clase: vení con
+            ganas de partida. Los miércoles de noche se suman próximamente al esquema de clases para
+            adultos.
           </p>
         </div>
       </div>

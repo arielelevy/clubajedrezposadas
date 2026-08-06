@@ -362,8 +362,15 @@ export const decadaTorneos = {
   nota: 'Reconstruido de las crónicas que el club publicó entre 2010 y 2019.',
 } as const
 
+/** Un turno del horario semanal. Sin `instructor` cuando la sede solo abre para jugar. */
+type TurnoSemanal = { readonly horario: string; readonly grupo: string; readonly instructor?: string }
+
 /** Horario semanal completo (gráfica oficial "Horario semanal · Talleres de ajedrez"). */
-export const horarioSemanal = [
+export const horarioSemanal: readonly {
+  readonly dia: string
+  readonly abrev: string
+  readonly turnos: readonly TurnoSemanal[]
+}[] = [
   {
     dia: 'Lunes',
     abrev: 'LUN',
@@ -396,14 +403,20 @@ export const horarioSemanal = [
   {
     dia: 'Viernes',
     abrev: 'VIE',
-    turnos: [{ horario: '17:00 a 20:00', instructor: 'Santiago Coronel', grupo: 'Talleres' }],
+    turnos: [
+      { horario: '17:00 a 20:00', instructor: 'Santiago Coronel', grupo: 'Talleres' },
+      { horario: '20:00 a 22:00', grupo: 'Abierto para jugar' },
+    ],
   },
   {
     dia: 'Sábado',
     abrev: 'SÁB',
-    turnos: [{ horario: '09:00 a 11:30', instructor: 'Franco Medina', grupo: 'Talleres' }],
+    turnos: [
+      { horario: '09:00 a 11:30', instructor: 'Franco Medina', grupo: 'Talleres' },
+      { horario: '16:00 a 20:00', grupo: 'Abierto para jugar' },
+    ],
   },
-] as const
+]
 
 export const programas = [
   {
