@@ -1,0 +1,156 @@
+{
+  "actualizado": "2026-08-06",
+  "fuente": "https://chess-results.com",
+  "torneos": [
+    {
+      "id": "1222679",
+      "nombre": "IRT ABIERTO 99 ANIVERSARIO CLUB DE AJEDREZ POSADAS APTO PARA TODO PUBLICO",
+      "rondas": 6,
+      "porEquipos": false,
+      "participantes": 39,
+      "podio": [
+        {
+          "nombre": "Zaldivar, Patricio",
+          "puntos": "5",
+          "rating": "1970",
+          "club": "Club de Ajedrez Posadas"
+        },
+        {
+          "nombre": "Botz, Stefan",
+          "puntos": "5",
+          "rating": "1900",
+          "club": "itapua - misiones"
+        },
+        {
+          "nombre": "Oviedo, Horacio",
+          "puntos": "4,5",
+          "rating": "2070",
+          "club": "Club de Ajedrez Posadas"
+        }
+      ],
+      "actualizado": "2025-08-17",
+      "url": "https://chess-results.com/tnr1222679.aspx?lan=2",
+      "anio": 2025
+    },
+    {
+      "id": "991550",
+      "nombre": "IRT CLASIFICACIÓN AL MAYOR DEL CLUB DE AJEDREZ POSADAS 2024",
+      "rondas": 7,
+      "porEquipos": false,
+      "participantes": 10,
+      "podio": [
+        {
+          "nombre": "Selva Andrade, Juan Ignacio",
+          "puntos": "5,5",
+          "rating": "1709",
+          "club": null
+        },
+        {
+          "nombre": "Alvarez, Miguel",
+          "puntos": "5,5",
+          "rating": "1881",
+          "club": null
+        },
+        {
+          "nombre": "Medina, Franco Alexis",
+          "puntos": "4",
+          "rating": "1677",
+          "club": null
+        }
+      ],
+      "actualizado": "2024-09-16",
+      "url": "https://chess-results.com/tnr991550.aspx?lan=2",
+      "anio": 2024
+    },
+    {
+      "id": "983624",
+      "nombre": "TORNEO MAYOR DEL CLUB DE AJEDREZ POSADAS 2024",
+      "rondas": 7,
+      "porEquipos": false,
+      "participantes": 8,
+      "podio": [
+        {
+          "nombre": "Oviedo, Horacio",
+          "puntos": "6",
+          "rating": "2052",
+          "club": null
+        },
+        {
+          "nombre": "Jimenez, Joaquin",
+          "puntos": "5,5",
+          "rating": "2168",
+          "club": null
+        },
+        {
+          "nombre": "Yossen, Angel Damian",
+          "puntos": "5",
+          "rating": "1924",
+          "club": null
+        }
+      ],
+      "actualizado": "2024-10-20",
+      "url": "https://chess-results.com/tnr983624.aspx?lan=2",
+      "anio": 2024
+    },
+    {
+      "id": "960817",
+      "nombre": "Torneo por Equipos 98º Aniversario Club de Ajedrez Posadas \"IN MEMORIAM ANA MARIA DAVALOS\"",
+      "rondas": 5,
+      "porEquipos": true,
+      "participantes": 8,
+      "podio": [
+        {
+          "nombre": "Tierra Roja",
+          "puntos": "9",
+          "rating": null,
+          "club": null
+        },
+        {
+          "nombre": "Club de Ajedrez Obera A",
+          "puntos": "7",
+          "rating": null,
+          "club": null
+        },
+        {
+          "nombre": "Club de Ajedrez Posadas \"A\"",
+          "puntos": "7",
+          "rating": null,
+          "club": null
+        }
+      ],
+      "actualizado": "2024-07-10",
+      "url": "https://chess-results.com/tnr960817.aspx?lan=2",
+      "anio": 2024
+    },
+    {
+      "id": "683766",
+      "nombre": "IRT Sub 2400. “Torneo Mayor Abierto 2022” Posadas- Misiones",
+      "rondas": 6,
+      "porEquipos": false,
+      "participantes": 39,
+      "podio": [
+        {
+          "nombre": "Zaldivar Patricio",
+          "puntos": "5,5",
+          "rating": "1816",
+          "club": "Escuela Ajedrez Itapua"
+        },
+        {
+          "nombre": "Amarilla Ettiene Ezequiel",
+          "puntos": "5",
+          "rating": "1588",
+          "club": "ABF"
+        },
+        {
+          "nombre": "Carlino Esteban",
+          "puntos": "4,5",
+          "rating": "1829",
+          "club": "Club Ajedrez Posadas"
+        }
+      ],
+      "actualizado": "2022-11-09",
+      "url": "https://chess-results.com/tnr683766.aspx?lan=2",
+      "anio": 2022
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+name: Sincronizar torneos
+
+# Relee las planillas de Chess-Results y actualiza src/data/torneos.json.
+# No usa credenciales: son planillas públicas. El script descubre los torneos
+# nuevos del club en la lista de Argentina y los que solo mencionan a Posadas
+# quedan anotados en el log para revisarlos a mano.
+
+on:
+  schedule:
+    - cron: '30 9 * * 1' # los lunes, después del sync de socios
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-torneos
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    name: Leer Chess-Results y commitear
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Leer las planillas
+        run: node scripts/sync-torneos.mjs
+
+      - name: Commitear si cambió
+        run: |
+          if git diff --quiet -- src/data/torneos.json; then
+            echo "Sin cambios en los torneos."
+            exit 0
+          fi
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/torneos.json
+          git commit -m "Actualizar los torneos del club desde Chess-Results"
+          git push
