@@ -15,7 +15,7 @@ const normalizar = (t: string) =>
 /**
  * Padrón de socios en un panel que se abre desde la cabecera de la página.
  *
- * Listado en línea, los 113 nombres se comían media página y empujaban todo lo
+ * Listado en línea, los más de cien nombres se comían media página y empujaban todo lo
  * demás hacia abajo. Acá queda a un click del título, sin costo de espacio, y
  * con un buscador que a esa cantidad es lo que de verdad sirve.
  */

@@ -1,7 +1,7 @@
 {
   "_nota": "Generado por scripts/sync-socios.mjs desde la planilla de socios del club. No editar a mano.",
-  "actualizado": "2026-08-04",
-  "total": 113,
+  "actualizado": "2026-08-06",
+  "total": 118,
   "socios": [
     {
       "nombre": "Acuña Jonas Agustin",
@@ -136,6 +136,10 @@
       "tipo": "Activo"
     },
     {
+      "nombre": "Figueroa Ramiro",
+      "tipo": "Cadete"
+    },
+    {
       "nombre": "Galenga Benicio Cadete",
       "tipo": "Cadete"
     },
@@ -193,6 +197,10 @@
     },
     {
       "nombre": "Horrisberger, Martina Hebe",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Klikaylo Lucas",
       "tipo": "Cadete"
     },
     {
@@ -276,12 +284,20 @@
       "tipo": "Activo"
     },
     {
+      "nombre": "Mendoza Thiago Nahuel",
+      "tipo": "Cadete"
+    },
+    {
       "nombre": "Mercado Eduardo Miguel",
       "tipo": "Activo"
     },
     {
       "nombre": "Miranda Jorge Rafael",
       "tipo": "Activo"
+    },
+    {
+      "nombre": "Monzón, Gustavo Ezequiel",
+      "tipo": "Cadete"
     },
     {
       "nombre": "Moore Fernandez Damián (IN)",
@@ -326,6 +342,10 @@
     {
       "nombre": "Pernía, Andrés",
       "tipo": "Activo"
+    },
+    {
+      "nombre": "Pintos Merlo Ignacio Daniel (AN-OR-AFM)",
+      "tipo": "Protector"
     },
     {
       "nombre": "Portillo, Luciana Marian (CMNF)",

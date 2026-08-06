@@ -60,11 +60,18 @@ const CSV_POR_DEFECTO = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz
 /** Columna con el nombre del socio. */
 const COLUMNAS_NOMBRE = [/nombre y apellido/i, /^nombre/i, /^apellido/i]
 
-/** Columna con la categoría (ACTIVO, CADETE, PROTECTOR…). */
+/**
+ * Columna con la categoría (ACTIVO, CADETE, PROTECTOR…). Es la que define quién
+ * es socio: al pie de la planilla hay cuatro filas con la tabla de cuotas
+ * ("Valor de las cuotas Sociales", "Socio Activo"…) que tienen texto en la
+ * columna de nombre pero ninguna categoría, y son las únicas filas con nombre
+ * que no son socios.
+ *
+ * Ojo con la columna "Grupo" de la planilla: no marca el padrón, marca si el
+ * socio está en el grupo del club ("SI", "no", "inv. enviada", "SIx3"). Filtrar
+ * por ella dejaba 113 socios en vez de 118.
+ */
 const COLUMNA_TIPO = /tipo de socio/i
-
-/** Columna que marca si el socio integra el padrón ("SI" / "NO"). */
-const COLUMNA_PADRON = /^grupo$/i
 
 /**
  * Encabezados que nunca se leen. La planilla trae además el historial de pagos
@@ -256,7 +263,6 @@ function extraer(filas) {
   }
 
   const iTipo = buscar(COLUMNA_TIPO)
-  const iPadron = buscar(COLUMNA_PADRON)
 
   const vistos = new Set()
   const socios = []
@@ -267,17 +273,15 @@ function extraer(filas) {
       .replace(/\s+/g, ' ')
     if (!nombre) continue
 
-    // La planilla marca con "SI"/"NO" quién integra el padrón.
-    if (iPadron >= 0 && String(fila[iPadron] ?? '').trim().toUpperCase() !== 'SI') continue
+    // Es socio quien tiene categoría; sin categoría es la tabla de cuotas del pie.
+    const tipo = iTipo >= 0 ? String(fila[iTipo] ?? '').trim() : ''
+    if (iTipo >= 0 && !tipo) continue
 
     const clave = nombre.toLocaleLowerCase('es')
     if (vistos.has(clave)) continue
     vistos.add(clave)
 
-    socios.push({
-      nombre: capitalizar(nombre),
-      tipo: iTipo >= 0 ? capitalizar(String(fila[iTipo] ?? '').trim()) : '',
-    })
+    socios.push({ nombre: capitalizar(nombre), tipo: capitalizar(tipo) })
   }
 
   socios.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
