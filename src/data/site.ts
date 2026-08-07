@@ -76,7 +76,7 @@ export const eventoCentenario = {
     { rotulo: 'Sede', valor: 'Sociedad Italiana, Posadas' },
     { rotulo: 'Cupo', valor: 'Hasta 140 jugadores' },
     { rotulo: 'Formato', valor: 'Torneo abierto, todas las categorías' },
-    { rotulo: 'Ranking', valor: 'Homologado, con árbitros capacitados' },
+    { rotulo: 'Ranking', valor: 'IRT válido al Elo' },
     { rotulo: 'Premios', valor: 'En efectivo y trofeos' },
   ],
   descripcion:
