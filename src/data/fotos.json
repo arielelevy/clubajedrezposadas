@@ -1,5 +1,447 @@
 {
   "_nota": "Generado por scripts/sync-fotos.mjs desde la carpeta de Drive del club. No editar a mano.",
-  "actualizado": null,
-  "fotos": []
+  "actualizado": "2026-08-07",
+  "fotos": [
+    {
+      "id": "1iHx7k-pwoPVpug848Bg_i6fWOLT7k4go",
+      "archivo": "1iHx7k-pwoPVpug848Bg_i6fWOLT7k4go.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2025-09-26",
+      "md5": "7bd6684c8124dd985b4093b62e56bf23"
+    },
+    {
+      "id": "1EN52DYrb02-WUFex12hr3gPX0eOhP7yI",
+      "archivo": "1EN52DYrb02-WUFex12hr3gPX0eOhP7yI.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2025-09-25",
+      "md5": "0b6220183c0d4f1c9aab6880e11cc798"
+    },
+    {
+      "id": "1oq1L-3BjS7zt7UqjyTF_97RMcMoe5vw4",
+      "archivo": "1oq1L-3BjS7zt7UqjyTF_97RMcMoe5vw4.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2025-09-20",
+      "md5": "dcd8ef8f27bbe16bcf1fb7e2d89024e5"
+    },
+    {
+      "id": "1Qjs-UB89c6mkISPXur7njXhnOk_GMCeY",
+      "archivo": "1Qjs-UB89c6mkISPXur7njXhnOk_GMCeY.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2025-09-20",
+      "md5": "cbdf0819288a998e8e547732b004b997"
+    },
+    {
+      "id": "1NcTIFefQX0DObXiUm1CBaJIO-oN6Pihq",
+      "archivo": "1NcTIFefQX0DObXiUm1CBaJIO-oN6Pihq.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-10-20",
+      "md5": "9a40f674e3bd87e1a9b54acd609d477f"
+    },
+    {
+      "id": "1BUjjM8gf12dSmDiX7ciQbkdMaqegdMRw",
+      "archivo": "1BUjjM8gf12dSmDiX7ciQbkdMaqegdMRw.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-10-19",
+      "md5": "612c325c79dd7864d20e0d3844bda486"
+    },
+    {
+      "id": "1geK9jFVxsSQWYCB9tn9soW8QDJ-82H_n",
+      "archivo": "1geK9jFVxsSQWYCB9tn9soW8QDJ-82H_n.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-10-19",
+      "md5": "e7002cac5705f7cc8bf2343c58128a7a"
+    },
+    {
+      "id": "18I071prITdp6FMR3QucUe1cGJzBZV3ny",
+      "archivo": "18I071prITdp6FMR3QucUe1cGJzBZV3ny.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-10-12",
+      "md5": "6f902332a3468df529451cc5a22f5ccd"
+    },
+    {
+      "id": "1th2T2wKs8xNxx1QgXasI443cEGt_FiPn",
+      "archivo": "1th2T2wKs8xNxx1QgXasI443cEGt_FiPn.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-10-12",
+      "md5": "e40d87d8e7f4dc6bbb7c0496a4413ade"
+    },
+    {
+      "id": "1u7I10ocJUp6JbiFYHzRnzoIY--HKvpBk",
+      "archivo": "1u7I10ocJUp6JbiFYHzRnzoIY--HKvpBk.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-10-12",
+      "md5": "cecb7e72b2d98439457164d6a7d409a1"
+    },
+    {
+      "id": "12cFINFINXfWXJtnB3XeTJBvpnP5QqfGg",
+      "archivo": "12cFINFINXfWXJtnB3XeTJBvpnP5QqfGg.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-10-11",
+      "md5": "bc88d1a9b274662a06be362510ab40f7"
+    },
+    {
+      "id": "16ZjZBQWF8nHn3os_VLi-agEyLBd0HDsw",
+      "archivo": "16ZjZBQWF8nHn3os_VLi-agEyLBd0HDsw.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-09-14",
+      "md5": "6b370cfc85ee5236b2e16b45024cd57d"
+    },
+    {
+      "id": "1dlPGgFesQdAsGuItW1Rsb01h3O5yvJbB",
+      "archivo": "1dlPGgFesQdAsGuItW1Rsb01h3O5yvJbB.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-09-14",
+      "md5": "8ec273b8db4ee5384dd615b667dc3944"
+    },
+    {
+      "id": "1Fb50JpKYzmWRkeDUJT_kj3IyR2TjvAe9",
+      "archivo": "1Fb50JpKYzmWRkeDUJT_kj3IyR2TjvAe9.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-09-14",
+      "md5": "46550f8067e2ae4dd75594807d8691df"
+    },
+    {
+      "id": "1h5GzP3a_DV1b9A_Uf-fhSiDkjLwQul6b",
+      "archivo": "1h5GzP3a_DV1b9A_Uf-fhSiDkjLwQul6b.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-09-14",
+      "md5": "9856c173c45ee2fba636f09a59b23b84"
+    },
+    {
+      "id": "1OOhJkUE8NyOOBLZz1zeYkM1mYMxB23Oz",
+      "archivo": "1OOhJkUE8NyOOBLZz1zeYkM1mYMxB23Oz.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-09-14",
+      "md5": "6d000daf0144a34361ddb702017202e5"
+    },
+    {
+      "id": "1YFl9-OjB-pf57T5d1Xh3pyTVoToyjS63",
+      "archivo": "1YFl9-OjB-pf57T5d1Xh3pyTVoToyjS63.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-09-14",
+      "md5": "d77f45aece6eb47e2651f6257779d046"
+    },
+    {
+      "id": "1vfoD4hUu66p9khPBtwI-y5i80ZI_O0sX",
+      "archivo": "1vfoD4hUu66p9khPBtwI-y5i80ZI_O0sX.webp",
+      "carpeta": "Presidencia 2024-2026",
+      "fecha": "2024-09-13",
+      "md5": "3f55038a97c105fc72963926b6611380"
+    },
+    {
+      "id": "1Ma41WPPcehdIgjxxjlZ10ZV5b6naJT1V",
+      "archivo": "1Ma41WPPcehdIgjxxjlZ10ZV5b6naJT1V.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "da46354e73cd6936a0d4e0af42c57ba3"
+    },
+    {
+      "id": "1N-zayKh9J0PFlylirXZTQvWLJJVEIo8J",
+      "archivo": "1N-zayKh9J0PFlylirXZTQvWLJJVEIo8J.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "06db1c9ef896fc1c525795dd1c8a14b7"
+    },
+    {
+      "id": "1N97YZk3pxCSbMUtQcQZgCGHaQyP2fh7b",
+      "archivo": "1N97YZk3pxCSbMUtQcQZgCGHaQyP2fh7b.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "c71f95bc370afc84cbb45a1e1a7f24c2"
+    },
+    {
+      "id": "1NwQxKsnIpfoScrUt_pQp7miTTAKf9vQh",
+      "archivo": "1NwQxKsnIpfoScrUt_pQp7miTTAKf9vQh.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "8c74ba49b51f27e024e3ff3e172e94b1"
+    },
+    {
+      "id": "1PEzW7-ST6Y3HEu671KXtQwsxddYNsDe4",
+      "archivo": "1PEzW7-ST6Y3HEu671KXtQwsxddYNsDe4.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "13b0be11a75e50d173aed946e0b817f2"
+    },
+    {
+      "id": "1QHfU271UmPoX9UcZXEhvmF44eaZ8Lo8q",
+      "archivo": "1QHfU271UmPoX9UcZXEhvmF44eaZ8Lo8q.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "32261d1ac9652b631cacc3c87358fedb"
+    },
+    {
+      "id": "1RPPlulBvtpG-CgIwluSOEJIPwDJN4e0B",
+      "archivo": "1RPPlulBvtpG-CgIwluSOEJIPwDJN4e0B.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "e84b5789f687ac505119177515ce089d"
+    },
+    {
+      "id": "1RtWZPL6s4dWG3GxpX-4gvxyFZ0FGvSbd",
+      "archivo": "1RtWZPL6s4dWG3GxpX-4gvxyFZ0FGvSbd.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "bc78d7e27f25008b50f80ba94e50dd2b"
+    },
+    {
+      "id": "1STDaDa1ZwgpH98HsGAUG8Fypy1Nguh5Y",
+      "archivo": "1STDaDa1ZwgpH98HsGAUG8Fypy1Nguh5Y.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "b04e3f97dac07b92cf77fc60bd71a9b1"
+    },
+    {
+      "id": "1SU3o1BUAhMddML-fxeLPPJt2-EPyQC59",
+      "archivo": "1SU3o1BUAhMddML-fxeLPPJt2-EPyQC59.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "129e3944fcc55a13b9931fbf03bdcbff"
+    },
+    {
+      "id": "1T9UqQe7113HDJBqQbVw24IbMyS5WcSD7",
+      "archivo": "1T9UqQe7113HDJBqQbVw24IbMyS5WcSD7.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "0737e99837822c26fb6c20554c230d31"
+    },
+    {
+      "id": "1TFl3oq7CdcvpLdZr7pFduHwY2h0glgJU",
+      "archivo": "1TFl3oq7CdcvpLdZr7pFduHwY2h0glgJU.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "5bede29267d489b06337469cdd3cf651"
+    },
+    {
+      "id": "1TxQdVJRH2C5LqFuxjBFq0cPe-9GM27XB",
+      "archivo": "1TxQdVJRH2C5LqFuxjBFq0cPe-9GM27XB.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "4c903dfedfb7ab69ce8da0b7aa40bbb0"
+    },
+    {
+      "id": "1U1M8U_SasIVcfUT86hEi1phooIU6bJA9",
+      "archivo": "1U1M8U_SasIVcfUT86hEi1phooIU6bJA9.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "f15cb298dca71cd9e96674a3385717a0"
+    },
+    {
+      "id": "1Uc392mHFY8-7jNljHDOTEPNFRNxO6lzY",
+      "archivo": "1Uc392mHFY8-7jNljHDOTEPNFRNxO6lzY.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "f2737f97f49cd903f030f65f9219ed59"
+    },
+    {
+      "id": "1WBygIJbHkSLzVtrlelk2SmgpMcr6sfAa",
+      "archivo": "1WBygIJbHkSLzVtrlelk2SmgpMcr6sfAa.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "bcc88b13e6f369073fd63b9d51289e0e"
+    },
+    {
+      "id": "1XEfec25iDk6Nz99DfEsH-CX4a3xtNCmx",
+      "archivo": "1XEfec25iDk6Nz99DfEsH-CX4a3xtNCmx.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "03f77e0fa62ab6e51bbaa72d964316a2"
+    },
+    {
+      "id": "1XgIx5JVFbX82Kr-EGeALpW-AZp2ZQcS7",
+      "archivo": "1XgIx5JVFbX82Kr-EGeALpW-AZp2ZQcS7.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "fbab748df4006abf2bfec0ed895907ad"
+    },
+    {
+      "id": "1Xs9S04EWajOCY_KJvMwXzlLHWAtvsqf1",
+      "archivo": "1Xs9S04EWajOCY_KJvMwXzlLHWAtvsqf1.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "946c0d19a52813d95e82a2c6d82ec80a"
+    },
+    {
+      "id": "1YNJgY-iYQ6Wi_2MicVfcEgUcCbJYlIKK",
+      "archivo": "1YNJgY-iYQ6Wi_2MicVfcEgUcCbJYlIKK.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-10-02",
+      "md5": "722eed7420b468996fb10b7ba35e1aca"
+    },
+    {
+      "id": "1l7MpdSMZCUdljdjrYqHknBXqLl32CWFM",
+      "archivo": "1l7MpdSMZCUdljdjrYqHknBXqLl32CWFM.webp",
+      "carpeta": "2019 Congreso Internacional de Ajedrez",
+      "fecha": "2022-09-03",
+      "md5": "613528cb20ae7ca19e0c760c35a7dd73"
+    },
+    {
+      "id": "1lelr9VPImzXpxNR0MnVDaN_dDy2Gt-ns",
+      "archivo": "1lelr9VPImzXpxNR0MnVDaN_dDy2Gt-ns.webp",
+      "carpeta": "2022 Blitz CAP",
+      "fecha": "2022-09-03",
+      "md5": "221d1df56466b3aba810a727e5328f5c"
+    },
+    {
+      "id": "1lgQUXcn-XYq4lWNQWKVDj8QSul0OX_Qj",
+      "archivo": "1lgQUXcn-XYq4lWNQWKVDj8QSul0OX_Qj.webp",
+      "carpeta": "2022 Blitz CAP",
+      "fecha": "2022-09-03",
+      "md5": "706f4e28574a3269c8cf6f889658be62"
+    },
+    {
+      "id": "1lwELJPfeIFXo1dnTr7pc2CVDAl9CDeRy",
+      "archivo": "1lwELJPfeIFXo1dnTr7pc2CVDAl9CDeRy.webp",
+      "carpeta": "2022 Blitz CAP",
+      "fecha": "2022-09-03",
+      "md5": "913f542889b420d7d2d291f37bea8acb"
+    },
+    {
+      "id": "1lxD_8S4povEn27M3LdWkAlz8CjBocqSS",
+      "archivo": "1lxD_8S4povEn27M3LdWkAlz8CjBocqSS.webp",
+      "carpeta": "2022 Blitz CAP",
+      "fecha": "2022-09-03",
+      "md5": "a57f2ba8db9b62203c5d8296ccf1a97c"
+    },
+    {
+      "id": "1mFraB47ANZimHXm1qzu0S-XZBQsJADWH",
+      "archivo": "1mFraB47ANZimHXm1qzu0S-XZBQsJADWH.webp",
+      "carpeta": "2022 Blitz CAP",
+      "fecha": "2022-09-03",
+      "md5": "35b99014766fe8a396c5d6659fced6a7"
+    },
+    {
+      "id": "1mKEnNeTaZQLSn64OHuScw9rS3eEbubP2",
+      "archivo": "1mKEnNeTaZQLSn64OHuScw9rS3eEbubP2.webp",
+      "carpeta": "2022 Blitz CAP",
+      "fecha": "2022-09-03",
+      "md5": "3b6d090815a7bfa265a26a7d0cfe8c19"
+    },
+    {
+      "id": "1nckvH_bpbqhBzePYjyCURtT3FWJSMt9k",
+      "archivo": "1nckvH_bpbqhBzePYjyCURtT3FWJSMt9k.webp",
+      "carpeta": "2017 Super 8 CAP",
+      "fecha": "2022-09-03",
+      "md5": "0bc2f4e548e994c8fffa4cb316a64b02"
+    },
+    {
+      "id": "1nyi9L8CW0TX5c3Dk7iELq2cVVZjSOuVg",
+      "archivo": "1nyi9L8CW0TX5c3Dk7iELq2cVVZjSOuVg.webp",
+      "carpeta": "2017 Super 8 CAP",
+      "fecha": "2022-09-03",
+      "md5": "3f2a314bbc48a0daa22d9344ec0296fb"
+    },
+    {
+      "id": "1oFEW6mA3W00QM3h0kVFfXUiaIo8hUznp",
+      "archivo": "1oFEW6mA3W00QM3h0kVFfXUiaIo8hUznp.webp",
+      "carpeta": "2017 Super 8 CAP",
+      "fecha": "2022-09-03",
+      "md5": "4cf0e724da8567368bca9ba0e2b2d944"
+    },
+    {
+      "id": "1oHX_TjQ7KAUI1_uA-BugWSc07_OddOQQ",
+      "archivo": "1oHX_TjQ7KAUI1_uA-BugWSc07_OddOQQ.webp",
+      "carpeta": "2017 Super 8 CAP",
+      "fecha": "2022-09-03",
+      "md5": "122f2440e58a0b569a1d81b5695a4b34"
+    },
+    {
+      "id": "1usY8c1dXrIH0XsGl0nlAVyRfx10OfF0K",
+      "archivo": "1usY8c1dXrIH0XsGl0nlAVyRfx10OfF0K.webp",
+      "carpeta": "2019 Soppe",
+      "fecha": "2022-09-03",
+      "md5": "a59fd6baf46c445a524ac5146bbbba21"
+    },
+    {
+      "id": "1uZ-2QyZSVWqP8TDYumgKfh15Py6EDPvF",
+      "archivo": "1uZ-2QyZSVWqP8TDYumgKfh15Py6EDPvF.webp",
+      "carpeta": "2019 Soppe",
+      "fecha": "2022-09-03",
+      "md5": "5f6bc3dff7383e2eaba3da889bdefaa3"
+    },
+    {
+      "id": "1S8EiZNrCdEKGVCKo7jdKMGF5Ln1zfQND",
+      "archivo": "1S8EiZNrCdEKGVCKo7jdKMGF5Ln1zfQND.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-05-27",
+      "md5": "cf8033a68ce8d2963135cd0163a19935"
+    },
+    {
+      "id": "1-XLu2Ywwr2BgclHcz5uipc9zD2vh7t3o",
+      "archivo": "1-XLu2Ywwr2BgclHcz5uipc9zD2vh7t3o.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-05-03",
+      "md5": "c67a2ee097333a570f0cabd8ac922935"
+    },
+    {
+      "id": "1FFJD4KdsnOeQXcIZDeOcuRDIjzkh-uuA",
+      "archivo": "1FFJD4KdsnOeQXcIZDeOcuRDIjzkh-uuA.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-05-03",
+      "md5": "04a75fc8669301784865e2079f4faa7b"
+    },
+    {
+      "id": "1GrQOWOKeXoFN53MrhXNPbDF695RzYMm-",
+      "archivo": "1GrQOWOKeXoFN53MrhXNPbDF695RzYMm-.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-05-03",
+      "md5": "e01de63d3276ed69d78d304fe428ef6c"
+    },
+    {
+      "id": "1jv9019HsKvii1FRqGBszX-525hOXT7l3",
+      "archivo": "1jv9019HsKvii1FRqGBszX-525hOXT7l3.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-05-03",
+      "md5": "388289d0725f4b4443c51dcfee90c321"
+    },
+    {
+      "id": "1uJ-kWIX7eoUsMtxsJX8CbY0vzgSeFmQD",
+      "archivo": "1uJ-kWIX7eoUsMtxsJX8CbY0vzgSeFmQD.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-05-03",
+      "md5": "ee5acc9607c96e3b156c67949b67290a"
+    },
+    {
+      "id": "1S2ofgM_tR2Xjw0J2X0ASWCsdUy9k97Bu",
+      "archivo": "1S2ofgM_tR2Xjw0J2X0ASWCsdUy9k97Bu.webp",
+      "carpeta": "2022 IRT CAP",
+      "fecha": "2022-05-01",
+      "md5": "7f7bc847edce34274bb3da8dcefcb342"
+    },
+    {
+      "id": "1ktqQrheXl8l8dlvB4AlAaXsn973n5LqN",
+      "archivo": "1ktqQrheXl8l8dlvB4AlAaXsn973n5LqN.webp",
+      "carpeta": "2021 IRT CAP Homenaje a Reta",
+      "fecha": "2021-11-21",
+      "md5": "ac3525ca9b5db43531ff9fc5774eaf8b"
+    },
+    {
+      "id": "1_bLHp68YsclSgH_0D0g8S0tIQpKtN-gi",
+      "archivo": "1_bLHp68YsclSgH_0D0g8S0tIQpKtN-gi.webp",
+      "carpeta": "2005 y 2017 Fiesta del Inmigrante",
+      "fecha": "2017-09-09",
+      "md5": "7dd44eb0bb8ea136c9b1a4b4962248a8"
+    },
+    {
+      "id": "1Ztl2SzLDiyqhAG3hCTPUqwSbf0F1vkzS",
+      "archivo": "1Ztl2SzLDiyqhAG3hCTPUqwSbf0F1vkzS.webp",
+      "carpeta": "2005 y 2017 Fiesta del Inmigrante",
+      "fecha": "2017-09-09",
+      "md5": "34d79864192f3c77b89f875b03ec4e51"
+    },
+    {
+      "id": "1_ew-zrJlJDwkNUZLuFanE--dZmbSjwTq",
+      "archivo": "1_ew-zrJlJDwkNUZLuFanE--dZmbSjwTq.webp",
+      "carpeta": "2005 y 2017 Fiesta del Inmigrante",
+      "fecha": "2005-01-15",
+      "md5": "719806d0a4119db470a8e4e98927590b"
+    },
+    {
+      "id": "1_NddEzpK7uTw-a8foK9JMs9XMcjXgRvM",
+      "archivo": "1_NddEzpK7uTw-a8foK9JMs9XMcjXgRvM.webp",
+      "carpeta": "2005 y 2017 Fiesta del Inmigrante",
+      "fecha": "2005-01-15",
+      "md5": "3a030e0319712ba01b071ccdba254839"
+    }
+  ]
 }

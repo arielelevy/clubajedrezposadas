@@ -141,15 +141,32 @@ async function prepararCredencial() {
   return null
 }
 
+const esperar = (ms) => new Promise((r) => setTimeout(r, ms))
+
 async function pedirDrive(credencial, ruta, params) {
   const url = new URL(`${API}/${ruta}`)
   for (const [k, v] of Object.entries({ ...params, ...credencial.params })) {
     url.searchParams.set(k, v)
   }
 
-  const respuesta = await fetch(url, { headers: credencial.headers })
-  if (!respuesta.ok) {
+  // La cuota de Drive es por minuto: cuando la carpeta es grande, la corrida
+  // la pisa y Google devuelve 403 rateLimitExceeded. Se espera y se insiste.
+  for (let intento = 0; ; intento++) {
+    const respuesta = await fetch(url, { headers: credencial.headers })
+    if (respuesta.ok) return respuesta
+
     const detalle = await respuesta.text()
+    const esLimite =
+      respuesta.status === 429 ||
+      (respuesta.status === 403 && /rate.?limit|quota/i.test(detalle))
+
+    if (esLimite && intento < 6) {
+      const pausa = Math.min(90, 10 * 2 ** intento)
+      console.log(`  … límite de la Drive API, esperando ${pausa}s`)
+      await esperar(pausa * 1000)
+      continue
+    }
+
     if (respuesta.status === 403 || respuesta.status === 404) {
       throw new Error(
         `Drive no dejó leer (${respuesta.status}). Con service account: la carpeta tiene que ` +
@@ -159,7 +176,6 @@ async function pedirDrive(credencial, ruta, params) {
     }
     throw new Error(`Error de la Drive API (${respuesta.status}): ${detalle}`)
   }
-  return respuesta
 }
 
 async function listarCarpetaApi(credencial, idCarpeta) {
