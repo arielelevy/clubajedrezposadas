@@ -375,12 +375,24 @@ async function main() {
   const existentes = new Set(await readdir(CARPETA_FOTOS))
 
   const fotos = []
+  const md5Vistos = new Set()
   let bajadas = 0
   let falladas = 0
+  let duplicadas = 0
 
   for (const archivo of descubiertas) {
     const nombreLocal = `${archivo.id}.webp`
     const anterior = previas.get(archivo.id)
+
+    // La misma foto subida dos veces al Drive (distinto archivo, mismo
+    // contenido) se publica una sola vez.
+    if (archivo.md5) {
+      if (md5Vistos.has(archivo.md5)) {
+        duplicadas++
+        continue
+      }
+      md5Vistos.add(archivo.md5)
+    }
 
     // Con la API comparamos md5; en el modo público no hay hash, así que una
     // foto ya bajada no se vuelve a bajar (editar una foto subida es rarísimo).
@@ -449,6 +461,7 @@ async function main() {
 
   console.log(
     `Galería: ${fotos.length} fotos publicadas (${bajadas} bajadas, ${borradas} borradas` +
+      (duplicadas ? `, ${duplicadas} duplicadas omitidas` : '') +
       (falladas ? `, ${falladas} sin convertir` : '') +
       ').',
   )
