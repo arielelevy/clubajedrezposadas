@@ -19,6 +19,12 @@ const modulos = import.meta.glob<string>('../assets/galeria/*.{jpg,jpeg,png,webp
 })
 
 /**
+ * El acta y la placa ya se ven en grande, con su propio relato, en la sección
+ * "acta" de /historia: repetirlas en la misma página no suma.
+ */
+const yaEnLaPagina = new Set(['acta-1926', 'placa-centenario'])
+
+/**
  * Epígrafes por nombre de archivo (sin extensión). Los que no estén acá caen
  * al nombre del archivo con los guiones convertidos en espacios.
  *
@@ -45,6 +51,7 @@ const fotos: Foto[] = Object.entries(modulos)
     const nombre = ruta.split('/').pop()!.replace(/\.[^.]+$/, '')
     return { url, nombre, epigrafe: epigrafes[nombre] ?? nombre.replace(/[-_]/g, ' ') }
   })
+  .filter((f) => !yaEnLaPagina.has(f.nombre))
   .sort((a, b) => a.nombre.localeCompare(b.nombre))
 
 export function Galeria() {
@@ -53,12 +60,12 @@ export function Galeria() {
   if (fotos.length === 0) return null
 
   return (
-    <section id="galeria" className="scroll-mt-24 bg-bone py-12 lg:py-18">
+    <section id="imagenes" className="scroll-mt-24 bg-ivory py-12 lg:py-18">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
-          kicker="Galería"
-          titulo="El club, en imágenes"
-          bajada="Talleres, torneos y la vida cotidiana de la sede de Jujuy 1514."
+          kicker="Archivo"
+          titulo="La historia, en imágenes"
+          bajada="Documentos y fotos del archivo del club, de los torneos itinerantes al festejo del centenario."
           align="center"
         />
 
@@ -97,13 +104,13 @@ export function Galeria() {
           ))}
         </div>
 
-        {/* La galería completa (las fotos que el club sube a Drive) vive en
+        {/* La galería de hoy (las fotos que el club sube a Drive) vive en
             /fotos; el link recién aparece cuando la sincronización trajo algo. */}
         {hayFotos ? (
           <div className="mt-10 text-center">
             <Button asChild variant="outlineDark">
               <Link to="/fotos">
-                Ver todas las fotos
+                Ver la galería de fotos
                 <ArrowRight />
               </Link>
             </Button>

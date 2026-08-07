@@ -10,9 +10,9 @@ tercera institución ajedrecística más antigua del país.
 ## Qué incluye
 
 - **Home** — el evento del centenario (IRT "100 Años", 5 al 8 de diciembre de 2026), el club,
-  el recorrido de los cien años, los talleres con el horario semanal real, el visor de partidas
-  y la galería.
-- **/historia** — reseña histórica oficial completa y la línea del tiempo de los cinco hitos.
+  el recorrido de los cien años, los talleres con el horario semanal real y el visor de partidas.
+- **/historia** — reseña histórica oficial completa, el archivo en imágenes y la línea del
+  tiempo de los cinco hitos.
 - **/auspicios** — los seis niveles de auspicio de la carpeta 2026 con sus aportes, la propuesta
   de valor y los auspiciantes que ya acompañan.
 - **/socios** — alta de socio (formulario online o PDF), preguntas frecuentes y la convocatoria

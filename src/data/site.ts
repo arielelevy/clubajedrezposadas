@@ -48,7 +48,7 @@ export const navegacion = [
   { label: 'Centenario', href: '/#evento' },
   { label: 'Talleres', href: '/#talleres' },
   { label: 'Partidas', href: '/#partidas' },
-  { label: 'Galería', href: '/#galeria' },
+  { label: 'Galería', href: '/fotos' },
   { label: 'Auspicios', href: '/auspicios' },
   { label: 'Socios', href: '/socios' },
 ] as const

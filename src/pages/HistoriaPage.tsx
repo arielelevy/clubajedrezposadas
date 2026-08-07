@@ -12,6 +12,7 @@ import { copyTorneos, hayTorneos, torneosDelClub } from '@/data/torneos'
 import actaUrl from '@/assets/galeria/acta-1926.webp'
 import placaUrl from '@/assets/galeria/placa-centenario.webp'
 import { PageHeader } from '@/components/PageHeader'
+import { Galeria } from '@/sections/Galeria'
 import { SectionHeading } from '@/components/SectionHeading'
 import { Reveal } from '@/components/Reveal'
 import { Button } from '@/components/ui/button'
@@ -240,6 +241,10 @@ export function HistoriaPage() {
           ) : null}
         </div>
       </section>
+
+      {/* El archivo en imágenes: era la galería del home, pero es historia;
+          la galería de fotos actuales vive en /fotos. */}
+      <Galeria />
 
       {/* Línea del tiempo: los hitos del siglo */}
       <section

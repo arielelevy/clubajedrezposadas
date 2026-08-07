@@ -33,15 +33,14 @@ export function FotosPage() {
       <PageHeader
         kicker="Galería"
         titulo="Las fotos del club"
-        bajada="Talleres, torneos y festejos, tal como los va registrando el club. La galería se actualiza sola con las fotos que se suben a la carpeta compartida."
+        bajada="Talleres, torneos y festejos, tal como los va registrando el club."
       />
 
       <section className="bg-bone py-12 lg:py-18">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           {fotos.length === 0 ? (
             <p className="mx-auto max-w-xl text-center text-lg leading-relaxed text-ink/60">
-              Todavía no hay fotos cargadas. En cuanto el club suba las primeras a su carpeta
-              compartida, van a aparecer acá.
+              Todavía no hay fotos cargadas: las primeras están en camino.
             </p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
