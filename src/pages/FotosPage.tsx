@@ -31,6 +31,7 @@ export function FotosPage() {
   return (
     <>
       <PageHeader
+        compacta
         kicker="Galería"
         titulo="Las fotos del club"
         bajada="Talleres, torneos y festejos, tal como los va registrando el club."
