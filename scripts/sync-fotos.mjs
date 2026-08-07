@@ -203,16 +203,20 @@ async function listarCarpetaApi(credencial, idCarpeta) {
     esCarpeta: a.mimeType === 'application/vnd.google-apps.folder',
     esImagen: Boolean(a.mimeType?.startsWith('image/')),
     md5: a.md5Checksum ?? null,
-    fechaApi: fechaDeMetadatos(a),
+    momentoApi: momentoDeMetadatos(a),
   }))
 }
 
-/** 'AAAA:MM:DD HH:MM:SS' del EXIF que reporta Drive → 'AAAA-MM-DD'. */
-function fechaDeMetadatos(archivo) {
+/**
+ * Momento completo de la foto, 'AAAA-MM-DDTHH:MM:SS': el del EXIF que reporta
+ * Drive ('AAAA:MM:DD HH:MM:SS') o, si la foto no trae, el de subida. La hora
+ * no se muestra en el epígrafe pero ordena la galería dentro de un mismo día.
+ */
+function momentoDeMetadatos(archivo) {
   const exif = archivo.imageMediaMetadata?.time
-  const match = exif?.match(/^(\d{4}):(\d{2}):(\d{2})/)
-  if (match) return `${match[1]}-${match[2]}-${match[3]}`
-  return (archivo.createdTime ?? '').slice(0, 10) || null
+  const match = exif?.match(/^(\d{4}):(\d{2}):(\d{2})[ T](\d{2}:\d{2}:\d{2})/)
+  if (match) return `${match[1]}-${match[2]}-${match[3]}T${match[4]}`
+  return (archivo.createdTime ?? '').slice(0, 19) || null
 }
 
 /* ------------------------------------------------------------------ */
@@ -254,7 +258,7 @@ async function listarCarpetaPublica(idCarpeta) {
       esCarpeta,
       esImagen: !esCarpeta && EXTENSIONES_IMAGEN.test(nombre),
       md5: null,
-      fechaApi: null,
+      momentoApi: null,
     })
   }
 
@@ -266,14 +270,14 @@ async function listarCarpetaPublica(idCarpeta) {
  * lugar de un parser TIFF entero alcanza con buscar ese patrón en el arranque
  * del archivo (el EXIF vive en los primeros bloques del JPEG).
  */
-function fechaDeExif(buffer) {
+function momentoDeExif(buffer) {
   const cabecera = buffer.subarray(0, 131072).toString('latin1')
-  const match = cabecera.match(/((?:19|20)\d{2}):(\d{2}):(\d{2}) \d{2}:\d{2}:\d{2}/)
+  const match = cabecera.match(/((?:19|20)\d{2}):(\d{2}):(\d{2}) (\d{2}:\d{2}:\d{2})/)
   if (!match) return null
 
-  const [, anio, mes, dia] = match
+  const [, anio, mes, dia, hora] = match
   if (Number(mes) < 1 || Number(mes) > 12 || Number(dia) < 1 || Number(dia) > 31) return null
-  return `${anio}-${mes}-${dia}`
+  return `${anio}-${mes}-${dia}T${hora}`
 }
 
 /* ------------------------------------------------------------------ */
@@ -399,12 +403,12 @@ async function main() {
     const sinCambios =
       existentes.has(nombreLocal) && (archivo.md5 ? anterior?.md5 === archivo.md5 : Boolean(anterior))
 
-    let fecha = archivo.fechaApi ?? anterior?.fecha ?? null
+    let momento = archivo.momentoApi ?? anterior?.momento ?? null
 
     if (!sinCambios) {
       try {
         const original = await descargar(credencial, archivo)
-        fecha = archivo.fechaApi ?? fechaDeExif(original)
+        momento = archivo.momentoApi ?? momentoDeExif(original)
         await convertir(original, resolve(CARPETA_FOTOS, nombreLocal))
         bajadas++
       } catch (error) {
@@ -420,7 +424,8 @@ async function main() {
             id: archivo.id,
             archivo: nombreLocal,
             carpeta: archivo.carpeta,
-            fecha: anterior.fecha ?? fecha,
+            fecha: anterior.fecha ?? momento?.slice(0, 10) ?? null,
+            momento: anterior.momento ?? momento,
             md5: archivo.md5 ?? anterior.md5,
           })
         }
@@ -432,7 +437,8 @@ async function main() {
       id: archivo.id,
       archivo: nombreLocal,
       carpeta: archivo.carpeta,
-      fecha,
+      fecha: momento?.slice(0, 10) ?? anterior?.fecha ?? null,
+      momento,
       md5: archivo.md5,
     })
   }
@@ -447,8 +453,12 @@ async function main() {
     }
   }
 
+  // De la más nueva a la más vieja, con la hora de la cámara desempatando
+  // dentro del mismo día (y el nombre de archivo como último recurso).
   fotos.sort(
-    (a, b) => (b.fecha ?? '').localeCompare(a.fecha ?? '') || a.archivo.localeCompare(b.archivo),
+    (a, b) =>
+      (b.momento ?? b.fecha ?? '').localeCompare(a.momento ?? a.fecha ?? '') ||
+      a.archivo.localeCompare(b.archivo),
   )
 
   const salida = {
