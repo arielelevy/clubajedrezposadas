@@ -18,6 +18,7 @@ const AuspiciosPage = lazy(() =>
   import('./pages/AuspiciosPage').then((m) => ({ default: m.AuspiciosPage })),
 )
 const SociosPage = lazy(() => import('./pages/SociosPage').then((m) => ({ default: m.SociosPage })))
+const FotosPage = lazy(() => import('./pages/FotosPage').then((m) => ({ default: m.FotosPage })))
 const NotFound = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFound })))
 
 export function App() {
@@ -35,6 +36,7 @@ export function App() {
             <Route path="/historia" element={<HistoriaPage />} />
             <Route path="/auspicios" element={<AuspiciosPage />} />
             <Route path="/socios" element={<SociosPage />} />
+            <Route path="/fotos" element={<FotosPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

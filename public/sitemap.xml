@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Las cuatro rutas reales del sitio (App.tsx). Las secciones del inicio
+  Las rutas reales del sitio (App.tsx). Las secciones del inicio
   (/#el-club, /#talleres…) no van: son anclas de la misma página y Google
   no indexa fragmentos por separado.
 -->
@@ -19,6 +19,11 @@
     <loc>https://clubdeajedrezposadas.com/socios</loc>
     <lastmod>2026-08-04</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clubdeajedrezposadas.com/fotos</loc>
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://clubdeajedrezposadas.com/auspicios</loc>

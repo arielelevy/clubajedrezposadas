@@ -4,11 +4,11 @@ import { useLocation } from 'react-router-dom'
 /**
  * Título, descripción y canonical por ruta.
  *
- * El sitio es una SPA: el `index.html` es el mismo para las cuatro rutas, así
+ * El sitio es una SPA: el `index.html` es el mismo para todas las rutas, así
  * que sin esto Google indexa /historia, /socios y /auspicios con el título del
  * inicio y las páginas compiten entre ellas por la misma consulta. Se hace a
  * mano sobre el `<head>` en lugar de traer una librería de meta tags: son
- * cuatro rutas y media docena de etiquetas.
+ * cinco rutas y media docena de etiquetas.
  *
  * El 404 se marca `noindex`: no tiene por qué entrar al índice.
  */
@@ -32,6 +32,11 @@ const POR_RUTA: Record<string, Meta> = {
     titulo: 'Hacete socio · Club de Ajedrez Posadas',
     descripcion:
       'Cómo asociarse al Club de Ajedrez Posadas: formulario de alta online, solicitud en PDF, horarios de los talleres en Jujuy 1514 y el padrón de socios del centenario.',
+  },
+  '/fotos': {
+    titulo: 'Fotos del club · Club de Ajedrez Posadas',
+    descripcion:
+      'La galería completa del Club de Ajedrez Posadas: talleres, torneos y los festejos del centenario en Jujuy 1514, con las fotos que el club va subiendo.',
   },
   '/auspicios': {
     titulo: 'Auspicios del centenario · Club de Ajedrez Posadas',

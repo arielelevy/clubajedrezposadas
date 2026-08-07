@@ -17,6 +17,8 @@ tercera institución ajedrecística más antigua del país.
   de valor y los auspiciantes que ya acompañan.
 - **/socios** — alta de socio (formulario online o PDF), preguntas frecuentes y la convocatoria
   abierta a presentar proyectos en el club.
+- **/fotos** — la galería completa, sincronizada todos los días desde la carpeta de Google Drive
+  del club (`scripts/sync-fotos.mjs`): cada foto lleva como epígrafe su subcarpeta y su fecha.
 - **Visor de partidas** — tablero propio con navegación de jugadas, que lee PGN del club y también
   transmisiones en vivo de torneos de elite vía la API pública de Lichess.
 
