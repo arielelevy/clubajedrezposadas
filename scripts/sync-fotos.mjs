@@ -128,6 +128,15 @@ async function prepararCredencial() {
     return { headers: {}, params: { key } }
   }
 
+  // Para una corrida manual con la sesión de una persona:
+  //   DRIVE_ACCESS_TOKEN=$(gcloud auth print-access-token) node scripts/sync-fotos.mjs
+  // (el login previo necesita el scope de Drive: gcloud auth login --enable-gdrive-access)
+  const tokenManual = process.env.DRIVE_ACCESS_TOKEN
+  if (tokenManual) {
+    console.log('Leyendo Drive con un access token manual.')
+    return { headers: { Authorization: `Bearer ${tokenManual}` }, params: {} }
+  }
+
   console.log('Sin credencial: leyendo la carpeta pública por la vista embebida de Drive.')
   return null
 }
