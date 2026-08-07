@@ -400,6 +400,18 @@ async function main() {
         // tiene que frenar el resto de la galería.
         falladas++
         console.warn(`  ⚠ No pude bajar o convertir "${archivo.nombre}" (${archivo.id}): ${error.message}`)
+
+        // Si hay una versión local rescatada a mano (ej. el BMP convertido con
+        // .NET), se conserva con los datos que ya tenía en vez de borrarla.
+        if (existentes.has(nombreLocal) && anterior) {
+          fotos.push({
+            id: archivo.id,
+            archivo: nombreLocal,
+            carpeta: archivo.carpeta,
+            fecha: anterior.fecha ?? fecha,
+            md5: archivo.md5 ?? anterior.md5,
+          })
+        }
         continue
       }
     }
