@@ -4,10 +4,12 @@ name: Sincronizar fotos
 # y regenera src/data/fotos.json (subcarpeta y fecha de cada foto, para el
 # epígrafe). Es un espejo: lo que se borra en Drive se borra del sitio.
 #
-# Configuración pendiente del link del club:
+# Configuración:
 #   - Variable del repo FOTOS_DRIVE_FOLDER: el link de la carpeta compartida.
-#   - Credencial: secret GOOGLE_SERVICE_ACCOUNT_JSON (carpeta compartida como
-#     Lector con la service account) o secret DRIVE_API_KEY (carpeta pública).
+#   - Credencial (opcional): sin ninguna, la carpeta tiene que ser pública
+#     ("cualquiera con el enlace") y se lee por la vista embebida. Con el secret
+#     GOOGLE_SERVICE_ACCOUNT_JSON (carpeta compartida como Lector con la service
+#     account) o DRIVE_API_KEY se usa la Drive API formal.
 # Mientras falte la variable, el script avisa y termina en verde.
 
 on:

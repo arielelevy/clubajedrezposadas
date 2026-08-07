@@ -15,19 +15,24 @@
  * la raíz quedan solo con la fecha. La fecha sale del EXIF de la foto y, si no
  * trae, de la fecha de subida a Drive.
  *
+ * Cómo lee la carpeta, según lo que haya configurado:
+ *
+ *   A) GOOGLE_SERVICE_ACCOUNT_JSON — la carpeta se comparte como Lector con el
+ *      mail de la service account (Drive API habilitada en su proyecto).
+ *   B) DRIVE_API_KEY — la carpeta es pública y se lee con una API key.
+ *   C) Sin credencial — la carpeta es pública ("cualquiera con el enlace") y
+ *      se lee por la vista embebida de Drive, sin ninguna key. Es el modo por
+ *      defecto del club; si Google cambia ese HTML, pasar al modo A o B.
+ *
  * Variables:
  *   FOTOS_DRIVE_FOLDER           link (o id) de la carpeta compartida. Sin esto
  *                                el script avisa y termina bien, para que el
  *                                cron no falle mientras el club no pase el link.
- *   GOOGLE_SERVICE_ACCOUNT_JSON  opción A: la carpeta se comparte como Lector
- *                                con el mail de la service account (la misma
- *                                del padrón sirve, con la Drive API habilitada).
- *   DRIVE_API_KEY                opción B: la carpeta queda pública ("cualquiera
- *                                con el enlace") y se lee con una API key.
+ *   GOOGLE_SERVICE_ACCOUNT_JSON  modo A (opcional)
+ *   DRIVE_API_KEY                modo B (opcional)
  *
  * Uso:
- *   FOTOS_DRIVE_FOLDER='https://drive.google.com/drive/folders/...' \
- *   DRIVE_API_KEY='...' node scripts/sync-fotos.mjs
+ *   FOTOS_DRIVE_FOLDER='https://drive.google.com/drive/folders/...' node scripts/sync-fotos.mjs
  */
 
 import { createSign } from 'node:crypto'
@@ -45,6 +50,7 @@ const ANCHO_MAX = 1600
 const CALIDAD = 78
 
 const API = 'https://www.googleapis.com/drive/v3'
+const EXTENSIONES_IMAGEN = /\.(jpe?g|png|webp|avif|gif|bmp|tiff?|heic|heif)$/i
 
 function extraerIdCarpeta(crudo) {
   const texto = crudo.trim()
@@ -58,6 +64,10 @@ function extraerIdCarpeta(crudo) {
   }
   return match[1]
 }
+
+/* ------------------------------------------------------------------ */
+/* Modos A y B: la Drive API, con service account o con API key        */
+/* ------------------------------------------------------------------ */
 
 function firmarJwt(cuenta) {
   const ahora = Math.floor(Date.now() / 1000)
@@ -98,7 +108,7 @@ async function obtenerToken(cuenta) {
   return access_token
 }
 
-/** Credencial elegida: header Bearer (service account) o key en la URL (API key). */
+/** Credencial elegida, o null para el modo público sin credencial. */
 async function prepararCredencial() {
   const crudo = process.env.GOOGLE_SERVICE_ACCOUNT_JSON
 
@@ -118,10 +128,8 @@ async function prepararCredencial() {
     return { headers: {}, params: { key } }
   }
 
-  throw new Error(
-    'Falta la credencial: GOOGLE_SERVICE_ACCOUNT_JSON (carpeta compartida con la service ' +
-      'account) o DRIVE_API_KEY (carpeta pública). Ver el encabezado de este script.',
-  )
+  console.log('Sin credencial: leyendo la carpeta pública por la vista embebida de Drive.')
+  return null
 }
 
 async function pedirDrive(credencial, ruta, params) {
@@ -145,7 +153,7 @@ async function pedirDrive(credencial, ruta, params) {
   return respuesta
 }
 
-async function listarCarpeta(credencial, idCarpeta) {
+async function listarCarpetaApi(credencial, idCarpeta) {
   const archivos = []
   let pageToken
 
@@ -164,8 +172,88 @@ async function listarCarpeta(credencial, idCarpeta) {
     pageToken = datos.nextPageToken
   } while (pageToken)
 
-  return archivos
+  return archivos.map((a) => ({
+    id: a.id,
+    nombre: a.name,
+    esCarpeta: a.mimeType === 'application/vnd.google-apps.folder',
+    esImagen: Boolean(a.mimeType?.startsWith('image/')),
+    md5: a.md5Checksum ?? null,
+    fechaApi: fechaDeMetadatos(a),
+  }))
 }
+
+/** 'AAAA:MM:DD HH:MM:SS' del EXIF que reporta Drive → 'AAAA-MM-DD'. */
+function fechaDeMetadatos(archivo) {
+  const exif = archivo.imageMediaMetadata?.time
+  const match = exif?.match(/^(\d{4}):(\d{2}):(\d{2})/)
+  if (match) return `${match[1]}-${match[2]}-${match[3]}`
+  return (archivo.createdTime ?? '').slice(0, 10) || null
+}
+
+/* ------------------------------------------------------------------ */
+/* Modo C: carpeta pública, sin credencial                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * La vista embebida (embeddedfolderview) es HTML público y estable que Google
+ * sirve para carpetas compartidas con "cualquiera con el enlace". No es una
+ * API formal: si algún día cambia, conviene pasar al modo con credencial.
+ */
+async function listarCarpetaPublica(idCarpeta) {
+  const url = `https://drive.google.com/embeddedfolderview?id=${idCarpeta}`
+  const respuesta = await fetch(url, { redirect: 'follow' })
+
+  if (respuesta.status === 401 || respuesta.status === 403) {
+    throw new Error(
+      'La carpeta no es pública: en Drive, botón "Compartir" → "Cualquiera con el enlace" ' +
+        'como Lector. La otra opción es configurar GOOGLE_SERVICE_ACCOUNT_JSON o DRIVE_API_KEY.',
+    )
+  }
+  if (!respuesta.ok) {
+    throw new Error(`Drive devolvió ${respuesta.status} al listar la carpeta pública.`)
+  }
+
+  const html = await respuesta.text()
+  const entradas = []
+
+  // Cada entrada de la vista: id="entry-<ID>" … href="<link>" … flip-entry-title">nombre<
+  for (const bloque of html.split(/id="entry-/).slice(1)) {
+    const id = bloque.match(/^([-\w]+)"/)?.[1]
+    const nombre = bloque.match(/flip-entry-title">([^<]*)</)?.[1]
+    if (!id || nombre === undefined) continue
+
+    const esCarpeta = bloque.includes('/drive/folders/')
+    entradas.push({
+      id,
+      nombre,
+      esCarpeta,
+      esImagen: !esCarpeta && EXTENSIONES_IMAGEN.test(nombre),
+      md5: null,
+      fechaApi: null,
+    })
+  }
+
+  return entradas
+}
+
+/**
+ * El EXIF guarda las fechas como texto plano 'AAAA:MM:DD HH:MM:SS', así que en
+ * lugar de un parser TIFF entero alcanza con buscar ese patrón en el arranque
+ * del archivo (el EXIF vive en los primeros bloques del JPEG).
+ */
+function fechaDeExif(buffer) {
+  const cabecera = buffer.subarray(0, 131072).toString('latin1')
+  const match = cabecera.match(/((?:19|20)\d{2}):(\d{2}):(\d{2}) \d{2}:\d{2}:\d{2}/)
+  if (!match) return null
+
+  const [, anio, mes, dia] = match
+  if (Number(mes) < 1 || Number(mes) > 12 || Number(dia) < 1 || Number(dia) > 31) return null
+  return `${anio}-${mes}-${dia}`
+}
+
+/* ------------------------------------------------------------------ */
+/* Recorrido, descarga y espejo                                        */
+/* ------------------------------------------------------------------ */
 
 /**
  * Recorre la carpeta y sus subcarpetas. El título de cada foto es la
@@ -173,17 +261,21 @@ async function listarCarpeta(credencial, idCarpeta) {
  * "Torneo X/día 1/..." sigue titulado "Torneo X".
  */
 async function descubrirFotos(credencial, idRaiz) {
+  const listar = credencial
+    ? (id) => listarCarpetaApi(credencial, id)
+    : (id) => listarCarpetaPublica(id)
+
   const pendientes = [{ id: idRaiz, carpeta: null }]
   const fotos = []
 
   while (pendientes.length) {
     const { id, carpeta } = pendientes.shift()
 
-    for (const archivo of await listarCarpeta(credencial, id)) {
-      if (archivo.mimeType === 'application/vnd.google-apps.folder') {
-        pendientes.push({ id: archivo.id, carpeta: carpeta ?? archivo.name.trim() })
-      } else if (archivo.mimeType?.startsWith('image/')) {
-        fotos.push({ ...archivo, carpeta })
+    for (const entrada of await listar(id)) {
+      if (entrada.esCarpeta) {
+        pendientes.push({ id: entrada.id, carpeta: carpeta ?? entrada.nombre.trim() })
+      } else if (entrada.esImagen) {
+        fotos.push({ ...entrada, carpeta })
       }
     }
   }
@@ -191,21 +283,32 @@ async function descubrirFotos(credencial, idRaiz) {
   return fotos
 }
 
-/** 'AAAA:MM:DD HH:MM:SS' del EXIF → 'AAAA-MM-DD'; sin EXIF, la fecha de subida. */
-function fechaDeFoto(archivo) {
-  const exif = archivo.imageMediaMetadata?.time
-  const match = exif?.match(/^(\d{4}):(\d{2}):(\d{2})/)
-  if (match) return `${match[1]}-${match[2]}-${match[3]}`
-  return (archivo.createdTime ?? '').slice(0, 10) || null
+async function descargar(credencial, archivo) {
+  if (credencial) {
+    const respuesta = await pedirDrive(credencial, `files/${archivo.id}`, {
+      alt: 'media',
+      supportsAllDrives: 'true',
+    })
+    return Buffer.from(await respuesta.arrayBuffer())
+  }
+
+  // Descarga pública directa. Para archivos grandes Drive intercala una página
+  // de confirmación; el endpoint moderno con confirm=t la saltea.
+  for (const url of [
+    `https://drive.google.com/uc?export=download&id=${archivo.id}`,
+    `https://drive.usercontent.google.com/download?id=${archivo.id}&export=download&confirm=t`,
+  ]) {
+    const respuesta = await fetch(url, { redirect: 'follow' })
+    if (!respuesta.ok) continue
+    const tipo = respuesta.headers.get('content-type') ?? ''
+    if (tipo.includes('text/html')) continue
+    return Buffer.from(await respuesta.arrayBuffer())
+  }
+
+  throw new Error('Drive no entregó el archivo por los endpoints públicos.')
 }
 
-async function bajarYConvertir(credencial, archivo, destino) {
-  const respuesta = await pedirDrive(credencial, `files/${archivo.id}`, {
-    alt: 'media',
-    supportsAllDrives: 'true',
-  })
-  const original = Buffer.from(await respuesta.arrayBuffer())
-
+async function convertir(original, destino) {
   // rotate() sin argumentos hornea la orientación EXIF: las fotos de celular
   // suelen venir "acostadas" y con la rotación solo en metadatos.
   await sharp(original)
@@ -243,7 +346,7 @@ async function main() {
   await mkdir(CARPETA_FOTOS, { recursive: true })
 
   const previo = await leerJsonPrevio()
-  const md5Previo = new Map((previo.fotos ?? []).map((f) => [f.id, f.md5]))
+  const previas = new Map((previo.fotos ?? []).map((f) => [f.id, f]))
   const existentes = new Set(await readdir(CARPETA_FOTOS))
 
   const fotos = []
@@ -252,17 +355,26 @@ async function main() {
 
   for (const archivo of descubiertas) {
     const nombreLocal = `${archivo.id}.webp`
-    const sinCambios = existentes.has(nombreLocal) && md5Previo.get(archivo.id) === archivo.md5Checksum
+    const anterior = previas.get(archivo.id)
+
+    // Con la API comparamos md5; en el modo público no hay hash, así que una
+    // foto ya bajada no se vuelve a bajar (editar una foto subida es rarísimo).
+    const sinCambios =
+      existentes.has(nombreLocal) && (archivo.md5 ? anterior?.md5 === archivo.md5 : Boolean(anterior))
+
+    let fecha = archivo.fechaApi ?? anterior?.fecha ?? null
 
     if (!sinCambios) {
       try {
-        await bajarYConvertir(credencial, archivo, resolve(CARPETA_FOTOS, nombreLocal))
+        const original = await descargar(credencial, archivo)
+        fecha = archivo.fechaApi ?? fechaDeExif(original)
+        await convertir(original, resolve(CARPETA_FOTOS, nombreLocal))
         bajadas++
       } catch (error) {
         // Un formato que sharp no decodifica (HEIC de iPhone, por ejemplo) no
         // tiene que frenar el resto de la galería.
         falladas++
-        console.warn(`  ⚠ No pude convertir "${archivo.name}" (${archivo.id}): ${error.message}`)
+        console.warn(`  ⚠ No pude bajar o convertir "${archivo.nombre}" (${archivo.id}): ${error.message}`)
         continue
       }
     }
@@ -271,8 +383,8 @@ async function main() {
       id: archivo.id,
       archivo: nombreLocal,
       carpeta: archivo.carpeta,
-      fecha: fechaDeFoto(archivo),
-      md5: archivo.md5Checksum ?? null,
+      fecha,
+      md5: archivo.md5,
     })
   }
 
