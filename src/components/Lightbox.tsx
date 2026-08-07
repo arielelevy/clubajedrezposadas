@@ -25,7 +25,13 @@ export function Lightbox({
     <Dialog.Root open={indice !== null} onOpenChange={(o) => !o && onCambio(null)}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/92 backdrop-blur-md" />
-        <Dialog.Content className="fixed inset-0 z-50 grid place-items-center p-4 focus:outline-none">
+        <Dialog.Content
+          className="fixed inset-0 z-50 grid place-items-center p-4 focus:outline-none"
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft') mover(-1)
+            if (e.key === 'ArrowRight') mover(1)
+          }}
+        >
           {indice !== null ? (
             <figure className="relative max-h-full w-full max-w-4xl">
               <img
