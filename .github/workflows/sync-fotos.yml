@@ -11,10 +11,15 @@ name: Sincronizar fotos
 #     GOOGLE_SERVICE_ACCOUNT_JSON (carpeta compartida como Lector con la service
 #     account) o DRIVE_API_KEY se usa la Drive API formal.
 # Mientras falte la variable, el script avisa y termina en verde.
+#
+# No tiene cron: se corre a mano. Tenía uno diario (10 UTC) y se sacó el
+# 2026-08-10, porque la carpeta de Drive dejó de ser pública y el modo sin
+# credencial devolvía 401 todos los días. Hoy la sincronización la hace Ariel
+# desde su máquina, con un access token de Drive (ver CLAUDE.md). Si alguna vez
+# se carga GOOGLE_SERVICE_ACCOUNT_JSON o DRIVE_API_KEY, vale la pena volver a
+# poner el cron acá.
 
 on:
-  schedule:
-    - cron: '0 10 * * *' # todos los días a las 10 UTC (7 de la mañana en Argentina)
   workflow_dispatch:
 
 permissions:

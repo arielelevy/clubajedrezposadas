@@ -6,8 +6,11 @@ y quedan versionados como JSON en `src/data/`.
 
 ## Refrescar fotos y socios a mano
 
-Los dos syncs corren solos por GitHub Actions (`sync-fotos.yml` diario 10 UTC,
-`sync-socios.yml` los lunes 9 UTC). Esto es para forzarlos desde la máquina.
+**Socios** corre solo por GitHub Actions (`sync-socios.yml`, los lunes 9 UTC).
+**Fotos ya no tiene cron**: se sacó el 2026-08-10 porque la carpeta de Drive
+dejó de ser pública y fallaba todos los días; ahora la corre Ariel a mano desde
+su máquina. `sync-fotos.yml` quedó solo con `workflow_dispatch`, para el día que
+haya una credencial cargada en el repo.
 
 ### Socios — no necesita login
 
@@ -63,8 +66,9 @@ casos quedan como dos socios. Al 2026-08-10 son 118: 63 Activo, 51 Cadete,
 
 El script tiene un modo sin credencial que lee carpetas públicas por
 `embeddedfolderview`, pero **la carpeta del club volvió a quedar privada y
-devuelve 401 desde el 2026-08-08** (por eso el cron diario viene fallando).
-Hasta que se arregle eso, la corrida manual va con un access token de Drive.
+devuelve 401 desde el 2026-08-08** (por eso se sacó el cron diario). La corrida
+va con un access token de Drive, y hay que acordarse de hacerla cuando el club
+sube fotos nuevas: ya no hay nada automático que las traiga.
 
 Ariel eligió sacarlo con **rclone** (ya instalado, sin remote configurado):
 
@@ -95,8 +99,9 @@ Detalles que importan:
   imprime el script.
 - Los HEIC de iPhone no los decodifica sharp: el script los saltea con warning.
 
-Arreglos de fondo para que el cron vuelva a andar solo (los dos los tiene que
-hacer Ariel, no se pueden hacer desde acá):
+Si algún día se quiere volver a automatizar, hay que hacer una de estas dos
+(las dos las tiene que hacer Ariel, no se pueden hacer desde acá) y después
+devolverle el cron a `sync-fotos.yml`:
 
 1. Volver a poner la carpeta en «Cualquiera con el enlace → Lector». Es el modo
    por defecto del script, sin credenciales.
