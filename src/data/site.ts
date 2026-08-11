@@ -481,6 +481,11 @@ export const pilaresCentenario = [
 /**
  * Niveles de auspicio de la carpeta institucional 2026 ("Elegí tu jugada").
  * Montos y beneficios según el PDF oficial: public/docs/carpeta-auspicios-2026.pdf
+ *
+ * Van de mayor a menor aporte, que es el orden inverso al del PDF. Ojo con la
+ * pieza de cada nivel: la carpeta usa Caballo para el aporte más bajo y Dama
+ * para el más alto (Caballo → Alfil → Torre → Dama → Rey). Estuvieron
+ * espejados hasta 2026-08-11.
  */
 export const nivelesAuspicio = [
   {
@@ -514,15 +519,16 @@ export const nivelesAuspicio = [
       'Presencia en la entrega de premios',
       'Espacio para exhibición y material promocional',
       'Inclusión en todas las publicaciones oficiales',
+      'Prioridad absoluta en acciones comerciales',
       'Stand premium (si lo desea)',
     ],
   },
   {
-    nivel: 'Caballo',
+    nivel: 'Dama',
     rol: 'Auspiciante',
     aporte: '$751.000 a $1.500.000',
     disponibilidad: 'Cupos disponibles',
-    pieza: 'caballo',
+    pieza: 'dama',
     destacado: false,
     exclusivo: '',
     beneficios: [
@@ -535,11 +541,11 @@ export const nivelesAuspicio = [
     ],
   },
   {
-    nivel: 'Alfil',
+    nivel: 'Torre',
     rol: 'Auspiciante',
     aporte: '$400.001 a $750.000',
     disponibilidad: 'Cupos disponibles',
-    pieza: 'alfil',
+    pieza: 'torre',
     destacado: false,
     exclusivo: '',
     beneficios: [
@@ -551,11 +557,11 @@ export const nivelesAuspicio = [
     ],
   },
   {
-    nivel: 'Torre',
+    nivel: 'Alfil',
     rol: 'Colaborador',
     aporte: '$200.001 a $400.000',
     disponibilidad: 'Cupos disponibles',
-    pieza: 'torre',
+    pieza: 'alfil',
     destacado: false,
     exclusivo: '',
     beneficios: [
@@ -566,11 +572,11 @@ export const nivelesAuspicio = [
     ],
   },
   {
-    nivel: 'Dama',
+    nivel: 'Caballo',
     rol: 'Colaborador',
     aporte: 'Aportes hasta $200.000',
     disponibilidad: 'Cupos disponibles',
-    pieza: 'dama',
+    pieza: 'caballo',
     destacado: false,
     exclusivo: '',
     beneficios: [
@@ -583,9 +589,13 @@ export const nivelesAuspicio = [
   },
 ] as const
 
-/** Cada nivel incluye los beneficios de los niveles anteriores. */
+/**
+ * Las tarjetas se muestran de mayor a menor aporte, así que la nota dice
+ * "niveles de menor aporte" y no "los anteriores" como el PDF: leído en
+ * pantalla, "anteriores" apuntaría justo al revés.
+ */
 export const notaAuspicios =
-  'Cada nivel incluye los beneficios de los niveles anteriores. El aporte puede ser económico o en productos, y los festejos del centenario se extienden hasta julio de 2027, con hasta 12 meses de exposición de marca.'
+  'Cada nivel incluye los beneficios de los niveles de menor aporte. El aporte puede ser económico o en productos, y los festejos del centenario se extienden hasta julio de 2027, con hasta 12 meses de exposición de marca.'
 
 /** Marcas e instituciones que ya acompañan el centenario. */
 export const auspiciantesActuales = [
@@ -604,6 +614,8 @@ export const propuestaValor = [
   { titulo: 'Actividad de RSE', texto: 'Inclusión social y programas de becas.' },
   { titulo: 'Publicidad en el club', texto: 'Paredes disponibles para publicidad directa en la sede, con presencia constante.' },
   { titulo: 'Entradas y experiencias', texto: 'Partidas con titulados, accesos gratuitos al torneo y brindis de celebración.' },
+  { titulo: 'Posicionamiento', texto: 'Imagen positiva y perdurable en la comunidad.' },
+  { titulo: 'Merchandising y productos', texto: 'Presencia de la marca en el merchandising oficial del centenario.' },
 ] as const
 
 /** Programa de Ajedrez Infantil del centenario. */
