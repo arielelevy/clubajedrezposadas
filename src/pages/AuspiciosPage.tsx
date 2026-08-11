@@ -13,6 +13,48 @@ import { ChessGlyph, type Pieza } from '@/components/ChessGlyph'
 import { BoardTexture, GoldDivider } from '@/components/Ornaments'
 import { cn } from '@/lib/utils'
 
+/**
+ * Tres escalones de énfasis para las tarjetas, del aporte más alto al más
+ * accesible: los dos Rey en grafito, Dama y Torre en el mármol frío de las
+ * piezas del club, y los niveles de entrada en blanco.
+ *
+ * El `hover` de cada escalón intensifica su propio borde; el levantamiento lo
+ * pone la tarjeta, así las seis reaccionan igual al mouse (antes solo lo hacían
+ * las dos blancas y los Rey quedaban muertos).
+ */
+const estiloNivel = {
+  alto: {
+    tarjeta: 'border-gold/45 bg-ink text-ivory shadow-[var(--shadow-gold)] hover:border-gold/80',
+    pieza: 'text-gold-bright',
+    chip: 'border-gold/40 text-gold-bright',
+    titulo: 'text-ivory',
+    kicker: 'text-gold-bright',
+    aporte: 'text-gold-bright',
+    exclusivo: 'text-gold-bright/85',
+    lista: 'border-ivory/15 text-ivory/75',
+  },
+  medio: {
+    tarjeta: 'border-silver/45 bg-marble shadow-[var(--shadow-lift)] hover:border-slate-soft/60',
+    pieza: 'text-slate-soft',
+    chip: 'border-ink/15 text-ink/60',
+    titulo: 'text-ink',
+    kicker: 'text-ink/60',
+    aporte: 'text-ink',
+    exclusivo: 'text-ink/70',
+    lista: 'border-ink/12 text-ink/75',
+  },
+  base: {
+    tarjeta: 'border-ink/8 bg-white/70 shadow-none hover:border-gold/45 hover:shadow-[var(--shadow-lift)]',
+    pieza: 'text-gold/70',
+    chip: 'border-ink/12 text-ink/50',
+    titulo: 'text-ink',
+    kicker: 'text-gold-deep',
+    aporte: 'text-ink',
+    exclusivo: 'text-gold-deep',
+    lista: 'border-ink/8 text-ink/70',
+  },
+} as const
+
 export function AuspiciosPage() {
   return (
     <>
@@ -54,89 +96,69 @@ export function AuspiciosPage() {
             </p>
           </Reveal>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {nivelesAuspicio.map((n, i) => (
-              <Reveal key={n.nivel} delay={0.06 * i}>
-                <article
-                  className={cn(
-                    'flex h-full flex-col rounded-lg border p-7 transition-all duration-500',
-                    n.destacado
-                      ? 'border-gold/45 bg-ink text-ivory shadow-[var(--shadow-gold)]'
-                      : 'border-ink/8 bg-white/70 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]',
-                  )}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <ChessGlyph
-                      pieza={n.pieza as Pieza}
-                      className={cn('text-5xl', n.destacado ? 'text-gold-bright' : 'text-gold/70')}
-                    />
-                    <span
-                      className={cn(
-                        'rounded-full border px-3 py-1 text-[0.65rem] tracking-wide uppercase',
-                        n.destacado ? 'border-gold/40 text-gold-bright' : 'border-ink/12 text-ink/50',
-                      )}
-                    >
-                      {n.disponibilidad}
-                    </span>
-                  </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {nivelesAuspicio.map((n, i) => {
+              const e = estiloNivel[n.enfasis]
 
-                  <h3
+              return (
+                <Reveal key={n.nivel} delay={0.06 * i}>
+                  <article
                     className={cn(
-                      'mt-6 font-display text-3xl',
-                      n.destacado ? 'text-ivory' : 'text-ink',
+                      'flex h-full flex-col rounded-lg border p-6 transition-all duration-300 hover:-translate-y-1',
+                      e.tarjeta,
                     )}
                   >
-                    {n.nivel}
-                  </h3>
-                  <p
-                    className={cn(
-                      'kicker mt-2 text-[0.6rem]',
-                      n.destacado ? 'text-gold-bright' : 'text-gold-deep',
-                    )}
-                  >
-                    {n.rol}
-                  </p>
+                    <div className="flex items-start justify-between gap-4">
+                      <ChessGlyph pieza={n.pieza as Pieza} className={cn('text-4xl', e.pieza)} />
+                      <span
+                        className={cn(
+                          'rounded-full border px-2.5 py-0.5 text-[0.6rem] tracking-wide uppercase',
+                          e.chip,
+                        )}
+                      >
+                        {n.disponibilidad}
+                      </span>
+                    </div>
 
-                  {/* Aporte */}
-                  <p
-                    className={cn(
-                      'mt-6 font-condensed text-2xl leading-none tracking-wide',
-                      n.destacado ? 'text-gold-bright' : 'text-ink',
-                    )}
-                  >
-                    {n.aporte}
-                  </p>
+                    <h3 className={cn('mt-5 font-display text-2xl', e.titulo)}>{n.nivel}</h3>
+                    <p className={cn('kicker mt-1.5 text-[0.55rem]', e.kicker)}>{n.rol}</p>
 
-                  {n.exclusivo ? (
+                    {/* Aporte */}
                     <p
                       className={cn(
-                        'mt-3 text-xs leading-snug',
-                        n.destacado ? 'text-gold-bright/85' : 'text-gold-deep',
+                        'mt-4 font-condensed text-xl leading-none tracking-wide',
+                        e.aporte,
                       )}
                     >
-                      {n.exclusivo}
+                      {n.aporte}
                     </p>
-                  ) : null}
 
-                  <ul
-                    className={cn(
-                      'mt-6 space-y-3 border-t pt-6 text-sm',
-                      n.destacado ? 'border-ivory/15 text-ivory/75' : 'border-ink/8 text-ink/70',
-                    )}
-                  >
-                    {n.beneficios.map((b) => (
-                      <li key={b} className="flex gap-3">
-                        <span
-                          aria-hidden="true"
-                          className="mt-1.5 size-1.5 shrink-0 rotate-45 bg-gold"
-                        />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </Reveal>
-            ))}
+                    {n.exclusivo ? (
+                      <p className={cn('mt-2.5 text-xs leading-snug', e.exclusivo)}>
+                        {n.exclusivo}
+                      </p>
+                    ) : null}
+
+                    <ul
+                      className={cn(
+                        'mt-5 space-y-2.5 border-t pt-5 text-[0.82rem] leading-snug',
+                        e.lista,
+                      )}
+                    >
+                      {n.beneficios.map((b) => (
+                        <li key={b} className="flex gap-2.5">
+                          <span
+                            aria-hidden="true"
+                            className="mt-[0.3rem] size-1.5 shrink-0 rotate-45 bg-gold"
+                          />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </Reveal>
+              )
+            })}
           </div>
 
           <Reveal delay={0.08}>

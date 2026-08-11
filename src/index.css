@@ -15,6 +15,10 @@
   --color-ivory: #f5efe1;
   --color-ivory-deep: #e9e0cc;
 
+  /* Mármol de las piezas y los tableros del club: blanco frío, no beige. Contra
+     el hueso cálido del fondo se lee como piedra y no como un marfil lavado. */
+  --color-marble: #d7dcdb;
+
   --color-gold: #c0912c;
   --color-gold-bright: #e2bd5e;
   --color-gold-deep: #8f6a1c;

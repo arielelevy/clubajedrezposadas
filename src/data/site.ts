@@ -494,7 +494,7 @@ export const nivelesAuspicio = [
     aporte: 'Más de $1.500.000',
     disponibilidad: '1 disponible',
     pieza: 'rey',
-    destacado: true,
+    enfasis: 'alto',
     exclusivo: 'Beneficio exclusivo: nombre del torneo',
     beneficios: [
       'Logo predominante en toda la identidad gráfica',
@@ -511,7 +511,7 @@ export const nivelesAuspicio = [
     aporte: 'Más de $1.500.000',
     disponibilidad: '2 disponibles',
     pieza: 'rey',
-    destacado: true,
+    enfasis: 'alto',
     exclusivo: '',
     beneficios: [
       'Logo de igual tamaño al sponsor presentador (excepto en el nombre del torneo)',
@@ -529,7 +529,7 @@ export const nivelesAuspicio = [
     aporte: '$751.000 a $1.500.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'dama',
-    destacado: false,
+    enfasis: 'medio',
     exclusivo: '',
     beneficios: [
       'Logo destacado en toda la gráfica oficial',
@@ -546,7 +546,7 @@ export const nivelesAuspicio = [
     aporte: '$400.001 a $750.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'torre',
-    destacado: false,
+    enfasis: 'medio',
     exclusivo: '',
     beneficios: [
       'Logo en planillas oficiales de anotación',
@@ -562,7 +562,7 @@ export const nivelesAuspicio = [
     aporte: '$200.001 a $400.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'alfil',
-    destacado: false,
+    enfasis: 'base',
     exclusivo: '',
     beneficios: [
       'Logo en afiches digitales y publicaciones oficiales',
@@ -577,7 +577,7 @@ export const nivelesAuspicio = [
     aporte: 'Aportes hasta $200.000',
     disponibilidad: 'Cupos disponibles',
     pieza: 'caballo',
-    destacado: false,
+    enfasis: 'base',
     exclusivo: '',
     beneficios: [
       'Logo en la web de inscripciones y reglamento',
