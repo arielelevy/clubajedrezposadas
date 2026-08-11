@@ -13,7 +13,7 @@ import {
 
 export function Contacto() {
   return (
-    <section id="contacto" className="scroll-mt-24 bg-bone py-12 lg:py-18">
+    <section id="contacto" className="bg-bone scroll-mt-24 py-12 lg:py-18">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <div>
@@ -28,14 +28,16 @@ export function Contacto() {
                 href={club.mapsLink}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-start gap-4 rounded-lg border border-ink/8 bg-white/70 p-5 transition-all hover:border-gold/45"
+                className="border-ink/8 hover:border-gold/45 flex items-start gap-4 rounded-lg border bg-white/70 p-5 transition-all"
               >
-                <MapPin className="mt-0.5 size-5 shrink-0 text-gold" />
+                <MapPin className="text-gold mt-0.5 size-5 shrink-0" />
                 <span>
-                  <span className="block font-medium text-ink">
+                  <span className="text-ink block font-medium">
                     {club.direccion} — {club.codigoPostal} {club.ciudad}, {club.provincia}
                   </span>
-                  <span className="mt-1 block text-sm text-ink/60">Sede propia del club desde 1980</span>
+                  <span className="text-ink/60 mt-1 block text-sm">
+                    Sede propia del club desde 1980
+                  </span>
                 </span>
               </a>
 
@@ -43,12 +45,12 @@ export function Contacto() {
                 href={club.whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-start gap-4 rounded-lg border border-ink/8 bg-white/70 p-5 transition-all hover:border-gold/45"
+                className="border-ink/8 hover:border-gold/45 flex items-start gap-4 rounded-lg border bg-white/70 p-5 transition-all"
               >
-                <MessageCircle className="mt-0.5 size-5 shrink-0 text-gold" />
+                <MessageCircle className="text-gold mt-0.5 size-5 shrink-0" />
                 <span>
-                  <span className="block font-medium text-ink">WhatsApp {club.whatsapp}</span>
-                  <span className="mt-1 block text-sm text-ink/60">
+                  <span className="text-ink block font-medium">WhatsApp {club.whatsapp}</span>
+                  <span className="text-ink/60 mt-1 block text-sm">
                     Consultas por talleres, torneos y cómo asociarse
                   </span>
                 </span>
@@ -58,22 +60,26 @@ export function Contacto() {
                 href={club.instagramLink}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-start gap-4 rounded-lg border border-ink/8 bg-white/70 p-5 transition-all hover:border-gold/45"
+                className="border-ink/8 hover:border-gold/45 flex items-start gap-4 rounded-lg border bg-white/70 p-5 transition-all"
               >
-                <InstagramIcon className="mt-0.5 size-5 shrink-0 text-gold" />
+                <InstagramIcon className="text-gold mt-0.5 size-5 shrink-0" />
                 <span>
-                  <span className="block font-medium text-ink">@{club.instagram}</span>
-                  <span className="mt-1 block text-sm text-ink/60">
+                  <span className="text-ink block font-medium">@{club.instagram}</span>
+                  <span className="text-ink/60 mt-1 block text-sm">
                     Novedades, torneos y resultados del club
                   </span>
                 </span>
               </a>
 
-              <div className="flex items-start gap-4 rounded-lg border border-ink/8 bg-white/70 p-5">
-                <Clock className="mt-0.5 size-5 shrink-0 text-gold" />
+              <div className="border-ink/8 flex items-start gap-4 rounded-lg border bg-white/70 p-5">
+                <Clock className="text-gold mt-0.5 size-5 shrink-0" />
                 <span>
-                  <span className="block font-medium text-ink">Lunes a viernes de 17:00 a 21:30 hs</span>
-                  <span className="mt-1 block text-sm text-ink/60">Sábados de 09:00 a 11:30 hs</span>
+                  <span className="text-ink block font-medium">
+                    Lunes a viernes de 17:00 a 21:30 hs
+                  </span>
+                  <span className="text-ink/60 mt-1 block text-sm">
+                    Sábados de 09:00 a 11:30 hs
+                  </span>
                 </span>
               </div>
 
@@ -88,7 +94,7 @@ export function Contacto() {
 
           <div>
             <Reveal>
-              <div className="overflow-hidden rounded-lg border border-ink/8 bg-ink/5">
+              <div className="border-ink/8 bg-ink/5 overflow-hidden rounded-lg border">
                 <iframe
                   src={club.mapsEmbed}
                   title={`Mapa de la sede del ${club.nombre} en ${club.direccion}`}

@@ -17,7 +17,7 @@ export function PageHeader({
 }) {
   return (
     <section
-      className={`relative isolate overflow-hidden bg-ink text-ivory ${
+      className={`bg-ink text-ivory relative isolate overflow-hidden ${
         compacta ? 'pt-24 pb-8 lg:pt-28 lg:pb-10' : 'pt-28 pb-14 lg:pt-32 lg:pb-16'
       }`}
     >
@@ -25,7 +25,7 @@ export function PageHeader({
       <GraphiteCurves className="opacity-80" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(192,145,44,0.15),transparent_55%)]" />
 
-      <div className="relative mx-auto max-w-4xl px-5 text-center motion-safe:animate-entrar lg:px-8">
+      <div className="motion-safe:animate-entrar relative mx-auto max-w-4xl px-5 text-center lg:px-8">
         <p className="kicker text-gold-bright">{kicker}</p>
         <h1
           className={
@@ -39,14 +39,16 @@ export function PageHeader({
         <GoldDivider className={`mx-auto max-w-xs ${compacta ? 'mt-4' : 'mt-6'}`} />
         {bajada ? (
           <p
-            className={`mx-auto max-w-2xl leading-relaxed text-ivory/70 ${
+            className={`text-ivory/70 mx-auto max-w-2xl leading-relaxed ${
               compacta ? 'mt-3 text-base' : 'mt-4 text-lg'
             }`}
           >
             {bajada}
           </p>
         ) : null}
-        {children ? <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div> : null}
+        {children ? (
+          <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>
+        ) : null}
       </div>
     </section>
   )

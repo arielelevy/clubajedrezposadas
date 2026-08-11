@@ -44,7 +44,8 @@ const estiloNivel = {
     lista: 'border-ink/12 text-ink/75',
   },
   base: {
-    tarjeta: 'border-ink/8 bg-white/70 shadow-none hover:border-gold/45 hover:shadow-[var(--shadow-lift)]',
+    tarjeta:
+      'border-ink/8 bg-white/70 shadow-none hover:border-gold/45 hover:shadow-[var(--shadow-lift)]',
     pieza: 'text-gold/70',
     chip: 'border-ink/12 text-ink/50',
     titulo: 'text-ink',
@@ -62,8 +63,7 @@ export function AuspiciosPage() {
         kicker="Carpeta de auspicios 2026"
         titulo={
           <>
-            Sumá tu marca a
-            <span className="block text-gold-gradient">cien años de historia</span>
+            Sumá tu marca a<span className="text-gold-gradient block">cien años de historia</span>
           </>
         }
         bajada="El centenario del Club de Ajedrez Posadas es una plataforma con arraigo real en la comunidad: talleres para cientos de chicos y adultos, torneos con validez nacional e internacional y una sede propia en el centro de la ciudad."
@@ -87,10 +87,10 @@ export function AuspiciosPage() {
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <Reveal>
             <p className="kicker text-gold-deep">Niveles de auspicio</p>
-            <h2 className="mt-4 max-w-2xl text-4xl text-ink lg:text-5xl">
+            <h2 className="text-ink mt-4 max-w-2xl text-4xl lg:text-5xl">
               Seis formas de acompañar el proyecto
             </h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/65">
+            <p className="text-ink/65 mt-4 max-w-2xl text-lg leading-relaxed">
               Cada nivel toma el nombre de una pieza y define el aporte y las contraprestaciones. El
               detalle completo, junto con los plazos, está en la carpeta institucional 2026.
             </p>
@@ -120,13 +120,13 @@ export function AuspiciosPage() {
                       </span>
                     </div>
 
-                    <h3 className={cn('mt-5 font-display text-2xl', e.titulo)}>{n.nivel}</h3>
+                    <h3 className={cn('font-display mt-5 text-2xl', e.titulo)}>{n.nivel}</h3>
                     <p className={cn('kicker mt-1.5 text-[0.55rem]', e.kicker)}>{n.rol}</p>
 
                     {/* Aporte */}
                     <p
                       className={cn(
-                        'mt-4 font-condensed text-xl leading-none tracking-wide',
+                        'font-condensed mt-4 text-xl leading-none tracking-wide',
                         e.aporte,
                       )}
                     >
@@ -149,7 +149,7 @@ export function AuspiciosPage() {
                         <li key={b} className="flex gap-2.5">
                           <span
                             aria-hidden="true"
-                            className="mt-[0.3rem] size-1.5 shrink-0 rotate-45 bg-gold"
+                            className="bg-gold mt-[0.3rem] size-1.5 shrink-0 rotate-45"
                           />
                           {b}
                         </li>
@@ -162,7 +162,7 @@ export function AuspiciosPage() {
           </div>
 
           <Reveal delay={0.08}>
-            <p className="mx-auto mt-9 max-w-3xl border-l-2 border-gold/50 pl-6 text-[0.95rem] leading-relaxed text-ink/60">
+            <p className="border-gold/50 text-ink/60 mx-auto mt-9 max-w-3xl border-l-2 pl-6 text-[0.95rem] leading-relaxed">
               {notaAuspicios}
             </p>
           </Reveal>
@@ -170,18 +170,18 @@ export function AuspiciosPage() {
       </section>
 
       {/* Dónde aparece la marca */}
-      <section className="relative isolate overflow-hidden bg-ink py-12 text-ivory lg:py-16">
+      <section className="bg-ink text-ivory relative isolate overflow-hidden py-12 lg:py-16">
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_0%,rgba(192,145,44,0.15),transparent_55%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
           <Reveal className="max-w-3xl">
             <p className="kicker text-gold-bright">Propuesta de valor</p>
-            <h2 className="mt-5 text-4xl leading-[1.06] text-ivory lg:text-5xl">
+            <h2 className="text-ivory mt-5 text-4xl leading-[1.06] lg:text-5xl">
               Dónde va a estar tu marca
             </h2>
             <GoldDivider className="mt-8 max-w-sm" />
-            <p className="mt-8 text-lg leading-relaxed text-ivory/70">
+            <p className="text-ivory/70 mt-8 text-lg leading-relaxed">
               Los festejos del centenario se extienden hasta julio de 2027: hasta doce meses de
               exposición sostenida, dentro y fuera de la sede.
             </p>
@@ -190,9 +190,9 @@ export function AuspiciosPage() {
           <dl className="mt-8 grid gap-x-10 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
             {propuestaValor.map((p, i) => (
               <Reveal key={p.titulo} delay={0.05 * i}>
-                <div className="border-t border-ivory/12 pt-5">
-                  <dt className="font-display text-xl text-ivory">{p.titulo}</dt>
-                  <dd className="mt-2 text-[0.9rem] leading-relaxed text-ivory/60">{p.texto}</dd>
+                <div className="border-ivory/12 border-t pt-5">
+                  <dt className="font-display text-ivory text-xl">{p.titulo}</dt>
+                  <dd className="text-ivory/60 mt-2 text-[0.9rem] leading-relaxed">{p.texto}</dd>
                 </div>
               </Reveal>
             ))}
@@ -205,31 +205,31 @@ export function AuspiciosPage() {
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <Reveal className="text-center">
             <p className="kicker text-gold-deep">Ya acompañan el centenario</p>
-            <h2 className="mt-4 text-3xl text-ink lg:text-4xl">Gracias por estar</h2>
+            <h2 className="text-ink mt-4 text-3xl lg:text-4xl">Gracias por estar</h2>
           </Reveal>
 
           <ul className="mt-9 grid gap-4 sm:grid-cols-3">
             {auspiciantesActuales.map((a, i) => (
               <Reveal key={a} delay={0.07 * i}>
-                <li className="flex h-full items-center justify-center gap-4 rounded-lg border border-ink/8 bg-white/70 px-6 py-8 text-center">
-                  <ChessGlyph pieza="peon" className="text-2xl text-gold/60" />
-                  <span className="font-display text-lg leading-snug text-ink">{a}</span>
+                <li className="border-ink/8 flex h-full items-center justify-center gap-4 rounded-lg border bg-white/70 px-6 py-8 text-center">
+                  <ChessGlyph pieza="peon" className="text-gold/60 text-2xl" />
+                  <span className="font-display text-ink text-lg leading-snug">{a}</span>
                 </li>
               </Reveal>
             ))}
           </ul>
 
           <Reveal delay={0.1}>
-            <div className="mt-9 rounded-lg border border-ink/8 bg-bone p-8 lg:p-10">
+            <div className="border-ink/8 bg-bone mt-9 rounded-lg border p-8 lg:p-10">
               <div className="flex flex-wrap items-center justify-between gap-6">
                 <div className="max-w-xl">
-                  <h3 className="font-display text-2xl text-ink">
+                  <h3 className="font-display text-ink text-2xl">
                     ¿Querés que tu empresa acompañe el centenario?
                   </h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">
+                  <p className="text-ink/65 mt-3 text-[0.95rem] leading-relaxed">
                     Escribinos al {club.whatsapp} y coordinamos una reunión en la sede de{' '}
-                    {club.direccion} para armar el plan que mejor se ajuste a tu marca. El aporte puede
-                    ser económico o en productos.
+                    {club.direccion} para armar el plan que mejor se ajuste a tu marca. El aporte
+                    puede ser económico o en productos.
                   </p>
                 </div>
                 <Button asChild variant="gold" size="lg">

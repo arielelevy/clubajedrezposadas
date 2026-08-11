@@ -128,7 +128,7 @@ export function Navbar() {
         // Con el aviso desplegado la barra se apoya sobre el bloque oscuro de la
         // página, así que vuelve al look transparente sobre oscuro. Ya no depende
         // de la ruta, que era lo que dejaba el menú negro sobre negro.
-        avisoVisible ? 'bg-transparent' : 'border-b border-ink/8 bg-bone/95 backdrop-blur-sm',
+        avisoVisible ? 'bg-transparent' : 'border-ink/8 bg-bone/95 border-b backdrop-blur-sm',
       )}
     >
       {/* Aviso del evento del centenario */}
@@ -136,20 +136,20 @@ export function Navbar() {
         <Link
           to="/#evento"
           className={cn(
-            'group block overflow-hidden border-gold/20 bg-ink transition-all duration-500',
+            'group border-gold/20 bg-ink block overflow-hidden transition-all duration-500',
             avisoVisible
               ? 'max-h-24 border-b opacity-100'
               : 'pointer-events-none max-h-0 opacity-0',
           )}
         >
           <span className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-5 py-2.5 lg:px-8">
-            <span aria-hidden="true" className="size-1.5 shrink-0 rotate-45 bg-gold-bright" />
-            <span className="font-condensed text-[0.68rem] leading-tight tracking-[0.2em] text-gold-bright uppercase sm:text-[0.8rem] sm:tracking-[0.28em]">
+            <span aria-hidden="true" className="bg-gold-bright size-1.5 shrink-0 rotate-45" />
+            <span className="font-condensed text-gold-bright text-[0.68rem] leading-tight tracking-[0.2em] uppercase sm:text-[0.8rem] sm:tracking-[0.28em]">
               {eventoCentenario.avisoSuperior}
             </span>
             <ArrowRight
               aria-hidden="true"
-              className="size-3.5 shrink-0 text-gold-bright/60 transition-transform duration-300 group-hover:translate-x-1"
+              className="text-gold-bright/60 size-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1"
             />
           </span>
         </Link>
@@ -162,13 +162,13 @@ export function Navbar() {
         )}
       >
         <Link to="/" className="group flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-full bg-ivory">
+          <span className="bg-ivory grid size-11 place-items-center rounded-full">
             <img src="/logo-cap-96.webp" alt="" width={36} height={36} className="size-9" />
           </span>
           <span className="leading-tight">
             <span
               className={cn(
-                'block font-display text-[1.05rem] font-semibold tracking-tight whitespace-nowrap transition-colors duration-500 sm:text-[1.3rem]',
+                'font-display block text-[1.05rem] font-semibold tracking-tight whitespace-nowrap transition-colors duration-500 sm:text-[1.3rem]',
                 avisoVisible ? 'text-ivory' : 'text-ink',
               )}
             >
@@ -192,7 +192,7 @@ export function Navbar() {
               key={item.href}
               to={item.href}
               className={cn(
-                'relative py-1 text-[0.95rem] transition-colors duration-500 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:scale-x-100',
+                'after:bg-gold relative py-1 text-[0.95rem] transition-colors duration-500 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100',
                 avisoVisible ? 'text-ivory/85 hover:text-ivory' : 'text-ink/75 hover:text-ink',
               )}
             >
@@ -222,26 +222,32 @@ export function Navbar() {
             </button>
           </Dialog.Trigger>
           <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/70 backdrop-blur-sm" />
-            <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-[21rem] flex-col bg-ink text-ivory shadow-2xl">
+            <Dialog.Overlay className="bg-ink/70 fixed inset-0 z-50 backdrop-blur-sm" />
+            <Dialog.Content className="bg-ink text-ivory fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-[21rem] flex-col shadow-2xl">
               {/* Identidad, en lugar de un "Menú" a secas */}
-              <div className="flex items-start justify-between gap-4 border-b border-ivory/10 px-6 py-5">
+              <div className="border-ivory/10 flex items-start justify-between gap-4 border-b px-6 py-5">
                 <Dialog.Title asChild>
                   <div className="flex items-center gap-3">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ivory">
-                      <img src="/logo-cap-96.webp" alt="" width={32} height={32} className="size-8" />
+                    <span className="bg-ivory grid size-10 shrink-0 place-items-center rounded-full">
+                      <img
+                        src="/logo-cap-96.webp"
+                        alt=""
+                        width={32}
+                        height={32}
+                        className="size-8"
+                      />
                     </span>
                     <span className="leading-tight">
-                      <span className="block font-display text-[1.05rem] font-semibold">
+                      <span className="font-display block text-[1.05rem] font-semibold">
                         {club.nombre}
                       </span>
-                      <span className="kicker block text-[0.58rem] text-gold-bright/90">
+                      <span className="kicker text-gold-bright/90 block text-[0.58rem]">
                         1926 — 2026
                       </span>
                     </span>
                   </div>
                 </Dialog.Title>
-                <Dialog.Close className="grid size-10 shrink-0 place-items-center rounded-full border border-ivory/20 transition-colors hover:border-gold/60 hover:text-gold-bright">
+                <Dialog.Close className="border-ivory/20 hover:border-gold/60 hover:text-gold-bright grid size-10 shrink-0 place-items-center rounded-full border transition-colors">
                   <X className="size-5" />
                   <span className="sr-only">Cerrar</span>
                 </Dialog.Close>
@@ -251,7 +257,7 @@ export function Navbar() {
               <nav className="flex-1 overflow-y-auto overscroll-contain px-6 py-6">
                 {grupos.map((grupo, i) => (
                   <div key={grupo.titulo} className={i > 0 ? 'mt-8' : undefined}>
-                    <p className="kicker text-[0.58rem] text-ivory/35">{grupo.titulo}</p>
+                    <p className="kicker text-ivory/35 text-[0.58rem]">{grupo.titulo}</p>
                     <ul className="mt-3">
                       {grupo.items.map((item) => (
                         <li key={item.href}>
@@ -260,10 +266,10 @@ export function Navbar() {
                             // Cierra también cuando se elige la sección en la
                             // que ya estás, donde la ubicación no cambia.
                             onClick={() => setOpen(false)}
-                            className="flex items-center justify-between gap-3 border-b border-ivory/8 py-3.5 text-[1.05rem] font-medium text-ivory/85 transition-colors hover:text-gold-bright"
+                            className="border-ivory/8 text-ivory/85 hover:text-gold-bright flex items-center justify-between gap-3 border-b py-3.5 text-[1.05rem] font-medium transition-colors"
                           >
                             {item.label}
-                            <ChevronRight className="size-4 shrink-0 text-ivory/25" />
+                            <ChevronRight className="text-ivory/25 size-4 shrink-0" />
                           </Link>
                         </li>
                       ))}
@@ -272,14 +278,14 @@ export function Navbar() {
                 ))}
               </nav>
 
-              <div className="shrink-0 space-y-4 border-t border-ivory/10 px-6 py-5">
+              <div className="border-ivory/10 shrink-0 space-y-4 border-t px-6 py-5">
                 <a
                   href={club.mapsLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-start gap-2.5 text-sm text-ivory/60 transition-colors hover:text-gold-bright"
+                  className="text-ivory/60 hover:text-gold-bright flex items-start gap-2.5 text-sm transition-colors"
                 >
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-gold" />
+                  <MapPin className="text-gold mt-0.5 size-4 shrink-0" />
                   <span>
                     {club.direccion} · {club.ciudad}
                   </span>

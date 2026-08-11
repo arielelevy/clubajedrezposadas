@@ -363,7 +363,11 @@ export const decadaTorneos = {
 } as const
 
 /** Un turno del horario semanal. Sin `instructor` cuando la sede solo abre para jugar. */
-type TurnoSemanal = { readonly horario: string; readonly grupo: string; readonly instructor?: string }
+type TurnoSemanal = {
+  readonly horario: string
+  readonly grupo: string
+  readonly instructor?: string
+}
 
 /** Horario semanal completo (gráfica oficial "Horario semanal · Talleres de ajedrez"). */
 export const horarioSemanal: readonly {
@@ -376,7 +380,11 @@ export const horarioSemanal: readonly {
     abrev: 'LUN',
     turnos: [
       { horario: '17:30 a 20:00', instructor: 'Pablo Paz', grupo: 'Talleres' },
-      { horario: '20:00 a 21:30', instructor: 'ACM Cristian Owczarczyn', grupo: 'Adultos · Principiantes' },
+      {
+        horario: '20:00 a 21:30',
+        instructor: 'ACM Cristian Owczarczyn',
+        grupo: 'Adultos · Principiantes',
+      },
     ],
   },
   {
@@ -384,7 +392,11 @@ export const horarioSemanal: readonly {
     abrev: 'MAR',
     turnos: [
       { horario: '17:00 a 20:00', instructor: 'Inst. Nac. Damián Moore', grupo: 'Talleres' },
-      { horario: '20:00 a 21:30', instructor: 'Inst. Nac. Damián Moore', grupo: 'Adultos · Principiantes' },
+      {
+        horario: '20:00 a 21:30',
+        instructor: 'Inst. Nac. Damián Moore',
+        grupo: 'Adultos · Principiantes',
+      },
     ],
   },
   {
@@ -397,7 +409,11 @@ export const horarioSemanal: readonly {
     abrev: 'JUE',
     turnos: [
       { horario: '17:00 a 20:00', instructor: 'Inst. Nac. Damián Moore', grupo: 'Talleres' },
-      { horario: '20:00 a 21:30', instructor: 'ACM Cristian Owczarczyn', grupo: 'Adultos · Intermedio' },
+      {
+        horario: '20:00 a 21:30',
+        instructor: 'ACM Cristian Owczarczyn',
+        grupo: 'Adultos · Intermedio',
+      },
     ],
   },
   {
@@ -606,16 +622,34 @@ export const auspiciantesActuales = [
 
 /** Propuesta de valor para auspiciantes (carpeta 2026). */
 export const propuestaValor = [
-  { titulo: 'Material gráfico', texto: 'Planillas de anotación, folletos, itinerarios, bonos de premiación y certificados.' },
+  {
+    titulo: 'Material gráfico',
+    texto: 'Planillas de anotación, folletos, itinerarios, bonos de premiación y certificados.',
+  },
   { titulo: 'Redes sociales', texto: 'Instagram (feed, stories y ads), Facebook y Threads.' },
-  { titulo: 'Tableros y salas de juego', texto: 'Banderas, banners y publicidad general provista por los aportantes.' },
+  {
+    titulo: 'Tableros y salas de juego',
+    texto: 'Banderas, banners y publicidad general provista por los aportantes.',
+  },
   { titulo: 'Indumentaria oficial', texto: 'Remeras institucionales del club.' },
-  { titulo: 'Prensa en actos oficiales', texto: 'Menciones en actos y premiaciones durante todo el año.' },
+  {
+    titulo: 'Prensa en actos oficiales',
+    texto: 'Menciones en actos y premiaciones durante todo el año.',
+  },
   { titulo: 'Actividad de RSE', texto: 'Inclusión social y programas de becas.' },
-  { titulo: 'Publicidad en el club', texto: 'Paredes disponibles para publicidad directa en la sede, con presencia constante.' },
-  { titulo: 'Entradas y experiencias', texto: 'Partidas con titulados, accesos gratuitos al torneo y brindis de celebración.' },
+  {
+    titulo: 'Publicidad en el club',
+    texto: 'Paredes disponibles para publicidad directa en la sede, con presencia constante.',
+  },
+  {
+    titulo: 'Entradas y experiencias',
+    texto: 'Partidas con titulados, accesos gratuitos al torneo y brindis de celebración.',
+  },
   { titulo: 'Posicionamiento', texto: 'Imagen positiva y perdurable en la comunidad.' },
-  { titulo: 'Merchandising y productos', texto: 'Presencia de la marca en el merchandising oficial del centenario.' },
+  {
+    titulo: 'Merchandising y productos',
+    texto: 'Presencia de la marca en el merchandising oficial del centenario.',
+  },
 ] as const
 
 /** Programa de Ajedrez Infantil del centenario. */
@@ -657,7 +691,8 @@ export const pasosSocio = [
   {
     paso: '03',
     titulo: 'Vení a jugar',
-    texto: 'Te esperamos en Jujuy 1514 en cualquiera de los horarios de taller para tu primera partida.',
+    texto:
+      'Te esperamos en Jujuy 1514 en cualquiera de los horarios de taller para tu primera partida.',
     enlace: { texto: 'Ver cómo llegar', href: club.mapsLink },
   },
 ] as const

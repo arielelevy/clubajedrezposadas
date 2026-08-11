@@ -40,18 +40,18 @@ export function PadronDialog() {
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/80 backdrop-blur-sm" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 z-50 flex max-h-[88svh] w-[92%] max-w-3xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-xl border border-gold/25 bg-bone shadow-2xl focus:outline-none">
+        <Dialog.Overlay className="bg-ink/80 fixed inset-0 z-50 backdrop-blur-sm" />
+        <Dialog.Content className="border-gold/25 bg-bone fixed top-1/2 left-1/2 z-50 flex max-h-[88svh] w-[92%] max-w-3xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-xl border shadow-2xl focus:outline-none">
           {/* Cabecera con el desglose por categoría */}
-          <div className="shrink-0 border-b border-ink/8 bg-ivory px-6 py-5 lg:px-8">
+          <div className="border-ink/8 bg-ivory shrink-0 border-b px-6 py-5 lg:px-8">
             <div className="flex items-start justify-between gap-6">
               <div>
                 <p className="kicker text-gold-deep">Padrón</p>
-                <Dialog.Title className="mt-2 font-display text-2xl text-ink lg:text-3xl">
+                <Dialog.Title className="font-display text-ink mt-2 text-2xl lg:text-3xl">
                   Quiénes sostienen el club
                 </Dialog.Title>
               </div>
-              <Dialog.Close className="grid size-10 shrink-0 place-items-center rounded-full border border-ink/12 text-ink/50 transition-colors hover:border-gold hover:text-gold-deep">
+              <Dialog.Close className="border-ink/12 text-ink/50 hover:border-gold hover:text-gold-deep grid size-10 shrink-0 place-items-center rounded-full border transition-colors">
                 <X className="size-5" />
                 <span className="sr-only">Cerrar</span>
               </Dialog.Close>
@@ -59,15 +59,15 @@ export function PadronDialog() {
 
             <dl className="mt-5 flex flex-wrap items-baseline gap-x-7 gap-y-2">
               <div className="flex items-baseline gap-2">
-                <dd className="font-condensed text-3xl leading-none text-gold-deep">
+                <dd className="font-condensed text-gold-deep text-3xl leading-none">
                   {padron.total}
                 </dd>
-                <dt className="kicker text-[0.58rem] text-ink/45">socios</dt>
+                <dt className="kicker text-ink/45 text-[0.58rem]">socios</dt>
               </div>
               {porCategoria.map(([tipo, cantidad]) => (
                 <div key={tipo} className="flex items-baseline gap-2">
-                  <dd className="font-condensed text-2xl leading-none text-ink/70">{cantidad}</dd>
-                  <dt className="kicker text-[0.58rem] text-ink/40">{tipo}</dt>
+                  <dd className="font-condensed text-ink/70 text-2xl leading-none">{cantidad}</dd>
+                  <dt className="kicker text-ink/40 text-[0.58rem]">{tipo}</dt>
                 </div>
               ))}
             </dl>
@@ -75,7 +75,7 @@ export function PadronDialog() {
             <div className="relative mt-5">
               <Search
                 aria-hidden="true"
-                className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-ink/35"
+                className="text-ink/35 pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2"
               />
               <input
                 type="search"
@@ -83,14 +83,14 @@ export function PadronDialog() {
                 onChange={(e) => setBusqueda(e.target.value)}
                 placeholder="Buscar un socio o una categoría"
                 aria-label="Buscar en el padrón de socios"
-                className="w-full rounded-full border border-ink/12 bg-bone py-3 pr-11 pl-11 text-[0.95rem] text-ink placeholder:text-ink/40 focus:border-gold focus:outline-none"
+                className="border-ink/12 bg-bone text-ink placeholder:text-ink/40 focus:border-gold w-full rounded-full border py-3 pr-11 pl-11 text-[0.95rem] focus:outline-none"
               />
               {busqueda ? (
                 <button
                   type="button"
                   onClick={() => setBusqueda('')}
                   aria-label="Limpiar la búsqueda"
-                  className="absolute top-1/2 right-3 grid size-8 -translate-y-1/2 place-items-center rounded-full text-ink/45 transition-colors hover:bg-ink/5 hover:text-ink"
+                  className="text-ink/45 hover:bg-ink/5 hover:text-ink absolute top-1/2 right-3 grid size-8 -translate-y-1/2 place-items-center rounded-full transition-colors"
                 >
                   <X className="size-4" />
                 </button>
@@ -105,11 +105,11 @@ export function PadronDialog() {
                 {filtrados.map((socio) => (
                   <li
                     key={socio.nombre}
-                    className="flex break-inside-avoid items-baseline justify-between gap-3 border-b border-ink/8 py-2.5"
+                    className="border-ink/8 flex break-inside-avoid items-baseline justify-between gap-3 border-b py-2.5"
                   >
-                    <span className="text-[0.93rem] text-ink/80">{socio.nombre}</span>
+                    <span className="text-ink/80 text-[0.93rem]">{socio.nombre}</span>
                     {socio.tipo ? (
-                      <span className="shrink-0 text-[0.62rem] tracking-wide text-ink/35 uppercase">
+                      <span className="text-ink/35 shrink-0 text-[0.62rem] tracking-wide uppercase">
                         {socio.tipo}
                       </span>
                     ) : null}
@@ -117,7 +117,7 @@ export function PadronDialog() {
                 ))}
               </ul>
             ) : (
-              <p className="px-2 py-12 text-center text-[0.95rem] text-ink/55">
+              <p className="text-ink/55 px-2 py-12 text-center text-[0.95rem]">
                 Ningún socio coincide con “{busqueda}”. Probá con el apellido, o escribinos al{' '}
                 {club.whatsapp} si deberías figurar.
               </p>
@@ -126,7 +126,7 @@ export function PadronDialog() {
 
           <div
             aria-live="polite"
-            className="shrink-0 border-t border-ink/8 bg-ivory px-6 py-4 text-xs text-ink/45 lg:px-8"
+            className="border-ink/8 bg-ivory text-ink/45 shrink-0 border-t px-6 py-4 text-xs lg:px-8"
           >
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
               <span>

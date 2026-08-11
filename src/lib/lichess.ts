@@ -113,6 +113,7 @@ export async function obtenerPgnDeJugador(usuario: string, cantidad = 3): Promis
   const res = await fetch(`${BASE}/games/user/${usuario}?${params}`, {
     headers: { Accept: 'application/x-chess-pgn' },
   })
-  if (!res.ok) throw new Error(`Lichess respondió ${res.status} al pedir las partidas de ${usuario}`)
+  if (!res.ok)
+    throw new Error(`Lichess respondió ${res.status} al pedir las partidas de ${usuario}`)
   return res.text()
 }

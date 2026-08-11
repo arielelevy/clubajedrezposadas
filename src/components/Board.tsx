@@ -34,7 +34,7 @@ export function Board({
       {/* @container: el tamaño de las piezas se mide contra el ancho del
           tablero y no contra el viewport, así siguen al tablero cuando cambia
           de tamaño en lugar de quedarse chicas. */}
-      <div className="@container overflow-hidden rounded-md border border-ink/12 shadow-[var(--shadow-lift)]">
+      <div className="border-ink/12 @container overflow-hidden rounded-md border shadow-[var(--shadow-lift)]">
         {/* El tablero es cuadrado y sus ocho filas miden exactamente un octavo:
             así ninguna casilla puede estirarse por lo que tenga adentro, que era
             lo que deformaba el tablero cuando la pieza entraba en la fila. */}
@@ -43,7 +43,8 @@ export function Board({
             (invertido ? [...fila].reverse() : fila).map((casilla, j) => {
               const clara = (i + j) % 2 === 0
               const destacada =
-                ultimaJugada && (ultimaJugada.from === casilla.nombre || ultimaJugada.to === casilla.nombre)
+                ultimaJugada &&
+                (ultimaJugada.from === casilla.nombre || ultimaJugada.to === casilla.nombre)
 
               return (
                 <div
@@ -56,7 +57,7 @@ export function Board({
                   {destacada ? (
                     <span
                       aria-hidden="true"
-                      className="absolute inset-0 bg-gold-bright/35 ring-2 ring-gold/70 ring-inset"
+                      className="bg-gold-bright/35 ring-gold/70 absolute inset-0 ring-2 ring-inset"
                     />
                   ) : null}
 
@@ -69,7 +70,7 @@ export function Board({
                         // A 10.5cqw queda margen arriba y abajo, y el empujón
                         // corrige el centrado óptico (la tinta de estos glifos
                         // vive toda arriba de la línea base).
-                        'relative -translate-y-[0.07em] select-none leading-none text-[10.5cqw]',
+                        'relative -translate-y-[0.07em] text-[10.5cqw] leading-none select-none',
                         casilla.color === 'w'
                           ? 'text-[#fdfbf6] [text-shadow:0_0_1px_#0b0b0c,0_1px_0_#0b0b0c,1px_0_0_#0b0b0c,-1px_0_0_#0b0b0c,0_-1px_0_#0b0b0c]'
                           : 'text-[#141416] [text-shadow:0_0_1px_rgba(252,250,245,0.55)]',

@@ -48,7 +48,10 @@ type Foto = { url: string; nombre: string; epigrafe: string }
 
 const fotos: Foto[] = Object.entries(modulos)
   .map(([ruta, url]) => {
-    const nombre = ruta.split('/').pop()!.replace(/\.[^.]+$/, '')
+    const nombre = ruta
+      .split('/')
+      .pop()!
+      .replace(/\.[^.]+$/, '')
     return { url, nombre, epigrafe: epigrafes[nombre] ?? nombre.replace(/[-_]/g, ' ') }
   })
   .filter((f) => !yaEnLaPagina.has(f.nombre))
@@ -60,7 +63,7 @@ export function Galeria() {
   if (fotos.length === 0) return null
 
   return (
-    <section id="imagenes" className="scroll-mt-24 bg-ivory py-12 lg:py-18">
+    <section id="imagenes" className="bg-ivory scroll-mt-24 py-12 lg:py-18">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Archivo"
@@ -80,7 +83,7 @@ export function Galeria() {
                   type="button"
                   onClick={() => setAbierta(i)}
                   aria-label={`Ampliar: ${foto.epigrafe}`}
-                  className="group relative block w-full overflow-hidden rounded-lg border border-ink/8 bg-ink/5"
+                  className="group border-ink/8 bg-ink/5 relative block w-full overflow-hidden rounded-lg border"
                 >
                   <span className="block aspect-4/3">
                     <img
@@ -92,11 +95,11 @@ export function Galeria() {
                   </span>
                   {/* Sin backdrop-blur: aun invisible obligaba al navegador a
                       mantener una capa aparte por cada foto de la galería. */}
-                  <span className="absolute top-3 right-3 grid size-9 place-items-center rounded-full border border-ivory/30 bg-ink/60 text-ivory opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <span className="border-ivory/30 bg-ink/60 text-ivory absolute top-3 right-3 grid size-9 place-items-center rounded-full border opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                     <Camera className="size-4" />
                   </span>
                 </button>
-                <figcaption className="mt-3 text-[0.88rem] leading-relaxed text-ink/65">
+                <figcaption className="text-ink/65 mt-3 text-[0.88rem] leading-relaxed">
                   {foto.epigrafe}
                 </figcaption>
               </figure>

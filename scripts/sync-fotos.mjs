@@ -157,8 +157,7 @@ async function pedirDrive(credencial, ruta, params) {
 
     const detalle = await respuesta.text()
     const esLimite =
-      respuesta.status === 429 ||
-      (respuesta.status === 403 && /rate.?limit|quota/i.test(detalle))
+      respuesta.status === 429 || (respuesta.status === 403 && /rate.?limit|quota/i.test(detalle))
 
     if (esLimite && intento < 6) {
       const pausa = Math.min(90, 10 * 2 ** intento)
@@ -401,7 +400,8 @@ async function main() {
     // Con la API comparamos md5; en el modo público no hay hash, así que una
     // foto ya bajada no se vuelve a bajar (editar una foto subida es rarísimo).
     const sinCambios =
-      existentes.has(nombreLocal) && (archivo.md5 ? anterior?.md5 === archivo.md5 : Boolean(anterior))
+      existentes.has(nombreLocal) &&
+      (archivo.md5 ? anterior?.md5 === archivo.md5 : Boolean(anterior))
 
     let momento = archivo.momentoApi ?? anterior?.momento ?? null
 
@@ -415,7 +415,9 @@ async function main() {
         // Un formato que sharp no decodifica (HEIC de iPhone, por ejemplo) no
         // tiene que frenar el resto de la galería.
         falladas++
-        console.warn(`  ⚠ No pude bajar o convertir "${archivo.nombre}" (${archivo.id}): ${error.message}`)
+        console.warn(
+          `  ⚠ No pude bajar o convertir "${archivo.nombre}" (${archivo.id}): ${error.message}`,
+        )
 
         // Si hay una versión local rescatada a mano (ej. el BMP convertido con
         // .NET), se conserva con los datos que ya tenía en vez de borrarla.

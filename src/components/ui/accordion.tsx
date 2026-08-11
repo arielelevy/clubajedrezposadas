@@ -9,7 +9,11 @@ export const AccordionItem = React.forwardRef<
   React.ComponentRef<typeof AccordionPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
 >(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item ref={ref} className={cn('border-b border-ink/10', className)} {...props} />
+  <AccordionPrimitive.Item
+    ref={ref}
+    className={cn('border-ink/10 border-b', className)}
+    {...props}
+  />
 ))
 AccordionItem.displayName = 'AccordionItem'
 
@@ -23,13 +27,13 @@ export const AccordionTrigger = React.forwardRef<
       className={cn(
         // Las preguntas van en la sans, no en la display: Cormorant tiene poca
         // altura de x y a este tamaño una lista de preguntas se lee lavada.
-        'group flex flex-1 items-center justify-between gap-6 py-5 text-left font-sans text-[1.05rem] font-medium text-ink transition-colors hover:text-gold-deep',
+        'group text-ink hover:text-gold-deep flex flex-1 items-center justify-between gap-6 py-5 text-left font-sans text-[1.05rem] font-medium transition-colors',
         className,
       )}
       {...props}
     >
       {children}
-      <Plus className="size-5 shrink-0 text-gold transition-transform duration-300 group-data-[state=open]:rotate-45" />
+      <Plus className="text-gold size-5 shrink-0 transition-transform duration-300 group-data-[state=open]:rotate-45" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ))
@@ -44,7 +48,9 @@ export const AccordionContent = React.forwardRef<
     className="overflow-hidden data-[state=closed]:animate-[accordion-up_240ms_ease-out] data-[state=open]:animate-[accordion-down_240ms_ease-out]"
     {...props}
   >
-    <div className={cn('pr-10 pb-6 text-base leading-relaxed text-ink/75', className)}>{children}</div>
+    <div className={cn('text-ink/75 pr-10 pb-6 text-base leading-relaxed', className)}>
+      {children}
+    </div>
   </AccordionPrimitive.Content>
 ))
 AccordionContent.displayName = 'AccordionContent'

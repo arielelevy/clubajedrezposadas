@@ -15,7 +15,9 @@ function obtenerContexto(): AudioContext | null {
   if (typeof window === 'undefined') return null
 
   if (!contexto) {
-    const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+    const Ctor =
+      window.AudioContext ??
+      (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
     if (!Ctor) return null
     contexto = new Ctor()
   }
@@ -26,7 +28,13 @@ function obtenerContexto(): AudioContext | null {
 }
 
 /** Ruido corto y filtrado: es el "tac" de la madera. */
-function golpe(ctx: AudioContext, cuando: number, duracion: number, frecuencia: number, volumen: number) {
+function golpe(
+  ctx: AudioContext,
+  cuando: number,
+  duracion: number,
+  frecuencia: number,
+  volumen: number,
+) {
   const muestras = Math.floor(ctx.sampleRate * duracion)
   const buffer = ctx.createBuffer(1, muestras, ctx.sampleRate)
   const datos = buffer.getChannelData(0)

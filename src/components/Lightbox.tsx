@@ -24,7 +24,7 @@ export function Lightbox({
   return (
     <Dialog.Root open={indice !== null} onOpenChange={(o) => !o && onCambio(null)}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/92 backdrop-blur-md" />
+        <Dialog.Overlay className="bg-ink/92 fixed inset-0 z-50 backdrop-blur-md" />
         <Dialog.Content
           className="fixed inset-0 z-50 grid place-items-center p-4 focus:outline-none"
           onKeyDown={(e) => {
@@ -39,7 +39,7 @@ export function Lightbox({
                 alt={fotos[indice].epigrafe}
                 className="mx-auto max-h-[80svh] w-auto rounded-lg object-contain shadow-2xl"
               />
-              <figcaption className="mt-5 text-center text-sm text-ivory/70">
+              <figcaption className="text-ivory/70 mt-5 text-center text-sm">
                 {fotos[indice].epigrafe}
               </figcaption>
               <Dialog.Title className="sr-only">{fotos[indice].epigrafe}</Dialog.Title>
@@ -48,7 +48,7 @@ export function Lightbox({
                 type="button"
                 onClick={() => mover(-1)}
                 aria-label="Foto anterior"
-                className="absolute top-1/2 -left-2 grid size-12 -translate-y-1/2 place-items-center rounded-full border border-ivory/25 text-ivory transition-colors hover:border-gold hover:text-gold-bright lg:-left-16"
+                className="border-ivory/25 text-ivory hover:border-gold hover:text-gold-bright absolute top-1/2 -left-2 grid size-12 -translate-y-1/2 place-items-center rounded-full border transition-colors lg:-left-16"
               >
                 <ChevronLeft className="size-6" />
               </button>
@@ -56,7 +56,7 @@ export function Lightbox({
                 type="button"
                 onClick={() => mover(1)}
                 aria-label="Foto siguiente"
-                className="absolute top-1/2 -right-2 grid size-12 -translate-y-1/2 place-items-center rounded-full border border-ivory/25 text-ivory transition-colors hover:border-gold hover:text-gold-bright lg:-right-16"
+                className="border-ivory/25 text-ivory hover:border-gold hover:text-gold-bright absolute top-1/2 -right-2 grid size-12 -translate-y-1/2 place-items-center rounded-full border transition-colors lg:-right-16"
               >
                 <ChevronRight className="size-6" />
               </button>
@@ -65,7 +65,7 @@ export function Lightbox({
 
           <Dialog.Close
             aria-label="Cerrar"
-            className="fixed top-6 right-6 grid size-11 place-items-center rounded-full border border-ivory/25 text-ivory transition-colors hover:border-gold hover:text-gold-bright"
+            className="border-ivory/25 text-ivory hover:border-gold hover:text-gold-bright fixed top-6 right-6 grid size-11 place-items-center rounded-full border transition-colors"
           >
             <X className="size-5" />
           </Dialog.Close>

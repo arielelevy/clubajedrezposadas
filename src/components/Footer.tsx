@@ -24,24 +24,26 @@ const redes = [
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden bg-ink text-ivory">
+    <footer className="bg-ink text-ivory relative isolate overflow-hidden">
       <BoardTexture className="text-ivory" size={38} opacity={0.04} animate={false} />
 
       <div className="relative mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-12">
         <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr_1fr] lg:gap-12">
           <div>
             <div className="flex items-center gap-4">
-              <span className="grid size-14 shrink-0 place-items-center rounded-full bg-ivory">
+              <span className="bg-ivory grid size-14 shrink-0 place-items-center rounded-full">
                 <img src="/logo-cap-96.webp" alt="" width={48} height={48} className="size-12" />
               </span>
               <div>
                 <p className="font-display text-xl">{club.nombre}</p>
-                <p className="kicker mt-1 text-[0.6rem] text-gold-bright">1926 — 2026 · {club.lema}</p>
+                <p className="kicker text-gold-bright mt-1 text-[0.6rem]">
+                  1926 — 2026 · {club.lema}
+                </p>
               </div>
             </div>
-            <p className="mt-4 max-w-sm text-[0.85rem] leading-relaxed text-ivory/60">
-              Institución deportiva y cultural centenaria de {club.ciudad}, {club.provincia}. Personería
-              jurídica {club.personeriaJuridica}.
+            <p className="text-ivory/60 mt-4 max-w-sm text-[0.85rem] leading-relaxed">
+              Institución deportiva y cultural centenaria de {club.ciudad}, {club.provincia}.
+              Personería jurídica {club.personeriaJuridica}.
             </p>
 
             {/* Redes del club. Con siete ya no entran en una línea de celular. */}
@@ -54,7 +56,7 @@ export function Footer() {
                     rel="noreferrer"
                     aria-label={r.nombre}
                     title={r.nombre}
-                    className="grid size-11 place-items-center rounded-full border border-ivory/15 text-ivory/70 transition-all duration-300 hover:border-gold/60 hover:bg-gold/10 hover:text-gold-bright"
+                    className="border-ivory/15 text-ivory/70 hover:border-gold/60 hover:bg-gold/10 hover:text-gold-bright grid size-11 place-items-center rounded-full border transition-all duration-300"
                   >
                     <r.Icono className="size-5" />
                   </a>
@@ -68,7 +70,10 @@ export function Footer() {
             <ul className="mt-4 space-y-2 text-sm">
               {navegacion.map((item) => (
                 <li key={item.href}>
-                  <Link to={item.href} className="text-ivory/70 transition-colors hover:text-gold-bright">
+                  <Link
+                    to={item.href}
+                    className="text-ivory/70 hover:text-gold-bright transition-colors"
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -84,9 +89,9 @@ export function Footer() {
                   href={club.whatsappLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-3 text-ivory/70 transition-colors hover:text-gold-bright"
+                  className="text-ivory/70 hover:text-gold-bright inline-flex items-center gap-3 transition-colors"
                 >
-                  <MessageCircle className="size-4 text-gold" />
+                  <MessageCircle className="text-gold size-4" />
                   WhatsApp {club.whatsapp}
                 </a>
               </li>
@@ -95,10 +100,9 @@ export function Footer() {
                   href={club.instagramLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-3 text-ivory/70 transition-colors hover:text-gold-bright"
+                  className="text-ivory/70 hover:text-gold-bright inline-flex items-center gap-3 transition-colors"
                 >
-                  <InstagramIcon className="size-4 text-gold" />
-                  @{club.instagram}
+                  <InstagramIcon className="text-gold size-4" />@{club.instagram}
                 </a>
               </li>
               <li>
@@ -106,9 +110,9 @@ export function Footer() {
                   href={club.mapsLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-start gap-3 text-ivory/70 transition-colors hover:text-gold-bright"
+                  className="text-ivory/70 hover:text-gold-bright inline-flex items-start gap-3 transition-colors"
                 >
-                  <MapPin className="mt-0.5 size-4 text-gold" />
+                  <MapPin className="text-gold mt-0.5 size-4" />
                   <span>
                     {club.direccion}
                     <br />
@@ -122,9 +126,10 @@ export function Footer() {
 
         <GoldDivider className="mt-9" />
 
-        <div className="mt-5 flex flex-col items-center justify-between gap-2 text-xs text-ivory/40 sm:flex-row">
+        <div className="text-ivory/40 mt-5 flex flex-col items-center justify-between gap-2 text-xs sm:flex-row">
           <p>
-            © {club.anioFundacion}–{new Date().getFullYear()} {club.nombre}. Todos los derechos reservados.
+            © {club.anioFundacion}–{new Date().getFullYear()} {club.nombre}. Todos los derechos
+            reservados.
           </p>
           <p className="kicker text-[0.6rem]">Cien años de ajedrez, comunidad y futuro</p>
         </div>

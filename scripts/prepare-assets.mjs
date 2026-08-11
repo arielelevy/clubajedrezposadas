@@ -75,7 +75,14 @@ async function icono(size, { fondo = null, ocupa = 0.98 } = {}) {
   const arte = await sharp(arteBase).resize(w, h, { fit: 'fill' }).png().toBuffer()
   const lienzo = fondo
     ? sharp({ create: { width: size, height: size, channels: 3, background: fondo } })
-    : sharp({ create: { width: size, height: size, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    : sharp({
+        create: {
+          width: size,
+          height: size,
+          channels: 4,
+          background: { r: 0, g: 0, b: 0, alpha: 0 },
+        },
+      })
   return lienzo
     .composite([{ input: arte, top: Math.round((size - h) / 2), left: Math.round((size - w) / 2) }])
     .png({ compressionLevel: 9 })
@@ -90,8 +97,13 @@ for (const size of [16, 32, 48]) {
     .png({ compressionLevel: 9 })
     .toFile(path.join(root, 'public', `favicon-${size}.png`))
 }
-await sharp(master).resize(256, 256).png({ compressionLevel: 9 }).toFile(path.join(root, 'public', 'favicon.png'))
-await (await icono(180, { fondo: { r: 0xfc, g: 0xfa, b: 0xf5 }, ocupa: 0.9 })).toFile(path.join(root, 'public', 'apple-touch-icon.png'))
+await sharp(master)
+  .resize(256, 256)
+  .png({ compressionLevel: 9 })
+  .toFile(path.join(root, 'public', 'favicon.png'))
+await (
+  await icono(180, { fondo: { r: 0xfc, g: 0xfa, b: 0xf5 }, ocupa: 0.9 })
+).toFile(path.join(root, 'public', 'apple-touch-icon.png'))
 
 /* --- Piezas graficas -> webp.
    Los tres primeros se ven en las tarjetas de talleres, en un recuadro 16/9 de
@@ -125,14 +137,24 @@ await sharp({
   .toFile(path.join(root, 'public', 'og-image.jpg'))
 
 // --- Documentos descargables ---
-await copyFile(need('SOLICITUD DE ALTA DE SOCIO- FINAL.pdf'), path.join(outDocs, 'solicitud-alta-socio.pdf'))
-await copyFile(need('CARPETA DE AUSPICIOS - 2026.pdf'), path.join(outDocs, 'carpeta-auspicios-2026.pdf'))
+await copyFile(
+  need('SOLICITUD DE ALTA DE SOCIO- FINAL.pdf'),
+  path.join(outDocs, 'solicitud-alta-socio.pdf'),
+)
+await copyFile(
+  need('CARPETA DE AUSPICIOS - 2026.pdf'),
+  path.join(outDocs, 'carpeta-auspicios-2026.pdf'),
+)
 
 // --- Reporte: alpha del logo (para saber si el SVG trae fondo blanco) ---
 const stats = await sharp(await readFile(path.join(root, 'public', 'logo-cap-512.png'))).stats()
 await writeFile(
   path.join(outImg, '.assets-report.json'),
-  JSON.stringify({ logoHasAlpha: stats.isOpaque === false, channels: stats.channels.length }, null, 2),
+  JSON.stringify(
+    { logoHasAlpha: stats.isOpaque === false, channels: stats.channels.length },
+    null,
+    2,
+  ),
 )
 
 console.log('Assets listos en public/. logo con transparencia:', stats.isOpaque === false)

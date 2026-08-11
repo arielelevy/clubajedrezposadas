@@ -21,7 +21,7 @@ export function SociosPage() {
         titulo={
           <>
             Ser socio de un club
-            <span className="block text-gold-gradient">centenario</span>
+            <span className="text-gold-gradient block">centenario</span>
           </>
         }
         bajada="Asociarte es sostener una institución que lleva cien años abriendo sus puertas. Y es, además, la forma de entrar a todos los talleres, torneos internos y actividades del club."
@@ -46,7 +46,7 @@ export function SociosPage() {
           {/* Título y bajada en una línea: "Tres pasos" solo no justificaba
               ocupar el alto de un titular de sección. */}
           <Reveal className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-            <h2 className="text-3xl text-ink lg:text-4xl">Cómo asociarse</h2>
+            <h2 className="text-ink text-3xl lg:text-4xl">Cómo asociarse</h2>
             <p className="kicker text-gold-deep">en tres pasos</p>
           </Reveal>
 
@@ -61,19 +61,19 @@ export function SociosPage() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={`${p.titulo} — ${p.enlace.texto}`}
-                    className="group flex h-full flex-col rounded-lg border border-ink/8 bg-white/70 p-6 transition-all duration-500 hover:border-gold/45 hover:shadow-[var(--shadow-lift)]"
+                    className="group border-ink/8 hover:border-gold/45 flex h-full flex-col rounded-lg border bg-white/70 p-6 transition-all duration-500 hover:shadow-[var(--shadow-lift)]"
                   >
                     <span className="flex items-baseline justify-between gap-4">
-                      <span className="font-condensed text-4xl leading-none text-gold">
+                      <span className="font-condensed text-gold text-4xl leading-none">
                         {p.paso}
                       </span>
                       <ArrowRight
                         aria-hidden="true"
-                        className="size-5 shrink-0 text-gold/45 transition-all duration-300 group-hover:translate-x-1 group-hover:text-gold"
+                        className="text-gold/45 group-hover:text-gold size-5 shrink-0 transition-all duration-300 group-hover:translate-x-1"
                       />
                     </span>
-                    <h3 className="mt-4 font-display text-2xl text-ink">{p.titulo}</h3>
-                    <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/65">{p.texto}</p>
+                    <h3 className="font-display text-ink mt-4 text-2xl">{p.titulo}</h3>
+                    <p className="text-ink/65 mt-2 text-[0.95rem] leading-relaxed">{p.texto}</p>
                   </a>
                 </li>
               </Reveal>
@@ -81,10 +81,10 @@ export function SociosPage() {
           </ol>
 
           <Reveal delay={0.1}>
-            <div className="mt-9 grid gap-6 rounded-lg border border-ink/8 bg-ivory p-8 lg:grid-cols-2 lg:p-10">
+            <div className="border-ink/8 bg-ivory mt-9 grid gap-6 rounded-lg border p-8 lg:grid-cols-2 lg:p-10">
               <div>
-                <h3 className="font-display text-2xl text-ink">Formulario de alta de socio</h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/65">
+                <h3 className="font-display text-ink text-2xl">Formulario de alta de socio</h3>
+                <p className="text-ink/65 mt-3 text-[0.95rem] leading-relaxed">
                   La forma más rápida es el formulario online: lo completás desde el celular en dos
                   minutos y el club te contacta para terminar el alta.
                 </p>
@@ -102,27 +102,27 @@ export function SociosPage() {
                     </a>
                   </Button>
                 </div>
-                <p className="mt-4 text-sm text-ink/50">
+                <p className="text-ink/50 mt-4 text-sm">
                   Si elegís el PDF, completalo y acercalo a la sede o envialo por WhatsApp.
                 </p>
               </div>
-              <div className="rounded-md border border-ink/8 bg-bone p-6">
+              <div className="border-ink/8 bg-bone rounded-md border p-6">
                 <p className="kicker text-gold-deep">Dónde entregarlo</p>
                 <a
                   href={club.mapsLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-4 flex items-start gap-3 text-ink transition-colors hover:text-gold-deep"
+                  className="text-ink hover:text-gold-deep mt-4 flex items-start gap-3 transition-colors"
                 >
-                  <MapPin className="mt-0.5 size-5 shrink-0 text-gold" />
+                  <MapPin className="text-gold mt-0.5 size-5 shrink-0" />
                   <span>
                     <span className="block font-medium">{club.direccion}</span>
-                    <span className="text-sm text-ink/60">
+                    <span className="text-ink/60 text-sm">
                       {club.ciudad}, {club.provincia}
                     </span>
                   </span>
                 </a>
-                <p className="mt-5 text-sm text-ink/60">
+                <p className="text-ink/60 mt-5 text-sm">
                   Lunes a viernes de 17:00 a 21:30 hs · Sábados de 09:00 a 11:30 hs
                 </p>
               </div>
@@ -143,11 +143,10 @@ export function SociosPage() {
         </div>
       </section>
 
-
       {/* Convocatoria abierta a presentar proyectos */}
       <section
         id="proyectos"
-        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-12 text-ivory lg:py-16"
+        className="bg-ink text-ivory relative isolate scroll-mt-24 overflow-hidden py-12 lg:py-16"
       >
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_10%,rgba(192,145,44,0.16),transparent_58%)]" />
@@ -156,12 +155,12 @@ export function SociosPage() {
           <div className="grid gap-12 lg:grid-cols-[1fr_0.95fr] lg:gap-20">
             <Reveal>
               <p className="kicker text-gold-bright">{proyectos.kicker}</p>
-              <h2 className="mt-5 text-4xl leading-[1.06] text-ivory lg:text-5xl">
+              <h2 className="text-ivory mt-5 text-4xl leading-[1.06] lg:text-5xl">
                 {proyectos.titulo}
               </h2>
               <GoldDivider className="mt-8 max-w-sm" />
-              <p className="mt-8 text-lg leading-relaxed text-ivory/70">{proyectos.bajada}</p>
-              <p className="mt-5 text-sm leading-relaxed text-ivory/50">{proyectos.nota}</p>
+              <p className="text-ivory/70 mt-8 text-lg leading-relaxed">{proyectos.bajada}</p>
+              <p className="text-ivory/50 mt-5 text-sm leading-relaxed">{proyectos.nota}</p>
               <Button asChild variant="gold" size="lg" className="mt-9">
                 <a href={club.formularioProyectos} target="_blank" rel="noreferrer">
                   {proyectos.cta}
@@ -171,20 +170,20 @@ export function SociosPage() {
             </Reveal>
 
             <Reveal delay={0.12}>
-              <div className="rounded-lg border border-ivory/12 bg-graphite/60 p-8 backdrop-blur-sm lg:p-10">
+              <div className="border-ivory/12 bg-graphite/60 rounded-lg border p-8 backdrop-blur-sm lg:p-10">
                 <div className="flex items-center gap-3">
-                  <Lightbulb className="size-5 text-gold-bright" />
-                  <p className="kicker text-[0.62rem] text-ivory/50">Qué tipo de propuestas</p>
+                  <Lightbulb className="text-gold-bright size-5" />
+                  <p className="kicker text-ivory/50 text-[0.62rem]">Qué tipo de propuestas</p>
                 </div>
                 <ul className="mt-7 space-y-4">
                   {proyectos.ejemplos.map((e) => (
                     <li
                       key={e}
-                      className="flex gap-4 border-b border-ivory/8 pb-4 text-[0.95rem] leading-snug text-ivory/80 last:border-b-0 last:pb-0"
+                      className="border-ivory/8 text-ivory/80 flex gap-4 border-b pb-4 text-[0.95rem] leading-snug last:border-b-0 last:pb-0"
                     >
                       <span
                         aria-hidden="true"
-                        className="mt-1.5 size-1.5 shrink-0 rotate-45 bg-gold-bright"
+                        className="bg-gold-bright mt-1.5 size-1.5 shrink-0 rotate-45"
                       />
                       {e}
                     </li>

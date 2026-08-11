@@ -16,7 +16,8 @@ export const archivosDelClub: ArchivoPartidas[] = [
   {
     archivo: '/partidas/clasicas.pgn',
     titulo: 'Clásicas comentadas',
-    descripcion: 'Partidas históricas que se usan en los talleres para enseñar ataque y sacrificio.',
+    descripcion:
+      'Partidas históricas que se usan en los talleres para enseñar ataque y sacrificio.',
   },
 ]
 

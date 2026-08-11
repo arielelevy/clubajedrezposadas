@@ -11,7 +11,7 @@ export function Hero() {
   })
 
   return (
-    <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-ink text-ivory">
+    <section className="bg-ink text-ivory relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden">
       <BoardTexture className="text-ivory" size={52} opacity={0.05} animate />
       <GraphiteCurves />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(192,145,44,0.16),transparent_58%)]" />
@@ -19,7 +19,7 @@ export function Hero() {
       {/* Numeral del centenario como marca de agua */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -right-6 bottom-[-6%] font-display text-[34rem] leading-none font-semibold text-ivory/[0.035] select-none lg:text-[46rem]"
+        className="font-display text-ivory/[0.035] pointer-events-none absolute -right-6 bottom-[-6%] text-[34rem] leading-none font-semibold select-none lg:text-[46rem]"
       >
         100
       </span>
@@ -32,25 +32,28 @@ export function Hero() {
 
           <h1
             {...aparece(0.15)}
-            className="mt-4 text-[2.9rem] leading-[0.95] font-medium motion-safe:animate-entrar sm:text-6xl lg:text-[5rem]"
+            className="motion-safe:animate-entrar mt-4 text-[2.9rem] leading-[0.95] font-medium sm:text-6xl lg:text-[5rem]"
           >
             Cien años
-            <span className="block text-gold-gradient">de ajedrez</span>
-            <span className="mt-2 block font-sans text-base font-light tracking-[0.2em] text-ivory/60 uppercase sm:text-lg">
+            <span className="text-gold-gradient block">de ajedrez</span>
+            <span className="text-ivory/60 mt-2 block font-sans text-base font-light tracking-[0.2em] uppercase sm:text-lg">
               en el corazón de Misiones
             </span>
           </h1>
 
           <div {...aparece(0.28)} className="motion-safe:animate-entrar">
             <GoldDivider className="mt-6 max-w-md" />
-            <p className="mt-5 max-w-xl text-[1.05rem] leading-relaxed text-ivory/75">
+            <p className="text-ivory/75 mt-5 max-w-xl text-[1.05rem] leading-relaxed">
               El primer club dedicado exclusivamente al ajedrez en la provincia. Fundado el{' '}
               {club.fundacion} en el Palace Hotel, con sede propia desde 1980 y las puertas abiertas
               seis días por semana para chicos, jóvenes y adultos.
             </p>
           </div>
 
-          <div {...aparece(0.4)} className="mt-6 flex flex-wrap items-center gap-4 motion-safe:animate-entrar">
+          <div
+            {...aparece(0.4)}
+            className="motion-safe:animate-entrar mt-6 flex flex-wrap items-center gap-4"
+          >
             <Button asChild size="lg" variant="gold">
               <a href={club.whatsappLink} target="_blank" rel="noreferrer">
                 <MessageCircle />
@@ -70,7 +73,7 @@ export function Hero() {
             href={club.mapsLink}
             target="_blank"
             rel="noreferrer"
-            className="mt-6 inline-flex items-center gap-2 text-sm text-ivory/55 transition-colors hover:text-gold-bright motion-safe:animate-entrar"
+            className="text-ivory/55 hover:text-gold-bright motion-safe:animate-entrar mt-6 inline-flex items-center gap-2 text-sm transition-colors"
           >
             <MapPin className="size-4" />
             {club.direccion} · {club.ciudad}, {club.provincia}
@@ -80,7 +83,7 @@ export function Hero() {
         {/* Medallón del centenario */}
         <div
           style={{ animationDelay: '0.25s' }}
-          className="relative mx-auto w-full max-w-[13rem] motion-safe:animate-acercar sm:max-w-xs lg:max-w-none"
+          className="motion-safe:animate-acercar relative mx-auto w-full max-w-[13rem] sm:max-w-xs lg:max-w-none"
         >
           <div className="relative aspect-square">
             {/* El arco dorado gira por CSS, no por Framer Motion: animarlo en JS
@@ -88,13 +91,13 @@ export function Hero() {
                 siempre, incluso con el Hero fuera de pantalla. */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 rounded-full border border-gold/25 [will-change:transform] motion-safe:animate-girar"
+              className="border-gold/25 motion-safe:animate-girar absolute inset-0 rounded-full border [will-change:transform]"
               style={{
                 background:
                   'conic-gradient(from 0deg, transparent 0 78%, rgba(226,189,94,0.5) 86%, transparent 94%)',
               }}
             />
-            <div className="absolute inset-5 rounded-full bg-ivory shadow-[0_40px_120px_-40px_rgba(226,189,94,0.55)]" />
+            <div className="bg-ivory absolute inset-5 rounded-full shadow-[0_40px_120px_-40px_rgba(226,189,94,0.55)]" />
             {/* El logo va dentro de su propio marco para quedar centrado en el
                 disco marfil: con size-auto el SVG se salía del recuadro. */}
             <div className="absolute inset-7">
@@ -112,19 +115,19 @@ export function Hero() {
 
       {/* Cifras institucionales. En el flujo y empujadas al fondo con mt-auto:
           como capa absoluta se le montaba encima al medallón en mobile. */}
-      <div className="relative mt-auto w-full border-t border-ivory/10 bg-ink/70">
-        <dl className="mx-auto grid max-w-7xl grid-cols-2 divide-ivory/10 px-5 lg:grid-cols-4 lg:divide-x lg:px-8">
+      <div className="border-ivory/10 bg-ink/70 relative mt-auto w-full border-t">
+        <dl className="divide-ivory/10 mx-auto grid max-w-7xl grid-cols-2 px-5 lg:grid-cols-4 lg:divide-x lg:px-8">
           {cifras.map((c, i) => (
             <div
               key={c.detalle}
               {...aparece(0.55 + i * 0.08)}
-              className="px-2 py-3 motion-safe:animate-entrar lg:px-8 lg:py-4"
+              className="motion-safe:animate-entrar px-2 py-3 lg:px-8 lg:py-4"
             >
-              <dt className="font-condensed text-3xl text-gold-bright lg:text-4xl">
+              <dt className="font-condensed text-gold-bright text-3xl lg:text-4xl">
                 {c.valor}
-                {c.unidad ? <span className="ml-1 text-base text-ivory/50">{c.unidad}</span> : null}
+                {c.unidad ? <span className="text-ivory/50 ml-1 text-base">{c.unidad}</span> : null}
               </dt>
-              <dd className="mt-0.5 text-xs leading-snug text-ivory/55 lg:text-[0.8rem]">
+              <dd className="text-ivory/55 mt-0.5 text-xs leading-snug lg:text-[0.8rem]">
                 <span className="sm:hidden">{c.corto}</span>
                 <span className="hidden sm:inline">{c.detalle}</span>
               </dd>

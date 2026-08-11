@@ -17,7 +17,7 @@ export function EventoCentenario() {
   return (
     <section
       id="evento"
-      className="relative isolate scroll-mt-24 overflow-hidden bg-ivory py-12 lg:py-18"
+      className="bg-ivory relative isolate scroll-mt-24 overflow-hidden py-12 lg:py-18"
     >
       <BoardTexture className="text-ink" size={72} opacity={0.035} animate={false} />
 
@@ -27,20 +27,20 @@ export function EventoCentenario() {
         <Reveal className="grid items-end gap-x-12 gap-y-4 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <p className="kicker text-gold-deep">El evento del centenario</p>
-            <h2 className="mt-4 text-3xl leading-[1.06] text-ink sm:text-4xl lg:text-5xl">
+            <h2 className="text-ink mt-4 text-3xl leading-[1.06] sm:text-4xl lg:text-5xl">
               {evento.nombre}
             </h2>
-            <p className="mt-3 font-sans text-sm font-light tracking-[0.22em] text-ink/50 uppercase">
+            <p className="text-ink/50 mt-3 font-sans text-sm font-light tracking-[0.22em] uppercase">
               {evento.subtitulo}
             </p>
           </div>
-          <p className="text-[1.02rem] leading-relaxed text-ink/65 lg:pb-1">{evento.bajada}</p>
+          <p className="text-ink/65 text-[1.02rem] leading-relaxed lg:pb-1">{evento.bajada}</p>
         </Reveal>
 
         <Reveal delay={0.12}>
-          <article className="mt-2 grid overflow-hidden rounded-xl border border-gold/30 bg-ink text-ivory shadow-[var(--shadow-lift)] lg:grid-cols-[0.82fr_1.18fr]">
+          <article className="border-gold/30 bg-ink text-ivory mt-2 grid overflow-hidden rounded-xl border shadow-[var(--shadow-lift)] lg:grid-cols-[0.82fr_1.18fr]">
             {/* Ficha: fecha en tipografía condensada y datos del torneo */}
-            <div className="relative isolate overflow-hidden border-b border-ivory/10 p-6 lg:border-r lg:border-b-0 lg:p-7">
+            <div className="border-ivory/10 relative isolate overflow-hidden border-b p-6 lg:border-r lg:border-b-0 lg:p-7">
               <GraphiteCurves className="opacity-60" />
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(192,145,44,0.2),transparent_60%)]" />
 
@@ -48,13 +48,16 @@ export function EventoCentenario() {
                 <p className="kicker text-gold-bright">{evento.sigla} · Diciembre 2026</p>
 
                 {/* Fecha y mes en una sola línea: apilados sumaban un renglón */}
-                <time dateTime={evento.fechaISO} className="mt-3 flex flex-wrap items-baseline gap-x-3">
-                  <span className="flex items-baseline font-condensed leading-[0.8] text-ivory">
+                <time
+                  dateTime={evento.fechaISO}
+                  className="mt-3 flex flex-wrap items-baseline gap-x-3"
+                >
+                  <span className="font-condensed text-ivory flex items-baseline leading-[0.8]">
                     <span className="text-[3.2rem] lg:text-[3.8rem]">{evento.diaDesde}</span>
-                    <span className="mx-1.5 text-[2rem] text-gold lg:text-[2.2rem]">—</span>
+                    <span className="text-gold mx-1.5 text-[2rem] lg:text-[2.2rem]">—</span>
                     <span className="text-[3.2rem] lg:text-[3.8rem]">{evento.diaHasta}</span>
                   </span>
-                  <span className="font-condensed text-lg tracking-[0.28em] text-gold-bright uppercase lg:text-xl">
+                  <span className="font-condensed text-gold-bright text-lg tracking-[0.28em] uppercase lg:text-xl">
                     {evento.mesCorto} {evento.anio}
                   </span>
                   <span className="sr-only">{evento.fechaTexto}</span>
@@ -65,8 +68,10 @@ export function EventoCentenario() {
                 <dl className="mt-4 grid gap-x-6 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-1">
                   {evento.ficha.map((f) => (
                     <div key={f.rotulo}>
-                      <dt className="kicker text-[0.58rem] text-ivory/40">{f.rotulo}</dt>
-                      <dd className="mt-0.5 text-[0.92rem] leading-snug text-ivory/85">{f.valor}</dd>
+                      <dt className="kicker text-ivory/40 text-[0.58rem]">{f.rotulo}</dt>
+                      <dd className="text-ivory/85 mt-0.5 text-[0.92rem] leading-snug">
+                        {f.valor}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -84,37 +89,37 @@ export function EventoCentenario() {
             <div className="relative isolate overflow-hidden p-6 lg:p-7">
               <ChessGlyph
                 pieza="rey"
-                className="pointer-events-none absolute -right-6 -bottom-14 text-[15rem] leading-none text-ivory/[0.04] select-none"
+                className="text-ivory/[0.04] pointer-events-none absolute -right-6 -bottom-14 text-[15rem] leading-none select-none"
               />
 
               <div className="relative">
-                <p className="text-[0.94rem] leading-[1.6] text-ivory/75">{evento.descripcion}</p>
-                <p className="mt-3 text-[0.94rem] leading-[1.6] text-ivory/75">
+                <p className="text-ivory/75 text-[0.94rem] leading-[1.6]">{evento.descripcion}</p>
+                <p className="text-ivory/75 mt-3 text-[0.94rem] leading-[1.6]">
                   {evento.descripcion2}
                 </p>
 
-                <p className="kicker mt-6 text-[0.6rem] text-gold-bright">Qué incluye la edición</p>
+                <p className="kicker text-gold-bright mt-6 text-[0.6rem]">Qué incluye la edición</p>
                 <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
                   {evento.caracteristicas.map((c) => (
-                    <li key={c} className="flex gap-3 text-[0.9rem] leading-snug text-ivory/80">
+                    <li key={c} className="text-ivory/80 flex gap-3 text-[0.9rem] leading-snug">
                       <span
                         aria-hidden="true"
-                        className="mt-1.5 size-1.5 shrink-0 rotate-45 bg-gold-bright"
+                        className="bg-gold-bright mt-1.5 size-1.5 shrink-0 rotate-45"
                       />
                       {c}
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-ivory/10 pt-5">
+                <div className="border-ivory/10 mt-6 flex flex-wrap items-center gap-4 border-t pt-5">
                   <Button asChild variant="outlineLight">
                     <a href={club.instagramLink} target="_blank" rel="noreferrer">
                       Seguir la cuenta oficial
                       <ArrowRight />
                     </a>
                   </Button>
-                  <p className="text-sm text-ivory/50">
-                    Las bases, el reglamento y la inscripción se publican en {' '}
+                  <p className="text-ivory/50 text-sm">
+                    Las bases, el reglamento y la inscripción se publican en{' '}
                     <span className="text-ivory/70">@{club.instagram}</span>.
                   </p>
                 </div>

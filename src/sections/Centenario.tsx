@@ -37,19 +37,19 @@ type Hito = (typeof hitos)[number]
  */
 function FichaHito({ hito }: { hito: Hito }) {
   return (
-    <div className="animate-jugada rounded-lg border border-gold/25 bg-graphite/60 p-8 backdrop-blur-sm lg:p-9">
+    <div className="animate-jugada border-gold/25 bg-graphite/60 rounded-lg border p-8 backdrop-blur-sm lg:p-9">
       <div className="flex items-center gap-4">
-        <span className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/40 text-gold-bright">
+        <span className="border-gold/40 text-gold-bright grid size-11 shrink-0 place-items-center rounded-full border">
           <ChessGlyph pieza={hito.pieza as Pieza} className="text-xl" />
         </span>
         <div>
-          <p className="font-condensed text-3xl leading-none text-gold-bright">{hito.anio}</p>
-          <p className="kicker mt-1.5 text-[0.6rem] text-ivory/40">{hito.fecha}</p>
+          <p className="font-condensed text-gold-bright text-3xl leading-none">{hito.anio}</p>
+          <p className="kicker text-ivory/40 mt-1.5 text-[0.6rem]">{hito.fecha}</p>
         </div>
       </div>
 
-      <h3 className="mt-7 text-2xl leading-snug text-ivory">{hito.titulo}</h3>
-      <p className="mt-4 text-[0.98rem] leading-relaxed text-ivory/70">{hito.texto}</p>
+      <h3 className="text-ivory mt-7 text-2xl leading-snug">{hito.titulo}</h3>
+      <p className="text-ivory/70 mt-4 text-[0.98rem] leading-relaxed">{hito.texto}</p>
     </div>
   )
 }
@@ -71,7 +71,7 @@ export function Centenario() {
   return (
     <section
       id="centenario"
-      className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-12 text-ivory lg:py-18"
+      className="bg-ink text-ivory relative isolate scroll-mt-24 overflow-hidden py-12 lg:py-18"
     >
       <BoardTexture className="text-ivory" size={64} opacity={0.04} />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_10%,rgba(192,145,44,0.14),transparent_58%)]" />
@@ -90,7 +90,7 @@ export function Centenario() {
                 .map((a) => (
                   <span
                     key={a}
-                    className="self-center font-condensed text-[0.65rem] leading-none text-ivory/30"
+                    className="font-condensed text-ivory/30 self-center text-[0.65rem] leading-none"
                   >
                     ’{String(a).slice(2)}
                   </span>
@@ -133,9 +133,9 @@ export function Centenario() {
                           // casillero: en mobile cada casilla mide ~28px. Solo
                           // en punteros gruesos, porque con mouse ese halo le
                           // robaba el hover a los casilleros vecinos.
-                          'relative grid size-full place-items-center rounded-[3px] bg-gradient-to-br from-gold-bright to-gold-deep text-ink transition-all duration-300 pointer-coarse:after:absolute pointer-coarse:after:-inset-1.5 pointer-coarse:after:content-[""] hover:brightness-115',
+                          'from-gold-bright to-gold-deep text-ink relative grid size-full place-items-center rounded-[3px] bg-gradient-to-br transition-all duration-300 hover:brightness-115 pointer-coarse:after:absolute pointer-coarse:after:-inset-1.5 pointer-coarse:after:content-[""]',
                           hito.anio === ancla.anio
-                            ? 'ring-2 ring-gold-bright ring-offset-2 ring-offset-ink'
+                            ? 'ring-gold-bright ring-offset-ink ring-2 ring-offset-2'
                             : 'opacity-80 hover:opacity-100',
                         )}
                       >
@@ -169,17 +169,17 @@ export function Centenario() {
           </div>
 
           {/* Lectura del casillero + la jugada en curso */}
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-ivory/10 pt-6">
+          <div className="border-ivory/10 mt-6 flex flex-wrap items-center justify-between gap-4 border-t pt-6">
             <p
               aria-live="polite"
-              className="min-w-0 font-condensed text-xl tracking-wide text-ivory/60"
+              className="font-condensed text-ivory/60 min-w-0 text-xl tracking-wide"
             >
               {anioMirado || tocado ? (
                 // El año va siempre en el mismo lugar: si alternara con el
                 // rótulo del hito, la línea se movería sola con el mouse.
                 <span className="flex flex-wrap items-baseline gap-x-2.5">
                   <span className="text-gold-bright">{anioMirado ?? hito.anio}</span>
-                  <span className="font-sans text-[0.68rem] font-light tracking-[0.16em] text-ivory/45 uppercase">
+                  <span className="text-ivory/45 font-sans text-[0.68rem] font-light tracking-[0.16em] uppercase">
                     {anioMirado ? '' : hito.fecha}
                   </span>
                 </span>
@@ -203,7 +203,7 @@ export function Centenario() {
             >
               <ChessGlyph pieza={cierre.pieza as Pieza} className="text-xl" />
               <span className="text-left leading-tight">
-                <span className="block font-condensed text-lg tracking-wide">{cierre.anio}</span>
+                <span className="font-condensed block text-lg tracking-wide">{cierre.anio}</span>
                 <span className="block text-[0.62rem] tracking-[0.14em] uppercase opacity-70">
                   La jugada en curso
                 </span>
@@ -222,13 +222,14 @@ export function Centenario() {
         <div className="order-1 lg:order-2">
           <Reveal>
             <p className="kicker text-gold-bright">1926 — 2026</p>
-            <h2 className="mt-5 text-4xl leading-[1.04] text-ivory sm:text-5xl lg:text-[3.4rem]">
+            <h2 className="text-ivory mt-5 text-4xl leading-[1.04] sm:text-5xl lg:text-[3.4rem]">
               Cien casilleros,
-              <span className="block text-gold-gradient">cien años</span>
+              <span className="text-gold-gradient block">cien años</span>
             </h2>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-ivory/70">
+            <p className="text-ivory/70 mt-7 max-w-xl text-lg leading-relaxed">
               Cada fila del tablero es una década y cada casillero un año del club, desde aquella
-              primera reunión en el Palace Hotel. Los cinco de oro son los que cambiaron su historia.
+              primera reunión en el Palace Hotel. Los cinco de oro son los que cambiaron su
+              historia.
             </p>
           </Reveal>
 
@@ -239,16 +240,16 @@ export function Centenario() {
 
           {/* Antigüedad en perspectiva: tres fechas y se entiende sola */}
           <Reveal delay={0.14}>
-            <div className="mt-8 border-t border-ivory/12 pt-7">
-              <p className="kicker text-[0.58rem] text-ivory/40">{contextoAntiguedad.titulo}</p>
+            <div className="border-ivory/12 mt-8 border-t pt-7">
+              <p className="kicker text-ivory/40 text-[0.58rem]">{contextoAntiguedad.titulo}</p>
               <ol className="mt-5 flex flex-wrap items-start gap-x-10 gap-y-5">
                 {contextoAntiguedad.fechas.map((f) => (
                   <li key={f.anio}>
                     <p
                       className={
                         f.propio
-                          ? 'font-condensed text-3xl leading-none text-gold-bright'
-                          : 'font-condensed text-3xl leading-none text-ivory/45'
+                          ? 'font-condensed text-gold-bright text-3xl leading-none'
+                          : 'font-condensed text-ivory/45 text-3xl leading-none'
                       }
                     >
                       {f.anio}
@@ -256,8 +257,8 @@ export function Centenario() {
                     <p
                       className={
                         f.propio
-                          ? 'mt-1.5 text-[0.82rem] text-ivory/80'
-                          : 'mt-1.5 text-[0.82rem] text-ivory/45'
+                          ? 'text-ivory/80 mt-1.5 text-[0.82rem]'
+                          : 'text-ivory/45 mt-1.5 text-[0.82rem]'
                       }
                     >
                       {f.que}
@@ -265,7 +266,7 @@ export function Centenario() {
                   </li>
                 ))}
               </ol>
-              <p className="mt-5 max-w-xl text-[0.9rem] leading-relaxed text-ivory/55">
+              <p className="text-ivory/55 mt-5 max-w-xl text-[0.9rem] leading-relaxed">
                 {contextoAntiguedad.texto}
               </p>
             </div>

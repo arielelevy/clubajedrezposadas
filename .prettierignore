@@ -1,0 +1,19 @@
+# Generado por el build
+dist/
+node_modules/
+
+# La prosa va cortada a mano, con los saltos donde ayudan a leerla. Prettier
+# reacomoda los párrafos enteros y el diff no dice nada.
+*.md
+
+# Datos generados por los scripts de sync: se reescriben enteros y el formato
+# lo decide JSON.stringify, no prettier.
+src/data/fotos.json
+src/data/socios.json
+
+# Assets y material del club
+src/assets/
+public/
+Material/
+
+package-lock.json

@@ -132,7 +132,8 @@ export function fenATablero(fen: string): Casilla[][] {
 
 /** Agrupa las jugadas en pares (blancas / negras) para la planilla. */
 export function agruparJugadas(plies: Ply[]) {
-  const pares: { numero: number; blancas?: Ply; negras?: Ply; indiceB: number; indiceN: number }[] = []
+  const pares: { numero: number; blancas?: Ply; negras?: Ply; indiceB: number; indiceN: number }[] =
+    []
   plies.forEach((ply, i) => {
     const par = pares.find((p) => p.numero === ply.numero)
     if (ply.color === 'w') {

@@ -21,7 +21,9 @@ export function SectionHeading({
   return (
     <Reveal className={cn(align === 'center' && 'text-center', className)}>
       {kicker ? (
-        <p className={cn('kicker mb-3', oscuro ? 'text-gold-bright' : 'text-gold-deep')}>{kicker}</p>
+        <p className={cn('kicker mb-3', oscuro ? 'text-gold-bright' : 'text-gold-deep')}>
+          {kicker}
+        </p>
       ) : null}
       <h2
         className={cn(

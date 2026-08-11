@@ -25,9 +25,7 @@ export function GameViewer({ partida }: { partida: Partida }) {
   const [invertido, setInvertido] = useState(false)
 
   // Arranca en silencio: audio que suena sin que lo pidas es una molestia.
-  const [conSonido, setConSonido] = useState(
-    () => localStorage.getItem(CLAVE_SONIDO) === '1',
-  )
+  const [conSonido, setConSonido] = useState(() => localStorage.getItem(CLAVE_SONIDO) === '1')
 
   useEffect(() => {
     localStorage.setItem(CLAVE_SONIDO, conSonido ? '1' : '0')
@@ -147,14 +145,14 @@ export function GameViewer({ partida }: { partida: Partida }) {
             </BotonControl>
           </div>
 
-          <div className="flex items-center gap-4 text-xs text-ink/55">
+          <div className="text-ink/55 flex items-center gap-4 text-xs">
             <span>
               Jugada {Math.max(indice + 1, 0)} de {total}
             </span>
             <a
               href={pgnUrl}
               download={`${partida.blancas}-${partida.negras}.pgn`}
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-gold-deep"
+              className="hover:text-gold-deep inline-flex items-center gap-1.5 transition-colors"
             >
               <Download className="size-3.5" />
               PGN
@@ -164,32 +162,45 @@ export function GameViewer({ partida }: { partida: Partida }) {
       </div>
 
       {/* Ficha + planilla */}
-      <div className="flex flex-col rounded-lg border border-ink/8 bg-white/70">
-        <div className="border-b border-ink/8 p-4">
-          <p className="kicker text-[0.58rem] text-gold-deep">{partida.evento}</p>
+      <div className="border-ink/8 flex flex-col rounded-lg border bg-white/70">
+        <div className="border-ink/8 border-b p-4">
+          <p className="kicker text-gold-deep text-[0.58rem]">{partida.evento}</p>
           <div className="mt-2.5 space-y-1.5 text-sm">
             <Jugador nombre={partida.blancas} elo={partida.eloBlancas} color="w" />
             <Jugador nombre={partida.negras} elo={partida.eloNegras} color="b" />
           </div>
-          <p className="mt-3 text-xs text-ink/50">
+          <p className="text-ink/50 mt-3 text-xs">
             {[partida.ronda && `Ronda ${partida.ronda}`, partida.fecha, resultado]
               .filter(Boolean)
               .join(' · ')}
           </p>
           {partida.apertura ? (
-            <p className="mt-2 text-xs text-ink/45 italic">{partida.apertura}</p>
+            <p className="text-ink/45 mt-2 text-xs italic">{partida.apertura}</p>
           ) : null}
         </div>
 
         <ol className="max-h-[17rem] flex-1 overflow-y-auto p-3 text-sm">
           {pares.map((par) => (
-            <li key={par.numero} className="grid grid-cols-[2.2rem_1fr_1fr] items-center gap-1 py-0.5">
-              <span className="text-xs text-ink/40">{par.numero}.</span>
-              <JugadaBoton ply={par.blancas?.san} activo={indice === par.indiceB} onClick={() => setIndice(par.indiceB)} />
-              <JugadaBoton ply={par.negras?.san} activo={indice === par.indiceN} onClick={() => setIndice(par.indiceN)} />
+            <li
+              key={par.numero}
+              className="grid grid-cols-[2.2rem_1fr_1fr] items-center gap-1 py-0.5"
+            >
+              <span className="text-ink/40 text-xs">{par.numero}.</span>
+              <JugadaBoton
+                ply={par.blancas?.san}
+                activo={indice === par.indiceB}
+                onClick={() => setIndice(par.indiceB)}
+              />
+              <JugadaBoton
+                ply={par.negras?.san}
+                activo={indice === par.indiceN}
+                onClick={() => setIndice(par.indiceN)}
+              />
             </li>
           ))}
-          {total === 0 ? <li className="text-xs text-ink/50">La partida no tiene jugadas cargadas.</li> : null}
+          {total === 0 ? (
+            <li className="text-ink/50 text-xs">La partida no tiene jugadas cargadas.</li>
+          ) : null}
         </ol>
       </div>
     </div>
@@ -244,7 +255,7 @@ function JugadaBoton({
       onClick={onClick}
       className={cn(
         'rounded px-2 py-1 text-left font-mono text-[0.8rem] transition-colors',
-        activo ? 'bg-gold/20 font-semibold text-ink' : 'text-ink/75 hover:bg-ink/5',
+        activo ? 'bg-gold/20 text-ink font-semibold' : 'text-ink/75 hover:bg-ink/5',
       )}
     >
       {ply}
@@ -261,8 +272,8 @@ function Jugador({ nombre, elo, color }: { nombre: string; elo: string; color: '
           color === 'w' ? 'border-ink/25 bg-bone' : 'border-ink/60 bg-ink',
         )}
       />
-      <span className="font-medium text-ink">{nombre}</span>
-      {elo ? <span className="text-xs text-ink/45">{elo}</span> : null}
+      <span className="text-ink font-medium">{nombre}</span>
+      {elo ? <span className="text-ink/45 text-xs">{elo}</span> : null}
     </p>
   )
 }

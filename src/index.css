@@ -146,7 +146,7 @@
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-3 outline-gold;
+    @apply outline-gold outline-2 outline-offset-3;
   }
 
   @media (prefers-reduced-motion: reduce) {

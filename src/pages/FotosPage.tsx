@@ -40,7 +40,7 @@ export function FotosPage() {
       <section className="bg-bone py-12 lg:py-18">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           {fotos.length === 0 ? (
-            <p className="mx-auto max-w-xl text-center text-lg leading-relaxed text-ink/60">
+            <p className="text-ink/60 mx-auto max-w-xl text-center text-lg leading-relaxed">
               Todavía no hay fotos cargadas: las primeras están en camino.
             </p>
           ) : (
@@ -52,7 +52,7 @@ export function FotosPage() {
                       type="button"
                       onClick={() => setAbierta(i)}
                       aria-label={`Ampliar: ${foto.epigrafe}`}
-                      className="group relative block w-full overflow-hidden rounded-lg border border-ink/8 bg-ink/5"
+                      className="group border-ink/8 bg-ink/5 relative block w-full overflow-hidden rounded-lg border"
                     >
                       <span className="block aspect-4/3">
                         <img
@@ -62,11 +62,11 @@ export function FotosPage() {
                           className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                       </span>
-                      <span className="absolute top-3 right-3 grid size-9 place-items-center rounded-full border border-ivory/30 bg-ink/60 text-ivory opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                      <span className="border-ivory/30 bg-ink/60 text-ivory absolute top-3 right-3 grid size-9 place-items-center rounded-full border opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                         <Camera className="size-4" />
                       </span>
                     </button>
-                    <figcaption className="mt-3 text-[0.88rem] leading-relaxed text-ink/65">
+                    <figcaption className="text-ink/65 mt-3 text-[0.88rem] leading-relaxed">
                       {foto.epigrafe}
                     </figcaption>
                   </figure>

@@ -27,7 +27,7 @@ export function HistoriaPage() {
         titulo={
           <>
             Reseña histórica de
-            <span className="block text-gold-gradient">un siglo de ajedrez</span>
+            <span className="text-gold-gradient block">un siglo de ajedrez</span>
           </>
         }
         bajada={historia.bajada}
@@ -40,8 +40,8 @@ export function HistoriaPage() {
               <p
                 className={
                   i === 0
-                    ? 'font-display text-2xl leading-relaxed text-ink first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-gold'
-                    : 'mt-7 text-[1.05rem] leading-[1.85] text-ink/75'
+                    ? 'font-display text-ink first-letter:font-display first-letter:text-gold text-2xl leading-relaxed first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:leading-[0.8]'
+                    : 'text-ink/75 mt-7 text-[1.05rem] leading-[1.85]'
                 }
               >
                 {p}
@@ -55,14 +55,14 @@ export function HistoriaPage() {
 
           {historia.cierre.map((p, i) => (
             <Reveal key={i} delay={0.05 * i}>
-              <p className="mt-6 font-display text-xl leading-relaxed text-ink/85 italic">{p}</p>
+              <p className="font-display text-ink/85 mt-6 text-xl leading-relaxed italic">{p}</p>
             </Reveal>
           ))}
         </div>
       </section>
 
       {/* El acta de fundación y la primera comisión directiva */}
-      <section id="acta" className="scroll-mt-24 bg-ivory py-12 lg:py-16">
+      <section id="acta" className="bg-ivory scroll-mt-24 py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
             <Reveal>
@@ -71,9 +71,9 @@ export function HistoriaPage() {
                   src={actaUrl}
                   alt="Acta N° 1 del Club de Ajedrez Posadas, manuscrita el 12 de julio de 1926 en el Palace Hotel, con la distribución de cargos de la primera comisión directiva"
                   loading="lazy"
-                  className="w-full rounded-lg border border-ink/10 shadow-[var(--shadow-lift)]"
+                  className="border-ink/10 w-full rounded-lg border shadow-[var(--shadow-lift)]"
                 />
-                <figcaption className="mt-3 text-xs text-ink/45">
+                <figcaption className="text-ink/45 mt-3 text-xs">
                   Acta N.º 1, libro de actas del club.
                 </figcaption>
               </figure>
@@ -81,19 +81,19 @@ export function HistoriaPage() {
 
             <Reveal delay={0.1}>
               <p className="kicker text-gold-deep">12 de julio de 1926</p>
-              <h2 className="mt-3 text-3xl text-ink lg:text-4xl">{comisionFundadora.titulo}</h2>
-              <p className="mt-5 text-[1.02rem] leading-relaxed text-ink/70">
+              <h2 className="text-ink mt-3 text-3xl lg:text-4xl">{comisionFundadora.titulo}</h2>
+              <p className="text-ink/70 mt-5 text-[1.02rem] leading-relaxed">
                 {comisionFundadora.bajada}
               </p>
 
-              <dl className="mt-8 divide-y divide-ink/8 border-t border-ink/8">
+              <dl className="divide-ink/8 border-ink/8 mt-8 divide-y border-t">
                 {comisionFundadora.cargos.map((c) => (
                   <div key={c.cargo} className="grid grid-cols-[8rem_1fr] gap-4 py-2.5">
-                    <dt className="kicker text-[0.58rem] text-ink/40">{c.cargo}</dt>
-                    <dd className="text-[0.95rem] text-ink/85">
+                    <dt className="kicker text-ink/40 text-[0.58rem]">{c.cargo}</dt>
+                    <dd className="text-ink/85 text-[0.95rem]">
                       {c.nombre}
                       {c.aConfirmar ? (
-                        <span className="ml-1 text-gold-deep" title="Pendiente de confirmación">
+                        <span className="text-gold-deep ml-1" title="Pendiente de confirmación">
                           *
                         </span>
                       ) : null}
@@ -102,7 +102,7 @@ export function HistoriaPage() {
                 ))}
               </dl>
 
-              <p className="mt-5 text-xs text-ink/45">{comisionFundadora.nota}</p>
+              <p className="text-ink/45 mt-5 text-xs">{comisionFundadora.nota}</p>
             </Reveal>
           </div>
 
@@ -111,19 +111,19 @@ export function HistoriaPage() {
           <div className="mt-12 grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
             <Reveal>
               <p className="kicker text-gold-deep">12 de julio de 2026</p>
-              <h2 className="mt-3 text-3xl text-ink lg:text-4xl">{comisionCentenario.titulo}</h2>
-              <p className="mt-5 text-[1.02rem] leading-relaxed text-ink/70">
+              <h2 className="text-ink mt-3 text-3xl lg:text-4xl">{comisionCentenario.titulo}</h2>
+              <p className="text-ink/70 mt-5 text-[1.02rem] leading-relaxed">
                 {comisionCentenario.bajada}
               </p>
 
-              <dl className="mt-8 divide-y divide-ink/8 border-t border-ink/8">
+              <dl className="divide-ink/8 border-ink/8 mt-8 divide-y border-t">
                 {comisionCentenario.cargos.map((c) => (
                   <div
                     key={`${c.cargo}-${c.nombre}`}
                     className="grid gap-1 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"
                   >
-                    <dt className="kicker text-[0.58rem] text-ink/40">{c.cargo}</dt>
-                    <dd className="text-[0.95rem] text-ink/85">{c.nombre}</dd>
+                    <dt className="kicker text-ink/40 text-[0.58rem]">{c.cargo}</dt>
+                    <dd className="text-ink/85 text-[0.95rem]">{c.nombre}</dd>
                   </div>
                 ))}
               </dl>
@@ -135,9 +135,9 @@ export function HistoriaPage() {
                   src={placaUrl}
                   alt="Placa conmemorativa del centenario del Club de Ajedrez Posadas, titulada Hogar de Ajedrecistas, con los nombres de la comisión directiva"
                   loading="lazy"
-                  className="w-full rounded-lg border border-ink/10 shadow-[var(--shadow-lift)]"
+                  className="border-ink/10 w-full rounded-lg border shadow-[var(--shadow-lift)]"
                 />
-                <figcaption className="mt-3 text-xs text-ink/45">
+                <figcaption className="text-ink/45 mt-3 text-xs">
                   “Hogar de Ajedrecistas”, en la sede de {club.direccion}.
                 </figcaption>
               </figure>
@@ -147,7 +147,7 @@ export function HistoriaPage() {
       </section>
 
       {/* La década 2010-2019 según las crónicas que el club publicó en su momento */}
-      <section id="decada" className="scroll-mt-24 bg-bone py-12 lg:py-16">
+      <section id="decada" className="bg-bone scroll-mt-24 py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <div className="max-w-3xl">
             <SectionHeading
@@ -160,20 +160,20 @@ export function HistoriaPage() {
           <div className="mt-9 grid gap-5 lg:grid-cols-2">
             {decadaTorneos.destacados.map((t, i) => (
               <Reveal key={`${t.anio}-${t.nombre}`} delay={0.05 * (i % 2)}>
-                <article className="flex h-full flex-col rounded-lg border border-ink/8 bg-white/70 p-6 transition-colors duration-500 hover:border-gold/45 lg:p-7">
+                <article className="border-ink/8 hover:border-gold/45 flex h-full flex-col rounded-lg border bg-white/70 p-6 transition-colors duration-500 lg:p-7">
                   <div className="flex items-baseline gap-3">
-                    <p className="font-condensed text-3xl leading-none text-gold-deep">{t.anio}</p>
-                    <p className="kicker text-[0.58rem] text-ink/40">{t.fecha}</p>
+                    <p className="font-condensed text-gold-deep text-3xl leading-none">{t.anio}</p>
+                    <p className="kicker text-ink/40 text-[0.58rem]">{t.fecha}</p>
                   </div>
-                  <h3 className="mt-3 font-display text-2xl leading-snug text-ink">{t.nombre}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/70">{t.texto}</p>
+                  <h3 className="font-display text-ink mt-3 text-2xl leading-snug">{t.nombre}</h3>
+                  <p className="text-ink/70 mt-3 text-[0.95rem] leading-relaxed">{t.texto}</p>
 
                   {/* El campeón cierra la ficha: es el dato que la crónica destacaba */}
-                  <div className="mt-auto flex items-start gap-3 border-t border-ink/8 pt-5">
-                    <ChessGlyph pieza={t.pieza as Pieza} className="mt-0.5 text-xl text-gold" />
+                  <div className="border-ink/8 mt-auto flex items-start gap-3 border-t pt-5">
+                    <ChessGlyph pieza={t.pieza as Pieza} className="text-gold mt-0.5 text-xl" />
                     <div>
-                      <p className="text-[0.95rem] font-medium text-ink">Campeón: {t.campeon}</p>
-                      <p className="mt-1 text-[0.88rem] leading-relaxed text-ink/60">{t.cierre}</p>
+                      <p className="text-ink text-[0.95rem] font-medium">Campeón: {t.campeon}</p>
+                      <p className="text-ink/60 mt-1 text-[0.88rem] leading-relaxed">{t.cierre}</p>
                     </div>
                   </div>
                 </article>
@@ -184,16 +184,16 @@ export function HistoriaPage() {
           {/* El resto de la serie, año por año */}
           <Reveal className="mt-11">
             <GoldDivider className="max-w-xs" />
-            <p className="kicker mt-6 text-gold-deep">Y además</p>
-            <dl className="mt-4 divide-y divide-ink/8 border-t border-ink/8">
+            <p className="kicker text-gold-deep mt-6">Y además</p>
+            <dl className="divide-ink/8 border-ink/8 mt-4 divide-y border-t">
               {decadaTorneos.serie.map((a) => (
                 <div key={a.anio} className="grid gap-1 py-3 sm:grid-cols-[5rem_1fr] sm:gap-6">
-                  <dt className="font-condensed text-xl leading-none text-gold-deep">{a.anio}</dt>
-                  <dd className="text-[0.95rem] text-ink/70">{a.torneos.join(' · ')}</dd>
+                  <dt className="font-condensed text-gold-deep text-xl leading-none">{a.anio}</dt>
+                  <dd className="text-ink/70 text-[0.95rem]">{a.torneos.join(' · ')}</dd>
                 </div>
               ))}
             </dl>
-            <p className="mt-5 text-xs text-ink/45">{decadaTorneos.nota}</p>
+            <p className="text-ink/45 mt-5 text-xs">{decadaTorneos.nota}</p>
           </Reveal>
 
           {/* De 2020 en adelante el blog ya no publicaba: la fuente pasa a ser la
@@ -201,34 +201,34 @@ export function HistoriaPage() {
           {hayTorneos ? (
             <Reveal className="mt-12">
               <p className="kicker text-gold-deep">{copyTorneos.titulo}</p>
-              <p className="mt-4 max-w-2xl text-[1.02rem] leading-relaxed text-ink/70">
+              <p className="text-ink/70 mt-4 max-w-2xl text-[1.02rem] leading-relaxed">
                 {copyTorneos.bajada}
               </p>
 
-              <ul className="mt-7 divide-y divide-ink/8 border-t border-ink/8">
+              <ul className="divide-ink/8 border-ink/8 mt-7 divide-y border-t">
                 {torneosDelClub.map((t) => (
                   <li
                     key={`${t.anio}-${t.nombre}`}
                     className="grid gap-2 py-4 sm:grid-cols-[4.5rem_1fr_auto] sm:gap-6"
                   >
-                    <p className="font-condensed text-2xl leading-none text-gold-deep">{t.anio}</p>
+                    <p className="font-condensed text-gold-deep text-2xl leading-none">{t.anio}</p>
                     <div>
                       <a
                         href={t.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="font-display text-lg leading-snug text-ink transition-colors hover:text-gold-deep"
+                        className="font-display text-ink hover:text-gold-deep text-lg leading-snug transition-colors"
                         title="Ver la planilla en Chess-Results"
                       >
                         {t.nombre}
                       </a>
-                      <p className="kicker mt-1 text-[0.55rem] text-ink/35">{t.detalle}</p>
-                      <p className="mt-2 text-[0.9rem] leading-relaxed text-ink/60">{t.cierre}</p>
+                      <p className="kicker text-ink/35 mt-1 text-[0.55rem]">{t.detalle}</p>
+                      <p className="text-ink/60 mt-2 text-[0.9rem] leading-relaxed">{t.cierre}</p>
                     </div>
-                    <p className="text-[0.95rem] text-ink sm:text-right">
+                    <p className="text-ink text-[0.95rem] sm:text-right">
                       <span className="font-medium">{t.campeon}</span>
                       {t.puntos ? (
-                        <span className="mt-0.5 block text-xs text-gold-deep">
+                        <span className="text-gold-deep mt-0.5 block text-xs">
                           {t.puntos} {t.unidad}
                         </span>
                       ) : null}
@@ -236,7 +236,7 @@ export function HistoriaPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-xs text-ink/45">{copyTorneos.nota}</p>
+              <p className="text-ink/45 mt-5 text-xs">{copyTorneos.nota}</p>
             </Reveal>
           ) : null}
         </div>
@@ -249,7 +249,7 @@ export function HistoriaPage() {
       {/* Línea del tiempo: los hitos del siglo */}
       <section
         id="hitos"
-        className="relative isolate scroll-mt-24 overflow-hidden bg-ink py-12 text-ivory lg:py-18"
+        className="bg-ink text-ivory relative isolate scroll-mt-24 overflow-hidden py-12 lg:py-18"
       >
         <BoardTexture className="text-ivory" size={58} opacity={0.05} />
         <GraphiteCurves className="opacity-70" />
@@ -269,7 +269,7 @@ export function HistoriaPage() {
             {/* Riel vertical */}
             <span
               aria-hidden="true"
-              className="absolute top-2 bottom-2 left-[1.15rem] w-px bg-gradient-to-b from-transparent via-gold/45 to-transparent lg:left-1/2"
+              className="via-gold/45 absolute top-2 bottom-2 left-[1.15rem] w-px bg-gradient-to-b from-transparent to-transparent lg:left-1/2"
             />
 
             {hitos.map((h, i) => (
@@ -283,19 +283,19 @@ export function HistoriaPage() {
                     >
                       {/* Nodo */}
                       <span
-                        className={`absolute top-1 left-0 grid size-10 place-items-center rounded-full border border-gold/40 bg-ink text-gold-bright ${
-                          i % 2 === 1 ? 'lg:right-auto lg:-left-5' : 'lg:left-auto lg:-right-5'
+                        className={`border-gold/40 bg-ink text-gold-bright absolute top-1 left-0 grid size-10 place-items-center rounded-full border ${
+                          i % 2 === 1 ? 'lg:right-auto lg:-left-5' : 'lg:-right-5 lg:left-auto'
                         }`}
                       >
                         <ChessGlyph pieza={h.pieza as Pieza} className="text-xl" />
                       </span>
 
-                      <p className="font-condensed text-4xl leading-none text-gold-bright lg:text-5xl">
+                      <p className="font-condensed text-gold-bright text-4xl leading-none lg:text-5xl">
                         {h.anio}
                       </p>
-                      <p className="kicker mt-2 text-[0.62rem] text-ivory/45">{h.fecha}</p>
-                      <h3 className="mt-4 text-2xl text-ivory lg:text-[1.75rem]">{h.titulo}</h3>
-                      <p className="mt-3 text-[0.95rem] leading-relaxed text-ivory/65">{h.texto}</p>
+                      <p className="kicker text-ivory/45 mt-2 text-[0.62rem]">{h.fecha}</p>
+                      <h3 className="text-ivory mt-4 text-2xl lg:text-[1.75rem]">{h.titulo}</h3>
+                      <p className="text-ivory/65 mt-3 text-[0.95rem] leading-relaxed">{h.texto}</p>
                     </div>
                   </div>
                 </Reveal>

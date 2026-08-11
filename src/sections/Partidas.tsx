@@ -164,7 +164,7 @@ export function Partidas() {
   const partida = partidas[seleccionada]
 
   return (
-    <section ref={seccion} id="partidas" className="scroll-mt-20 bg-ivory py-10 lg:py-14">
+    <section ref={seccion} id="partidas" className="bg-ivory scroll-mt-20 py-10 lg:py-14">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <SectionHeading
           kicker="Tablero en vivo"
@@ -201,7 +201,7 @@ export function Partidas() {
                 title={[t.ronda.torneo, t.ronda.ronda, t.ronda.info].filter(Boolean).join(' · ')}
               >
                 {t.ronda.enVivo ? (
-                  <span className="mr-2 inline-block size-1.5 rounded-full bg-mate" />
+                  <span className="bg-mate mr-2 inline-block size-1.5 rounded-full" />
                 ) : null}
                 {t.ronda.torneo} · {t.ronda.ronda}
               </button>
@@ -211,21 +211,23 @@ export function Partidas() {
 
         <div className="mt-5">
           {cargando ? (
-            <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-12 text-ink/50">
-              <LoaderCircle className="size-7 animate-spin text-gold" />
+            <div className="border-ink/8 bg-bone text-ink/50 grid place-items-center rounded-lg border py-12">
+              <LoaderCircle className="text-gold size-7 animate-spin" />
               <p className="mt-4 text-sm">
                 {fuente === 'elite' ? 'Consultando Lichess…' : 'Leyendo las partidas…'}
               </p>
             </div>
           ) : error ? (
-            <div className="mx-auto max-w-xl rounded-lg border border-mate/30 bg-bone p-8 text-center">
-              <TriangleAlert className="mx-auto size-7 text-mate" />
-              <p className="mt-4 font-display text-xl text-ink">No se pudieron cargar las partidas</p>
-              <p className="mt-2 text-sm text-ink/60">{error}</p>
+            <div className="border-mate/30 bg-bone mx-auto max-w-xl rounded-lg border p-8 text-center">
+              <TriangleAlert className="text-mate mx-auto size-7" />
+              <p className="font-display text-ink mt-4 text-xl">
+                No se pudieron cargar las partidas
+              </p>
+              <p className="text-ink/60 mt-2 text-sm">{error}</p>
               <button
                 type="button"
                 onClick={() => (fuente === 'club' ? cargarDelClub() : cargarElite())}
-                className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink/15 px-5 py-2.5 text-sm transition-colors hover:border-gold hover:text-gold-deep"
+                className="border-ink/15 hover:border-gold hover:text-gold-deep mt-6 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm transition-colors"
               >
                 <RefreshCw className="size-4" />
                 Reintentar
@@ -249,10 +251,10 @@ export function Partidas() {
                           : 'border-ink/8 bg-bone/60 hover:border-gold/40',
                       )}
                     >
-                      <p className="text-[0.82rem] leading-snug font-medium text-ink">
+                      <p className="text-ink text-[0.82rem] leading-snug font-medium">
                         {p.blancas} — {p.negras}
                       </p>
-                      <p className="mt-1 text-[0.7rem] text-ink/50">
+                      <p className="text-ink/50 mt-1 text-[0.7rem]">
                         {[p.evento, p.resultado].filter(Boolean).join(' · ')}
                       </p>
                     </button>
@@ -263,8 +265,8 @@ export function Partidas() {
               <div className="order-1 lg:order-none">
                 <Suspense
                   fallback={
-                    <div className="grid place-items-center rounded-lg border border-ink/8 bg-bone py-12">
-                      <LoaderCircle className="size-7 animate-spin text-gold" />
+                    <div className="border-ink/8 bg-bone grid place-items-center rounded-lg border py-12">
+                      <LoaderCircle className="text-gold size-7 animate-spin" />
                     </div>
                   }
                 >
@@ -273,11 +275,11 @@ export function Partidas() {
               </div>
             </div>
           ) : (
-            <p className="text-center text-sm text-ink/50">No hay partidas para mostrar.</p>
+            <p className="text-ink/50 text-center text-sm">No hay partidas para mostrar.</p>
           )}
         </div>
 
-        <p className="mt-6 text-center text-xs text-ink/45">
+        <p className="text-ink/45 mt-6 text-center text-xs">
           Las partidas de elite se leen en vivo desde la API pública de Lichess. Las clásicas se
           publican como archivos PGN, sin necesidad de servidor.
         </p>

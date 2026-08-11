@@ -55,7 +55,7 @@ export function BoardTexture({
       aria-hidden="true"
       className={cn(
         'board-texture pointer-events-none absolute inset-0 text-current',
-        animate && 'animate-drift [contain:paint] [will-change:transform]',
+        animate && 'animate-drift [will-change:transform] [contain:paint]',
         className,
       )}
       style={{ ['--board-size' as string]: `${size}px`, opacity }}
@@ -68,7 +68,7 @@ export function GoldDivider({ className }: { className?: string }) {
   return (
     <div className={cn('flex items-center gap-4', className)} aria-hidden="true">
       <span className="rule-gold h-px flex-1" />
-      <span className="size-1.5 rotate-45 bg-gold-bright" />
+      <span className="bg-gold-bright size-1.5 rotate-45" />
       <span className="rule-gold h-px flex-1" />
     </div>
   )

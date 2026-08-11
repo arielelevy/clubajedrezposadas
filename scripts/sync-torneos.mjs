@@ -147,7 +147,9 @@ async function leerTorneo(id) {
     porEquipos,
     participantes: puestos.length,
     podio: puestos.slice(0, 3),
-    actualizado: actualizado.length ? `${actualizado[2]}-${actualizado[1]}-${actualizado[0]}` : null,
+    actualizado: actualizado.length
+      ? `${actualizado[2]}-${actualizado[1]}-${actualizado[0]}`
+      : null,
     url: `https://chess-results.com/tnr${id}.aspx?lan=2`,
   }
 }
