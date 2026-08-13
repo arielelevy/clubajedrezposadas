@@ -14,6 +14,9 @@ import { Home } from './pages/Home'
 const HistoriaPage = lazy(() =>
   import('./pages/HistoriaPage').then((m) => ({ default: m.HistoriaPage })),
 )
+const FestivalPage = lazy(() =>
+  import('./pages/FestivalPage').then((m) => ({ default: m.FestivalPage })),
+)
 const AuspiciosPage = lazy(() =>
   import('./pages/AuspiciosPage').then((m) => ({ default: m.AuspiciosPage })),
 )
@@ -34,6 +37,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/historia" element={<HistoriaPage />} />
+            <Route path="/festival" element={<FestivalPage />} />
             <Route path="/auspicios" element={<AuspiciosPage />} />
             <Route path="/socios" element={<SociosPage />} />
             <Route path="/fotos" element={<FotosPage />} />

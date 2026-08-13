@@ -24,6 +24,26 @@
   --color-gold-deep: #8f6a1c;
   --color-mate: #d9821b;
 
+  /* ----------------------------------------------------------------
+     Paleta extendida del festival, muestreada del sello de la Federación
+     Argentina de Ajedrez que va en el afiche: el aro azul y el fondo rojo.
+
+     Reparto de trabajo, para que sumar dos colores no rompa la identidad del
+     club: el oro sigue siendo el centenario y los premios, el azul marca lo
+     deportivo-oficial (validez FIDE, arbitraje, planillas de Chess-Results) y
+     el rojo marca lo que vence (plazos, cupos, aforo). Sin ese reparto la
+     página del festival sería un semáforo.
+
+     Las variantes existen por contraste: `-deep` para texto sobre los fondos
+     claros, `-bright` para texto sobre el grafito. Los tonos planos quedan
+     para bordes y fondos translúcidos.
+     ---------------------------------------------------------------- */
+  --color-fada-blue: #1476bd;
+  --color-fada-blue-bright: #4aa3e0;
+  --color-fada-blue-deep: #0e4f7f;
+  --color-fada-red: #a50f14;
+  --color-fada-red-bright: #e0555c;
+
   --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-condensed: 'Bebas Neue', 'Inter', sans-serif;

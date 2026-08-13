@@ -45,7 +45,10 @@ export const club = {
 export const navegacion = [
   { label: 'El club', href: '/#el-club' },
   { label: 'Historia', href: '/historia' },
-  { label: 'Centenario', href: '/#evento' },
+  /* El centenario dejó de ser una sección del inicio y pasó a ser la página del
+     festival: ahí está la información completa de los cuatro torneos. La sección
+     del inicio quedó como adelanto y sigue anclada en /#evento. */
+  { label: 'Festival', href: '/festival' },
   { label: 'Talleres', href: '/#talleres' },
   { label: 'Partidas', href: '/#partidas' },
   { label: 'Galería', href: '/fotos' },
@@ -53,46 +56,13 @@ export const navegacion = [
   { label: 'Socios', href: '/socios' },
 ] as const
 
-/**
- * Evento central del centenario (datos de la carpeta institucional 2026).
- * Con `publicado: false` la sección y el aviso superior dejan de mostrarse.
+/*
+ * El evento del centenario vivía acá con una ficha de cinco renglones. Desde que
+ * llegó el programa oficial del festival (cuatro torneos, aranceles, cronograma)
+ * es demasiado contenido para este archivo y demasiado importante para tenerlo
+ * duplicado: pasó completo a src/data/festival.ts, que es de donde leen la
+ * página /festival, la sección del inicio y el aviso de la barra.
  */
-export const eventoCentenario = {
-  publicado: true,
-  sigla: 'IRT',
-  nombre: 'IRT "100 Años"',
-  subtitulo: 'International Rating Tournament',
-  bajada: 'El torneo principal del festejo de los 100 años del Club de Ajedrez Posadas',
-  fechaTexto: '5, 6, 7 y 8 de diciembre de 2026',
-  fechaISO: '2026-12-05',
-  /** Fecha partida para el bloque tipográfico del afiche. */
-  diaDesde: '05',
-  diaHasta: '08',
-  mesCorto: 'Dic',
-  anio: '2026',
-  lugar: 'Sociedad Italiana de Socorros Mutuos, Posadas',
-  /** Ficha rápida del torneo, para la columna de datos del afiche. */
-  ficha: [
-    { rotulo: 'Sede', valor: 'Sociedad Italiana, Posadas' },
-    { rotulo: 'Cupo', valor: 'Hasta 140 jugadores' },
-    { rotulo: 'Formato', valor: 'Torneo abierto, todas las categorías' },
-    { rotulo: 'Ranking', valor: 'IRT válido al Elo' },
-    { rotulo: 'Premios', valor: 'En efectivo y trofeos' },
-  ],
-  descripcion:
-    'Una edición especial que busca consolidarse como uno de los eventos ajedrecísticos más importantes de la región, con proyección nacional e internacional. Al ser un torneo abierto participan jugadores de todas las edades y categorías, junto a profesionales titulados nacionales e internacionales.',
-  descripcion2:
-    'En el marco de su centenario, el club proyecta este evento como un punto de encuentro intergeneracional que combina competencia, formación y desarrollo, posicionando a Posadas como sede de eventos ajedrecísticos de relevancia.',
-  caracteristicas: [
-    'Jugadores locales, regionales, nacionales e internacionales',
-    'Presencia de jugadores profesionales titulados',
-    'Árbitros capacitados y homologación para ranking oficial',
-    'Premiación en efectivo y trofeos',
-    'Cobertura en redes sociales y medios digitales',
-  ],
-  ctaTexto: 'Consultar por la inscripción',
-  avisoSuperior: 'IRT "100 Años" · 5 al 8 de diciembre de 2026 · Posadas',
-} as const
 
 /**
  * Contexto de antigüedad: el club es casi contemporáneo de las dos federaciones

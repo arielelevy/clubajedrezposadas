@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Menu, X, MessageCircle, ArrowRight, ChevronRight, MapPin } from 'lucide-react'
-import { club, navegacion, eventoCentenario } from '@/data/site'
+import { club, navegacion } from '@/data/site'
+import { festival } from '@/data/festival'
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
 
@@ -131,10 +132,12 @@ export function Navbar() {
         avisoVisible ? 'bg-transparent' : 'border-ink/8 bg-bone/95 border-b backdrop-blur-sm',
       )}
     >
-      {/* Aviso del evento del centenario */}
-      {eventoCentenario.publicado ? (
+      {/* Aviso del evento del centenario. Lleva a la página del festival, no a
+          la sección del inicio: quien insiste hacia arriba para abrirlo ya está
+          buscando el torneo, y la página tiene la información completa. */}
+      {festival.publicado ? (
         <Link
-          to="/#evento"
+          to="/festival"
           className={cn(
             'group border-gold/20 bg-ink block overflow-hidden transition-all duration-500',
             avisoVisible
@@ -145,7 +148,7 @@ export function Navbar() {
           <span className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-5 py-2.5 lg:px-8">
             <span aria-hidden="true" className="bg-gold-bright size-1.5 shrink-0 rotate-45" />
             <span className="font-condensed text-gold-bright text-[0.68rem] leading-tight tracking-[0.2em] uppercase sm:text-[0.8rem] sm:tracking-[0.28em]">
-              {eventoCentenario.avisoSuperior}
+              {festival.avisoSuperior}
             </span>
             <ArrowRight
               aria-hidden="true"

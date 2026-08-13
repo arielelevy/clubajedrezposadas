@@ -1,18 +1,24 @@
-import { MessageCircle, ArrowRight } from 'lucide-react'
-import { club, eventoCentenario as evento } from '@/data/site'
+import { Link } from 'react-router-dom'
+import { ArrowRight, FileText } from 'lucide-react'
+import { festival } from '@/data/festival'
 import { Reveal } from '@/components/Reveal'
 import { Button } from '@/components/ui/button'
-import { ChessGlyph } from '@/components/ChessGlyph'
+import { ChessGlyph, type Pieza } from '@/components/ChessGlyph'
 import { BoardTexture, GraphiteCurves, GoldDivider } from '@/components/Ornaments'
 
 /**
- * Evento central del festejo: el IRT "100 Años".
- * Va inmediatamente después del Hero y está resuelto como un afiche de torneo:
- * banda clara (para cortar con el Hero oscuro) con la ficha del evento en una
- * pieza de grafito y oro. Se oculta completo con `eventoCentenario.publicado: false`.
+ * Adelanto del festival del centenario, inmediatamente después del Hero.
+ *
+ * Hasta que llegó el programa oficial, esta sección era todo lo que el sitio
+ * decía del torneo, y por eso traía la ficha completa. Ahora la información vive
+ * en /festival: acá quedan el afiche, la fecha, las cifras que deciden a un
+ * jugador (premios, rondas, ritmo) y los cuatro torneos en una línea cada uno.
+ * Todo lo demás —aranceles, packs, cronograma, sede— es un click.
+ *
+ * Se oculta completa con `festival.publicado: false`.
  */
 export function EventoCentenario() {
-  if (!evento.publicado) return null
+  if (!festival.publicado) return null
 
   return (
     <section
@@ -28,100 +34,110 @@ export function EventoCentenario() {
           <div>
             <p className="kicker text-gold-deep">El evento del centenario</p>
             <h2 className="text-ink mt-4 text-3xl leading-[1.06] sm:text-4xl lg:text-5xl">
-              {evento.nombre}
+              {festival.nombre}
             </h2>
             <p className="text-ink/50 mt-3 font-sans text-sm font-light tracking-[0.22em] uppercase">
-              {evento.subtitulo}
+              {festival.torneoPrincipal} · {festival.fechaTexto}
             </p>
           </div>
-          <p className="text-ink/65 text-[1.02rem] leading-relaxed lg:pb-1">{evento.bajada}</p>
+          <p className="text-ink/65 text-[1.02rem] leading-relaxed lg:pb-1">{festival.bajada}</p>
         </Reveal>
 
         <Reveal delay={0.12}>
-          <article className="border-gold/30 bg-ink text-ivory mt-2 grid overflow-hidden rounded-xl border shadow-[var(--shadow-lift)] lg:grid-cols-[0.82fr_1.18fr]">
-            {/* Ficha: fecha en tipografía condensada y datos del torneo */}
+          <article className="border-gold/30 bg-ink text-ivory mt-6 grid overflow-hidden rounded-xl border shadow-[var(--shadow-lift)] lg:grid-cols-[0.9fr_1.1fr]">
+            {/* El afiche, del lado de la fecha */}
             <div className="border-ivory/10 relative isolate overflow-hidden border-b p-6 lg:border-r lg:border-b-0 lg:p-7">
               <GraphiteCurves className="opacity-60" />
               <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(192,145,44,0.2),transparent_60%)]" />
 
               <div className="relative">
-                <p className="kicker text-gold-bright">{evento.sigla} · Diciembre 2026</p>
-
-                {/* Fecha y mes en una sola línea: apilados sumaban un renglón */}
                 <time
-                  dateTime={evento.fechaISO}
-                  className="mt-3 flex flex-wrap items-baseline gap-x-3"
+                  dateTime={festival.fechaISO}
+                  className="flex flex-wrap items-baseline gap-x-3"
                 >
                   <span className="font-condensed text-ivory flex items-baseline leading-[0.8]">
-                    <span className="text-[3.2rem] lg:text-[3.8rem]">{evento.diaDesde}</span>
+                    <span className="text-[3.2rem] lg:text-[3.8rem]">{festival.diaDesde}</span>
                     <span className="text-gold mx-1.5 text-[2rem] lg:text-[2.2rem]">—</span>
-                    <span className="text-[3.2rem] lg:text-[3.8rem]">{evento.diaHasta}</span>
+                    <span className="text-[3.2rem] lg:text-[3.8rem]">{festival.diaHasta}</span>
                   </span>
                   <span className="font-condensed text-gold-bright text-lg tracking-[0.28em] uppercase lg:text-xl">
-                    {evento.mesCorto} {evento.anio}
+                    {festival.mesCorto} {festival.anio}
                   </span>
-                  <span className="sr-only">{evento.fechaTexto}</span>
+                  <span className="sr-only">{festival.fechaTexto}</span>
                 </time>
 
                 <GoldDivider className="mt-4" />
 
-                <dl className="mt-4 grid gap-x-6 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-1">
-                  {evento.ficha.map((f) => (
-                    <div key={f.rotulo}>
-                      <dt className="kicker text-ivory/40 text-[0.58rem]">{f.rotulo}</dt>
-                      <dd className="text-ivory/85 mt-0.5 text-[0.92rem] leading-snug">
-                        {f.valor}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
+                <Link
+                  to="/festival"
+                  className="border-gold/25 hover:border-gold/70 group mt-5 block overflow-hidden rounded-lg border transition-colors"
+                >
+                  <img
+                    src={festival.afiche.src}
+                    alt={festival.afiche.alt}
+                    width={festival.afiche.ancho}
+                    height={festival.afiche.alto}
+                    loading="lazy"
+                    className="block w-full transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </Link>
 
-                <Button asChild variant="gold" className="mt-6 w-full sm:w-auto">
-                  <a href={club.whatsappLink} target="_blank" rel="noreferrer">
-                    <MessageCircle />
-                    {evento.ctaTexto}
-                  </a>
-                </Button>
+                <p className="text-ivory/55 mt-4 text-[0.88rem] leading-snug">
+                  {festival.sede.nombre} · {festival.sede.direccion}
+                </p>
               </div>
             </div>
 
-            {/* Descripción y características */}
+            {/* Cifras, los cuatro torneos y la salida a la página */}
             <div className="relative isolate overflow-hidden p-6 lg:p-7">
               <ChessGlyph
                 pieza="rey"
                 className="text-ivory/[0.04] pointer-events-none absolute -right-6 -bottom-14 text-[15rem] leading-none select-none"
               />
 
-              <div className="relative">
-                <p className="text-ivory/75 text-[0.94rem] leading-[1.6]">{evento.descripcion}</p>
-                <p className="text-ivory/75 mt-3 text-[0.94rem] leading-[1.6]">
-                  {evento.descripcion2}
-                </p>
+              <div className="relative flex h-full flex-col">
+                <dl className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
+                  {festival.cifras.map((c) => (
+                    <div key={c.rotulo}>
+                      <dt className="font-condensed text-gold-bright text-3xl leading-none">
+                        {c.valor}
+                      </dt>
+                      <dd className="text-ivory/55 mt-1.5 text-[0.85rem] leading-snug">
+                        {c.rotulo}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
 
-                <p className="kicker text-gold-bright mt-6 text-[0.6rem]">Qué incluye la edición</p>
-                <ul className="mt-3 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-                  {evento.caracteristicas.map((c) => (
-                    <li key={c} className="text-ivory/80 flex gap-3 text-[0.9rem] leading-snug">
-                      <span
-                        aria-hidden="true"
-                        className="bg-gold-bright mt-1.5 size-1.5 shrink-0 rotate-45"
-                      />
-                      {c}
+                <p className="kicker text-gold-bright mt-7 text-[0.6rem]">Los cuatro torneos</p>
+                <ul className="border-ivory/10 mt-4 border-t">
+                  {festival.torneos.map((t) => (
+                    <li
+                      key={t.nombre}
+                      className="border-ivory/8 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b py-3 last:border-0"
+                    >
+                      <span className="text-ivory/85 flex items-baseline gap-2.5 text-[0.95rem]">
+                        <ChessGlyph pieza={t.pieza as Pieza} className="text-gold/70 text-base" />
+                        {t.nombre}
+                      </span>
+                      <span className="text-ivory/45 text-[0.8rem]">{t.cuando}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="border-ivory/10 mt-6 flex flex-wrap items-center gap-4 border-t pt-5">
-                  <Button asChild variant="outlineLight">
-                    <a href={club.instagramLink} target="_blank" rel="noreferrer">
-                      Seguir la cuenta oficial
+                <div className="mt-7 flex flex-wrap items-center gap-4 pt-1">
+                  <Button asChild variant="gold">
+                    <Link to="/festival">
+                      Ver el festival completo
                       <ArrowRight />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outlineLight">
+                    <a href={festival.inscripcion.reglamento} target="_blank" rel="noreferrer">
+                      <FileText />
+                      Reglamento
                     </a>
                   </Button>
-                  <p className="text-ivory/50 text-sm">
-                    Las bases, el reglamento y la inscripción se publican en{' '}
-                    <span className="text-ivory/70">@{club.instagram}</span>.
-                  </p>
                 </div>
               </div>
             </div>

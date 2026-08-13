@@ -15,7 +15,10 @@ import { useLocation } from 'react-router-dom'
 
 const SITIO = 'https://clubdeajedrezposadas.com'
 
-type Meta = { titulo: string; descripcion: string }
+/** La del `index.html`: el medallón del centenario sobre grafito. */
+const OG_POR_DEFECTO = '/og-image.jpg'
+
+type Meta = { titulo: string; descripcion: string; imagen?: string }
 
 const POR_RUTA: Record<string, Meta> = {
   '/': {
@@ -27,6 +30,14 @@ const POR_RUTA: Record<string, Meta> = {
     titulo: 'Cien años de historia · Club de Ajedrez Posadas',
     descripcion:
       'La reseña del centenario: la fundación en el Palace Hotel el 12 de julio de 1926, las décadas sin sede propia, la casa de Jujuy 1514 desde 1980 y las comisiones directivas de los cien años.',
+  },
+  '/festival': {
+    titulo: 'Festival de Ajedrez del Centenario · IRT "100 Años" · 5 al 8 de diciembre de 2026',
+    descripcion:
+      'IRT "100 Años" del Club de Ajedrez Posadas: cuatro torneos del 5 al 8 de diciembre de 2026 en la Sociedad Italiana. $1.300.000 en premios, suizo a 7 rondas válido para el ranking FIDE, Blitz IRT, Prix infanto-juvenil, simultáneas, aranceles e inscripción.',
+    // El afiche es lo que circula por WhatsApp: al compartir el link conviene
+    // que aparezca esa pieza y no el medallón del sitio.
+    imagen: '/og-festival.jpg',
   },
   '/socios': {
     titulo: 'Hacete socio · Club de Ajedrez Posadas',
@@ -83,7 +94,7 @@ export function Meta() {
     // La barra final sobra: /historia/ y /historia serían dos URLs para Google.
     const ruta = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
     const conocida = POR_RUTA[ruta]
-    const { titulo, descripcion } = conocida ?? NO_ENCONTRADA
+    const { titulo, descripcion, imagen } = conocida ?? NO_ENCONTRADA
     const url = SITIO + (ruta === '/' ? '/' : ruta)
 
     document.title = titulo
@@ -91,6 +102,8 @@ export function Meta() {
     meta('og:title', titulo, true)
     meta('og:description', descripcion, true)
     meta('og:url', url, true)
+    // Absoluta: las redes no resuelven rutas relativas del og:image.
+    meta('og:image', SITIO + (imagen ?? OG_POR_DEFECTO), true)
 
     if (conocida) {
       canonical(url)
