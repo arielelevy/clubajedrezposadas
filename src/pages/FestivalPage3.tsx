@@ -86,7 +86,10 @@ export function FestivalPage3() {
           ------------------------------------------------------------------ */}
       <section className="bg-ink text-ivory relative isolate overflow-hidden pt-24 pb-0 lg:pt-28">
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.45fr_0.55fr] lg:gap-16">
+          {/* La columna del afiche mide lo que mide el afiche (22rem): con
+              fracciones quedaba un vacío entre el texto y la imagen, y el
+              afiche flotaba centrado en una columna más ancha que él. */}
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_22rem] lg:gap-14">
             <div className="motion-safe:animate-entrar">
               <p className="text-gold-bright font-condensed text-sm tracking-[0.42em] uppercase">
                 {festival.nombre}

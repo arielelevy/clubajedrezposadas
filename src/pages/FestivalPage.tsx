@@ -103,7 +103,9 @@ export function FestivalPage() {
         <GraphiteCurves className="opacity-80" />
 
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-14">
+          {/* 0.64fr y no 0.75fr: el afiche a tres cuartos de columna se comía la
+              portada; un 15 % menos deja mandar al título. */}
+          <div className="grid items-center gap-10 lg:grid-cols-[1.36fr_0.64fr] lg:gap-14">
             <div className="motion-safe:animate-entrar">
               <p className="kicker text-gold-bright">{festival.nombre}</p>
               <h1 className="mt-4 text-4xl leading-[1.02] font-medium sm:text-5xl lg:text-6xl">
