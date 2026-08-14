@@ -57,7 +57,9 @@ function Bloque({
         <Reveal>
           <p className="kicker text-ink/40 text-[0.6rem] lg:sticky lg:top-24">{rotulo}</p>
         </Reveal>
-        <div>
+        {/* min-w-0: sin esto la tabla de packs (min-w fijo) no deja que la
+            columna se achique y toda la página desborda en mobile. */}
+        <div className="min-w-0">
           {titulo ? (
             <Reveal>
               <h2 className="text-ink mb-7 text-2xl leading-tight lg:text-3xl">{titulo}</h2>
@@ -125,12 +127,21 @@ export function FestivalPage2() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <Regla className="mt-9" />
-            {/* Ficha de cabecera: los cuatro datos duros, en columnas */}
-            <dl className="grid gap-x-10 gap-y-6 py-6 sm:grid-cols-2 lg:grid-cols-4">
-              {festival.cifras.map((c) => (
+            {/* Regla doble arriba y simple abajo, como un libro contable: la
+                fila de cifras es el renglón de totales de la planilla. */}
+            <div className="border-ink/30 mt-9 border-t-[3px] border-double" />
+            <dl className="grid gap-x-10 gap-y-6 py-5 sm:grid-cols-2 lg:grid-cols-4">
+              {festival.cifras.map((c, i) => (
                 <div key={c.rotulo}>
-                  <dt className="font-condensed text-ink text-4xl leading-none">{c.valor}</dt>
+                  <dt
+                    className={cn(
+                      'font-condensed text-4xl leading-none',
+                      // El único momento de oro del boletín: la bolsa.
+                      i === 0 ? 'text-gold-deep' : 'text-ink',
+                    )}
+                  >
+                    {c.valor}
+                  </dt>
                   <dd className="text-ink/50 mt-2 text-[0.84rem] leading-snug">{c.rotulo}</dd>
                 </div>
               ))}

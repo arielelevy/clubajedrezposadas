@@ -242,7 +242,7 @@ export function FestivalPage3() {
         <Reveal>
           <Casillero className="h-full lg:p-12">
             <p className="kicker text-gold-deep">Bolsa de premios</p>
-            <p className="font-condensed text-ink mt-4 text-5xl leading-none lg:text-6xl">
+            <p className="font-condensed text-gold-deep mt-4 text-5xl leading-none lg:text-6xl">
               {festival.premios.total}
             </p>
             <p className="text-ink/65 mt-4 max-w-lg leading-relaxed">{festival.premios.detalle}</p>
@@ -327,7 +327,7 @@ export function FestivalPage3() {
             {festival.cronograma.dias.map((d, col) => (
               <Reveal key={d.dia} delay={0.05 * col}>
                 <div className="flex h-full flex-col">
-                  <p className="bg-graphite font-display text-ivory px-5 py-3 text-lg">
+                  <p className="bg-graphite border-gold/40 font-display text-ivory border-b-2 px-5 py-3 text-lg">
                     {d.dia}
                     <span className="text-ivory/35 ml-2 text-[0.68rem] tracking-[0.2em] uppercase">
                       {d.mes}
@@ -434,7 +434,9 @@ export function FestivalPage3() {
               </ul>
             </Reveal>
 
-            <Reveal delay={0.12}>
+            {/* min-w-0: la tabla de packs tiene ancho mínimo fijo y sin esto la
+                columna del grid no se achica y la página desborda en mobile. */}
+            <Reveal delay={0.12} className="min-w-0">
               <p className="kicker text-gold-deep text-[0.6rem]">{festival.packs.titulo}</p>
               <p className="text-ink/60 mt-3 text-[0.92rem] leading-relaxed">
                 {festival.packs.bajada}
