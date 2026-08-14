@@ -189,14 +189,30 @@ export function FestivalPage3() {
                 />
 
                 <div className="relative flex h-full flex-col">
-                  <p
-                    className={cn(
-                      'font-condensed text-[0.8rem] tracking-[0.2em]',
-                      i % 2 === 1 ? 'text-fada-blue-bright' : 'text-fada-blue-deep',
-                    )}
-                  >
-                    {t.cuando}
-                  </p>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <p
+                      className={cn(
+                        'font-condensed text-[0.8rem] tracking-[0.2em]',
+                        i % 2 === 1 ? 'text-fada-blue-bright' : 'text-fada-blue-deep',
+                      )}
+                    >
+                      {t.cuando}
+                    </p>
+                    <p
+                      className={cn(
+                        'text-[0.6rem] tracking-[0.22em] uppercase',
+                        t.tipo === 'Torneo'
+                          ? i % 2 === 1
+                            ? 'text-gold-bright/80'
+                            : 'text-gold-deep'
+                          : i % 2 === 1
+                            ? 'text-ivory/40'
+                            : 'text-ink/40',
+                      )}
+                    >
+                      {t.tipo}
+                    </p>
+                  </div>
 
                   <h2
                     className={cn(
@@ -543,6 +559,18 @@ export function FestivalPage3() {
             </dl>
           </Casillero>
         </Reveal>
+      </section>
+
+      {/* Cómo llegar: el mapa a todo el ancho, como un casillero más. */}
+      <section aria-label={`Cómo llegar a la sede: ${festival.sede.nombre}`}>
+        <iframe
+          src={festival.sede.mapsEmbed}
+          title={`Cómo llegar a la sede: ${festival.sede.nombre}, ${festival.sede.direccion}`}
+          className="block h-56 w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
       </section>
 
       {/* ------------------------------------------------------------------

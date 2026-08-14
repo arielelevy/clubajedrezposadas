@@ -1,6 +1,6 @@
 /**
- * Festival de Ajedrez del Centenario — los cuatro torneos del 5 al 8 de
- * diciembre de 2026.
+ * Festival de Ajedrez del Centenario — tres torneos y una jornada de talleres,
+ * del 5 al 8 de diciembre de 2026.
  *
  * Todo sale de la presentación oficial "Festival Centenario Posadas" que pasó
  * la comisión (12 diapositivas) y del afiche que acompaña la difusión. Los
@@ -38,8 +38,14 @@ export const festival = {
 
   nombre: 'Festival de Ajedrez del Centenario',
   torneoPrincipal: 'IRT "100 Años"',
+  /*
+   * La difusión dice "4 torneos", pero el cuarto son los talleres y las
+   * simultáneas, que el propio programa llama "eventos paralelos" y no tienen
+   * planilla en Chess-Results. Acá se cuenta lo que es exacto: tres torneos y
+   * una jornada. La grilla de tarjetas sigue mostrando los cuatro frentes.
+   */
   bajada:
-    'Cuatro torneos, cuatro días y cien años de club. Del 5 al 8 de diciembre de 2026 Posadas juega su festival más grande: un IRT válido para el ranking FIDE, un Blitz vespertino, el Prix infanto-juvenil y una jornada de talleres y simultáneas.',
+    'Tres torneos, cuatro días y cien años de club. Del 5 al 8 de diciembre de 2026 Posadas juega su festival más grande: un IRT válido para el ranking FIDE, un Blitz vespertino, el Prix infanto-juvenil y una jornada de talleres y simultáneas.',
 
   fechaTexto: '5, 6, 7 y 8 de diciembre de 2026',
   fechaISO: '2026-12-05',
@@ -53,8 +59,13 @@ export const festival = {
     nombre: 'Sociedad Italiana de Socorros Mutuos',
     direccion: 'Santa Fe 1898, Posadas, Misiones',
     detalle: 'Sala de juego 100 % climatizada.',
+    /* Nombre y dirección juntos: el nombre solo era ambiguo (hay más de una
+       sociedad de socorros mutuos en Posadas) y la altura sola dependía del
+       geocoder. La dirección es la del programa oficial. */
     mapsLink:
-      'https://www.google.com/maps/search/?api=1&query=Santa+Fe+1898%2C+Posadas%2C+Misiones%2C+Argentina',
+      'https://www.google.com/maps/search/?api=1&query=Sociedad+Italiana%2C+Santa+Fe+1898%2C+Posadas%2C+Misiones',
+    mapsEmbed:
+      'https://www.google.com/maps?q=Sociedad%20Italiana%2C%20Santa%20Fe%201898%2C%20Posadas%2C%20Misiones&output=embed',
   },
 
   /**
@@ -67,7 +78,7 @@ export const festival = {
   /** Titulares del festival, para la banda de cifras del encabezado. */
   cifras: [
     { valor: '$1.300.000', rotulo: 'en premios garantizados' },
-    { valor: '4', rotulo: 'torneos en cuatro días' },
+    { valor: '3', rotulo: 'torneos en cuatro días' },
     { valor: '7', rotulo: 'rondas por sistema suizo' },
     { valor: '90\'+30"', rotulo: 'ritmo clásico del IRT' },
   ],
@@ -226,10 +237,11 @@ export const festival = {
       'Aforo limitado: la capacidad de la sala climatizada está restringida, así que los cupos son los que son.',
   },
 
-  /** Los cuatro torneos del festival. */
+  /** El programa: tres torneos y la jornada de talleres y simultáneas. */
   torneos: [
     {
       nombre: 'IRT Standard FIDE',
+      tipo: 'Torneo',
       pieza: 'rey',
       cuando: 'Sábado 5 a martes 8 de diciembre',
       destacado: true,
@@ -242,6 +254,7 @@ export const festival = {
     },
     {
       nombre: 'Blitz IRT Vespertino',
+      tipo: 'Torneo',
       pieza: 'caballo',
       cuando: 'Sábado 5 de diciembre, 15:30',
       destacado: false,
@@ -253,6 +266,7 @@ export const festival = {
     },
     {
       nombre: 'Prix Infanto-Juvenil',
+      tipo: 'Torneo',
       pieza: 'peon',
       cuando: 'Domingo 6 de diciembre, 09:00',
       destacado: false,
@@ -264,6 +278,7 @@ export const festival = {
     },
     {
       nombre: 'Talleres y simultáneas',
+      tipo: 'Actividades',
       pieza: 'alfil',
       cuando: 'Lunes 7 de diciembre, 15:00',
       destacado: false,

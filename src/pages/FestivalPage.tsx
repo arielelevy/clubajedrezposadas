@@ -159,8 +159,11 @@ export function FestivalPage() {
               </div>
             </div>
 
-            {/* El afiche es la pieza que circula por WhatsApp: se puede abrir en grande. */}
-            <Reveal delay={0.1} className="order-first lg:order-none">
+            {/* El afiche es la pieza que circula por WhatsApp: se puede abrir en
+                grande. En mobile va después del texto: primero iba antes, y quien
+                llegaba desde el chat veía de nuevo el afiche que ya tenía, con el
+                título y el botón de inscripción a una pantalla entera de scroll. */}
+            <Reveal delay={0.1} className="mx-auto w-full max-w-sm lg:max-w-none">
               <a
                 href={festival.afiche.src}
                 target="_blank"
@@ -300,7 +303,7 @@ export function FestivalPage() {
 
         <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
           <Encabezado
-            kicker="Cuatro torneos, cuatro días"
+            kicker="Tres torneos y una jornada"
             titulo="Hay un tablero para cada uno"
             claro
           >
@@ -330,8 +333,20 @@ export function FestivalPage() {
                       />
                       {t.nombre}
                     </h3>
-                    <span className="text-fada-blue-bright shrink-0 text-right text-[0.78rem] leading-tight">
-                      {t.cuando}
+                    <span className="shrink-0 text-right leading-tight">
+                      {/* Torneo o actividades: los tres torneos tienen planilla
+                          en Chess-Results; los talleres son la jornada paralela. */}
+                      <span
+                        className={cn(
+                          'kicker block text-[0.5rem]',
+                          t.tipo === 'Torneo' ? 'text-gold-bright/80' : 'text-ivory/45',
+                        )}
+                      >
+                        {t.tipo}
+                      </span>
+                      <span className="text-fada-blue-bright mt-1 block text-[0.78rem]">
+                        {t.cuando}
+                      </span>
                     </span>
                   </div>
 
@@ -579,6 +594,21 @@ export function FestivalPage() {
               </article>
             </Reveal>
           </div>
+
+          {/* Cómo llegar: el mapa de la sede, embebido igual que el de la sede
+              del club en el inicio. */}
+          <Reveal delay={0.08}>
+            <div className="border-ivory/12 mt-4 overflow-hidden rounded-lg border">
+              <iframe
+                src={festival.sede.mapsEmbed}
+                title={`Cómo llegar a la sede: ${festival.sede.nombre}, ${festival.sede.direccion}`}
+                className="block h-56 w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+          </Reveal>
 
           {/* Seguimiento en vivo. El rótulo sigue el estado del bloque: mientras
               falta para el 1.º de septiembre es una fecha pendiente y va en rojo;

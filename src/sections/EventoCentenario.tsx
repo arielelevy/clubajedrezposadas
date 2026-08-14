@@ -109,7 +109,7 @@ export function EventoCentenario() {
                   ))}
                 </dl>
 
-                <p className="kicker text-gold-bright mt-7 text-[0.6rem]">Los cuatro torneos</p>
+                <p className="kicker text-gold-bright mt-7 text-[0.6rem]">El programa</p>
                 <ul className="border-ivory/10 mt-4 border-t">
                   {festival.torneos.map((t) => (
                     <li

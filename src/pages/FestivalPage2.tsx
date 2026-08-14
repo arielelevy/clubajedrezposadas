@@ -280,13 +280,21 @@ export function FestivalPage2() {
         {/* ----------------------------------------------------------------
             Los cuatro torneos: filas de boletín, no tarjetas.
             ---------------------------------------------------------------- */}
-        <Bloque rotulo="Los cuatro torneos" titulo="Hay un tablero para cada uno">
+        <Bloque rotulo="El programa" titulo="Hay un tablero para cada uno">
           <ul>
             {festival.torneos.map((t, i) => (
               <Reveal key={t.nombre} delay={0.05 * i}>
                 <li className="border-ink/12 grid gap-x-10 gap-y-3 border-b py-6 sm:grid-cols-[1fr_1.3fr]">
                   <div>
-                    <h3 className="font-display text-ink flex items-baseline gap-3 text-xl lg:text-2xl">
+                    <p
+                      className={cn(
+                        'text-[0.62rem] tracking-[0.24em] uppercase',
+                        t.tipo === 'Torneo' ? 'text-gold-deep' : 'text-ink/40',
+                      )}
+                    >
+                      {t.tipo}
+                    </p>
+                    <h3 className="font-display text-ink mt-1 flex items-baseline gap-3 text-xl lg:text-2xl">
                       <ChessGlyph pieza={t.pieza as Pieza} className="text-gold/70 text-2xl" />
                       {t.nombre}
                     </h3>
@@ -525,6 +533,23 @@ export function FestivalPage2() {
               </dl>
             </Reveal>
           </div>
+
+          {/* Cómo llegar: el mapa como anexo del boletín, con su leyenda */}
+          <Reveal delay={0.08}>
+            <figure className="border-ink/12 mt-9 border p-2">
+              <iframe
+                src={festival.sede.mapsEmbed}
+                title={`Cómo llegar a la sede: ${festival.sede.nombre}, ${festival.sede.direccion}`}
+                className="block h-56 w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <figcaption className="text-ink/40 mt-2 text-[0.68rem] tracking-[0.16em] uppercase">
+                Cómo llegar
+              </figcaption>
+            </figure>
+          </Reveal>
 
           {/* Seguimiento */}
           <Reveal delay={0.08}>

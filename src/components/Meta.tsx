@@ -34,7 +34,7 @@ const POR_RUTA: Record<string, Meta> = {
   '/festival': {
     titulo: 'Festival de Ajedrez del Centenario · IRT "100 Años" · 5 al 8 de diciembre de 2026',
     descripcion:
-      'IRT "100 Años" del Club de Ajedrez Posadas: cuatro torneos del 5 al 8 de diciembre de 2026 en la Sociedad Italiana. $1.300.000 en premios, suizo a 7 rondas válido para el ranking FIDE, Blitz IRT, Prix infanto-juvenil, simultáneas, aranceles e inscripción.',
+      'IRT "100 Años" del Club de Ajedrez Posadas: tres torneos y una jornada de talleres del 5 al 8 de diciembre de 2026 en la Sociedad Italiana. $1.300.000 en premios, suizo a 7 rondas válido para el ranking FIDE, Blitz IRT, Prix infanto-juvenil, simultáneas, aranceles e inscripción.',
     // El afiche es lo que circula por WhatsApp: al compartir el link conviene
     // que aparezca esa pieza y no el medallón del sitio.
     imagen: '/og-festival.jpg',
