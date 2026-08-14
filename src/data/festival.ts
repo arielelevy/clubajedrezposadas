@@ -75,12 +75,16 @@ export const festival = {
    */
   vencimiento: 'Inscripción de $25.000 hasta el 31 de agosto · después sube por tramos',
 
-  /** Titulares del festival, para la banda de cifras del encabezado. */
+  /**
+   * Titulares del festival, para la banda de cifras del encabezado. Las cuatro
+   * son del festival entero: las 7 rondas y el ritmo 90'+30" son solo del IRT
+   * Standard (el Blitz va a 3'+2") y por eso viven en `formato`, no acá.
+   */
   cifras: [
     { valor: '$1.300.000', rotulo: 'en premios garantizados' },
-    { valor: '3', rotulo: 'torneos en cuatro días' },
-    { valor: '7', rotulo: 'rondas por sistema suizo' },
-    { valor: '90\'+30"', rotulo: 'ritmo clásico del IRT' },
+    { valor: '3', rotulo: 'torneos, más talleres y simultáneas' },
+    { valor: '4', rotulo: 'días en la Sociedad Italiana' },
+    { valor: '120', rotulo: 'cupos en el IRT Standard' },
   ],
 
   /** Bolsa de premios (diapositiva "Bolsa de Premios"). */

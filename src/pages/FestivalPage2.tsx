@@ -153,11 +153,19 @@ export function FestivalPage2() {
             <Reveal delay={0.12}>
               <p className="text-ink/70 max-w-2xl text-lg leading-relaxed">{festival.bajada}</p>
 
-              <p className="text-ink/60 mt-6 text-[0.95rem]">
+              <p className="mt-6 text-[0.95rem]">
                 <span className="text-ink/40 block text-[0.7rem] tracking-[0.2em] uppercase">
                   Sede
                 </span>
-                {festival.sede.nombre} · {festival.sede.direccion}
+                <a
+                  href={festival.sede.mapsLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-ink/60 hover:text-gold-deep inline-flex items-start gap-1.5 transition-colors"
+                >
+                  {festival.sede.nombre} · {festival.sede.direccion}
+                  <ArrowUpRight className="mt-1 size-3.5 shrink-0" />
+                </a>
               </p>
 
               {festival.vencimiento ? (

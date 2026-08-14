@@ -115,9 +115,15 @@ export function FestivalPage3() {
                 {festival.bajada}
               </p>
 
-              <p className="text-ivory/55 mt-5 text-[0.95rem]">
+              <a
+                href={festival.sede.mapsLink}
+                target="_blank"
+                rel="noreferrer"
+                className="text-ivory/55 hover:text-gold-bright mt-5 inline-flex items-start gap-1.5 text-[0.95rem] transition-colors"
+              >
                 {festival.sede.nombre} · {festival.sede.direccion}
-              </p>
+                <ArrowUpRight className="mt-1 size-3.5 shrink-0" />
+              </a>
 
               {festival.vencimiento ? (
                 <p className="border-fada-red-bright text-ivory/75 mt-6 border-l-2 pl-4 text-[0.92rem] leading-snug">
@@ -141,7 +147,10 @@ export function FestivalPage3() {
               </div>
             </div>
 
-            <Reveal delay={0.1} className="order-first lg:order-none">
+            {/* En mobile va después del texto: antes que el título repetía lo
+                que el visitante ya vio en el chat y empujaba el botón de
+                inscripción una pantalla para abajo. */}
+            <Reveal delay={0.1}>
               <img
                 src={festival.afiche.src}
                 alt={festival.afiche.alt}
