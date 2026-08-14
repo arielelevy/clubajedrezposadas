@@ -398,11 +398,15 @@ export const festival = {
     citaFuente: 'Estatuto social, artículo 2.º (1926)',
   },
 
-  /** Afiche oficial de difusión. */
+  /**
+   * Afiche oficial de difusión. El nombre lleva versión (-2) a propósito: la
+   * SWA cachea /img/* siete días, así que cada afiche nuevo entra con nombre
+   * nuevo para que nadie siga viendo el anterior.
+   */
   afiche: {
-    src: '/img/festival-afiche.webp',
+    src: '/img/festival-afiche-2.webp',
     alt: 'Afiche oficial del IRT "100 Años" del Club de Ajedrez Posadas: 5, 6, 7 y 8 de diciembre de 2026 en la Sociedad Italiana',
     ancho: 900,
-    alto: 1125,
+    alto: 1126,
   },
 } as const
