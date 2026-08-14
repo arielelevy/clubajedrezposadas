@@ -57,6 +57,13 @@ export const festival = {
       'https://www.google.com/maps/search/?api=1&query=Santa+Fe+1898%2C+Posadas%2C+Misiones%2C+Argentina',
   },
 
+  /**
+   * Tarifa vigente, en la portada y en rojo: es el único dato de la página que
+   * se vence solo. Hay que actualizarlo cuando cambia el tramo (los cortes están
+   * en `escala.tramos`); si se deja vacío, la línea no se muestra.
+   */
+  vencimiento: 'Inscripción de $25.000 hasta el 31 de agosto · después sube por tramos',
+
   /** Titulares del festival, para la banda de cifras del encabezado. */
   cifras: [
     { valor: '$1.300.000', rotulo: 'en premios garantizados' },

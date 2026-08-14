@@ -48,7 +48,7 @@ export const navegacion = [
   /* El centenario dejó de ser una sección del inicio y pasó a ser la página del
      festival: ahí está la información completa de los cuatro torneos. La sección
      del inicio quedó como adelanto y sigue anclada en /#evento. */
-  { label: 'Festival', href: '/festival' },
+  { label: 'IRT 100 Años', href: '/festival' },
   { label: 'Talleres', href: '/#talleres' },
   { label: 'Partidas', href: '/#partidas' },
   { label: 'Galería', href: '/fotos' },
