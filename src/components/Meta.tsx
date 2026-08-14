@@ -61,6 +61,23 @@ const NO_ENCONTRADA: Meta = {
   descripcion: 'La página que buscabas no existe o cambió de dirección.',
 }
 
+/**
+ * Bocetos alternativos de la página del festival, mientras la comisión elige.
+ * Van con `noindex` (no están en POR_RUTA a propósito: no deben competir con
+ * /festival en Google) pero con título propio, para que la pestaña no diga
+ * "Página no encontrada". Borrar cuando quede uno.
+ */
+const BORRADORES: Record<string, Meta> = {
+  '/festival2': {
+    titulo: 'IRT "100 Años" · boceto 2 · Club de Ajedrez Posadas',
+    descripcion: 'Boceto alternativo de la página del festival del centenario.',
+  },
+  '/festival3': {
+    titulo: 'IRT "100 Años" · boceto 3 · Club de Ajedrez Posadas',
+    descripcion: 'Boceto alternativo de la página del festival del centenario.',
+  },
+}
+
 /** Escribe una `<meta>`, creándola si el `index.html` no la trae. */
 function meta(clave: string, valor: string, comoPropiedad = false) {
   const atributo = comoPropiedad ? 'property' : 'name'
@@ -94,7 +111,7 @@ export function Meta() {
     // La barra final sobra: /historia/ y /historia serían dos URLs para Google.
     const ruta = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
     const conocida = POR_RUTA[ruta]
-    const { titulo, descripcion, imagen } = conocida ?? NO_ENCONTRADA
+    const { titulo, descripcion, imagen } = conocida ?? BORRADORES[ruta] ?? NO_ENCONTRADA
     const url = SITIO + (ruta === '/' ? '/' : ruta)
 
     document.title = titulo
