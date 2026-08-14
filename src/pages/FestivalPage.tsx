@@ -422,9 +422,9 @@ export function FestivalPage() {
             ))}
           </div>
 
-          {/* La escala es lo único que vence, así que es lo único en rojo. El
-              filete superior se va cargando tramo a tramo: leídas en fila, las
-              cuatro tarjetas muestran que el arancel sube con los cupos. */}
+          {/* El filete dorado se va cargando tramo a tramo: leídas en fila, las
+              cuatro tarjetas muestran que el arancel sube con los cupos. El rojo
+              queda reservado para el cierre, que es lo único que vence de verdad. */}
           <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {festival.escala.tramos.map((t, i) => {
               const ultimo = i === festival.escala.tramos.length - 1
@@ -432,14 +432,25 @@ export function FestivalPage() {
                 <Reveal key={t.cupos} delay={0.05 * i}>
                   <li
                     className={cn(
-                      'border-ink/8 border-t-fada-red flex h-full flex-col rounded-lg border border-t-4 p-5',
-                      ultimo ? 'bg-fada-red/[0.06]' : 'bg-white/70',
+                      'border-ink/8 flex h-full flex-col rounded-lg border border-t-2 p-5',
+                      ultimo ? 'border-t-fada-red bg-fada-red/[0.06]' : 'bg-white/70',
                     )}
-                    style={{
-                      borderTopColor: `color-mix(in srgb, var(--color-fada-red) ${45 + i * 18}%, transparent)`,
-                    }}
+                    style={
+                      ultimo
+                        ? undefined
+                        : {
+                            borderTopColor: `color-mix(in srgb, var(--color-gold-deep) ${35 + i * 20}%, transparent)`,
+                          }
+                    }
                   >
-                    <p className="kicker text-fada-red text-[0.55rem]">{t.hasta}</p>
+                    <p
+                      className={cn(
+                        'kicker text-[0.55rem]',
+                        ultimo ? 'text-fada-red' : 'text-gold-deep',
+                      )}
+                    >
+                      {t.hasta}
+                    </p>
                     <p className="text-ink/60 mt-2.5 text-[0.85rem]">{t.cupos}</p>
                     <p
                       className={cn(
@@ -461,7 +472,7 @@ export function FestivalPage() {
           </ol>
 
           <Reveal delay={0.08}>
-            <p className="border-fada-red/50 text-ink/60 mt-5 border-l-2 pl-5 text-[0.9rem] leading-relaxed">
+            <p className="border-gold/60 text-ink/60 mt-5 border-l-2 pl-5 text-[0.9rem] leading-relaxed">
               {festival.escala.aforo}
             </p>
           </Reveal>
@@ -696,7 +707,16 @@ export function FestivalPage() {
                   <p className="text-ivory/65 mt-4 text-[0.95rem] leading-relaxed">
                     {festival.espiritu.reconocimientos.texto} La inscripción se completa por el
                     formulario oficial y cualquier duda —packs, alojamiento, pagos desde Paraguay o
-                    Brasil— se responde por WhatsApp al {festival.inscripcion.whatsappTexto}.
+                    Brasil— se responde por WhatsApp al{' '}
+                    <a
+                      href={festival.inscripcion.whatsapp}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-ivory decoration-gold/60 hover:text-gold-bright underline underline-offset-4 transition-colors"
+                    >
+                      {festival.inscripcion.whatsappTexto}
+                    </a>
+                    .
                   </p>
                   <Link
                     to="/historia"

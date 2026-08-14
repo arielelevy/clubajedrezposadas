@@ -622,7 +622,15 @@ export function FestivalPage2() {
                 </h2>
                 <p className="text-ivory/60 mt-3 text-[0.94rem] leading-relaxed">
                   {festival.espiritu.reconocimientos.texto} Consultas por WhatsApp al{' '}
-                  {festival.inscripcion.whatsappTexto}.
+                  <a
+                    href={festival.inscripcion.whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-ivory decoration-gold/60 hover:text-gold-bright underline underline-offset-4 transition-colors"
+                  >
+                    {festival.inscripcion.whatsappTexto}
+                  </a>
+                  .
                 </p>
                 <Link
                   to="/historia"
