@@ -43,7 +43,26 @@ export function Navbar() {
    */
   const [avisoVisible, setAvisoVisible] = useState(false)
   const [open, setOpen] = useState(false)
+  // En el tope de la página (hasta TOPE px). Se usa solo en el festival, cuya
+  // portada es oscura: ahí la barra clara ensuciaba el hero.
+  const [enTope, setEnTope] = useState(() => window.scrollY <= TOPE)
   const { pathname, hash } = useLocation()
+
+  const enFestival = pathname === '/festival'
+
+  /**
+   * En el festival el aviso no corre: es la invitación a esta misma página, y
+   * al desplegarse la barra crecía y se montaba sobre el texto del hero.
+   */
+  const avisoDesplegado = avisoVisible && !enFestival
+
+  /**
+   * El festival abre con un bloque oscuro a pantalla completa: la barra arranca
+   * transparente sobre él y recién al scrollear pasa al look claro. Solo esa
+   * ruta: el resto de las páginas abre sobre fondo claro y la barra clara queda
+   * bien desde el primer píxel.
+   */
+  const sobreOscuro = avisoDesplegado || (enFestival && enTope)
 
   useEffect(() => {
     let anterior = window.scrollY
@@ -57,6 +76,7 @@ export function Navbar() {
     // sin que nadie haya bajado nada, y eso cerraba el aviso recién abierto.
     const onScroll = () => {
       const y = window.scrollY
+      setEnTope(y <= TOPE)
       if (y > anterior && y > TOPE) {
         acumulado = 0
         setAvisoVisible(false)
@@ -126,21 +146,21 @@ export function Navbar() {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-colors duration-500',
-        // Con el aviso desplegado la barra se apoya sobre el bloque oscuro de la
-        // página, así que vuelve al look transparente sobre oscuro. Ya no depende
-        // de la ruta, que era lo que dejaba el menú negro sobre negro.
-        avisoVisible ? 'bg-transparent' : 'border-ink/8 bg-bone/95 border-b backdrop-blur-sm',
+        // Transparente cuando se apoya sobre un bloque oscuro: con el aviso
+        // desplegado, o en el tope del festival. En el festival vuelve al look
+        // claro al scrollear, así nunca queda el menú negro sobre negro.
+        sobreOscuro ? 'bg-transparent' : 'border-ink/8 bg-bone/95 border-b backdrop-blur-sm',
       )}
     >
       {/* Aviso del evento del centenario. Lleva a la página del festival, no a
           la sección del inicio: quien insiste hacia arriba para abrirlo ya está
           buscando el torneo, y la página tiene la información completa. */}
-      {festival.publicado ? (
+      {festival.publicado && !enFestival ? (
         <Link
           to="/festival"
           className={cn(
             'group border-gold/20 bg-ink block overflow-hidden transition-all duration-500',
-            avisoVisible
+            avisoDesplegado
               ? 'max-h-24 border-b opacity-100'
               : 'pointer-events-none max-h-0 opacity-0',
           )}
@@ -161,7 +181,7 @@ export function Navbar() {
       <div
         className={cn(
           'mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 transition-all duration-500 lg:px-8',
-          avisoVisible ? 'py-3' : 'py-2',
+          avisoDesplegado ? 'py-3' : 'py-2',
         )}
       >
         <Link to="/" className="group flex items-center gap-3">
@@ -172,7 +192,7 @@ export function Navbar() {
             <span
               className={cn(
                 'font-display block text-[1.05rem] font-semibold tracking-tight whitespace-nowrap transition-colors duration-500 sm:text-[1.3rem]',
-                avisoVisible ? 'text-ivory' : 'text-ink',
+                sobreOscuro ? 'text-ivory' : 'text-ink',
               )}
             >
               Club de Ajedrez Posadas
@@ -181,7 +201,7 @@ export function Navbar() {
             <span
               className={cn(
                 'kicker block text-[0.6rem] tracking-[0.2em] whitespace-nowrap transition-colors duration-500 sm:text-[0.68rem] sm:tracking-[0.34em]',
-                avisoVisible ? 'text-gold-bright/90' : 'text-gold-deep',
+                sobreOscuro ? 'text-gold-bright/90' : 'text-gold-deep',
               )}
             >
               1926 — 2026<span className="hidden sm:inline"> · Centenario</span>
@@ -196,13 +216,13 @@ export function Navbar() {
               to={item.href}
               className={cn(
                 'after:bg-gold relative py-1 text-[0.95rem] transition-colors duration-500 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100',
-                avisoVisible ? 'text-ivory/85 hover:text-ivory' : 'text-ink/75 hover:text-ink',
+                sobreOscuro ? 'text-ivory/85 hover:text-ivory' : 'text-ink/75 hover:text-ink',
               )}
             >
               {item.label}
             </Link>
           ))}
-          <Button asChild size="sm" variant={avisoVisible ? 'outlineLight' : 'gold'}>
+          <Button asChild size="sm" variant={sobreOscuro ? 'outlineLight' : 'gold'}>
             <a href={club.whatsappLink} target="_blank" rel="noreferrer">
               <MessageCircle />
               Escribinos
@@ -215,7 +235,7 @@ export function Navbar() {
             <button
               className={cn(
                 'grid size-11 place-items-center rounded-full border transition-colors duration-500 lg:hidden',
-                avisoVisible
+                sobreOscuro
                   ? 'border-ivory/30 text-ivory'
                   : 'border-ink/15 text-ink hover:border-gold hover:text-gold-deep',
               )}

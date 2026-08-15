@@ -17,15 +17,6 @@ const HistoriaPage = lazy(() =>
 const FestivalPage = lazy(() =>
   import('./pages/FestivalPage').then((m) => ({ default: m.FestivalPage })),
 )
-/* Bocetos alternativos del festival, para que la comisión elija. No están en el
-   menú (solo por URL directa) y van con noindex; cuando se elija uno, borrar
-   los otros y estas rutas. */
-const FestivalPage2 = lazy(() =>
-  import('./pages/FestivalPage2').then((m) => ({ default: m.FestivalPage2 })),
-)
-const FestivalPage3 = lazy(() =>
-  import('./pages/FestivalPage3').then((m) => ({ default: m.FestivalPage3 })),
-)
 const AuspiciosPage = lazy(() =>
   import('./pages/AuspiciosPage').then((m) => ({ default: m.AuspiciosPage })),
 )
@@ -47,8 +38,6 @@ export function App() {
             <Route path="/" element={<Home />} />
             <Route path="/historia" element={<HistoriaPage />} />
             <Route path="/festival" element={<FestivalPage />} />
-            <Route path="/festival2" element={<FestivalPage2 />} />
-            <Route path="/festival3" element={<FestivalPage3 />} />
             <Route path="/auspicios" element={<AuspiciosPage />} />
             <Route path="/socios" element={<SociosPage />} />
             <Route path="/fotos" element={<FotosPage />} />
