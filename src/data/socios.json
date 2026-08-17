@@ -1,7 +1,7 @@
 {
   "_nota": "Generado por scripts/sync-socios.mjs desde la planilla de socios del club. No editar a mano.",
-  "actualizado": "2026-08-10",
-  "total": 118,
+  "actualizado": "2026-08-17",
+  "total": 117,
   "socios": [
     {
       "nombre": "Acuña Jonas Agustin",
@@ -178,10 +178,6 @@
     {
       "nombre": "Guerrero, Axel Elian",
       "tipo": "Cadete"
-    },
-    {
-      "nombre": "Guerrero, Guillermo Martín",
-      "tipo": "Activo"
     },
     {
       "nombre": "Hassel, Guillermo",
@@ -432,8 +428,8 @@
       "tipo": "Protector"
     },
     {
-      "nombre": "Theisen, Lisandro",
-      "tipo": "Activo"
+      "nombre": "Theisen, Hijo",
+      "tipo": "Cadete"
     },
     {
       "nombre": "Tucci Christian",
