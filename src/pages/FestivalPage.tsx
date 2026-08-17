@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MessageCircle, FileText, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { club } from '@/data/site'
@@ -76,15 +77,58 @@ function enlacesVigentes() {
   return Date.now() >= new Date(`${festival.chessResults.desdeISO}T00:00:00`).getTime()
 }
 
-/** Días que faltan para la primera ronda. */
+/** Medianoche de hoy: el contador cuenta días de calendario, no fracciones. */
+function medianocheDeHoy() {
+  const d = new Date()
+  d.setHours(0, 0, 0, 0)
+  return d
+}
+
+/** Días que faltan para la primera ronda, de medianoche a medianoche. */
 function diasQueFaltan() {
-  const ms = new Date(`${festival.fechaISO}T00:00:00`).getTime() - Date.now()
-  return Math.max(0, Math.ceil(ms / 86_400_000))
+  const ms = new Date(`${festival.fechaISO}T00:00:00`).getTime() - medianocheDeHoy().getTime()
+  return Math.max(0, Math.round(ms / 86_400_000))
+}
+
+/**
+ * El número tiene que bajar solo. Calculado una sola vez en el render, se
+ * quedaba con el día en que se montó el componente: una pestaña abierta —o el
+ * HTML ya cacheado, que es lo normal en una SWA— seguía mostrando el mismo
+ * "Faltan N días" al otro día. Acá se recalcula al pasar la medianoche y cada
+ * vez que la pestaña vuelve al frente (si la máquina estuvo suspendida, el
+ * timer llega tarde y ese es el que corrige).
+ */
+function useDiasQueFaltan() {
+  const [faltan, setFaltan] = useState(diasQueFaltan)
+
+  useEffect(() => {
+    if (faltan <= 0) return
+
+    // setHours(24, …) es la medianoche siguiente, con cambio de hora incluido.
+    const proxima = new Date()
+    proxima.setHours(24, 0, 0, 0)
+    // Un segundo de más para caer del lado nuevo del día.
+    const espera = Math.max(1_000, proxima.getTime() - Date.now() + 1_000)
+
+    const revisar = () => setFaltan(diasQueFaltan())
+    const timer = setTimeout(revisar, espera)
+    const alVolver = () => {
+      if (document.visibilityState === 'visible') revisar()
+    }
+    document.addEventListener('visibilitychange', alVolver)
+
+    return () => {
+      clearTimeout(timer)
+      document.removeEventListener('visibilitychange', alVolver)
+    }
+  }, [faltan])
+
+  return faltan
 }
 
 export function FestivalPage() {
   const vigentes = enlacesVigentes()
-  const faltan = diasQueFaltan()
+  const faltan = useDiasQueFaltan()
 
   return (
     <>
@@ -118,7 +162,7 @@ export function FestivalPage() {
               <span className="sr-only">{festival.fechaTexto}</span>
               {faltan > 0 ? (
                 <p className="font-condensed text-gold-bright/80 mt-3 text-[0.95rem] tracking-[0.3em] uppercase">
-                  Faltan {faltan} días
+                  {faltan === 1 ? 'Falta 1 día' : `Faltan ${faltan} días`}
                 </p>
               ) : null}
 
