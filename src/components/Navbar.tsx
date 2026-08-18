@@ -26,20 +26,23 @@ const grupos = [
 /**
  * Resistencia para desplegar el aviso, ya en el tope. No se puede medir con el
  * scroll: en `y = 0` la página no se mueve más y dejan de llegar eventos, así
- * que los píxeles se cuentan sobre la rueda y el arrastre del dedo, que siguen
- * llegando cuando uno insiste hacia arriba contra el tope.
+ * que los píxeles se cuentan sobre la rueda, que sigue llegando cuando uno
+ * insiste hacia arriba contra el tope.
+ *
+ * Solo la rueda: en el celular ese mismo tirón hacia abajo es el pull-to-refresh
+ * del navegador, que gana y es lo que la gente espera. El aviso se abría encima
+ * de la recarga. En mobile el festival se llega por el menú, que ya lo lista.
  */
 const RESISTENCIA_RUEDA = 380 // cuatro golpes de rueda, más o menos
-const RESISTENCIA_TACTIL = 150 // un tirón sostenido del dedo
 
 /** Hasta acá se considera que la página está en el tope. */
 const TOPE = 24
 
 export function Navbar() {
   /**
-   * El aviso del centenario aparece cuando volvés al tope subiendo, y se
-   * retrae al bajar. No se muestra en la carga: la barra tiene que verse igual
-   * desde el primer momento, sin depender de dónde quedó el scroll.
+   * El aviso del centenario aparece cuando volvés al tope insistiendo con la
+   * rueda, y se retrae al bajar. No se muestra en la carga: la barra tiene que
+   * verse igual desde el primer momento, sin depender de dónde quedó el scroll.
    */
   const [avisoVisible, setAvisoVisible] = useState(false)
   const [open, setOpen] = useState(false)
@@ -67,13 +70,12 @@ export function Navbar() {
   useEffect(() => {
     let anterior = window.scrollY
     let acumulado = 0
-    let dedo: number | null = null
 
     const enTope = () => window.scrollY <= TOPE
 
     // Bajar retrae el aviso y borra lo acumulado: la insistencia arranca de cero.
-    // Se pide `y > TOPE` porque el rebote de iOS vuelve de un scroll negativo a 0
-    // sin que nadie haya bajado nada, y eso cerraba el aviso recién abierto.
+    // Se pide `y > TOPE` porque el rebote elástico vuelve al 0 sin que nadie
+    // haya bajado nada, y eso cerraba el aviso recién abierto.
     const onScroll = () => {
       const y = window.scrollY
       setEnTope(y <= TOPE)
@@ -95,43 +97,11 @@ export function Navbar() {
       if (acumulado >= RESISTENCIA_RUEDA) setAvisoVisible(true)
     }
 
-    const onTouchStart = (e: TouchEvent) => {
-      dedo = e.touches[0]?.clientY ?? null
-    }
-
-    const onTouchMove = (e: TouchEvent) => {
-      const actual = e.touches[0]?.clientY
-      if (actual == null || dedo == null) return
-
-      // El dedo bajando arrastra la página hacia arriba.
-      const arrastre = actual - dedo
-      dedo = actual
-
-      if (arrastre < 0) {
-        acumulado = 0
-        return
-      }
-      if (!enTope() || arrastre === 0) return
-
-      acumulado += arrastre
-      if (acumulado >= RESISTENCIA_TACTIL) setAvisoVisible(true)
-    }
-
-    const onTouchEnd = () => {
-      dedo = null
-    }
-
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('wheel', onWheel, { passive: true })
-    window.addEventListener('touchstart', onTouchStart, { passive: true })
-    window.addEventListener('touchmove', onTouchMove, { passive: true })
-    window.addEventListener('touchend', onTouchEnd, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('wheel', onWheel)
-      window.removeEventListener('touchstart', onTouchStart)
-      window.removeEventListener('touchmove', onTouchMove)
-      window.removeEventListener('touchend', onTouchEnd)
     }
   }, [])
 

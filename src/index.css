@@ -143,9 +143,11 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    /* El aviso del centenario se despliega insistiendo hacia arriba contra el
-       tope; sin esto, en Android ese mismo tirón recarga la página. */
-    overscroll-behavior-y: contain;
+    /* Sin `overscroll-behavior-y: contain` a propósito: tirar hacia abajo
+       estando en el tope tiene que recargar la página, como en cualquier otro
+       sitio del celular. Antes se lo bloqueaba para que ese mismo tirón
+       desplegara el aviso del centenario; ese gesto quedó solo en la rueda del
+       desktop (ver Navbar). */
   }
 
   body {
