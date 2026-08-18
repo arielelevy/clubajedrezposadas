@@ -60,8 +60,11 @@ export function Hero() {
                 Sumate a los talleres
               </a>
             </Button>
+            {/* "Los 100 años" es el festival de diciembre, no la reseña
+                histórica: quien toca acá desde la portada está buscando el
+                evento. La historia queda a un clic en El club y en el menú. */}
             <Button asChild size="lg" variant="outlineLight">
-              <Link to="/historia">
+              <Link to="/festival">
                 Conocé los 100 años
                 <ArrowRight />
               </Link>
