@@ -1,7 +1,7 @@
 {
   "_nota": "Generado por scripts/sync-socios.mjs desde la planilla de socios del club. No editar a mano.",
-  "actualizado": "2026-08-17",
-  "total": 117,
+  "actualizado": "2026-08-24",
+  "total": 128,
   "socios": [
     {
       "nombre": "Acuña Jonas Agustin",
@@ -104,6 +104,10 @@
       "tipo": "Activo"
     },
     {
+      "nombre": "Cuba, Facundo Emanuel",
+      "tipo": "Activo"
+    },
+    {
       "nombre": "De Sousa Benjamin",
       "tipo": "Cadete"
     },
@@ -120,12 +124,24 @@
       "tipo": "Activo"
     },
     {
+      "nombre": "Esponda Eduardo",
+      "tipo": "Activo"
+    },
+    {
       "nombre": "Ezquivel Santiago Farias",
       "tipo": "Cadete"
     },
     {
       "nombre": "Fernandez Gabriel",
       "tipo": "Activo"
+    },
+    {
+      "nombre": "Ferreyra Daniel",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Ferreyra Elías",
+      "tipo": "Cadete"
     },
     {
       "nombre": "Figueredo, Dante Gael",
@@ -292,6 +308,18 @@
       "tipo": "Activo"
     },
     {
+      "nombre": "Molina Iván",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Molina Pae Santino",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Molina Page Valentín",
+      "tipo": "Cadete"
+    },
+    {
       "nombre": "Monzón, Gustavo Ezequiel",
       "tipo": "Cadete"
     },
@@ -306,6 +334,18 @@
     {
       "nombre": "Nascimiento Machado, Máximiliano",
       "tipo": "Activo"
+    },
+    {
+      "nombre": "Nielsen Mónica",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Nuñez Cuenca Amparo",
+      "tipo": "Cadete"
+    },
+    {
+      "nombre": "Nuñez Cuenca Ignacio",
+      "tipo": "Cadete"
     },
     {
       "nombre": "Orrego Benjamin",
@@ -469,6 +509,10 @@
     },
     {
       "nombre": "Zaboulanes, Nancy",
+      "tipo": "Activo"
+    },
+    {
+      "nombre": "Zaldivar, Patricio",
       "tipo": "Activo"
     }
   ]
