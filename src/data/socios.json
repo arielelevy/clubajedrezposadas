@@ -1,7 +1,7 @@
 {
   "_nota": "Generado por scripts/sync-socios.mjs desde la planilla de socios del club. No editar a mano.",
-  "actualizado": "2026-08-24",
-  "total": 128,
+  "actualizado": "2026-08-31",
+  "total": 126,
   "socios": [
     {
       "nombre": "Acuña Jonas Agustin",
@@ -264,10 +264,6 @@
       "tipo": "Cadete"
     },
     {
-      "nombre": "Martinez Ezequiel Agusto",
-      "tipo": "Activo"
-    },
-    {
       "nombre": "Maxit Alfredo",
       "tipo": "Activo"
     },
@@ -458,10 +454,6 @@
     {
       "nombre": "Techeira Emmanuel",
       "tipo": "Cadete"
-    },
-    {
-      "nombre": "Tello Santiago",
-      "tipo": "Activo"
     },
     {
       "nombre": "Thea Osvaldo",
